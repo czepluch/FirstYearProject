@@ -1,5 +1,6 @@
 package Controller;
-import View.ViewListener;
+import View.*;
+import Model.*;
 
 /*
  * The main class
@@ -7,13 +8,19 @@ import View.ViewListener;
  * Listens to the view for changes, then calls the model for response
  */
 public class Controller implements ViewListener {
+	private Model model;
+	private View view;
+	
+	public Controller() {
+		model = new Model();
+		view = new View(this);
+	}
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Controller controller = new Controller();
 	}
 
 }

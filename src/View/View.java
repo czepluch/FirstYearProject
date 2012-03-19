@@ -5,5 +5,11 @@ package View;
  * need of accessing the stored data are needed
  */
 public class View {
-
+	private MainFrame mf;
+	private ViewListener listener;
+	
+	public View(ViewListener listener) {
+		mf = new MainFrame();
+		this.listener = listener;
+	}
 }
