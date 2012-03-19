@@ -14,6 +14,7 @@ public class MainFrame {
 		frame = new JFrame("Krax");
 		frame.setSize(new Dimension(600, 600));
 		frame.setResizable(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		cp = (JPanel) frame.getContentPane();
 		
