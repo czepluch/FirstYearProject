@@ -1,0 +1,13 @@
+<!DOCTYPE edges
+[
+<!ELEMENT edges (edge+)>
+<!ELEMENT edge (fromLat, fromLong, toLat, toLong, distance, speed)>
+<!ELEMENT fromLat (#PCDATA)>
+<!ELEMENT fromLong (#PCDATA)>
+<!ELEMENT toLat (#PCDATA)>
+<!ELEMENT toLong (#PCDATA)>
+<!ELEMENT distance (#PCDATA)>
+<!ELEMENT speed (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ATTLIST edge id CDATA #REQUIRED>
+]>
