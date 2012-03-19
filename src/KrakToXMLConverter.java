@@ -230,7 +230,7 @@ public class KrakToXMLConverter
 	
 	
 	/*
-	 * Main class of the KrakToXMLConverter-class
+	 * Main method of the KrakToXMLConverter-class
 	 * Checks if the correct amount of arguments has been passes
 	 * Then creates a new instance of the KrakToXMLConverter class, callings its
 	 * readAndProcessData-method passing the given arguments as parameters
