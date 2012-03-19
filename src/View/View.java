@@ -5,5 +5,9 @@ package View;
  * need of accessing the stored data are needed
  */
 public class View {
-
+	private MainFrame mf;
+	
+	public View() {
+		mf = new MainFrame();
+	}
 }
