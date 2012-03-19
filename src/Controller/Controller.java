@@ -1,3 +1,6 @@
+package Controller;
+import View.ViewListener;
+
 /*
  * The main class
  * Contains both the View and the Model
