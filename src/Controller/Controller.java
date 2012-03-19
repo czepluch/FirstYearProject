@@ -13,7 +13,7 @@ public class Controller implements ViewListener {
 	
 	public Controller() {
 		model = new Model();
-		view = new View();
+		view = new View(this);
 	}
 
 	/**

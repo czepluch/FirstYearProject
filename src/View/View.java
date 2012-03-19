@@ -6,8 +6,10 @@ package View;
  */
 public class View {
 	private MainFrame mf;
+	private ViewListener listener;
 	
-	public View() {
+	public View(ViewListener listener) {
 		mf = new MainFrame();
+		this.listener = listener;
 	}
 }
