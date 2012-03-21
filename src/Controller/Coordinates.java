@@ -4,13 +4,11 @@ package Controller;
  * Has the responsibility of converting UTM32 coordinates to pixels
  */
 public class Coordinates {
-	// The width and height of the canvas to which the coordinates are converted
-	private int width;
-	private int height;
-	// Information about the "viewbox" of the canvas
-	private double minX;
-	private double maxX;
-	private double minY;
+	// Information need to compute the conversions
+	private double cX;
+	private double cY;
+	private double xTranslate;
+	private double yTranslate;
 	private double maxY;
 
 	/*
@@ -23,12 +21,11 @@ public class Coordinates {
 	 * @param height the width of the canvas to which the coordinates are converted
 	 */
 	public Coordinates(double minX, double maxX, double minY, double maxY, int width, int height) {
-		this.minX = minX;
-		this.maxX = maxX;
-		this.minY = minY;
-		this.maxY = maxY;
-		this.width = width;
-		this.height = height;
+		cX = (maxX - minX) / width;
+		cY = (maxY - minY) / height;
+		xTranslate = minX;
+		yTranslate = minY;
+		this.maxY = maxY - yTranslate;
 	}
 	
 	/*
@@ -37,7 +34,8 @@ public class Coordinates {
 	 * @return the pixel x-coordinate
 	 */
 	public int convertXToPixels(double x) {
-		return 10;
+		double translatedX = x - xTranslate;
+		return (int) (translatedX / cX);
 	}
 	
 	/*
@@ -46,6 +44,8 @@ public class Coordinates {
 	 * @return the pixel y-coordinate
 	 */
 	public int convertYToPixels(double y) {
-		return 10;
+		double translatedY = y - yTranslate;
+		translatedY = maxY - translatedY;
+		return (int) (translatedY / cY);
 	}
 }
