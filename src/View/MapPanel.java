@@ -9,21 +9,38 @@ import java.awt.*;
 public class MapPanel extends JPanel {
 	private int[][][] lines;
 	
+	/*
+	 * Constructor
+	 * @param lines the data of the lines to be drawn
+	 */
 	public MapPanel(int[][][] lines) {
-		if (lines.length != 3) throw new IllegalArgumentException();
+		if (lines.length != 5) throw new IllegalArgumentException();
 		this.lines = lines;
 		this.setSize(new Dimension(600, 600));
 	}
 	
+	/*
+	 * Paints lines according to the data stored in the lines field
+	 */
+	@Override
 	public void paint(Graphics g) {
 		doLayout();
 		Graphics2D g2 = (Graphics2D) g;
 		for (int i = 0; i < lines.length; i++) {
 			switch(i) {
-				case 0: g2.setColor(Color.black);
+				// Highways, red
+				case 0: g2.setColor(Color.red);
 						g2.setStroke(new BasicStroke(5)); break;
-				case 1: g2.setColor(Color.red);
+				// Large streets, yellow
+				case 1: g2.setColor(Color.yellow);
 						g2.setStroke(new BasicStroke(3)); break;
+				// City streets, blue
+				case 2: g2.setColor(Color.blue);
+						g2.setStroke(new BasicStroke(3)); break;
+				// Small roads, black
+				case 3: g2.setColor(Color.black);
+						g2.setStroke(new BasicStroke(3)); break;
+				// Streets without vehicles, green
 				default:g2.setColor(Color.green);
 						g2.setStroke(new BasicStroke(2)); break;
 			}
