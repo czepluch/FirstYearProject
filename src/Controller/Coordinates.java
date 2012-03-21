@@ -5,11 +5,14 @@ package Controller;
  */
 public class Coordinates {
 	// Information need to compute the conversions
-	private double cX;
-	private double cY;
+	private double c;
 	private double xTranslate;
 	private double yTranslate;
+	private double minX;
+	private double maxX;
+	private double minY;
 	private double maxY;
+	private double translatedMaxY;
 
 	/*
 	 * Constructor
@@ -21,11 +24,14 @@ public class Coordinates {
 	 * @param height the width of the canvas to which the coordinates are converted
 	 */
 	public Coordinates(double minX, double maxX, double minY, double maxY, int width, int height) {
-		cX = (maxX - minX) / width;
-		cY = (maxY - minY) / height;
+		c = (maxX - minX) / width;
 		xTranslate = minX;
 		yTranslate = minY;
-		this.maxY = maxY - yTranslate;
+		this.minX = minX;
+		this.maxX = maxX;
+		this.minY = minY;
+		this.maxY = maxY;
+		translatedMaxY = maxY - yTranslate;
 	}
 	
 	/*
@@ -33,9 +39,10 @@ public class Coordinates {
 	 * @param x the UTM32 x-coordinate to be converted
 	 * @return the pixel x-coordinate
 	 */
-	public int convertXToPixels(double x) {
+	public int convertXToPixels(double x) throws IllegalArgumentException {
+		if (x < minX || x > maxX) throw new IllegalArgumentException();
 		double translatedX = x - xTranslate;
-		return (int) (translatedX / cX);
+		return (int) (translatedX / c);
 	}
 	
 	/*
@@ -43,9 +50,10 @@ public class Coordinates {
 	 * @param y the UTM32 y-coordinate to be converted
 	 * @return the pixel y-coordinate
 	 */
-	public int convertYToPixels(double y) {
+	public int convertYToPixels(double y) throws IllegalArgumentException {
+		if (y < minY || y > maxY) throw new IllegalArgumentException();
 		double translatedY = y - yTranslate;
-		translatedY = maxY - translatedY;
-		return (int) (translatedY / cY);
+		translatedY = translatedMaxY - translatedY;
+		return (int) (translatedY / c);
 	}
 }
