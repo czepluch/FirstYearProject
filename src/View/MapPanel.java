@@ -33,16 +33,16 @@ public class MapPanel extends JPanel {
 						g2.setStroke(new BasicStroke(5)); break;
 				// Large streets, yellow
 				case 1: g2.setColor(Color.yellow);
-						g2.setStroke(new BasicStroke(3)); break;
+						g2.setStroke(new BasicStroke(4)); break;
 				// City streets, blue
 				case 2: g2.setColor(Color.blue);
 						g2.setStroke(new BasicStroke(3)); break;
 				// Small roads, black
 				case 3: g2.setColor(Color.black);
-						g2.setStroke(new BasicStroke(3)); break;
+						g2.setStroke(new BasicStroke(2)); break;
 				// Streets without vehicles, green
 				default:g2.setColor(Color.green);
-						g2.setStroke(new BasicStroke(2)); break;
+						g2.setStroke(new BasicStroke(1)); break;
 			}
 			for (int j = 0; j < lines[i].length; j++) {
 				g2.drawLine(lines[i][j][0], lines[i][j][1], lines[i][j][2], lines[i][j][3]);
