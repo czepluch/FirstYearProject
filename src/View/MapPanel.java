@@ -8,15 +8,16 @@ import java.awt.*;
  */
 public class MapPanel extends JPanel {
 	private int[][][] lines;
+	private MapListener listener;
 	
 	/*
 	 * Constructor
 	 * @param lines the data of the lines to be drawn
 	 */
-	public MapPanel(int[][][] lines) {
+	public MapPanel(int[][][] lines, MapListener listener) {
 		if (lines.length != 5) throw new IllegalArgumentException();
 		this.lines = lines;
-		this.setSize(new Dimension(600, 600));
+		this.listener = listener;
 	}
 	
 	/*
@@ -48,6 +49,14 @@ public class MapPanel extends JPanel {
 				g2.drawLine(lines[i][j][0], lines[i][j][1], lines[i][j][2], lines[i][j][3]);
 			}
 		}
+	}
+	
+	/*
+	 * Notifies the listener, that the "viewbox" has been changed
+	 * (Correct parameters are missing)
+	 */
+	public void viewboxUpdated() {
+		listener.viewboxUpdated();
 	}
 	
 	/*

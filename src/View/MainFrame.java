@@ -15,14 +15,15 @@ public class MainFrame {
 	 * Constructor for the MainFrame class
 	 * @param lines the data to be displayed in the map of the MainFrame
 	 */
-	public MainFrame(int[][][] lines) {
+	public MainFrame(int[][][] lines, MapListener listener) {
 		frame = new JFrame("Krax");
 		frame.setSize(new Dimension(600, 600));
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		cp = (JPanel) frame.getContentPane();
-		map = new MapPanel(lines);
+		map = new MapPanel(lines, listener);
+		map.setSize(new Dimension(600, 600));
 		cp.add(map);
 		
 		frame.setVisible(true);

@@ -12,7 +12,7 @@ public class View implements MapListener {
 	 * Constructor for the View class
 	 */
 	public View(ViewListener listener, int[][][] lines) {
-		mf = new MainFrame(lines);
+		mf = new MainFrame(lines, this);
 		this.listener = listener;
 	}
 	
