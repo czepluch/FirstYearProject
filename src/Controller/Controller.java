@@ -16,7 +16,7 @@ public class Controller implements ViewListener {
 	 */
 	public Controller() {
 		model = new Model();
-		view = new View(this);
+		view = new View(this, FormatConverter.convertData(model.getData()));
 	}
 	
 	/*

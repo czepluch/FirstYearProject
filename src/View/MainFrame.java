@@ -9,15 +9,31 @@ import java.awt.*;
 public class MainFrame {
 	private JFrame frame;
 	private JPanel cp;
+	private MapPanel map;
 	
-	public MainFrame() {
+	/*
+	 * Constructor for the MainFrame class
+	 * @param lines the data to be displayed in the map of the MainFrame
+	 */
+	public MainFrame(int[][][] lines) {
 		frame = new JFrame("Krax");
 		frame.setSize(new Dimension(600, 600));
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		cp = (JPanel) frame.getContentPane();
+		map = new MapPanel(lines);
+		cp.add(map);
 		
 		frame.setVisible(true);
+	}
+	
+	/*
+	 * Updates the map in the MainFrame according to the given data
+	 * (passes the method invocation on from the View to the MapPanel)
+	 * @param the new data to be displayed
+	 */
+	public void updateMap(int[][][] lines) {
+		map.update(lines);
 	}
 }

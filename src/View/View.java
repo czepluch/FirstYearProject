@@ -11,8 +11,8 @@ public class View implements MapListener {
 	/*
 	 * Constructor for the View class
 	 */
-	public View(ViewListener listener) {
-		mf = new MainFrame();
+	public View(ViewListener listener, int[][][] lines) {
+		mf = new MainFrame(lines);
 		this.listener = listener;
 	}
 	
@@ -22,5 +22,12 @@ public class View implements MapListener {
 	 */
 	public void viewboxUpdated() {
 		listener.viewboxUpdated();
+	}
+	
+	/*
+	 * Updates the map in the view according to the given data
+	 */
+	public void updateView(int[][][] lines) {
+		mf.updateMap(lines);
 	}
 }
