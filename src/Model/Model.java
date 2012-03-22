@@ -34,7 +34,6 @@ public class Model {
 	 * @return the filtered ArrayList<Edge>
 	 */
 	public ArrayList<Data> getData(double minX, double maxX, double minY, double maxY) {
-		// Use the methods of the DataFilter class to filter then stored data according the the given data
 		return DataFilter.filterData(edges, minX, maxX, minY, maxY);
 	}
 }

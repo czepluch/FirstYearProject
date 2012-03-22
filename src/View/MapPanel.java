@@ -49,4 +49,13 @@ public class MapPanel extends JPanel {
 			}
 		}
 	}
+	
+	/*
+	 * Updates the map according the the given data and repaints.
+	 * @param lines the new data to be displayed
+	 */
+	public void update(int[][][] lines) {
+		this.lines = lines;
+		repaint();
+	}
 }
