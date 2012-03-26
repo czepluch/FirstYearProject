@@ -4,6 +4,6 @@ Report.log
 Report.synctex.gz
 Report.toc
 .metadata/
-*.class
-*.classpath
-*.project
+*class
+*classpath
+*project
