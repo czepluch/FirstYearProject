@@ -76,6 +76,7 @@ public class MapPanel extends JPanel {
 			
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent mwe) {
+				
 				viewboxUpdated();
 			}
 		});
