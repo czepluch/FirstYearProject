@@ -42,7 +42,7 @@ public class Coordinates {
 	 * @return the pixel x-coordinate
 	 */
 	public int convertXToPixels(double x) throws IllegalArgumentException {
-		if (x < minX || x > maxX) throw new IllegalArgumentException();
+		if (x < minX || x > maxX) throw new IllegalArgumentException("x value smaller than min x or larger than max x");
 		double translatedX = x - xTranslate;
 		return (int) (translatedX / c);
 	}
@@ -53,7 +53,7 @@ public class Coordinates {
 	 * @return the pixel y-coordinate
 	 */
 	public int convertYToPixels(double y) throws IllegalArgumentException {
-		if (y < minY || y > maxY) throw new IllegalArgumentException();
+		if (y < minY || y > maxY) throw new IllegalArgumentException("y value smaller than min y or larger than max y");
 		double translatedY = y - yTranslate;
 		translatedY = translatedMaxY - translatedY;
 		return (int) (translatedY / c);

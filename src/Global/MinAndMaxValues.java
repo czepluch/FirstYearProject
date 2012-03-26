@@ -18,9 +18,12 @@ public class MinAndMaxValues {
 		double oldYDif = maxY - minY;
 		
 		// Compute the given coordinates from pixels to utm coordinate
-		double c = (oldXDif) / width;
-		double xUTM = x * c;
-		double yUTM = y * c;
+		double cX = (oldXDif) / width;
+		double xUTM = x * cX;
+		double cY = (oldYDif) / height;
+		double yUTM = y * cY;
+		System.out.println("x as UTM:\t" + xUTM);
+		System.out.println("y as UTM:\t" + yUTM);
 		
 		// Compute a constant from the given zoom int
 		double zoomConstant = 1;

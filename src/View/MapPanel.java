@@ -1,6 +1,6 @@
 package View;
 import javax.swing.*;
-import Global.MinAndMaxValues;;
+import Global.MinAndMaxValues;
 
 import java.awt.*;
 import java.awt.event.MouseWheelEvent;
