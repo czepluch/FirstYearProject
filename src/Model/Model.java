@@ -25,7 +25,7 @@ public class Model {
 	 * Returns the data stored in the model
 	 * @return the ArrayList<Edge> stored
 	 */
-	public int[][][] getData() {
+	public int[][][] getEdges() {
 		return FormatConverter.convertData(edges);
 	}
 	
@@ -33,7 +33,7 @@ public class Model {
 	 * Returns the data stored in the model filtered according to the given data
 	 * @return the filtered ArrayList<Edge>
 	 */
-	public int[][][] getFilteredData() {
+	public int[][][] getFilteredEdges() {
 		return FormatConverter.convertData(DataFilter.filterData(edges);
 	}
 }
