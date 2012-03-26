@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Includes classes for reading, storing and filtering data
  */
 public class Model {
-	private ArrayList<Data> edges;
+	private ArrayList<Edge> edges;
 	
 	/*
 	 * Constructor of the model class
@@ -25,7 +25,7 @@ public class Model {
 	 * Returns the data stored in the model
 	 * @return the ArrayList<Edge> stored
 	 */
-	public ArrayList<Data> getData() {
+	public ArrayList<Edge> getData() {
 		return edges;
 	}
 	
@@ -33,7 +33,7 @@ public class Model {
 	 * Returns the data stored in the model filtered according to the given data
 	 * @return the filtered ArrayList<Edge>
 	 */
-	public ArrayList<Data> getData(double minX, double maxX, double minY, double maxY) {
+	public ArrayList<Edge> getData(double minX, double maxX, double minY, double maxY) {
 		return DataFilter.filterData(edges, minX, maxX, minY, maxY);
 	}
 }
