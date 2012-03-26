@@ -1,6 +1,8 @@
 package View;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 /*
  * The panel on which the map or sections of the map is drawn.
@@ -15,9 +17,9 @@ public class MapPanel extends JPanel {
 	 * @param lines the data of the lines to be drawn
 	 */
 	public MapPanel(int[][][] lines, MapListener listener) {
-		if (lines.length != 5) throw new IllegalArgumentException("Incorrect amount of road types");
 		this.lines = lines;
 		this.listener = listener;
+		addListeners();
 	}
 	
 	/*
@@ -55,7 +57,7 @@ public class MapPanel extends JPanel {
 	 * Notifies the listener, that the "viewbox" has been changed
 	 * (Correct parameters are missing)
 	 */
-	public void viewboxUpdated() {
+	public void viewboxUpdated () {
 		listener.viewboxUpdated();
 	}
 	
@@ -66,5 +68,16 @@ public class MapPanel extends JPanel {
 	public void update(int[][][] lines) {
 		this.lines = lines;
 		repaint();
+	}
+	
+	//Circumstantial methods:
+	private void addListeners(){
+		addMouseWheelListener(new MouseWheelListener(){
+			
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent mwe) {
+				viewboxUpdated();
+			}
+		});
 	}
 }
