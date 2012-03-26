@@ -2,8 +2,6 @@ package Model;
 
 import java.util.ArrayList;
 
-import sun.org.mozilla.javascript.tools.debugger.treetable.JTreeTable.ListToTreeSelectionModelWrapper;
-
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import Model.*;
@@ -63,7 +61,7 @@ public class FormatConverter {
 		int[][] edges4 = listToArray(type4);
 		int[][] edges5 = listToArray(type5);
 		
-		int[][][] convertedEdges = { edges1, edges2, edges3, edges4, edges5 };
+		int[][][] convertedEdges = { edges5, edges4, edges3, edges2, edges1 };
 		
 		return convertedEdges;
 	}
