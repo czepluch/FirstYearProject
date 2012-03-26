@@ -13,7 +13,6 @@ import java.util.ArrayList;
  */
 public class XMLReader
 {
-	private String path;
 	private static final int FROM_LAT = 0;
 	private static final int FROM_LONG = 1;
 	private static final int TO_LAT = 2;
@@ -21,12 +20,11 @@ public class XMLReader
 	private static final int DISTANCE = 4;
 	private static final int SPEED = 5;
 	private static final int TYPE = 6;
-	public XMLReader(String path)
+	public XMLReader()
 	{
-		this.path = path;
 	}
 	
-	public ArrayList<Edge> readEdges()
+	public ArrayList<Edge> readXML(String path)
 	{
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 		
@@ -119,7 +117,7 @@ public class XMLReader
 	}
 	
 	public static void main(String[] args) {
-		XMLReader xr = new XMLReader("krax_complete.xml");
-		xr.readEdges();
+		XMLReader xr = new XMLReader();
+		xr.readXML("krax_complete.xml");
 	}
 }
