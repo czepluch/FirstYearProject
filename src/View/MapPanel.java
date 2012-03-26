@@ -1,5 +1,6 @@
 package View;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -20,6 +21,12 @@ public class MapPanel extends JPanel {
 		this.lines = lines;
 		this.listener = listener;
 		addListeners();
+		
+		//TODO REMOVE DEBUGGING
+		System.out.println(lines[0][0][0]);
+		System.out.println(lines[0][0][1]);
+		System.out.println(lines[0][0][2]);
+		System.out.println(lines[0][0][3]);
 	}
 	
 	/*
@@ -28,6 +35,8 @@ public class MapPanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		doLayout();
+		g.setColor(Color.green);
+		g.fillRect(10, 10, 200, 200);
 		Graphics2D g2 = (Graphics2D) g;
 		for (int i = 0; i < lines.length; i++) {
 			switch(i) {
