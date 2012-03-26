@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/MikkelLarsen/Documents/ITU/F2012/Project/xom-1.2.7.jar"/>
+	<classpathentry kind="lib" path="/home/czepluch/Dropbox/ITU/2.semester/project/FirstYearProject/xom-1.2.7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
