@@ -82,7 +82,7 @@ public class XMLReader
 	 * and returns its value as a string,
 	 * or null if the input string was null
 	 */
-	private String parseXMLLine(String line, int i)
+	private static String parseXMLLine(String line, int i)
 	{
 		if (line != null)
 		{
