@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Includes classes for reading, storing and filtering data
  */
 public class Model {
-	private ArrayList<Data> edges;
+	private ArrayList<Edge> edges;
 	
 	/*
 	 * Constructor of the model class
@@ -15,7 +15,7 @@ public class Model {
 	 */
 	public Model() throws RuntimeException {
 		try {
-			// edges = XMLReader.readXML("krax.xml");
+			edges = XMLReader.readXML("krax_complete.xml");
 		} catch (Exception e) { // Exception needs to be specified
 			throw new RuntimeException("Could not read map data from file");
 		}
@@ -25,15 +25,16 @@ public class Model {
 	 * Returns the data stored in the model
 	 * @return the ArrayList<Edge> stored
 	 */
-	public ArrayList<Data> getData() {
-		return edges;
+	public int[][][] getEdges() {
+		return FormatConverter.convertData(edges);
 	}
 	
 	/*
 	 * Returns the data stored in the model filtered according to the given data
 	 * @return the filtered ArrayList<Edge>
 	 */
-	public ArrayList<Data> getData(double minX, double maxX, double minY, double maxY) {
-		return DataFilter.filterData(edges, minX, maxX, minY, maxY);
+	public int[][][] getFilteredEdges() {
+		return FormatConverter.convertData(DataFilter.filterData(edges));
 	}
+
 }

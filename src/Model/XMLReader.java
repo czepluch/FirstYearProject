@@ -24,7 +24,7 @@ public class XMLReader
 	{
 	}
 	
-	public ArrayList<Edge> readXML(String path)
+	public static ArrayList<Edge> readXML(String path)
 	{
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 		

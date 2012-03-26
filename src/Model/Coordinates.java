@@ -1,4 +1,6 @@
-package Controller;
+package Model;
+
+import Global.*;
 
 /*
  * Has the responsibility of converting UTM32 coordinates to pixels
@@ -23,15 +25,15 @@ public class Coordinates {
 	 * @param width the width of the canvas to which the coordinates are converted
 	 * @param height the width of the canvas to which the coordinates are converted
 	 */
-	public Coordinates(double minX, double maxX, double minY, double maxY, int width, int height) {
-		c = (maxX - minX) / width;
-		xTranslate = minX;
-		yTranslate = minY;
-		this.minX = minX;
-		this.maxX = maxX;
-		this.minY = minY;
-		this.maxY = maxY;
-		translatedMaxY = maxY - yTranslate;
+	public Coordinates() {
+		c = (MinAndMaxValues.maxX - MinAndMaxValues.minX) / MinAndMaxValues.width;
+		xTranslate = MinAndMaxValues.minX;
+		yTranslate = MinAndMaxValues.minY;
+		this.minX = MinAndMaxValues.minX;
+		this.maxX = MinAndMaxValues.maxX;
+		this.minY = MinAndMaxValues.minY;
+		this.maxY = MinAndMaxValues.maxY;
+		translatedMaxY = MinAndMaxValues.maxY - yTranslate;
 	}
 	
 	/*

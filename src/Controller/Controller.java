@@ -16,7 +16,7 @@ public class Controller implements ViewListener {
 	 */
 	public Controller() {
 		model = new Model();
-		view = new View(this, FormatConverter.convertData(model.getData()));
+		view = new View(this, model.getEdges());
 	}
 	
 	/*
@@ -27,7 +27,7 @@ public class Controller implements ViewListener {
 	public void viewboxUpdated() {
 		// Call for the model to filter the data according to the given viewbox
 		// Update the view according the the new data
-		view.updateView(FormatConverter.convertData(model.getData())); // Needs to be given the correct parameters
+		view.updateView(model.getFilteredEdges()); // Needs to be given the correct parameters
 	}
 
 	/**

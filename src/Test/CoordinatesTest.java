@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Controller.Coordinates;
+import Model.Coordinates;
 
 public class CoordinatesTest {
 	
