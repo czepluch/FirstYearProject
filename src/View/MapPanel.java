@@ -1,5 +1,6 @@
 package View;
 import javax.swing.*;
+import Global.MinAndMaxValues;;
 
 import java.awt.*;
 import java.awt.event.MouseWheelEvent;
@@ -79,7 +80,7 @@ public class MapPanel extends JPanel {
 			
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent mwe) {
-				
+				MinAndMaxValues.method(mwe.getX(), mwe.getY(), mwe.getScrollAmount());
 				viewboxUpdated();
 			}
 		});
