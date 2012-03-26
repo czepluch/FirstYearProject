@@ -1,7 +1,8 @@
-package Controller;
+package Model;
 
 import java.util.ArrayList;
 import Model.*;
+import Global.*;
 
 /*
  * Has the responsibility of converting between the data types stored in the Model
@@ -10,8 +11,8 @@ import Model.*;
 public class FormatConverter {
 	private static Coordinates c;
 
-	public static int[][][] convertData(ArrayList<Edge> edges, double minX, double maxX, double minY, double maxY, int width, int height) {
-		c = new Coordinates(minX, maxX, minY, maxY, width, height);
+	public static int[][][] convertData(ArrayList<Edge> edges) {
+		c = new Coordinates();
 		ArrayList<int[]> type1 = new ArrayList<int[]>();
 		ArrayList<int[]> type2 = new ArrayList<int[]>();
 		ArrayList<int[]> type3 = new ArrayList<int[]>();
