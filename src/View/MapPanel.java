@@ -32,21 +32,23 @@ public class MapPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		for (int i = 0; i < lines.length; i++) {
 			switch(i) {
-				// Highways, red
-				case 0: g2.setColor(Color.red);
-						g2.setStroke(new BasicStroke(5)); break;
-				// Large streets, yellow
-				case 1: g2.setColor(Color.yellow);
-						g2.setStroke(new BasicStroke(4)); break;
+				// Streets without vehicles, green
+				case 0:	g2.setColor(Color.green);
+						g2.setStroke(new BasicStroke(1)); break;
+				// Small roads, black
+				case 1: g2.setColor(Color.black);
+						g2.setStroke(new BasicStroke(2)); break;
 				// City streets, blue
 				case 2: g2.setColor(Color.blue);
 						g2.setStroke(new BasicStroke(3)); break;
-				// Small roads, black
-				case 3: g2.setColor(Color.black);
-						g2.setStroke(new BasicStroke(2)); break;
-				// Streets without vehicles, green
-				default:g2.setColor(Color.green);
-						g2.setStroke(new BasicStroke(1)); break;
+				// Large streets, yellow
+				case 3: g2.setColor(Color.yellow);
+						g2.setStroke(new BasicStroke(4)); break;
+				// Highways, red
+				case 4: g2.setColor(Color.red);
+						g2.setStroke(new BasicStroke(5)); break;
+				// Unknown types are not drawn
+				default:	break;
 			}
 			for (int j = 0; j < lines[i].length; j++) {
 				g2.drawLine(lines[i][j][0], lines[i][j][1], lines[i][j][2], lines[i][j][3]);
