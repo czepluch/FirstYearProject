@@ -15,7 +15,7 @@ public class Model {
 	 */
 	public Model() throws RuntimeException {
 		try {
-			// edges = XMLReader.readXML("krax.xml");
+			edges = XMLReader.readXML("krax_complete.xml");
 		} catch (Exception e) { // Exception needs to be specified
 			throw new RuntimeException("Could not read map data from file");
 		}
