@@ -15,7 +15,7 @@ public class MapPanel extends JPanel {
 	 * @param lines the data of the lines to be drawn
 	 */
 	public MapPanel(int[][][] lines, MapListener listener) {
-		if (lines.length != 5) throw new IllegalArgumentException();
+		if (lines.length != 5) throw new IllegalArgumentException("Incorrect amount of road types");
 		this.lines = lines;
 		this.listener = listener;
 	}
