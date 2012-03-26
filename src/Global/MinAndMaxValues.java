@@ -7,6 +7,7 @@ public class MinAndMaxValues {
 	public static double maxY = 6402050.98297;
 	public static int width = 600;
 	public static int height = 600;
+	public static int types = 2;
 	
 	private	MinAndMaxValues () {} //neverton - fuckyeah!
 	
