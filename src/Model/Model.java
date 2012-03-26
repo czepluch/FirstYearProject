@@ -25,15 +25,15 @@ public class Model {
 	 * Returns the data stored in the model
 	 * @return the ArrayList<Edge> stored
 	 */
-	public ArrayList<Edge> getData() {
-		return edges;
+	public int[][][] getData() {
+		return FormatConverter.convertData(edges);
 	}
 	
 	/*
 	 * Returns the data stored in the model filtered according to the given data
 	 * @return the filtered ArrayList<Edge>
 	 */
-	public ArrayList<Edge> getData(double minX, double maxX, double minY, double maxY) {
-		return DataFilter.filterData(edges, minX, maxX, minY, maxY);
+	public int[][][] getFilteredData() {
+		return FormatConverter.convertData(DataFilter.filterData(edges);
 	}
 }
