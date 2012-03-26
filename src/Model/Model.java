@@ -34,6 +34,7 @@ public class Model {
 	 * @return the filtered ArrayList<Edge>
 	 */
 	public int[][][] getFilteredEdges() {
-		return FormatConverter.convertData(DataFilter.filterData(edges);
+		return FormatConverter.convertData(DataFilter.filterData(edges));
 	}
+
 }
