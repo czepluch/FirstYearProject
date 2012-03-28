@@ -11,11 +11,12 @@ public class ZoomHandler {
 	public static void valuesChanged(int x, int y, int zoom) {
 		if (zoom > 0 && canZoomIn()) {
 			// Zoom in
+			
 			// Change the min and max values
-			MinAndMaxValues.minX += zoomRateX;
-			MinAndMaxValues.maxX -= zoomRateX;
-			MinAndMaxValues.minY += zoomRateY;
-			MinAndMaxValues.maxY -= zoomRateY;
+			MinAndMaxValues.minX += zoom * zoomRateX;
+			MinAndMaxValues.maxX -= zoom * zoomRateX;
+			MinAndMaxValues.minY += zoom * zoomRateY;
+			MinAndMaxValues.maxY -= zoom * zoomRateY;
 			
 			/*
 			 * Outcommented version trying to use given x and y coordinates
