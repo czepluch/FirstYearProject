@@ -35,19 +35,19 @@ public class MapPanel extends JPanel {
 			switch(i) {
 				// Streets without vehicles, green
 				case 0:	g2.setColor(Color.green);
-						g2.setStroke(new BasicStroke(1)); break;
+						g2.setStroke(new BasicStroke(1 * MinAndMaxValues.lineWidth)); break;
 				// Small roads, black
 				case 1: g2.setColor(Color.black);
-						g2.setStroke(new BasicStroke(2)); break;
+						g2.setStroke(new BasicStroke(2 * MinAndMaxValues.lineWidth)); break;
 				// City streets, blue
 				case 2: g2.setColor(Color.blue);
-						g2.setStroke(new BasicStroke(3)); break;
+						g2.setStroke(new BasicStroke(3 * MinAndMaxValues.lineWidth)); break;
 				// Large streets, yellow
 				case 3: g2.setColor(Color.yellow);
-						g2.setStroke(new BasicStroke(4)); break;
+						g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth)); break;
 				// Highways, red
 				case 4: g2.setColor(Color.red);
-						g2.setStroke(new BasicStroke(5)); break;
+						g2.setStroke(new BasicStroke(5 * MinAndMaxValues.lineWidth)); break;
 				// Unknown types are not drawn
 				default:	break;
 			}
@@ -80,8 +80,8 @@ public class MapPanel extends JPanel {
 			
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent mwe) {
-				MinAndMaxValues.valuesChanged(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
-				viewboxUpdated();
+				boolean upd = MinAndMaxValues.valuesChanged(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
+				if (upd) viewboxUpdated();
 			}
 		});
 	}
