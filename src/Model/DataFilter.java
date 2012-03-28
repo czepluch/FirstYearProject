@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import Global.*;
 
 /*
  * Accesses the data and filters out the needed data
@@ -12,6 +13,10 @@ public class DataFilter {
 	 * (Currently it simply returns the data given)
 	 */
 	public static ArrayList<Edge> filterData(ArrayList<Edge> edges) {
-		return edges;
+		ArrayList<Edge> filteredEdges = new ArrayList<Edge>();
+		for (Edge e : edges) {
+			if (e.getType() <= MinAndMaxValues.types) filteredEdges.add(e);
+		}
+		return filteredEdges;
 	}
 }
