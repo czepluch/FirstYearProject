@@ -5,9 +5,10 @@ public class ZoomHandler {
 	private static final double ZOOM_CONSTANT_X = 1000;
 	private static final double ZOOM_CONSTANT_Y = ((MinAndMaxValues.maxY - MinAndMaxValues.minY) / (MinAndMaxValues.maxX - MinAndMaxValues.minX)) * ZOOM_CONSTANT_X;
 	private static final float LINE_WIDTH_INCREMENT = (float) 0.0005;
+	private static final int ZOOM_LIMIT = 1000;
 	
 	public static void valuesChanged(int x, int y, int zoom) {
-		if (zoom > 0) {
+		if (zoom > 0 && canZoomIn()) {
 			// Zoom in
 			// Change the min and max values
 			MinAndMaxValues.minX += ZOOM_CONSTANT_X;
@@ -43,7 +44,7 @@ public class ZoomHandler {
 			
 			// Compute shown types
 			int currentTypes = MinAndMaxValues.types; // Needed for computing the need for repaint
-			MinAndMaxValues.types = typesToBeDisplayed();
+			MinAndMaxValues.updateTypesToBeDisplayed();
 			
 			// Compute line widths and drag increments
 			MinAndMaxValues.lineWidth += LINE_WIDTH_INCREMENT;
@@ -64,7 +65,7 @@ public class ZoomHandler {
 			
 			// Compute shown types
 			int currentTypes = MinAndMaxValues.types; // Needed for computing the need for repaint
-			MinAndMaxValues.types = typesToBeDisplayed();
+			MinAndMaxValues.updateTypesToBeDisplayed();
 			
 			// Compute line widths and drag increment
 			MinAndMaxValues.lineWidth -= LINE_WIDTH_INCREMENT;
@@ -77,14 +78,11 @@ public class ZoomHandler {
 	}
 	
 	/*
-	 * Helper method for determining which types to be shown
+	 * Helper method for checking whether or not it should be allowed to zoom out
 	 */
-	private static int typesToBeDisplayed() {
-		double xDif = MinAndMaxValues.maxX - MinAndMaxValues.minX;
-		if (xDif < MinAndMaxValues.TYPE5) return 5;
-		else if (xDif < MinAndMaxValues.TYPE4) return 4;
-		else if (xDif < MinAndMaxValues.TYPE3) return 3;
-		else return 2;
+	private static boolean canZoomIn() {
+		if (((MinAndMaxValues.maxX - MinAndMaxValues.minX) - (2 * ZOOM_CONSTANT_X)) < ZOOM_LIMIT) return false;
+		return true;
 	}
 	
 	/*
