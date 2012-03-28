@@ -127,6 +127,7 @@ public class MapPanel extends JPanel {
 			public void mouseDragged(MouseEvent e) {
 				endX = (int) e.getPoint().getX();
 				endY = (int) e.getPoint().getY();
+				MinAndMaxValues.valuesChangedDrag(startX, startY, endX, endY);
 				System.out.println("End x:\t" + endX);
 				System.out.println("End y:\t" + endY);
 			}
