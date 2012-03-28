@@ -22,12 +22,12 @@ public class MinAndMaxValues {
 	public static double drawnMinY = MIN_Y;
 	public static double drawnMaxY = MAX_Y;
 	// Zoom constant
-	private static final int ZOOM_CONSTANT_X = 4000;
+	private static final int ZOOM_CONSTANT_X = 1000;
 	private static final int ZOOM_CONSTANT_Y = (int) ((maxY - minY) / (maxX - minX)) * ZOOM_CONSTANT_X;
-	private static final float LINE_WIDTH_INCREMENT = (float) 0.005;
+	private static final float LINE_WIDTH_INCREMENT = (float) 0.0005;
 	// Drag constants
-	private static int drag = 2000;
-	private static final int DRAG_INCREMENT = 25;
+	private static int drag = 500;
+	private static final int DRAG_INCREMENT = 10;
 	private static final int MIN_DRAG = 50;
 	private static final int MAX_DRAG = 2000;
 	// Int limits used for determining which types to be drawn
@@ -41,7 +41,7 @@ public class MinAndMaxValues {
 		// Needs to be stored for later
 			if (zoom > 0) {
 				// Zoom in
-				
+				System.out.println(zoom);
 				// Change the min and max values
 				minX += ZOOM_CONSTANT_X;
 				maxX -= ZOOM_CONSTANT_X;
@@ -81,7 +81,6 @@ public class MinAndMaxValues {
 				// Compute line widths and drag increments
 				lineWidth += LINE_WIDTH_INCREMENT;
 				if (drag > MIN_DRAG) drag -= DRAG_INCREMENT;
-				System.out.println("Drag:\t" + drag);
 				
 				// Compute whether or not repaint is needed
 				if (types != currentTypes) {
@@ -123,8 +122,6 @@ public class MinAndMaxValues {
 	}
 	
 	public static void valuesChangedDrag(int x, int y) {
-		System.out.println("x:\t" + x + "\t\ty:" + y);
-		
 		// Move horizontally
 		if (x < 0) {
 			if ((maxX + Math.abs(x * drag)) <= MAX_X) {
