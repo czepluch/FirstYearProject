@@ -3,6 +3,9 @@ import javax.swing.*;
 import Global.MinAndMaxValues;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
@@ -13,6 +16,11 @@ import java.awt.event.MouseWheelListener;
 public class MapPanel extends JPanel {
 	private int[][][] lines;
 	private MapListener listener;
+	// Variables used when dragging
+	private int startX;
+	private int startY;
+	private int endX;
+	private int endY;
 	
 	/*
 	 * Constructor
@@ -81,8 +89,46 @@ public class MapPanel extends JPanel {
 			
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent mwe) {
-				MinAndMaxValues.valuesChanged(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
+				MinAndMaxValues.valuesChangedZoom(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
 				viewboxUpdated();
+			}
+		});
+		
+		addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) { }
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) { }
+
+			@Override
+			public void mouseExited(MouseEvent arg0) { }
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				startX = (int) e.getPoint().getX();
+				startY = (int) e.getPoint().getY();
+				System.out.println("Start x:\t" + startX);
+				System.out.println("Start y:\t" + startY);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) { }
+			
+		});
+		
+		addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) { }
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				endX = (int) e.getPoint().getX();
+				endY = (int) e.getPoint().getY();
+				System.out.println("End x:\t" + endX);
+				System.out.println("End y:\t" + endY);
 			}
 		});
 	}

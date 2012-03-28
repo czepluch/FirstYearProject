@@ -29,7 +29,7 @@ public class MinAndMaxValues {
 	
 	private	MinAndMaxValues () {} //neverton - fuckyeah!
 	
-	public static void valuesChanged(int x, int y, int zoom) {
+	public static void valuesChangedZoom(int x, int y, int zoom) {
 		// Needs to be stored for later
 			System.out.println("Zoomed!");
 			if (zoom > 0) {
@@ -111,6 +111,10 @@ public class MinAndMaxValues {
 				if (types != currentTypes || repaintNeeded) repaint = true;
 				else repaint = false;
 			}
+	}
+	
+	public void valuesChangedDrag() {
+		
 	}
 	
 	/*
