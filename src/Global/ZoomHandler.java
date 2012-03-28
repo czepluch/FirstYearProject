@@ -51,14 +51,8 @@ public class ZoomHandler {
 			DragHandler.decrementDrag();
 			
 			// Compute whether or not repaint is needed
-			if (MinAndMaxValues.types != currentTypes) {
-				MinAndMaxValues.repaint = true;
-				MinAndMaxValues.drawnMinX = MinAndMaxValues.minX;
-				MinAndMaxValues.drawnMaxX = MinAndMaxValues.maxX;
-				MinAndMaxValues.drawnMinY = MinAndMaxValues.minY;
-				MinAndMaxValues.drawnMaxX = MinAndMaxValues.maxY;
-			}
-			else MinAndMaxValues.repaint = false;
+			MinAndMaxValues.needsRepaint();
+			if (MinAndMaxValues.types != currentTypes) { MinAndMaxValues.updateDrawn(); }
 			
 		} else if (canZoomOut()) { // Set an limit for how far out to zoom
 			// Zoom out
@@ -78,14 +72,8 @@ public class ZoomHandler {
 			DragHandler.incrementDrag();
 			
 			// Compute whether or not repaint is needed
-			if (MinAndMaxValues.types != currentTypes || MinAndMaxValues.needsRepaint()) {
-				MinAndMaxValues.repaint = true;
-				MinAndMaxValues.drawnMinX = MinAndMaxValues.minX;
-				MinAndMaxValues.drawnMaxX = MinAndMaxValues.maxX;
-				MinAndMaxValues.drawnMinY = MinAndMaxValues.minY;
-				MinAndMaxValues.drawnMaxX = MinAndMaxValues.maxY;
-			}
-			else MinAndMaxValues.repaint = false;
+			MinAndMaxValues.needsRepaint();
+			if (MinAndMaxValues.types != currentTypes) MinAndMaxValues.updateDrawn();
 		}
 	}
 	

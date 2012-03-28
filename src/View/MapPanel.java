@@ -17,8 +17,6 @@ public class MapPanel extends JPanel {
 	private int[][][] lines;
 	private MapListener listener;
 	// Variables used when dragging
-	private int startX;
-	private int startY;
 	private int lastEndX;
 	private int lastEndY;
 	private int endX;
@@ -54,7 +52,7 @@ public class MapPanel extends JPanel {
 				case 2: g2.setColor(Color.blue);
 						g2.setStroke(new BasicStroke(3 * MinAndMaxValues.lineWidth)); break;
 				// Large streets, yellow
-				case 3: g2.setColor(Color.yellow);
+				case 3: g2.setColor(Color.DARK_GRAY);
 						g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth)); break;
 				// Highways, red
 				case 4: g2.setColor(Color.red);
@@ -109,12 +107,8 @@ public class MapPanel extends JPanel {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				startX = (int) e.getPoint().getX();
-				startY = (int) e.getPoint().getY();
-				lastEndX = startX;
-				lastEndY = startY;
-				System.out.println("Start x:\t" + startX);
-				System.out.println("Start y:\t" + startY);
+				lastEndX = (int) e.getPoint().getX();
+				lastEndY = (int) e.getPoint().getY();
 			}
 
 			@Override
