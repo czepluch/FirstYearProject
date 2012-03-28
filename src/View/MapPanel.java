@@ -19,6 +19,8 @@ public class MapPanel extends JPanel {
 	// Variables used when dragging
 	private int startX;
 	private int startY;
+	private int lastEndX;
+	private int lastEndY;
 	private int endX;
 	private int endY;
 	
@@ -109,6 +111,8 @@ public class MapPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				startX = (int) e.getPoint().getX();
 				startY = (int) e.getPoint().getY();
+				lastEndX = startX;
+				lastEndY = startY;
 				System.out.println("Start x:\t" + startX);
 				System.out.println("Start y:\t" + startY);
 			}
@@ -127,9 +131,12 @@ public class MapPanel extends JPanel {
 			public void mouseDragged(MouseEvent e) {
 				endX = (int) e.getPoint().getX();
 				endY = (int) e.getPoint().getY();
-				MinAndMaxValues.valuesChangedDrag(startX, startY, endX, endY);
-				System.out.println("End x:\t" + endX);
-				System.out.println("End y:\t" + endY);
+				int relX = endX - lastEndX;
+				int relY = endY - lastEndY;
+				lastEndX = endX;
+				lastEndY = endY;
+				MinAndMaxValues.valuesChangedDrag(relX, relY);
+				viewboxUpdated();
 			}
 		});
 	}

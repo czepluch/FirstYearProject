@@ -25,6 +25,8 @@ public class MinAndMaxValues {
 	private static final int ZOOM_CONSTANT_X = 4000;
 	private static final int ZOOM_CONSTANT_Y = (int) ((maxY - minY) / (maxX - minX)) * ZOOM_CONSTANT_X;
 	private static final float LINE_WIDTH_INCREMENT = (float) 0.005;
+	// Drag constants
+	private static final int DRAG = 4000;
 	// Int limits used for determining which types to be drawn
 	private static final int TYPE3 = 50000;
 	private static final int TYPE4 = 25000; 
@@ -86,7 +88,7 @@ public class MinAndMaxValues {
 				}
 				else repaint = false;
 				
-			} else if ((minX - ZOOM_CONSTANT_X) > MIN_X) { // Set an limit for how far out to zoom
+			} else if (canZoomOut()) { // Set an limit for how far out to zoom
 				// Zoom out
 				
 				// Change the min and max values
@@ -114,22 +116,39 @@ public class MinAndMaxValues {
 			}
 	}
 	
-	public static void valuesChangedDrag(int startX, int startY, int endX, int endY) {
-		int difX = endX - startX;
-		int difY = endY - startY;
-		System.out.println("Test\t" + difX + "\t" + difY);
+	public static void valuesChangedDrag(int x, int y) {
+		System.out.println("x:\t" + x + "\t\ty:" + y);
 		
 		// Move horizontally
-		
+		if (x > 0) {
+			if ((maxX + DRAG) < MAX_X) {
+				maxX += x * DRAG;
+				minX += x * DRAG;
+			}
+		} else if (x < 0) {
+			if ((minX - DRAG) > MAX_X) {
+				maxX -= x * DRAG;
+				minX -= x * DRAG;
+			}
+		}
 		
 		// Move vertically
 		
+		
+		// check if repaint is needed
+		repaint = needsRepaint();
+		if (repaint) {
+			drawnMinX = minX;
+			drawnMaxX = maxX;
+			drawnMinY = minY;
+			drawnMaxX = maxY;
+		}
 	}
 	
 	/*
 	 * Helper method for determining which types to be shown
 	 */
-	public static int typesToBeDisplayed() {
+	private static int typesToBeDisplayed() {
 		double xDif = maxX - minX;
 		if (xDif < TYPE5) return 5;
 		else if (xDif < TYPE4) return 4;
@@ -138,9 +157,20 @@ public class MinAndMaxValues {
 	}
 	
 	/*
+	 * Helper method for checking whether or not it should be allowed to zoom out
+	 */
+	private static boolean canZoomOut() {
+		if (((minX - ZOOM_CONSTANT_X) >= MIN_X) &&
+			((maxX + ZOOM_CONSTANT_X) <= MAX_X) &&
+			((minY - ZOOM_CONSTANT_Y) >= MIN_Y) &&
+			((maxY + ZOOM_CONSTANT_Y) <= MAX_Y)) return true;
+		return false;
+	}
+	
+	/*
 	 * Helper method for determining whether or not the new area to be shown needs repainting
 	 */
-	public static boolean needsRepaint() {
+	private static boolean needsRepaint() {
 		if ((minX > drawnMinX) && (maxX < drawnMaxX) && (minY > drawnMinY) && (maxY < drawnMaxY)) return false;
 		return true;
 	}
