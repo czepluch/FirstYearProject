@@ -48,4 +48,15 @@ public class MinAndMaxValues {
 		drawnMaxX = maxY;
 		repaint = true;
 	}
+	
+	/*
+	 * Helper method for determining which types to be shown
+	 */
+	public static void updateTypesToBeDisplayed() {
+		double xDif = MinAndMaxValues.maxX - MinAndMaxValues.minX;
+		if (xDif < MinAndMaxValues.TYPE5) types = 5;
+		else if (xDif < MinAndMaxValues.TYPE4) types = 4;
+		else if (xDif < MinAndMaxValues.TYPE3) types = 3;
+		else types = 2;
+	}
 }
