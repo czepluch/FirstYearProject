@@ -29,7 +29,8 @@ public class MapPanel extends JPanel {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		doLayout();
+		super.paintComponent(g);
+		// doLayout();
 		Graphics2D g2 = (Graphics2D) g;
 		for (int i = 0; i < lines.length; i++) {
 			switch(i) {
