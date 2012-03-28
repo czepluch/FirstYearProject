@@ -26,7 +26,10 @@ public class MinAndMaxValues {
 	private static final int ZOOM_CONSTANT_Y = (int) ((maxY - minY) / (maxX - minX)) * ZOOM_CONSTANT_X;
 	private static final float LINE_WIDTH_INCREMENT = (float) 0.005;
 	// Drag constants
-	private static final int DRAG = 4000;
+	private static int drag = 2000;
+	private static final int DRAG_INCREMENT = 25;
+	private static final int MIN_DRAG = 50;
+	private static final int MAX_DRAG = 2000;
 	// Int limits used for determining which types to be drawn
 	private static final int TYPE3 = 50000;
 	private static final int TYPE4 = 25000; 
@@ -75,8 +78,10 @@ public class MinAndMaxValues {
 				int currentTypes = types; // Needed for computing the need for repaint
 				types = typesToBeDisplayed();
 				
-				// Compute line widths
+				// Compute line widths and drag increments
 				lineWidth += LINE_WIDTH_INCREMENT;
+				if (drag > MIN_DRAG) drag -= DRAG_INCREMENT;
+				System.out.println("Drag:\t" + drag);
 				
 				// Compute whether or not repaint is needed
 				if (types != currentTypes) {
@@ -101,8 +106,9 @@ public class MinAndMaxValues {
 				int currentTypes = types; // Needed for computing the need for repaint
 				types = typesToBeDisplayed();
 				
-				// Compute line widths
+				// Compute line widths and drag increment
 				lineWidth -= LINE_WIDTH_INCREMENT;
+				if (drag < MAX_DRAG) drag += DRAG_INCREMENT;
 				
 				// Compute whether or not repaint is needed
 				if (types != currentTypes || needsRepaint()) {
@@ -120,20 +126,30 @@ public class MinAndMaxValues {
 		System.out.println("x:\t" + x + "\t\ty:" + y);
 		
 		// Move horizontally
-		if (x > 0) {
-			if ((maxX + DRAG) < MAX_X) {
-				maxX += x * DRAG;
-				minX += x * DRAG;
+		if (x < 0) {
+			if ((maxX + Math.abs(x * drag)) <= MAX_X) {
+				maxX += Math.abs(x * drag);
+				minX += Math.abs(x * drag);
 			}
-		} else if (x < 0) {
-			if ((minX - DRAG) > MAX_X) {
-				maxX -= x * DRAG;
-				minX -= x * DRAG;
+		} else if (x > 0) {
+			if ((minX - Math.abs(x * drag)) >= MIN_X) {
+				maxX -= Math.abs(x * drag);
+				minX -= Math.abs(x * drag);
 			}
 		}
 		
 		// Move vertically
-		
+		if ((-y) < 0) {
+			if ((maxY + (y * drag)) <= MAX_Y) {
+				maxY += Math.abs(y * drag);
+				minY += Math.abs(y * drag);
+			}
+		} else if ((-y) > 0) {
+			if ((minY - (y * drag)) >= MIN_Y) {
+				maxY -= Math.abs(y * drag);
+				minY -= Math.abs(y * drag);
+			}
+		}
 		
 		// check if repaint is needed
 		repaint = needsRepaint();
