@@ -2,14 +2,13 @@ package Global;
 
 public class ZoomHandler {
 	// Zoom constant
-	private static final int ZOOM_CONSTANT_X = 1000;
-	private static final int ZOOM_CONSTANT_Y = (int) ((MinAndMaxValues.maxY - MinAndMaxValues.minY) / (MinAndMaxValues.maxX - MinAndMaxValues.minX)) * ZOOM_CONSTANT_X;
+	private static final double ZOOM_CONSTANT_X = 1000;
+	private static final double ZOOM_CONSTANT_Y = ((MinAndMaxValues.maxY - MinAndMaxValues.minY) / (MinAndMaxValues.maxX - MinAndMaxValues.minX)) * ZOOM_CONSTANT_X;
 	private static final float LINE_WIDTH_INCREMENT = (float) 0.0005;
 	
 	public static void valuesChanged(int x, int y, int zoom) {
 		if (zoom > 0) {
 			// Zoom in
-			System.out.println(zoom);
 			// Change the min and max values
 			MinAndMaxValues.minX += ZOOM_CONSTANT_X;
 			MinAndMaxValues.maxX -= ZOOM_CONSTANT_X;

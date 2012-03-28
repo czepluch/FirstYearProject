@@ -8,7 +8,6 @@ public class DragHandler {
 	private static final int MAX_DRAG = 2000;
 	
 	public static void valuesChanged(int x, int y) {
-		System.out.println("x:\t" + x + "\t\ty:\t" + y);
 		// Move horizontally
 		int xAbs = Math.abs(x);
 		if (x < 0) {
