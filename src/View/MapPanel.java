@@ -1,6 +1,6 @@
 package View;
 import javax.swing.*;
-import Global.MinAndMaxValues;
+import Global.*;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -91,7 +91,7 @@ public class MapPanel extends JPanel {
 			
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent mwe) {
-				MinAndMaxValues.valuesChangedZoom(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
+				ZoomHandler.valuesChanged(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
 				viewboxUpdated();
 			}
 		});
@@ -135,7 +135,7 @@ public class MapPanel extends JPanel {
 				int relY = endY - lastEndY;
 				lastEndX = endX;
 				lastEndY = endY;
-				MinAndMaxValues.valuesChangedDrag(relX, relY);
+				DragHandler.valuesChanged(relX, relY);
 				viewboxUpdated();
 			}
 		});
