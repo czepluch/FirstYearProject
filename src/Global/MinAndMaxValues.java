@@ -22,7 +22,7 @@ public class MinAndMaxValues {
 	private static final float LINE_WIDTH_INCREMENT = (float) 0.005;
 	// Other variables used for minimizing the need for zooming
 	private static int zoomInsSinceLastRepaint = 0;
-	// Int limits used for determing which types to be drawn
+	// Int limits used for determining which types to be drawn
 	private static final int TYPE3 = 50000;
 	private static final int TYPE4 = 25000; 
 	private static final int TYPE5 = 5000; 
