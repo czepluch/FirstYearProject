@@ -2,8 +2,8 @@ package Global;
 
 public class DragHandler {
 	// Drag constants
-	private static int drag = 500;
-	private static final int DRAG_INCREMENT = 10;
+	private static final double DRAG_CONSTANT = 0.0005;
+	private static double drag = (MinAndMaxValues.maxX - MinAndMaxValues.minX) * DRAG_CONSTANT;
 	private static final int MIN_DRAG = 100;
 	private static final int MAX_DRAG = 2000;
 	
@@ -40,11 +40,8 @@ public class DragHandler {
 		MinAndMaxValues.needsRepaint();
 	}
 	
-	public static void incrementDrag() {
-		if (drag < MAX_DRAG) drag += DRAG_INCREMENT;
-	}
-	
-	public static void decrementDrag() {
-		if (drag > MIN_DRAG) drag -= DRAG_INCREMENT;
+	public static void updateDrag() {
+		drag = (MinAndMaxValues.maxX - MinAndMaxValues.minX) * DRAG_CONSTANT;
+		System.out.println("Drag:\t" + drag);
 	}
 }

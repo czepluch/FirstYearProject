@@ -48,7 +48,7 @@ public class ZoomHandler {
 			
 			// Compute line widths and drag increments
 			MinAndMaxValues.lineWidth += LINE_WIDTH_INCREMENT;
-			DragHandler.decrementDrag();
+			DragHandler.updateDrag();
 			
 			// Compute whether or not repaint is needed
 			MinAndMaxValues.needsRepaint();
@@ -69,7 +69,7 @@ public class ZoomHandler {
 			
 			// Compute line widths and drag increment
 			MinAndMaxValues.lineWidth -= LINE_WIDTH_INCREMENT;
-			DragHandler.incrementDrag();
+			DragHandler.updateDrag();
 			
 			// Compute whether or not repaint is needed
 			MinAndMaxValues.needsRepaint();
