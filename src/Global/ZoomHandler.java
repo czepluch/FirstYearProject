@@ -63,18 +63,58 @@ public class ZoomHandler {
 			MinAndMaxValues.minY -= ZOOM_CONSTANT_Y;
 			MinAndMaxValues.maxY += ZOOM_CONSTANT_Y;
 			
-			// Compute shown types
-			int currentTypes = MinAndMaxValues.types; // Needed for computing the need for repaint
-			MinAndMaxValues.updateTypesToBeDisplayed();
+			updateTypesLineWidthDragAndRepaint();
 			
-			// Compute line widths and drag increment
-			MinAndMaxValues.lineWidth -= LINE_WIDTH_INCREMENT;
-			DragHandler.updateDrag();
 			
-			// Compute whether or not repaint is needed
-			MinAndMaxValues.needsRepaint();
-			if (MinAndMaxValues.types != currentTypes) MinAndMaxValues.updateDrawn();
+			// Additional cases for zooming out:
+			// 1. Too close to left side only
+			// 2. Too close to right side only
+			// 3. Too close to top only
+			// 4. Too close to bottom only
+			// 5. Too close to to left and top
+			// 6. Too close to left and bottom
+			// 7. Too close to right and top
+			// 8. Too close to right and bottom
+		} else {
+			// First compute the x-values
+			double xDif = MinAndMaxValues.maxX - MinAndMaxValues.minX;
+			if ((MinAndMaxValues.minX - ZOOM_CONSTANT_X) < MinAndMaxValues.MIN_X) { // minX too close to the left
+				MinAndMaxValues.minX = MinAndMaxValues.MIN_X;
+				MinAndMaxValues.maxX = MinAndMaxValues.minX + (xDif + (2 * ZOOM_CONSTANT_X));
+			} else { // Then maxX is too close to the right
+				MinAndMaxValues.maxX = MinAndMaxValues.MAX_X;
+				MinAndMaxValues.minX = MinAndMaxValues.maxX - (xDif + (2 * ZOOM_CONSTANT_X));
+			}
+			
+			// Then compute the y-values
+			double yDif = MinAndMaxValues.maxY - MinAndMaxValues.minY;
+			if ((MinAndMaxValues.minY - ZOOM_CONSTANT_Y) < MinAndMaxValues.MIN_Y) { // minY too close to the left
+				MinAndMaxValues.minY = MinAndMaxValues.MIN_Y;
+				MinAndMaxValues.maxY = MinAndMaxValues.minY + (yDif + (2 * ZOOM_CONSTANT_Y));
+			} else { // Then maxX is too close to the right
+				MinAndMaxValues.maxY = MinAndMaxValues.MAX_Y;
+				MinAndMaxValues.minY = MinAndMaxValues.maxY - (yDif + (2 * ZOOM_CONSTANT_Y));
+			}
+			
+			updateTypesLineWidthDragAndRepaint();
 		}
+	}
+	
+	/*
+	 * Helper method called for each zoom-out
+	 */
+	private static void updateTypesLineWidthDragAndRepaint() {
+		// Compute shown types
+		int currentTypes = MinAndMaxValues.types; // Needed for computing the need for repaint
+		MinAndMaxValues.updateTypesToBeDisplayed();
+				
+		// Compute line widths and drag increment
+		MinAndMaxValues.lineWidth -= LINE_WIDTH_INCREMENT;
+		DragHandler.updateDrag();
+			
+		// Compute whether or not repaint is needed
+		MinAndMaxValues.needsRepaint();
+		if (MinAndMaxValues.types != currentTypes) MinAndMaxValues.updateDrawn();
 	}
 	
 	/*
