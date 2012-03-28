@@ -1,18 +1,21 @@
 package Global;
 
 public class MinAndMaxValues {
-	public static double minX = 442254.35659;
-	public static double maxX = 892658.21706;
-	public static double minY = 6049914.43018;
-	public static double maxY = 6402050.98297;
+	// Final values
+	public static final double MIN_X = 442254.35659;
+	public static final double MAX_X = 892658.21706;
+	public static final double MIN_Y = 6049914.43018;
+	public static final double MAX_Y = 6402050.98297;
+	// Current values
+	public static double minX = MIN_X;
+	public static double maxX = MAX_X;
+	public static double minY = MIN_Y;
+	public static double maxY = MAX_Y;
 	public static int width = 600;
 	public static int height = 600;
 	public static int types = 2;
 	public static float lineWidth = (float) 0.1;
 	public static boolean repaint = false;
-	// Int values used for setting scrolls sensativity
-	private static int sens = 0;
-	private static final int ROLLOVER = 1;
 	// Zoom constant
 	private static final int ZOOM_CONSTANT_X = 4000;
 	private static final int ZOOM_CONSTANT_Y = (int) ((maxY - minY) / (maxX - minX)) * ZOOM_CONSTANT_X;
@@ -21,8 +24,8 @@ public class MinAndMaxValues {
 	private static int zoomInsSinceLastRepaint = 0;
 	// Int limits used for determing which types to be drawn
 	private static final int TYPE3 = 100000;
-	private static final int TYPE4 = 50000; 
-	private static final int TYPE5 = 10000; 
+	private static final int TYPE4 = 25000; 
+	private static final int TYPE5 = 5000; 
 	
 	private	MinAndMaxValues () {} //neverton - fuckyeah!
 	
@@ -76,11 +79,34 @@ public class MinAndMaxValues {
 				// Compute whether or not repaint is needed
 				if (types != currentTypes) repaint = true;
 				else repaint = false;
-			} else {
+				
+			} else if ((minX - ZOOM_CONSTANT_X) > MIN_X) { // Set an limit for how far out to zoom
 				// Zoom out
-				System.out.println("Should have zoomed out here...");
+
+				// Decrement the zoom in count if more than 0
+				boolean repaintNeeded = true; // Stores info about whether or not repaint is needed to to the zoom
+				if (zoomInsSinceLastRepaint > 0) {
+					zoomInsSinceLastRepaint--;
+					repaintNeeded = false;
+				}
+				
+				// Change the min and max values
+				minX -= ZOOM_CONSTANT_X;
+				maxX += ZOOM_CONSTANT_X;
+				minY -= ZOOM_CONSTANT_Y;
+				maxY += ZOOM_CONSTANT_Y;
+				
+				// Compute shown types
+				int currentTypes = types; // Needed for computing the need for repaint
+				types = typesToBeDisplayed();
+				
+				// Compute line widths
+				lineWidth -= LINE_WIDTH_INCREMENT;
+				
+				// Compute whether or not repaint is needed
+				if (types != currentTypes || repaintNeeded) repaint = true;
+				else repaint = false;
 			}
-			
 			
 			/*
 		
