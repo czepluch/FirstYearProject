@@ -62,7 +62,7 @@ public class XMLReader
 				speed = Integer.parseInt(line);
 				
 				line = parseXMLLine(in.readLine(),TYPE); // type
-				type = Integer.parseInt(line);
+				type = translateType(Integer.parseInt(line));
 				
 				edges.add(new Edge(fromLat, fromLong, toLat, toLong, distance, speed, type));
 				line = in.readLine(); // skip line
@@ -114,6 +114,43 @@ public class XMLReader
 			}
 		}
 		return line;
+	}
+	
+	private static int translateType(int type) {
+		int newType = 0;
+		switch (type) {
+			case 1: newType = 1; break; // Highways, type 1
+			case 2: newType = 1; break; // Almost highways, type 1
+			case 3: newType = 2; break; // Primary routes > 6m, type 2
+			case 4: newType = 2; break; // Secondary routes > 6m, type 2
+			case 5: newType = 3; break; // Roads 3 - 6m, type 3
+			case 6: newType = 4; break; // Other roads, type 4
+			case 8: newType = 5; break; // Paths, type 5
+			case 10: newType = 5; break; // Field paths, type 5
+			case 11: newType = 5; break; // Pedestrian zones, type 5
+			case 21: newType = 1; break; // Proj. highways, type 1
+			case 22: newType = 1; break; // Proj. almost highways, type1
+			case 23: newType = 2; break; // Proj. primary routes > 6m, type 2
+			case 24: newType = 2; break; // Proj. secondary routes > 6m, type 2
+			case 25: newType = 3; break; // Proj. roads 3 - 6m, type 4
+			case 26: newType = 4; break; // Proj. other roads, type 4
+			case 28: newType = 5; break; // Proj. paths, type 5
+			case 31: newType = 1; break; // Highway exits, type 1
+			case 32: newType = 1; break; // Almost highway exits, type 1
+			case 33: newType = 2; break; // Primary routes > 6m exits, type 2
+			case 34: newType = 2; break; // Secondary routes > 6m exits, type 2
+			case 35: newType = 3; break; // Roads 3 - 6m exits, type 3
+			case 41: newType = 1; break; // Highway tunnels, type 1
+			case 42: newType = 1; break; // Almost highway tunnels, type 1
+			case 43: newType = 2; break; // Primary routes > 6m tunnels, type 2
+			case 44: newType = 2; break; // Secondary routes > 6m tunnels, type 2
+			case 45: newType = 3; break; // Roads 3 - 6m tunnels, type 3
+			case 46: newType = 4; break; // Other road tunnels, type 4
+			case 48: newType = 5; break; // Path tunnels, type 5
+			// If some other type exists, it is of type 6 (not drawn)
+			default: newType = 6; 	break;
+		}
+		return newType;
 	}
 	
 	public static void main(String[] args) {
