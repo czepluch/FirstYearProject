@@ -65,4 +65,11 @@ public class FormatConverter {
 		int[] edge = { x1, y1, x2, y2 };
 		return edge;
 	}
+	
+	/*
+	 * Updates the Coordinate field c
+	 */
+	public static void updateC() {
+		c = new Coordinates();
+	}
 }
