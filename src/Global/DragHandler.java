@@ -2,7 +2,7 @@ package Global;
 
 public class DragHandler {
 	// Drag constants
-	private static final double DRAG_CONSTANT = 0.0005;
+	private static final double DRAG_CONSTANT = 0.0017; // This constant keeps allows the map to completely follow the cursor
 	private static double drag = (MinAndMaxValues.maxX - MinAndMaxValues.minX) * DRAG_CONSTANT;
 	private static final int MIN_DRAG = 100;
 	private static final int MAX_DRAG = 2000;
@@ -42,6 +42,5 @@ public class DragHandler {
 	
 	public static void updateDrag() {
 		drag = (MinAndMaxValues.maxX - MinAndMaxValues.minX) * DRAG_CONSTANT;
-		System.out.println("Drag:\t" + drag);
 	}
 }
