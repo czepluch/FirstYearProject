@@ -19,11 +19,11 @@ public class MinAndMaxValues {
 	// Zoom constant
 	private static final int ZOOM_CONSTANT_X = 4000;
 	private static final int ZOOM_CONSTANT_Y = (int) ((maxY - minY) / (maxX - minX)) * ZOOM_CONSTANT_X;
-	private static final float LINE_WIDTH_INCREMENT = (float) 0.01;
+	private static final float LINE_WIDTH_INCREMENT = (float) 0.005;
 	// Other variables used for minimizing the need for zooming
 	private static int zoomInsSinceLastRepaint = 0;
 	// Int limits used for determing which types to be drawn
-	private static final int TYPE3 = 100000;
+	private static final int TYPE3 = 50000;
 	private static final int TYPE4 = 25000; 
 	private static final int TYPE5 = 5000; 
 	
@@ -46,6 +46,7 @@ public class MinAndMaxValues {
 				
 				/*
 				 * Outcommented version trying to use given x and y coordinates
+				 * 
 				// Compute the given coordinates in UTM format
 				double c = (maxX - minX) / width;
 				System.out.println("c:\t" + c);
@@ -77,7 +78,10 @@ public class MinAndMaxValues {
 				lineWidth += LINE_WIDTH_INCREMENT;
 				
 				// Compute whether or not repaint is needed
-				if (types != currentTypes) repaint = true;
+				if (types != currentTypes) {
+					repaint = true;
+					zoomInsSinceLastRepaint = 0; // Reset zoom in since last repaint counter
+				}
 				else repaint = false;
 				
 			} else if ((minX - ZOOM_CONSTANT_X) > MIN_X) { // Set an limit for how far out to zoom
@@ -107,34 +111,6 @@ public class MinAndMaxValues {
 				if (types != currentTypes || repaintNeeded) repaint = true;
 				else repaint = false;
 			}
-			
-			/*
-		
-			// Compute a constant from the given zoom int
-			double zoomConstant = 1;
-			if (zoom > 0) {
-				zoomConstant = 1 + (zoom / 100); // The last value "100" needs to be adjusted
-			} else {
-				zoomConstant = 1 - (zoom / 100);
-			}
-		
-			// Compute the new differences
-			double newXDif = oldXDif * zoomConstant;
-			double newYDif = oldYDif * zoomConstant;
-		
-			// Compute and store the new results
-			minX = xUTM - (newXDif / 2);
-			maxX = xUTM + (newXDif / 2);
-			minY = yUTM - (newYDif / 2);
-			maxY = yUTM + (newYDif / 2);
-		
-			// Compute and store types
-			// Missing
-		
-			// Compute and store line widths
-			// Missing
-			 */
-			
 	}
 	
 	/*
