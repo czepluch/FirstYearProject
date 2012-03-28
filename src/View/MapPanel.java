@@ -51,7 +51,7 @@ public class MapPanel extends JPanel {
 				// City streets, blue
 				case 2: g2.setColor(Color.blue);
 						g2.setStroke(new BasicStroke(3 * MinAndMaxValues.lineWidth)); break;
-				// Large streets, yellow
+				// Large streets, dark grey
 				case 3: g2.setColor(Color.DARK_GRAY);
 						g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth)); break;
 				// Highways, red
