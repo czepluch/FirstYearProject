@@ -12,27 +12,22 @@ public class MinAndMaxValues {
 	public static boolean repaint = false;
 	// Int values used for setting scrolls sensativity
 	private static int sens = 0;
-	private static final int ROLLOVER = 10;
+	private static final int ROLLOVER = 1;
 	// Zoom constant
 	private static final int ZOOM_CONSTANT_X = 4000;
 	private static final int ZOOM_CONSTANT_Y = (int) ((maxY - minY) / (maxX - minX)) * ZOOM_CONSTANT_X;
-	private static final float LINE_WIDTH_INCREMENT = (float) 0.1;
+	private static final float LINE_WIDTH_INCREMENT = (float) 0.01;
 	// Other variables used for minimizing the need for zooming
 	private static int zoomInsSinceLastRepaint = 0;
 	// Int limits used for determing which types to be drawn
-	private static final int TYPE3 = 400000;
-	private static final int TYPE4 = 250000; 
-	private static final int TYPE5 = 100000; 
+	private static final int TYPE3 = 100000;
+	private static final int TYPE4 = 50000; 
+	private static final int TYPE5 = 10000; 
 	
 	private	MinAndMaxValues () {} //neverton - fuckyeah!
 	
-	public static boolean valuesChanged(int x, int y, int zoom) {
+	public static void valuesChanged(int x, int y, int zoom) {
 		// Needs to be stored for later
-		int currentTypes = types;
-		
-		// Do something only if sens rolls over
-		sens = (sens + 1) % ROLLOVER;
-		if (sens == 0) {
 			System.out.println("Zoomed!");
 			if (zoom > 0) {
 				// Zoom in
@@ -72,11 +67,15 @@ public class MinAndMaxValues {
 				*/
 				
 				// Compute shown types
+				int currentTypes = types; // Needed for computing the need for repaint
 				types = typesToBeDisplayed();
 				
 				// Compute line widths
 				lineWidth += LINE_WIDTH_INCREMENT;
 				
+				// Compute whether or not repaint is needed
+				if (types != currentTypes) repaint = true;
+				else repaint = false;
 			} else {
 				// Zoom out
 				System.out.println("Should have zoomed out here...");
@@ -110,15 +109,6 @@ public class MinAndMaxValues {
 			// Missing
 			 */
 			
-			// Only redraw if necessary
-			// That is if zooming out or the amount of types to be drawn are changed
-			if (zoom < 0 || currentTypes != types) repaint = true;
-			else repaint = false;
-			System.out.println("Repaint:\t" + repaint);
-			
-			return true;
-		}
-		return false;
 	}
 	
 	/*

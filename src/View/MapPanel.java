@@ -81,8 +81,8 @@ public class MapPanel extends JPanel {
 			
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent mwe) {
-				boolean upd = MinAndMaxValues.valuesChanged(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
-				if (upd) viewboxUpdated();
+				MinAndMaxValues.valuesChanged(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
+				viewboxUpdated();
 			}
 		});
 	}
