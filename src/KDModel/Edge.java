@@ -1,4 +1,4 @@
-package Model;
+package KDModel;
 
 import nu.xom.*;
 

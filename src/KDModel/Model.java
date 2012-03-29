@@ -1,9 +1,9 @@
-package Model;
+package KDModel;
 
 import java.util.ArrayList;
 
 import Global.MinAndMaxValues;
-import Model.KDTree.Node;
+import KDModel.KDTree.Node;
 
 /*
  * The part of the application taking care of data handling

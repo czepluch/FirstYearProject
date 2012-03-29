@@ -1,4 +1,4 @@
-package Model;
+package KDModel;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;

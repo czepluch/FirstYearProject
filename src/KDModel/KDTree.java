@@ -1,4 +1,4 @@
-package Model;
+package KDModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
