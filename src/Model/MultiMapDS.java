@@ -73,10 +73,18 @@ public class MultiMapDS implements DataStructure {
 		filteredEdges = new ArrayList<Edge>();
 		
 		// Compute max and min index values
-		int minXIndex = xCoordinateToIndex(minX);
-		int maxXIndex = xCoordinateToIndex(maxX);
-		int minYIndex = xCoordinateToIndex(minY);
-		int maxYIndex = xCoordinateToIndex(maxY);
+		int minXIndex = 0;
+		int maxXIndex = 0;
+		int minYIndex = 0;
+		int maxYIndex = 0;
+		if (!(minX < MIN_X)) minXIndex = xCoordinateToIndex(minX);
+		else minXIndex = xCoordinateToIndex(MIN_X);
+		if (!(maxX > MAX_X)) maxXIndex = xCoordinateToIndex(maxX);
+		else maxXIndex = xCoordinateToIndex(MAX_X);
+		if (!(minY < MIN_Y)) minYIndex = yCoordinateToIndex(minY);
+		else minYIndex = yCoordinateToIndex(MIN_Y);
+		if (!(maxY > MAX_Y)) maxYIndex = yCoordinateToIndex(maxY);
+		else maxYIndex = yCoordinateToIndex(MAX_Y);
 		
 		// Types
 		for (int t = 1; t <= types; t++) {
