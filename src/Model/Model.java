@@ -1,8 +1,8 @@
 package Model;
 
 import java.util.ArrayList;
-
-import Global.MinAndMaxValues;
+import static Global.MinAndMaxValues.*;
+import QuadTree.QuadTreeDS;
 
 /*
  * The part of the application taking care of data handling
@@ -17,7 +17,7 @@ public class Model {
 	 */
 	public Model() throws RuntimeException {
 		try {
-			edges = new MultiMapDS();
+			edges = new QuadTreeDS();
 			XMLReader.readXML("krax_complete.xml", edges);
 		} catch (Exception e) { // Exception needs to be specified
 			throw new RuntimeException("Could not read map data from file");

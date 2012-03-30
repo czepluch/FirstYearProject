@@ -70,35 +70,36 @@ public class MultiMapDS implements DataStructure {
 	
 	@Override
 	public ArrayList<Edge> getFilteredEdges() {
-		filteredEdges = new ArrayList<Edge>();
+		if (repaint) {
+			filteredEdges = new ArrayList<Edge>();
 		
-		// Compute max and min index values
-		int minXIndex = 0;
-		int maxXIndex = 0;
-		int minYIndex = 0;
-		int maxYIndex = 0;
-		if (!((minX - X_INTERVAL) < MIN_X)) minXIndex = xCoordinateToIndex(minX) - 1;
-		else minXIndex = xCoordinateToIndex(MIN_X);
-		if (!((maxX + X_INTERVAL) > MAX_X)) maxXIndex = xCoordinateToIndex(maxX) + 1;
-		else maxXIndex = xCoordinateToIndex(MAX_X);
-		if (!((minY - Y_INTERVAL) < MIN_Y)) minYIndex = yCoordinateToIndex(minY) - 1;
-		else minYIndex = yCoordinateToIndex(MIN_Y);
-		if (!((maxY + Y_INTERVAL) > MAX_Y)) maxYIndex = yCoordinateToIndex(maxY) + 1;
-		else maxYIndex = yCoordinateToIndex(MAX_Y);
-		
-		// Types
-		for (int t = 1; t <= types; t++) {
+			// Compute max and min index values
+			int minXIndex = 0;
+			int maxXIndex = 0;
+			int minYIndex = 0;
+			int maxYIndex = 0;
+			if (!((minX - X_INTERVAL) < MIN_X)) minXIndex = xCoordinateToIndex(minX) - 1;
+			else minXIndex = xCoordinateToIndex(MIN_X);
+			if (!((maxX + X_INTERVAL) > MAX_X)) maxXIndex = xCoordinateToIndex(maxX) + 1;
+			else maxXIndex = xCoordinateToIndex(MAX_X);
+			if (!((minY - Y_INTERVAL) < MIN_Y)) minYIndex = yCoordinateToIndex(minY) - 1;
+			else minYIndex = yCoordinateToIndex(MIN_Y);
+			if (!((maxY + Y_INTERVAL) > MAX_Y)) maxYIndex = yCoordinateToIndex(maxY) + 1;
+			else maxYIndex = yCoordinateToIndex(MAX_Y);
 			
-			// x-values
-			for (int x = minXIndex; x <= maxXIndex; x++) {
+			// Types
+			for (int t = 1; t <= types; t++) {
 				
-				// y-values
-				for (int y = minYIndex; y <= maxYIndex; y++) {
-					filteredEdges.addAll(edges.get(t).get(x).get(y));
+				// x-values
+				for (int x = minXIndex; x <= maxXIndex; x++) {
+					
+					// y-values
+					for (int y = minYIndex; y <= maxYIndex; y++) {
+						filteredEdges.addAll(edges.get(t).get(x).get(y));
+					}	
 				}
 			}
 		}
-		
 		return filteredEdges;
 	}
 
