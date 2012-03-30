@@ -1,6 +1,6 @@
 package Model;
 
-import Global.*;
+import static Global.MinAndMaxValues.*;
 
 /*
  * Has the responsibility of converting UTM32 coordinates to pixels
@@ -22,10 +22,10 @@ public class Coordinates {
 	 * @param height the width of the canvas to which the coordinates are converted
 	 */
 	public Coordinates() {
-		c = (MinAndMaxValues.maxX - MinAndMaxValues.minX) / MinAndMaxValues.width;
-		xTranslate = MinAndMaxValues.minX;
-		yTranslate = MinAndMaxValues.minY;
-		translatedMaxY = MinAndMaxValues.maxY - yTranslate;
+		c = (maxX - minX) / width;
+		xTranslate = minX;
+		yTranslate = minY;
+		translatedMaxY = maxY - yTranslate;
 	}
 	
 	/*

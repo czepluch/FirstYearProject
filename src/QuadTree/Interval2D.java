@@ -1,6 +1,6 @@
 package QuadTree;
 
-// http://algs4.cs.princeton.edu/12oop/Interval2D.java.html
+// http://algs4.cs.princeton.edu/91primitives/Interval2D.java.html
 
 /*************************************************************************
  *  Compilation:  javac Interval2D.java
