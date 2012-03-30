@@ -21,6 +21,8 @@ public class MinAndMaxValues {
 	public static double drawnMaxX = MAX_X;
 	public static double drawnMinY = MIN_Y;
 	public static double drawnMaxY = MAX_Y;
+	// Limit for how too wide the drawn area can be
+	private static int DRAWN_TOO_BIG = 20000;
 	// Int limits used for determining which types to be drawn
 	static final int TYPE3 = 50000;
 	static final int TYPE4 = 25000; 
@@ -32,10 +34,9 @@ public class MinAndMaxValues {
 	 * Helper method for determining whether or not the new area to be shown needs repainting
 	 */
 	static void needsRepaint() {
-		if ((minX > drawnMinX) && (maxX < drawnMaxX) && (minY > drawnMinY) && (maxY < drawnMaxY)) repaint = false;
-		else {
-			updateDrawn();
-		}
+		if (((drawnMaxX - drawnMinX) - (maxX - minX)) < DRAWN_TOO_BIG) updateDrawn();
+		else if ((minX > drawnMinX) && (maxX < drawnMaxX) && (minY > drawnMinY) && (maxY < drawnMaxY)) repaint = false;
+		else updateDrawn();
 	}
 	
 	/*
