@@ -9,43 +9,55 @@ public class ZoomHandler {
 	private static double zoomRateY = ((maxY - minY) / (maxX - minX)) * zoomRateX;
 	private static final float LINE_WIDTH_CONSTANT = (float) 0.0000002;
 	private static final int ZOOM_LIMIT = 1000;
+	private static final int DRAG_WHEN_ZOOM_IN = 2;
 	
 	public static void valuesChanged(int x, int y, int zoom) {
 		int absZoom = Math.abs(zoom);
 		if (zoom > 0 && canZoomIn()) {
 			// Zoom in
 			
-			// Change the min and max values
-			minX += absZoom * zoomRateX;
-			maxX -= absZoom * zoomRateX;
-			minY += absZoom * zoomRateY;
-			maxY -= absZoom * zoomRateY;
-			
-			/*
-			 * Outcommented version trying to use given x and y coordinates
-			 * 
-			// Compute the given coordinates in UTM format
+			// First compute the x and y parameters to UTM coordinates
 			double c = (maxX - minX) / width;
-			System.out.println("c:\t" + c);
 			double xUTM = (x * c) + minX;
 			double yUTM = (y * c) + minY;
-			System.out.println("X as UTM:\t" + xUTM);
-			System.out.println("Y as UTM:\t" + yUTM);
 			
-			// Compute new differences
-			double difX = (maxX - minX) + ZOOM_CONSTANT_X;
-			double difY = (maxY - minY) + ZOOM_CONSTANT_Y;
-			System.out.println("Dif X:\t" + difX);
-			System.out.println("Dif Y:\t" + difY);
+			// Compute the x-values
+			double xDif = maxX - minX;
+			double xMinToX = xUTM - minX;
+			double xMaxToX = maxX - xUTM;
 			
-			// Change the min and max values
-			minX = xUTM - (difX / 2);
-			maxX = xUTM + (difX / 2);
-			minY = yUTM - (difY / 2);
-			maxY = yUTM + (difY / 2);
-			System.out.println("Min X\t\tMax X\t\tMin Y\t\tMax Y");
-			System.out.println(minX + "\t" + maxX + "\t" + minY + "\t" + maxY);
-			*/
+			double xMinZoomFactor = xMinToX / xDif;
+			double xMaxZoomFactor = xMaxToX / xDif;
+			double computedXZoom = 2 * (absZoom * zoomRateX);
+			// Update the min and max x-values
+			minX += xMinZoomFactor * computedXZoom;
+			maxX -= xMaxZoomFactor * computedXZoom;
+			
+			// Compute the y-values
+			double yDif = maxY - minY;
+			double yMinToY = yUTM - minY;
+			double yMaxToY = maxY - yUTM;
+			
+			double yMinZoomFactor = yMinToY / yDif;
+			double yMaxZoomFactor = yMaxToY / yDif;
+			double computedYZoom = 2 * (absZoom * zoomRateY);
+			// Update the min and max y-values
+			minY += yMaxZoomFactor * computedYZoom;
+			maxY -= yMinZoomFactor * computedYZoom;
+			
+			// Call the drag-handler, making the view move according to the zoom
+			int xDrag = 0;
+			int yDrag = 0;
+			// First horizontally
+			if (xMinZoomFactor > xMaxZoomFactor) xDrag = (int) (-(DRAG_WHEN_ZOOM_IN * (1 - xMinZoomFactor)));
+			else xDrag = (int) (DRAG_WHEN_ZOOM_IN * (1 - xMaxZoomFactor));
+			// Then vertically
+			if (yMinZoomFactor > yMaxZoomFactor) yDrag = (int) (-(DRAG_WHEN_ZOOM_IN * (1 - yMinZoomFactor)));
+			else yDrag = (int) (DRAG_WHEN_ZOOM_IN * (1 - yMaxZoomFactor));
+			
+			DragHandler.valuesChanged(xDrag, yDrag);
+			
+			// Then vertically
 			
 			// Compute shown types
 			int currentTypes = types; // Needed for computing the need for repaint
