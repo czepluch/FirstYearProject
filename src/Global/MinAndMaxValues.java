@@ -13,7 +13,7 @@ public class MinAndMaxValues {
 	public static double maxY = MAX_Y;
 	public static int width = 600;
 	public static int height = 600;
-	public static int types = 2;
+	public static int types = 1;
 	public static float lineWidth = (float) 0.1;
 	public static boolean repaint = true;
 	// Current min and max values of what is drawn
@@ -24,8 +24,9 @@ public class MinAndMaxValues {
 	// Limit for how too wide the drawn area can be
 	private static int DRAWN_TOO_BIG = 2;
 	// Int limits used for determining which types to be drawn
-	static final int TYPE3 = 50000;
-	static final int TYPE4 = 25000; 
+	static final int TYPE2 = 200000;
+	static final int TYPE3 = 25000;
+	static final int TYPE4 = 10000; 
 	static final int TYPE5 = 5000; 
 	
 	private	MinAndMaxValues () {} //neverton - fuckyeah!
@@ -54,10 +55,11 @@ public class MinAndMaxValues {
 	 * Helper method for determining which types to be shown
 	 */
 	public static void updateTypesToBeDisplayed() {
-		double xDif = MinAndMaxValues.maxX - MinAndMaxValues.minX;
-		if (xDif < MinAndMaxValues.TYPE5) types = 5;
-		else if (xDif < MinAndMaxValues.TYPE4) types = 4;
-		else if (xDif < MinAndMaxValues.TYPE3) types = 3;
-		else types = 2;
+		double xDif = maxX - minX;
+		if (xDif < TYPE5) 		types = 5;
+		else if (xDif < TYPE4) 	types = 4;
+		else if (xDif < TYPE3) 	types = 3;
+		else if (xDif < TYPE2) 	types = 2;
+		else types = 1;
 	}
 }
