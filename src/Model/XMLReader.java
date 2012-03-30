@@ -24,10 +24,8 @@ public class XMLReader
 	{
 	}
 	
-	public static ArrayList<Edge> readXML(String path)
+	public static void readXML(String path, DataStructure edges)
 	{
-		ArrayList<Edge> edges = new ArrayList<Edge>();
-		
 		BufferedReader in = null;
 		try {
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
@@ -64,7 +62,7 @@ public class XMLReader
 				line = parseXMLLine(in.readLine(),TYPE); // type
 				type = translateType(Integer.parseInt(line));
 				
-				edges.add(new Edge(fromLat, fromLong, toLat, toLong, distance, speed, type));
+				edges.addEdge(new Edge(fromLat, fromLong, toLat, toLong, distance, speed, type));
 				line = in.readLine(); // skip line
 			}
 		} catch (FileNotFoundException e) {
@@ -72,9 +70,6 @@ public class XMLReader
 		} catch (IOException e) {
  			System.out.println("Oh noes!: "+ e.getMessage());
 		}
-		
-		System.out.println(edges.size());
-		return edges;
 	}
 	
 	/*
@@ -155,6 +150,6 @@ public class XMLReader
 	
 	public static void main(String[] args) {
 		XMLReader xr = new XMLReader();
-		xr.readXML("krax_complete.xml");
+		xr.readXML("krax_complete.xml", new ArrayListDS());
 	}
 }

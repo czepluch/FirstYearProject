@@ -9,9 +9,7 @@ import Global.MinAndMaxValues;
  * Includes classes for reading, storing and filtering data
  */
 public class Model {
-	private ArrayList<Edge> edges;
-	// Used to avoid filtering the same data again
-	private ArrayList<Edge> currentFilteredEdges;
+	private DataStructure edges;
 	
 	/*
 	 * Constructor of the model class
@@ -19,32 +17,19 @@ public class Model {
 	 */
 	public Model() throws RuntimeException {
 		try {
-			edges = XMLReader.readXML("krax_complete.xml");
-			currentFilteredEdges = DataFilter.filterData(edges);
+			edges = new ArrayListDS();
+			XMLReader.readXML("krax_complete.xml", edges);
 		} catch (Exception e) { // Exception needs to be specified
 			throw new RuntimeException("Could not read map data from file");
 		}
 	}
-	/*
-	 * Method no longer in use
-	 *
-	 * Returns the data stored in the model
-	 * @return the ArrayList<Edge> stored
-	 *
-	public int[][][] getEdges() {
-		currentFilteredEdges = edges;
-		return FormatConverter.convertData(currentFilteredEdges);
-	}
-	*/
 	
 	/*
 	 * Returns the data stored in the model filtered according to the given data
 	 * @return the filtered ArrayList<Edge>
 	 */
 	public int[][][] getFilteredEdges() {
-		// Filter only if needed
-		if (MinAndMaxValues.repaint) currentFilteredEdges = DataFilter.filterData(edges);
-		return FormatConverter.convertData(currentFilteredEdges);
+		return FormatConverter.convertData(edges.getFilteredEdges());
 	}
 
 }

@@ -15,7 +15,7 @@ public class MinAndMaxValues {
 	public static int height = 600;
 	public static int types = 2;
 	public static float lineWidth = (float) 0.1;
-	public static boolean repaint = false;
+	public static boolean repaint = true;
 	// Current min and max values of what is drawn
 	public static double drawnMinX = MIN_X;
 	public static double drawnMaxX = MAX_X;

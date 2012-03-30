@@ -162,12 +162,13 @@ public class KDTree
 	    System.out.println("Free memory (bytes): " + 
 	        Runtime.getRuntime().freeMemory());
 		XMLReader xr = new XMLReader();
-		ArrayList<Edge> edges = xr.readXML("krax_complete.xml");
+		DataStructure edges = new ArrayListDS();
+		xr.readXML("krax_complete.xml", edges);
 		/* Total amount of free memory available to the JVM */
 	    System.out.println("Free memory (bytes): " + 
 	        Runtime.getRuntime().freeMemory());
 		KDTree kd = new KDTree();
-		kd.createTree(edges);
+		// kd.createTree(edges);		A fix is needed / the KDTree needs to implement to DataStructure interface
 		/* Total amount of free memory available to the JVM */
 	    System.out.println("Free memory (bytes): " + 
 	        Runtime.getRuntime().freeMemory());
