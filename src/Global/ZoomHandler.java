@@ -1,22 +1,25 @@
 package Global;
 
+import static Global.MinAndMaxValues.*;
+
 public class ZoomHandler {
 	// Zoom constant
 	private static final double ZOOM_CONSTANT = 0.0017;
-	private static double zoomRateX = (MinAndMaxValues.maxX - MinAndMaxValues.minX) * ZOOM_CONSTANT;
-	private static double zoomRateY = ((MinAndMaxValues.maxY - MinAndMaxValues.minY) / (MinAndMaxValues.maxX - MinAndMaxValues.minX)) * zoomRateX;
-	private static final float LINE_WIDTH_INCREMENT = (float) 0.0005;
+	private static double zoomRateX = (maxX - minX) * ZOOM_CONSTANT;
+	private static double zoomRateY = ((maxY - minY) / (maxX - minX)) * zoomRateX;
+	private static final float LINE_WIDTH_CONSTANT = (float) 0.0000002;
 	private static final int ZOOM_LIMIT = 1000;
 	
 	public static void valuesChanged(int x, int y, int zoom) {
+		int absZoom = Math.abs(zoom);
 		if (zoom > 0 && canZoomIn()) {
 			// Zoom in
 			
 			// Change the min and max values
-			MinAndMaxValues.minX += zoom * zoomRateX;
-			MinAndMaxValues.maxX -= zoom * zoomRateX;
-			MinAndMaxValues.minY += zoom * zoomRateY;
-			MinAndMaxValues.maxY -= zoom * zoomRateY;
+			minX += absZoom * zoomRateX;
+			maxX -= absZoom * zoomRateX;
+			minY += absZoom * zoomRateY;
+			maxY -= absZoom * zoomRateY;
 			
 			/*
 			 * Outcommented version trying to use given x and y coordinates
@@ -45,26 +48,26 @@ public class ZoomHandler {
 			*/
 			
 			// Compute shown types
-			int currentTypes = MinAndMaxValues.types; // Needed for computing the need for repaint
-			MinAndMaxValues.updateTypesToBeDisplayed();
+			int currentTypes = types; // Needed for computing the need for repaint
+			updateTypesToBeDisplayed();
 			
 			// Compute line widths and drag increments and zoom rate
-			MinAndMaxValues.lineWidth += LINE_WIDTH_INCREMENT;
+			updateLineWidths();
 			DragHandler.updateDrag();
 			updateZoomRate();
 			
 			// Compute whether or not repaint is needed
-			MinAndMaxValues.needsRepaint();
-			if (MinAndMaxValues.types != currentTypes) { MinAndMaxValues.updateDrawn(); }
+			needsRepaint();
+			if (types != currentTypes) { updateDrawn(); }
 			
-		} else if (canZoomOut()) { // Set an limit for how far out to zoom
+		} else if (canZoomOut(absZoom)) { // Set an limit for how far out to zoom
 			// Zoom out
 			
 			// Change the min and max values
-			MinAndMaxValues.minX -= zoomRateX;
-			MinAndMaxValues.maxX += zoomRateX;
-			MinAndMaxValues.minY -= zoomRateY;
-			MinAndMaxValues.maxY += zoomRateY;
+			minX -= absZoom * zoomRateX;
+			maxX += absZoom * zoomRateX;
+			minY -= absZoom * zoomRateY;
+			maxY += absZoom * zoomRateY;
 			
 			updateTypesLineWidthDragAndRepaint();
 			
@@ -80,23 +83,23 @@ public class ZoomHandler {
 			// 8. Too close to right and bottom
 		} else {
 			// First compute the x-values
-			double xDif = MinAndMaxValues.maxX - MinAndMaxValues.minX;
-			if ((MinAndMaxValues.minX - zoomRateX) < MinAndMaxValues.MIN_X) { // minX too close to the left
-				MinAndMaxValues.minX = MinAndMaxValues.MIN_X;
-				MinAndMaxValues.maxX = MinAndMaxValues.minX + (xDif + (2 * zoomRateX));
+			double xDif = maxX - minX;
+			if ((minX - (zoomRateX * absZoom)) < MIN_X) { // minX too close to the left
+				minX = MIN_X;
+				maxX = minX + (xDif + (2 * (zoomRateX * absZoom)));
 			} else { // Then maxX is too close to the right
-				MinAndMaxValues.maxX = MinAndMaxValues.MAX_X;
-				MinAndMaxValues.minX = MinAndMaxValues.maxX - (xDif + (2 * zoomRateX));
+				maxX = MAX_X;
+				minX = maxX - (xDif + (2 * (zoomRateX * absZoom)));
 			}
 			
 			// Then compute the y-values
-			double yDif = MinAndMaxValues.maxY - MinAndMaxValues.minY;
-			if ((MinAndMaxValues.minY - zoomRateY) < MinAndMaxValues.MIN_Y) { // minY too close to the left
-				MinAndMaxValues.minY = MinAndMaxValues.MIN_Y;
-				MinAndMaxValues.maxY = MinAndMaxValues.minY + (yDif + (2 * zoomRateY));
+			double yDif = maxY - minY;
+			if ((minY - (zoomRateY * absZoom)) < MIN_Y) { // minY too close to the left
+				minY = MIN_Y;
+				maxY = minY + (yDif + (2 * (zoomRateY * absZoom)));
 			} else { // Then maxX is too close to the right
-				MinAndMaxValues.maxY = MinAndMaxValues.MAX_Y;
-				MinAndMaxValues.minY = MinAndMaxValues.maxY - (yDif + (2 * zoomRateY));
+				maxY = MAX_Y;
+				minY = maxY - (yDif + (2 * (zoomRateY * absZoom)));
 			}
 			
 			updateTypesLineWidthDragAndRepaint();
@@ -104,11 +107,18 @@ public class ZoomHandler {
 	}
 	
 	/*
-	 * Helper method for updated the zoom rate
+	 * Helper method for updating the zoom rate
 	 */
 	private static void updateZoomRate() {
-		zoomRateX = (MinAndMaxValues.maxX - MinAndMaxValues.minX) * ZOOM_CONSTANT;
-		zoomRateY = ((MinAndMaxValues.maxY - MinAndMaxValues.minY) / (MinAndMaxValues.maxX - MinAndMaxValues.minX)) * zoomRateX;
+		zoomRateX = (maxX - minX) * ZOOM_CONSTANT;
+		zoomRateY = ((maxY - minY) / (maxX - minX)) * zoomRateX;
+	}
+	
+	/*
+	 * Helper method for updating the line widths
+	 */
+	private static void updateLineWidths() {
+		lineWidth = (float) (maxX - minX) * LINE_WIDTH_CONSTANT;
 	}
 	
 	/*
@@ -116,35 +126,35 @@ public class ZoomHandler {
 	 */
 	private static void updateTypesLineWidthDragAndRepaint() {
 		// Compute shown types
-		int currentTypes = MinAndMaxValues.types; // Needed for computing the need for repaint
-		MinAndMaxValues.updateTypesToBeDisplayed();
+		int currentTypes = types; // Needed for computing the need for repaint
+		updateTypesToBeDisplayed();
 				
 		// Compute line widths and drag increment and zoom rate
-		MinAndMaxValues.lineWidth -= LINE_WIDTH_INCREMENT;
+		updateLineWidths();
 		DragHandler.updateDrag();
 		updateZoomRate();
 			
 		// Compute whether or not repaint is needed
-		MinAndMaxValues.needsRepaint();
-		if (MinAndMaxValues.types != currentTypes) MinAndMaxValues.updateDrawn();
+		needsRepaint();
+		if (types != currentTypes) updateDrawn();
 	}
 	
 	/*
 	 * Helper method for checking whether or not it should be allowed to zoom out
 	 */
 	private static boolean canZoomIn() {
-		if (((MinAndMaxValues.maxX - MinAndMaxValues.minX) - (2 * zoomRateX)) < ZOOM_LIMIT) return false;
+		if (((maxX - minX) - (2 * zoomRateX)) < ZOOM_LIMIT) return false;
 		return true;
 	}
 	
 	/*
 	 * Helper method for checking whether or not it should be allowed to zoom out
 	 */
-	private static boolean canZoomOut() {
-		if (((MinAndMaxValues.minX - zoomRateX) >= MinAndMaxValues.MIN_X) &&
-			((MinAndMaxValues.maxX + zoomRateX) <= MinAndMaxValues.MAX_X) &&
-			((MinAndMaxValues.minY - zoomRateY) >= MinAndMaxValues.MIN_Y) &&
-			((MinAndMaxValues.maxY + zoomRateY) <= MinAndMaxValues.MAX_Y)) return true;
+	private static boolean canZoomOut(int zoom) {
+		if (((minX - (zoomRateX * zoom)) >= MIN_X) &&
+			((maxX + (zoomRateX * zoom)) <= MAX_X) &&
+			((minY - (zoomRateY * zoom)) >= MIN_Y) &&
+			((maxY + (zoomRateY * zoom)) <= MAX_Y)) return true;
 		return false;
 	}
 }
