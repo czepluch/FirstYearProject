@@ -77,13 +77,13 @@ public class MultiMapDS implements DataStructure {
 		int maxXIndex = 0;
 		int minYIndex = 0;
 		int maxYIndex = 0;
-		if (!(minX < MIN_X)) minXIndex = xCoordinateToIndex(minX);
+		if (!((minX - X_INTERVAL) < MIN_X)) minXIndex = xCoordinateToIndex(minX) - 1;
 		else minXIndex = xCoordinateToIndex(MIN_X);
-		if (!(maxX > MAX_X)) maxXIndex = xCoordinateToIndex(maxX);
+		if (!((maxX + X_INTERVAL) > MAX_X)) maxXIndex = xCoordinateToIndex(maxX) + 1;
 		else maxXIndex = xCoordinateToIndex(MAX_X);
-		if (!(minY < MIN_Y)) minYIndex = yCoordinateToIndex(minY);
+		if (!((minY - Y_INTERVAL) < MIN_Y)) minYIndex = yCoordinateToIndex(minY) - 1;
 		else minYIndex = yCoordinateToIndex(MIN_Y);
-		if (!(maxY > MAX_Y)) maxYIndex = yCoordinateToIndex(maxY);
+		if (!((maxY + Y_INTERVAL) > MAX_Y)) maxYIndex = yCoordinateToIndex(maxY) + 1;
 		else maxYIndex = yCoordinateToIndex(MAX_Y);
 		
 		// Types
