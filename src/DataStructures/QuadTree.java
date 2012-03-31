@@ -21,11 +21,11 @@ public class QuadTree {
 
     // helper node data type
     private class Node {
-        Double x, y;              // x- and y- coordinates
+        double x, y;              // x- and y- coordinates
         Node NW, NE, SE, SW;   // four subtrees
         Edge edge;           // associated data
 
-        Node(Double x, Double y, Edge edge) {
+        Node(double x, double y, Edge edge) {
             this.x = x;
             this.y = y;
             this.edge = edge;
@@ -36,11 +36,11 @@ public class QuadTree {
   /***********************************************************************
     *  Insert (x, y) into appropriate quadrant
     ***********************************************************************/
-    public void insert(Double x, Double y, Edge edge) {
+    public void insert(double x, double y, Edge edge) {
         root = insert(root, x, y, edge);
     }
 
-    private Node insert(Node h, Double x, Double y, Edge edge) {
+    private Node insert(Node h, double x, double y, Edge edge) {
         if (h == null) return new Node(x, y, edge);
         //// if (eq(x, h.x) && eq(y, h.y)) h.edge = edge;  // duplicate
         else if ( less(x, h.x) &&  less(y, h.y)) h.SW = insert(h.SW, x, y, edge);
@@ -61,10 +61,10 @@ public class QuadTree {
 
     private void query2D(Node h, Interval2D rect, ArrayList<Edge> edges) {
         if (h == null) return;
-        Double xmin = rect.intervalX.low;
-        Double ymin = rect.intervalY.low;
-        Double xmax = rect.intervalX.high;
-        Double ymax = rect.intervalY.high;
+        double xmin = rect.intervalX.low;
+        double ymin = rect.intervalY.low;
+        double xmax = rect.intervalX.high;
+        double ymax = rect.intervalY.high;
         if (rect.contains(h.x, h.y)) edges.add(h.edge);
         if ( less(xmin, h.x) &&  less(ymin, h.y)) query2D(h.SW, rect, edges);
         if ( less(xmin, h.x) && !less(ymax, h.y)) query2D(h.NW, rect, edges);
@@ -77,8 +77,8 @@ public class QuadTree {
     *  helper comparison functions
     *************************************************************************/
 
-    private boolean less(Double k1, Double k2) { return k1.compareTo(k2) <  0; }
-    private boolean eq  (Double k1, Double k2) { return k1.compareTo(k2) == 0; }
+    private boolean less(double k1, double k2) { return k1 < k2; }
+    private boolean eq  (double k1, double k2) { return k1 == k2; }
 
     
     /*************************************************************************
@@ -99,16 +99,16 @@ public class QuadTree {
 		else 				y1 = minY;
 		if (maxY < MAX_Y) 	y2 = MAX_Y;
 		else 				y2 = maxY;
-		Interval xInterval = new Interval(new Double(x1), new Double(x2));
-		Interval yInterval = new Interval(new Double(y1), new Double(y2));
+		Interval xInterval = new Interval(x1, x2);
+		Interval yInterval = new Interval(y1, y2);
 		Interval2D xyInterval = new Interval2D(xInterval, yInterval);
 		query2D(xyInterval, filteredEdges);
 		return filteredEdges;
 	}
 
 	public void addEdge(Edge e) {
-		insert(new Double(e.getFromLong()), new Double(e.getFromLat()), e);
-		insert(new Double(e.getToLong()), new Double(e.getToLat()), e);
+		insert(e.getFromLong(), e.getFromLat(), e);
+		insert(e.getToLong(), e.getToLat(), e);
 	}
 
 

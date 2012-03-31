@@ -11,17 +11,17 @@ package DataStructures;
  *************************************************************************/
 
 class Interval { 
-    public final Double low;      // left endpoint
-    public final Double high;     // right endpoint
+    public final double low;      // left endpoint
+    public final double high;     // right endpoint
    
-    public Interval(Double low, Double high) {
+    public Interval(double low, double high) {
         if (less(high, low)) throw new RuntimeException("Illegal argument");
         this.low  = low;
         this.high = high;
     }
 
     // is x between low and high
-    public boolean contains(Double x) {
+    public boolean contains(double x) {
         return !less(x, low) && !less(high, x);
     }
 
@@ -34,13 +34,13 @@ class Interval {
 
     // does this interval equal that interval?
     public boolean equals(Interval that) {
-        return this.low.equals(that.low) && this.high.equals(that.high);
+        return (this.low == that.low) && (this.high == that.high);
     }
 
 
     // comparison helper functions
-    private boolean less(Double x, Double y) {
-        return x.compareTo(y) < 0;
+    private boolean less(double x, double y) {
+        return x < y;
     }
 
     // return string representation
@@ -64,10 +64,10 @@ class Interval {
 //
 //        // generate N random points in [-1, 2] and compute
 //        // fraction that lies in [0, 1]
-//        Interval<Double> interval = new Interval<Double>(0.0, 1.0);
+//        Interval<double> interval = new Interval<double>(0.0, 1.0);
 //        int cnt = 0;
 //        for (int i = 0; i < N; i++) {
-//            Double x = 3 * Math.random() - 1.0;
+//            double x = 3 * Math.random() - 1.0;
 //            if (interval.contains(x)) cnt++;
 //        }
 //        System.out.println("fraction = " + (1.0 * cnt / N));
