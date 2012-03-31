@@ -19,8 +19,6 @@ public class MultiMapDS implements DataStructure {
 	// The size of the intervals
 	private final int X_INTERVAL = 10000;
 	private final int Y_INTERVAL = 10000;
-	// The number of types
-	private final int NUMBER_OF_TYPES = 6;
 
 	/*
 	 * Constructor

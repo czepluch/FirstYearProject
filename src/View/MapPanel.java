@@ -1,6 +1,7 @@
 package View;
 import javax.swing.*;
 import Global.*;
+import static Global.MinAndMaxValues.*;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -42,21 +43,18 @@ public class MapPanel extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		for (int i = 0; i < lines.length; i++) {
 			switch(i) {
-				// Streets without vehicles, green
+				// Other roads
 				case 0:	g2.setColor(Color.green);
 						g2.setStroke(new BasicStroke(1 * MinAndMaxValues.lineWidth)); break;
-				// Small roads, black
+				// Secondary roads
 				case 1: g2.setColor(Color.black);
 						g2.setStroke(new BasicStroke(2 * MinAndMaxValues.lineWidth)); break;
-				// City streets, blue
+				// Primary roads
 				case 2: g2.setColor(Color.blue);
 						g2.setStroke(new BasicStroke(3 * MinAndMaxValues.lineWidth)); break;
-				// Large streets, dark grey
-				case 3: g2.setColor(Color.DARK_GRAY);
+				// Highways
+				case 3: g2.setColor(Color.red);
 						g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth)); break;
-				// Highways, red
-				case 4: g2.setColor(Color.red);
-						g2.setStroke(new BasicStroke(5 * MinAndMaxValues.lineWidth)); break;
 				// Unknown types are not drawn
 				default:	break;
 			}

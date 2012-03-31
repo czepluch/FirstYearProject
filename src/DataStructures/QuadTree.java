@@ -16,7 +16,7 @@ import Model.Edge;
  * 
  *************************************************************************/
 
-public class QuadTree implements DataStructure  {
+public class QuadTree {
     private Node root;
 
     // helper node data type
@@ -82,10 +82,9 @@ public class QuadTree implements DataStructure  {
 
     
     /*************************************************************************
-     *  Methods from the DataStructure interface
+     *  Methods from the DataStructure interface, though not implemented
      *************************************************************************/
     
-	@Override
 	public ArrayList<Edge> getFilteredEdges() {
 		ArrayList<Edge> filteredEdges = new ArrayList<Edge>();
 		double x1 = 0;
@@ -107,7 +106,6 @@ public class QuadTree implements DataStructure  {
 		return filteredEdges;
 	}
 
-	@Override
 	public void addEdge(Edge e) {
 		insert(new Double(e.getFromLong()), new Double(e.getFromLat()), e);
 		insert(new Double(e.getToLong()), new Double(e.getToLat()), e);

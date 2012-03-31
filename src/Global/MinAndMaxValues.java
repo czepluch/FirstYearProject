@@ -24,10 +24,10 @@ public class MinAndMaxValues {
 	// Limit for how too wide the drawn area can be
 	private static int DRAWN_TOO_BIG = 2;
 	// Int limits used for determining which types to be drawn
+	public static final int NUMBER_OF_TYPES = 4;
 	static final int TYPE2 = 200000;
 	static final int TYPE3 = 25000;
 	static final int TYPE4 = 10000; 
-	static final int TYPE5 = 5000; 
 	
 	private	MinAndMaxValues () {} //neverton - fuckyeah!
 	
@@ -56,8 +56,7 @@ public class MinAndMaxValues {
 	 */
 	public static void updateTypesToBeDisplayed() {
 		double xDif = maxX - minX;
-		if (xDif < TYPE5) 		types = 5;
-		else if (xDif < TYPE4) 	types = 4;
+		if (xDif < TYPE4) 		types = 4;
 		else if (xDif < TYPE3) 	types = 3;
 		else if (xDif < TYPE2) 	types = 2;
 		else types = 1;
