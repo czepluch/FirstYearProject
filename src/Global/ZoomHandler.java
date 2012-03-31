@@ -102,9 +102,12 @@ public class ZoomHandler {
 			if ((minX - (zoomRateX * absZoom)) < MIN_X) { // minX too close to the left
 				minX = MIN_X;
 				maxX = minX + (xDif + (2 * (zoomRateX * absZoom)));
-			} else { // Then maxX is too close to the right
+			} else if ((maxX + (zoomRateX * absZoom)) > MAX_X) { // Then maxX is too close to the right
 				maxX = MAX_X;
 				minX = maxX - (xDif + (2 * (zoomRateX * absZoom)));
+			} else { // then y was the problem, x is handled normally
+				minX -= absZoom * zoomRateX;
+				maxX += absZoom * zoomRateX;
 			}
 			
 			// Then compute the y-values
@@ -112,9 +115,12 @@ public class ZoomHandler {
 			if ((minY - (zoomRateY * absZoom)) < MIN_Y) { // minY too close to the left
 				minY = MIN_Y;
 				maxY = minY + (yDif + (2 * (zoomRateY * absZoom)));
-			} else { // Then maxX is too close to the right
+			} else if ((maxY + (zoomRateY * absZoom)) > MAX_Y) { // maxX is too close to the right
 				maxY = MAX_Y;
 				minY = maxY - (yDif + (2 * (zoomRateY * absZoom)));
+			} else { // then x was the problem, y is handled normally
+				minY -= absZoom * zoomRateY;
+				maxY += absZoom * zoomRateY;
 			}
 			
 			updateTypesLineWidthDragAndRepaint();
