@@ -4,7 +4,7 @@ import static Global.MinAndMaxValues.*;
 
 public class DragHandler {
 	// Drag constants
-	private static final double DRAG_CONSTANT = 0.0017; // This constant keeps allows the map to completely follow the cursor
+	private static final double DRAG_CONSTANT = 0.00125; // This constant keeps the map following the cursor when dragging
 	private static double drag = (maxX - minX) * DRAG_CONSTANT;
 	private static final int MIN_DRAG = 100;
 	private static final int MAX_DRAG = 2000;
