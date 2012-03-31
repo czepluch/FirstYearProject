@@ -11,18 +11,17 @@ public class Coordinates {
 	private double xTranslate;
 	private double yTranslate;
 	private double translatedMaxY;
+	// Static information that needs to be either computed every time or stored once computed
+	private static final double START_X_TO_Y_FACTOR = (MAX_Y - MIN_Y) / (MAX_X - MIN_X);
 
 	/*
 	 * Constructor
-	 * @param minX the minimum x-coordinate (UTM32)
-	 * @param maxX the maximum x-coordinate (UTM32)
-	 * @param minY the minimum y-coordinate (UTM32)
-	 * @param maxY the maximum y-coordinate (UTM32)
-	 * @param width the width of the canvas to which the coordinates are converted
-	 * @param height the width of the canvas to which the coordinates are converted
+	 * Uses variables stored in Global.MinAndMaxValues
 	 */
 	public Coordinates() {
-		c = (maxX - minX) / width;
+		double newXToYFactor = height / width;
+		if (newXToYFactor > START_X_TO_Y_FACTOR) 	c = (maxY - minY) / height;
+		else 										c = (maxX - minX) / width;
 		xTranslate = minX;
 		yTranslate = minY;
 		translatedMaxY = maxY - yTranslate;

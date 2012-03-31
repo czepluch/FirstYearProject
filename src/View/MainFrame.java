@@ -22,8 +22,6 @@ public class MainFrame {
 	 * @param lines the data to be displayed in the map of the MainFrame
 	 */
 	public MainFrame(int[][][] lines, MapListener listener) {
-		System.out.println(width);
-		System.out.println(height);
 		frame = new JFrame("Krax");
 		frame.setSize(new Dimension(width, height));
 		frame.setResizable(true);
@@ -31,7 +29,6 @@ public class MainFrame {
 		
 		cp = (JPanel) frame.getContentPane();
 		map = new MapPanel(lines, listener);
-		map.setSize(new Dimension(width, height));
 		cp.add(map);
 		
 		this.listener = listener;
@@ -63,10 +60,9 @@ public class MainFrame {
 				Dimension newSize = e.getComponent().getSize();
 				height = (int) newSize.getHeight();
 				width = (int) newSize.getWidth();
-				System.out.println(newSize.getHeight() + " " + newSize.getWidth());
 				map.setSize(newSize);
 				
-				// MinAndMaxValues.repaint = false;
+				repaint = false;
 				listener.viewboxUpdated();
 			}
 		});
