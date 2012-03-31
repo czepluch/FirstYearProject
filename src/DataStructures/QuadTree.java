@@ -1,4 +1,4 @@
-package QuadTree;
+package DataStructures;
 
 import java.util.ArrayList;
 import static Global.MinAndMaxValues.*;

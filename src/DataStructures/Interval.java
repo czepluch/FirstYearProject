@@ -1,4 +1,4 @@
-package QuadTree;
+package DataStructures;
 
 // http://algs4.cs.princeton.edu/92search/Interval.java.html
 

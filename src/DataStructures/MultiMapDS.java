@@ -1,8 +1,12 @@
-package Model;
+package DataStructures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+
+import Model.DataStructure;
+import Model.Edge;
+import Model.XMLReader;
 import static Global.MinAndMaxValues.*;
 
 public class MultiMapDS implements DataStructure {
