@@ -10,10 +10,13 @@ public class ZoomHandler {
 	private static final float LINE_WIDTH_CONSTANT = (float) 0.0000002;
 	private static final int ZOOM_LIMIT = 1000;
 	private static final int DRAG_WHEN_ZOOM_IN = 2;
+	// Values needed only be computed once
+	private static final double START_X_DIF = MAX_X - MIN_X;
+	private static final double START_Y_DIF = MAX_Y - MIN_Y;
 	
 	public static void valuesChanged(int x, int y, int zoom) {
 		int absZoom = Math.abs(zoom);
-		if (zoom > 0 && canZoomIn()) {
+		if (zoom > 0 && canZoomIn(absZoom)) {
 			// Zoom in
 			
 			// First compute the x and y parameters to UTM coordinates
@@ -93,7 +96,7 @@ public class ZoomHandler {
 			// 6. Too close to left and bottom
 			// 7. Too close to right and top
 			// 8. Too close to right and bottom
-		} else {
+		} else if (canZoomOutDif(absZoom)) {
 			// First compute the x-values
 			double xDif = maxX - minX;
 			if ((minX - (zoomRateX * absZoom)) < MIN_X) { // minX too close to the left
@@ -154,8 +157,8 @@ public class ZoomHandler {
 	/*
 	 * Helper method for checking whether or not it should be allowed to zoom out
 	 */
-	private static boolean canZoomIn() {
-		if (((maxX - minX) - (2 * zoomRateX)) < ZOOM_LIMIT) return false;
+	private static boolean canZoomIn(int zoom) {
+		if (((maxX - minX) - (2 * (zoomRateX * zoom))) < ZOOM_LIMIT) return false;
 		return true;
 	}
 	
@@ -167,6 +170,16 @@ public class ZoomHandler {
 			((maxX + (zoomRateX * zoom)) <= MAX_X) &&
 			((minY - (zoomRateY * zoom)) >= MIN_Y) &&
 			((maxY + (zoomRateY * zoom)) <= MAX_Y)) return true;
+		return false;
+	}
+	
+	/*
+	 * Second helper method for checking whether or not it should be allowed to zoom out
+	 * This one checks if the coordinates dif (max - min) is too big
+	 */
+	private static boolean canZoomOutDif(int zoom) {
+		if ((((maxX - minX) + (2 * (zoomRateX * zoom))) < START_X_DIF) &&
+				(((maxY - minY) + (2 * (zoomRateY * zoom))) < START_Y_DIF)) return true;
 		return false;
 	}
 }
