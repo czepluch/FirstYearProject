@@ -2,17 +2,17 @@ package Global;
 
 public class MinAndMaxValues {
 	// Final values
-	public static final double MIN_X = 442254.35659;
-	public static final double MAX_X = 892658.21706;
-	public static final double MIN_Y = 6049914.43018;
-	public static final double MAX_Y = 6402050.98297;
+	public static final double MIN_X = 400000;
+	public static final double MAX_X = 900000;
+	public static final double MIN_Y = 6000000;
+	public static final double MAX_Y = 6410000;
 	// Current values
 	public static double minX = MIN_X;
 	public static double maxX = MAX_X;
 	public static double minY = MIN_Y;
 	public static double maxY = MAX_Y;
-	public static int width = 600;
-	public static int height = 600;
+	public static int width = 800;
+	public static int height = (int) (((MAX_Y - MIN_Y) / (MAX_X - MIN_X)) * width);
 	public static int types = 1;
 	public static float lineWidth = (float) 0.1;
 	public static boolean repaint = true;

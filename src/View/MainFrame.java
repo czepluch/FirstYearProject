@@ -2,7 +2,7 @@ package View;
 
 import javax.swing.*;
 
-import Global.MinAndMaxValues;
+import static Global.MinAndMaxValues.*;
 
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -22,14 +22,16 @@ public class MainFrame {
 	 * @param lines the data to be displayed in the map of the MainFrame
 	 */
 	public MainFrame(int[][][] lines, MapListener listener) {
+		System.out.println(width);
+		System.out.println(height);
 		frame = new JFrame("Krax");
-		frame.setSize(new Dimension(600, 600));
+		frame.setSize(new Dimension(width, height));
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		cp = (JPanel) frame.getContentPane();
 		map = new MapPanel(lines, listener);
-		map.setSize(new Dimension(600, 600));
+		map.setSize(new Dimension(width, height));
 		cp.add(map);
 		
 		this.listener = listener;
@@ -59,8 +61,8 @@ public class MainFrame {
 			
 			@Override public void componentResized(ComponentEvent e) {
 				Dimension newSize = e.getComponent().getSize();
-				MinAndMaxValues.height = (int) newSize.getHeight();
-				MinAndMaxValues.width = (int) newSize.getWidth();
+				height = (int) newSize.getHeight();
+				width = (int) newSize.getWidth();
 				System.out.println(newSize.getHeight() + " " + newSize.getWidth());
 				map.setSize(newSize);
 				
