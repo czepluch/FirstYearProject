@@ -93,7 +93,7 @@ The \texttt{Model} class is the front-end class of the \texttt{Model} package (t
 \subsubsection{XMLReader class} % Reads in the data from an XML file of krax format and adds the content to a given data structure
 This class reads in data from an XML file of the KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing and edge on the roadmap), which then are added to a given data structure.
 
-The \texttt{XMLReader} makes use of an external library, \href{www.xom.nu}{xom} (\url{www.xom.nu}), for reading the XML data.
+The \texttt{XMLReader} makes use of an external library, \href{www.xom.nu}{\texttt{xom}} (\url{www.xom.nu}), for reading the XML data.
 
 \subsubsection{QuadTreeDS class} % The data structure of the application. Consists of several other classes to be explained here
 The \texttt{QuadTreeDS} is the basis of the entire application. It is in an instance of this all data is stored after being read by the \texttt{XMLReader} class. In order for it to be used as our data structure, it implements the \texttt{DataStructure} interface.
@@ -113,7 +113,7 @@ The \texttt{FormatConverter} has static methods only, and only one public method
 The FormatConverter uses an instance of the Coordinates class, which converts the given UTM32 coordinates to pixels as shown in the GUI.
 
 \subsubsection{KrakToXMLConverter class} % Not directly part of the implementation, but the class used for converting the data from Krak to the krax XML format
-The KrakToXMLConverter is not directly a part of the application (it is not used runtime). It is a util class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{xom} library).
+The KrakToXMLConverter is not directly a part of the application (it is not used runtime). It is a util class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
 
 \subsection{View package} % Consists of all the classes handling the graphical user interface
 The \texttt{View} package contains all the classes managing the graphical user interface.
