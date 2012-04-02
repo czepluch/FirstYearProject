@@ -3,6 +3,7 @@ Report.aux
 Report.log
 Report.synctex.gz
 Report.toc
+Report.out
 .metadata/
 *.class
 *.classpath
