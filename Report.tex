@@ -15,7 +15,15 @@
 \vspace*{\stretch{1}} \HRule\\[1cm]\Huge\bfseries
 Krak-vejkort\\[0.7cm]
 \large Visualiseringen\\[1cm]
-\HRule\\[4cm]  \large af Jacob Stenum Czepluch (jstc@itu.dk), Niels Liljedahl Christensen (nlch@itu.dk), Mikkel Larsen (milar@itu.dk), Sigurt Bladt Dinesen (sidi@itu.dk) \\
+\HRule\\[4cm]  \large af
+
+Jacob Stenum Czepluch (jstc@itu.dk),
+
+Niels Liljedahl Christensen (nlch@itu.dk),
+
+Mikkel Larsen (milar@itu.dk),
+
+Sigurt Bladt Dinesen (sidi@itu.dk) \\
 \vspace*{\stretch{2}} \normalsize %
 \begin{flushleft}
 IT-University\\
@@ -28,6 +36,7 @@ Rasmus Pagh\\
 \tableofcontents
 \pagebreak
 
+\pagebreak
 \section{Introduction}
 
 This will be our introduction to this small report\ldots
@@ -48,21 +57,75 @@ This is an example of a long text
 This is an example of a long text
 This is an example of a long text
 
+\pagebreak
 \section{Design choices} % (fold)
 \label{sec:Design choices}
 Here we should write something about our design choices.
+
+\subsection{Outline}
+\begin{description}
+	\item[MVC] \hfill \\
+	Great!
+	\item[Data structure] \hfill \\
+	QuadTree
+	\item[Visualisation] \hfill \\
+	Platform
+	
+	How everything is drawn
+	
+	How the user interacts
+	
+	Types of the Krax-data
+\end{description}
 % section Design choices (end)
 
+\pagebreak
 \section{Implementation} % (fold)
 \label{sec:Implementation}
 This sections should describe our implementation.
+
+\subsection{Outline}
+\begin{description}
+	\item[Model] \hfill \\
+	The Edge data type
+	
+	XMLReader
+	
+	QuadTree
+	
+	FormatConverter
+	
+	/KraxToXMLConverter
+	\item[View] \hfill \\
+	The overall class structure
+	
+	The use of the Observer design pattern
+	
+	Mouse and window listeners
+	\item[Controller] \hfill \\
+	The method calls from and to the map / data structure
+\end{description}
 % section Implementation (end)
 
+\pagebreak
 \section{Discussion} % (fold)
 \label{sec:Discussion}
 In this sections we will discuss what could have been done better, and/or what we think we have done right.
+
+\subsection{Outline}
+\begin{description}
+	\item[Limitations] \hfill \\
+	
+	\item[Possible improvements] \hfill \\
+	
+	\item[Data structure discussion] \hfill \\
+	QuadTree vs KD-tree
+	
+	Balanced vs unbalanced QuadTree
+\end{description}
 % section Discussion (end)
 
+\pagebreak
 \section{Conclusion} % (fold)
 \label{sec:Conclusion}
 This section will make a quick summary and conclusion on out project so far.
