@@ -16,8 +16,6 @@ public class MainFrame {
 	private JPanel cp;
 	private MapPanel map;
 	private MapListener listener; // Used when window is resized
-	private final double X_Y_RATIO = (MAX_X - MIN_X) / (MAX_Y - MIN_Y);
-	private final double Y_X_RATIO = (MAX_Y - MIN_Y) / (MAX_X - MIN_X);
 	
 	/*
 	 * Constructor for the MainFrame class
@@ -59,21 +57,10 @@ public class MainFrame {
 			@Override public void componentHidden(ComponentEvent arg0) { }
 			
 			@Override public void componentResized(ComponentEvent e) {
-				Dimension inputSize = e.getComponent().getSize();
-				Dimension newSize = null;
-				int xDif = (int) Math.abs(width - inputSize.getWidth());
-				int yDif = (int) Math.abs(height - inputSize.getHeight());
-				if (xDif >= yDif) {
-					width = (int) inputSize.getWidth();
-					height = (int) (width * Y_X_RATIO);
-					newSize = new Dimension(width, height);
-				} else {
-					height = (int) inputSize.getHeight();
-					width = (int) (height * X_Y_RATIO);
-					newSize = new Dimension(width, height);
-				}
+				Dimension newSize = e.getComponent().getSize();
+				height = (int) newSize.getHeight();
+				width = (int) newSize.getWidth();
 				map.setSize(newSize);
-				frame.setSize(newSize);
 				
 				repaint = false;
 				listener.viewboxUpdated();
