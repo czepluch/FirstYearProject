@@ -102,7 +102,7 @@ public class XMLReaderQuadTree
 		ArrayList<Point> NE = new ArrayList<Point>();
 		ArrayList<Point> SE = new ArrayList<Point>();
 		ArrayList<Point> SW = new ArrayList<Point>();
-		Point pivot = points.remove(points.size() / 2);
+		Point pivot = points.remove((int) (Math.random() * points.size()));
 		ds.addPoint(pivot);
 		for (int i = (points.size() - 1); i >= 0; i--) {
 			Point p = points.remove(i);
