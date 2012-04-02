@@ -16,7 +16,7 @@ public class ZoomHandler {
 	
 	public static void valuesChanged(int x, int y, int zoom) {
 		int absZoom = Math.abs(zoom);
-		if (zoom > 0 && canZoomIn(absZoom)) {
+		if (zoom < 0 && canZoomIn(absZoom)) {
 			// Zoom in
 			
 			// First compute the x and y parameters to UTM coordinates
