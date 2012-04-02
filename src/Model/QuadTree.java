@@ -1,11 +1,10 @@
-package DataStructures;
+package Model;
 
 import java.util.ArrayList;
+
+import Cleanup.Point;
 import static Global.MinAndMaxValues.*;
 
-import Model.DataStructure;
-import Model.Edge;
-import Model.Point;
 
 // http://algs4.cs.princeton.edu/92search/QuadTree.java.html
 

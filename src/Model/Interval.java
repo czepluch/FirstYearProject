@@ -1,4 +1,4 @@
-package DataStructures;
+package Model;
 
 // http://algs4.cs.princeton.edu/92search/Interval.java.html
 

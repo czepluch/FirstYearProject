@@ -1,8 +1,10 @@
-package Model;
+package Cleanup;
 
 import java.util.ArrayList;
 
-import DataStructures.ArrayListDS;
+import Model.DataStructure;
+import Model.Edge;
+import Model.XMLReader;
 
 public class KDTree 
 {

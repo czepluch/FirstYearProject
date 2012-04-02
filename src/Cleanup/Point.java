@@ -1,6 +1,7 @@
-package Model;
+package Cleanup;
 
-import static Model.Directions.*;
+import static Cleanup.Directions.*;
+import Model.Edge;
 
 public class Point{
 	double x;

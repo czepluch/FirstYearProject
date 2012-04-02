@@ -34,7 +34,7 @@ public class MinAndMaxValues {
 	/*
 	 * Helper method for determining whether or not the new area to be shown needs repainting
 	 */
-	static void needsRepaint() {
+	public static void needsRepaint() {
 		if (((drawnMaxX - drawnMinX) / (maxX - minX)) > DRAWN_TOO_BIG) updateDrawn();
 		else if ((minX > drawnMinX) && (maxX < drawnMaxX) && (minY > drawnMinY) && (maxY < drawnMaxY)) repaint = false;
 		else updateDrawn();
@@ -43,7 +43,7 @@ public class MinAndMaxValues {
 	/*
 	 * Helper method for updating the drawn min and max values
 	 */
-	static void updateDrawn() {
+	public static void updateDrawn() {
 		drawnMinX = minX;
 		drawnMaxX = maxX;
 		drawnMinY = minY;

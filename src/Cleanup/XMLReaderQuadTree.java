@@ -1,4 +1,4 @@
-package Model;
+package Cleanup;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -8,8 +8,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import DataStructures.QuadTreeDS;
-import Model.Directions.*;
+import Cleanup.Directions.*;
+import Model.Edge;
+import Model.QuadTreeDS;
 
 /*
  * Has the responsibility of reading XML-files of the KRAX-format,

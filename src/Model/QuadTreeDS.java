@@ -1,11 +1,10 @@
-package DataStructures;
+package Model;
 
 import java.util.ArrayList;
-import static Global.MinAndMaxValues.*;
-import Model.Point;
 
-import Model.DataStructure;
-import Model.Edge;
+import Cleanup.Point;
+import static Global.MinAndMaxValues.*;
+
 
 public class QuadTreeDS implements DataStructure {
 	private ArrayList<Edge> filteredEdges;

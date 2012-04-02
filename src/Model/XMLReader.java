@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import DataStructures.ArrayListDS;
+import Cleanup.ArrayListDS;
 
 /*
  * Has the responsibility of reading XML-files of the KRAX-format,

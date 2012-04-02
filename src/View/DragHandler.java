@@ -1,6 +1,7 @@
-package Global;
+package View;
 
 import static Global.MinAndMaxValues.*;
+import Global.MinAndMaxValues;
 
 public class DragHandler {
 	// Drag constants

@@ -2,7 +2,6 @@ package Model;
 
 import java.util.ArrayList;
 import static Global.MinAndMaxValues.*;
-import DataStructures.QuadTreeDS;
 
 /*
  * The part of the application taking care of data handling

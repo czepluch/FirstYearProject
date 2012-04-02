@@ -1,9 +1,8 @@
-package DataStructures;
+package Cleanup;
 
 import java.util.ArrayList;
 
 import Global.MinAndMaxValues;
-import Model.DataFilter;
 import Model.DataStructure;
 import Model.Edge;
 

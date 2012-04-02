@@ -1,4 +1,4 @@
-package Global;
+package View;
 
 import static Global.MinAndMaxValues.*;
 
