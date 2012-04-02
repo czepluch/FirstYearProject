@@ -5,6 +5,7 @@ import static Global.MinAndMaxValues.*;
 
 import Model.DataStructure;
 import Model.Edge;
+import Model.Point;
 
 // http://algs4.cs.princeton.edu/92search/QuadTree.java.html
 
@@ -110,6 +111,22 @@ public class QuadTree {
 		insert(e.getFromLong(), e.getFromLat(), e);
 		insert(e.getToLong(), e.getToLat(), e);
 	}
+	
+	public void addPoint(Point p) {
+		insert(p.getX(), p.getY(), p.getEdge());
+	}
+	
+//	public int getTreeHeight() {
+//		return getTreeHeight(root);
+//	}
+//	
+//	private int getTreeHeight(Node n) {
+//		if (n != null) {
+//			return 1 + Math.max(Math.max(getTreeHeight(n.NW), getTreeHeight(n.NE)),
+//								Math.max(getTreeHeight(n.SE), getTreeHeight(n.SW)));
+//		}
+//		return 0;
+//	}
 
 
 //   /*************************************************************************

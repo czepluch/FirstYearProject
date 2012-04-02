@@ -2,6 +2,7 @@ package DataStructures;
 
 import java.util.ArrayList;
 import static Global.MinAndMaxValues.*;
+import Model.Point;
 
 import Model.DataStructure;
 import Model.Edge;
@@ -32,4 +33,15 @@ public class QuadTreeDS implements DataStructure {
 	public void addEdge(Edge e) {
 		trees[e.getType() - 1].addEdge(e);
 	}
+	
+	public void addPoint(Point p) {
+		trees[p.getType() - 1].addPoint(p);
+	}
+	
+//	public void printTreeHeights() {
+//		System.out.println("Height of trees:");
+//		for (int i = 0; i < NUMBER_OF_TYPES; i++) {
+//			System.out.println((i + 1) + ":\t" + trees[i].getTreeHeight());
+//		}
+//	}
 }

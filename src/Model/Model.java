@@ -32,4 +32,8 @@ public class Model {
 		return FormatConverter.convertData(edges.getFilteredEdges());
 	}
 
+	
+//	private void printTreeHeights() {
+//		edges.printTreeHeights();
+//	}
 }
