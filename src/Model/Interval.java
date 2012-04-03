@@ -1,38 +1,51 @@
 package Model;
 
-// http://algs4.cs.princeton.edu/92search/Interval.java.html
+// Taken from http://algs4.cs.princeton.edu/92search/Interval.java.html
 
-/*************************************************************************
- *  Compilation:  javac Interval.java
- *  Execution:    java Interval
- *
- *  Implementation of an interval.
- *
- *************************************************************************/
-
+/**
+ * A one-dimensional interval.
+ * Can represent an interval on any given axis, i.e. the x-axis.
+ */
 class Interval { 
     public final double low;      // left endpoint
     public final double high;     // right endpoint
-   
+    
+    /**
+     * Constructor
+     * @param low Left endpoint
+     * @param high Right endpoint
+     */
     public Interval(double low, double high) {
         if (less(high, low)) throw new RuntimeException("Illegal argument");
         this.low  = low;
         this.high = high;
     }
 
-    // is x between low and high
+    /**
+     * Is a given value inside the interval?
+     * @param x Is this value inside the interval?
+     * @return True if the input value is inside the interval, false otherwise
+     */
     public boolean contains(double x) {
         return !less(x, low) && !less(high, x);
     }
 
-    // does this interval intersect that interval?
+    /**
+     * Checks whether this interval intersects another given interval
+     * @param that The given interval to check for intersection with
+     * @return True if the two intervals intersect, false otherwise
+     */
     public boolean intersects(Interval that) {
         if (less(this.high, that.low)) return false;
         if (less(that.high, this.low)) return false;
         return true;
     }
 
-    // does this interval equal that interval?
+    /**
+     * Are this and that interval the same?
+     * @param that The interval to check for equality with
+     * @return True if the two intervals have the same low and high endpoints, false otherwise
+     */
     public boolean equals(Interval that) {
         return (this.low == that.low) && (this.high == that.high);
     }
@@ -43,33 +56,8 @@ class Interval {
         return x < y;
     }
 
-    // return string representation
+    @Override
     public String toString() {
         return "[" + low + ", " + high + "]";
     }
-
-
-
-//    // test client
-//    public static void main(String[] args) {
-//        int N = Integer.parseInt(args[0]);
-//
-//        Interval<Integer> a = new Interval<Integer>(5, 17);
-//        Interval<Integer> b = new Interval<Integer>(5, 17);
-//        Interval<Integer> c = new Interval<Integer>(5, 18);
-//        System.out.println(a.equals(b));
-//        System.out.println(!a.equals(c));
-//        System.out.println(!b.equals(c));
-//
-//
-//        // generate N random points in [-1, 2] and compute
-//        // fraction that lies in [0, 1]
-//        Interval<double> interval = new Interval<double>(0.0, 1.0);
-//        int cnt = 0;
-//        for (int i = 0; i < N; i++) {
-//            double x = 3 * Math.random() - 1.0;
-//            if (interval.contains(x)) cnt++;
-//        }
-//        System.out.println("fraction = " + (1.0 * cnt / N));
-//    }
 }

@@ -1,5 +1,8 @@
 package Global;
 
+/**
+ * Contains global variables and methods used when drawing the map.
+ */
 public class MinAndMaxValues {
 	// Final values
 	public static final double MIN_X = 400000;
@@ -31,7 +34,7 @@ public class MinAndMaxValues {
 	
 	private	MinAndMaxValues () {} //neverton - fuckyeah!
 	
-	/*
+	/**
 	 * Helper method for determining whether or not the new area to be shown needs repainting
 	 */
 	public static void needsRepaint() {
@@ -40,7 +43,7 @@ public class MinAndMaxValues {
 		else updateDrawn();
 	}
 	
-	/*
+	/**
 	 * Helper method for updating the drawn min and max values
 	 */
 	public static void updateDrawn() {
@@ -51,7 +54,7 @@ public class MinAndMaxValues {
 		repaint = true;
 	}
 	
-	/*
+	/**
 	 * Helper method for determining which types to be shown
 	 */
 	public static void updateTypesToBeDisplayed() {

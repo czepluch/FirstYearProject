@@ -2,18 +2,19 @@ package Model;
 
 import java.util.ArrayList;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
-import Model.*;
-import Global.*;
-
-/*
+/**
  * Has the responsibility of converting between the data types stored in the Model
  * and data types needed by the view
  */
 public class FormatConverter {
 	private static Coordinates c;
 
+	/**
+	 * Converts an ArrayList of Edges into a three-dimensional int array
+	 * whose dimensions contain the type, the Edge, and the coordinates, respectively.
+	 * @param edges The Edge ArrayList containing the data we want to convert
+	 * @return A three-dimensional int array containing the data
+	 */
 	public static int[][][] convertData(ArrayList<Edge> edges) {
 		c = new Coordinates();
 		ArrayList<int[]> type1 = new ArrayList<int[]>();
@@ -40,6 +41,10 @@ public class FormatConverter {
 		return convertedEdges;
 	}
 	
+	/*
+	 * Helper method for convertData(ArrayList<Edge>).
+	 * Converts an ArrayList<int[]> to int[][]
+	 */
 	private static int[][] listToArray(ArrayList<int[]> l) {
 		int [][] ret = new int[l.size()][4];
 		
@@ -63,7 +68,7 @@ public class FormatConverter {
 		return edge;
 	}
 	
-	/*
+	/**
 	 * Updates the Coordinate field c
 	 */
 	public static void updateC() {

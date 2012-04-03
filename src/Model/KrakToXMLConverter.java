@@ -2,11 +2,10 @@ package Model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.Iterator;
 import nu.xom.*;
 
-/*
- * Class used for reading in, storing, and processing info about roads on a map
+/**
+ * Class used for reading, storing, and processing data about roads on a map
  */
 public class KrakToXMLConverter
 {
@@ -18,7 +17,7 @@ public class KrakToXMLConverter
 	private final int nToId = 1;
 	private final int eSpeed = 25;
 	
-	/*
+	/**
 	 * Constructor the the KrakToXMLConverter-class
 	 */
 	public KrakToXMLConverter()
@@ -27,7 +26,7 @@ public class KrakToXMLConverter
 		edges = new ArrayList<Edge>();
 	}
 	
-	/*
+	/**
 	 * Reads in data from the given files, then calls removeNodes and
 	 * removeEdges methods for "cleaning up" the inread data.
 	 * @param edge_path The file name/path of the file containing the edges
@@ -98,8 +97,8 @@ public class KrakToXMLConverter
 	
 	/*
 	 * Inner class representing a node
-	 * Stores the id, the coordinates and a collection of edges, which it
-	 * is connected to other nodes by
+	 * Stores the id, the coordinates, and a collection of edges 
+	 * which it is connected to other nodes by
 	 */
 	private class Node
 	{
@@ -150,6 +149,9 @@ public class KrakToXMLConverter
 			this.speed = speed;
 		}
 	
+		/*
+		 * Getter methods for the Edge
+		 */
 		public int getId() { return id; }
 		public double getFromLat() { return fromLat; }
 		public double getFromLong() { return fromLong; }
@@ -170,7 +172,10 @@ public class KrakToXMLConverter
 			distance = Math.sqrt(x*x + y*y);
 		}
 		
-
+		/*
+		 * Creates an XML element from an Edge
+		 * @return The XML element
+		 */
 		public Element getXML() {
 			Element edge = new Element("edge");
 			Attribute id = new Attribute("id", this.getId() + "");
@@ -199,9 +204,14 @@ public class KrakToXMLConverter
 			edge.appendChild(speed);
 			return edge;
 		}
-
 	}
 	
+	/**
+	 * Sets the format of the data to be written to a file
+	 * @param os An outputstream used to write to the document
+	 * @param doc The document to be written
+	 * @throws Exception
+	 */
 	public static void format(OutputStream os, Document doc) throws Exception {
 		Serializer serializer = new Serializer(os, "UTF-8");
 		serializer.setIndent(4);
@@ -210,6 +220,10 @@ public class KrakToXMLConverter
 		serializer.flush();
 	}
 	
+	/**
+	 * Writes output to an XML file
+	 * @param outputFile The file to be written to
+	 */
 	public void outputToXML(String outputFile) {
 		Element root = new Element("edges");
 		try {
@@ -222,10 +236,10 @@ public class KrakToXMLConverter
 	}
 	
 	
-	/*
+	/**
 	 * Main class of the KrakToXMLConverter-class
-	 * Checks if the correct amount of arguments has been passes
-	 * Then creates a new instance of the KrakToXMLConverter class, callings its
+	 * Checks if the correct amount of arguments has been passes,
+	 * then creates a new instance of the KrakToXMLConverter class, callings its
 	 * readAndProcessData-method passing the given arguments as parameters
 	 */
 	public static void main(String[] args) {

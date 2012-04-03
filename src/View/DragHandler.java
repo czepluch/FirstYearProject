@@ -1,7 +1,6 @@
 package View;
 
 import static Global.MinAndMaxValues.*;
-import Global.MinAndMaxValues;
 
 public class DragHandler {
 	// Drag constants
@@ -10,6 +9,11 @@ public class DragHandler {
 	private static final int MIN_DRAG = 100;
 	private static final int MAX_DRAG = 2000;
 	
+	/**
+	 * This method does what needs to be done when the user tries to drag the map
+	 * @param x The x-coordinate of the cursor
+	 * @param y The y-coordinate of the cursor
+	 */
 	public static void valuesChanged(int x, int y) {
 		// Move horizontally
 		int xAbs = Math.abs(x);

@@ -1,7 +1,6 @@
 package View;
 import javax.swing.*;
 import Global.*;
-import static Global.MinAndMaxValues.*;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,7 +9,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-/*
+/**
  * The panel on which the map or sections of the map is drawn.
  * Extends the JPanel
  */
@@ -23,9 +22,10 @@ public class MapPanel extends JPanel {
 	private int endX;
 	private int endY;
 	
-	/*
+	/**
 	 * Constructor
-	 * @param lines the data of the lines to be drawn
+	 * @param lines The edges to be drawn
+	 * @param listener The MapListener
 	 */
 	public MapPanel(int[][][] lines, MapListener listener) {
 		this.lines = lines;
@@ -64,15 +64,15 @@ public class MapPanel extends JPanel {
 		}
 	}
 	
-	/*
-	 * Notifies the listener, that the "viewbox" has been changed
+	/**
+	 * Notifies the listener that the viewbox has changed
 	 * (Correct parameters are missing)
 	 */
 	public void viewboxUpdated () {
 		listener.viewboxUpdated();
 	}
 	
-	/*
+	/**
 	 * Updates the map according the the given data and repaints.
 	 * @param lines the new data to be displayed
 	 */

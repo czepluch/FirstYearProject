@@ -9,3 +9,5 @@ Report.out
 *.classpath
 *.project
 *.dropbox
+*.pdf
+*.swp
