@@ -35,8 +35,6 @@ Rasmus Pagh\\
 
 This will be our introduction to this small report\ldots
 
-We should remember to have a quick bit about how the visualisation works at the moment. The touchpad zoom, mouse move around, and the relative to
-mouse pointer placement zoom.
 
 This is a section. Use it. Love it.
 This is an example of a long text
@@ -83,6 +81,7 @@ section we will further discuss pros and cons of the different data structures.
 \subsubsection{Platform} % (fold)
 \label{subsub:Platform}
 To start with we had to decided whether we wanted to use Java and Swing or Java, JavaScript, SVG, and HTML for the visualisation part. There we good and bad things about both. The good thing about Swing was that we all knew how to use it, and we were sure that we were able to do what we wanted in Swing.
+%rethink the next bit about good and bad things.
 The "bad" thing about Swing is that it does not have as many possibilities as HTML with JavaScript and SVG. The good thing about HTML with JavaScript and SVG would be that it is very easy to customize to look nice and sleek. However, none of us have ever used it before, and since we would rather spend time making something that work and has a nice data structure, we chose to go with Java and Swing.
 % subsubsection Platform (end)
 
@@ -95,13 +94,10 @@ Technically the map first draws all of Denmark. It is however only the two bigge
 
 \subsubsection{User interaction} % (fold)
 \label{subsub:User interaction}
-We wanted to make a very simple yet featurefull user interaction. This resulted in a user interface with no physical buttons. All you need to navigate the map is a mouse. To zoom in and out you either scroll up or down. The mouse pointer decides what the zooming point is. It is also very easy to go up and down or from side to side. This is done my simply dragging and dropping the map with the mouse pointer. Our main reason for making the user interaction like this, is that this way is basically the most intuitive way for a lot of people to navigate and interact with maps and alike, due to the great amount of tablets and smartphones.
-% subsubsection User interaction (end)
+We wanted to make a very simple yet featurefull user interaction. This resulted in a user interface with no physical buttons. All you need to navigate the map is a mouse. To zoom in and out you either scroll up or down. The mouse pointer decides what the zooming point is. It is also very easy to go up and down or from side to side. This is done my simply dragging and dropping the map with the mouse pointer. The window is also very easily resized just by dragging in one corner of the window. There are however some differences in the way that the resizing behaves according to the OS that the program runs under.
 
-\subsubsection{Types of the Krax-data} % (fold)
-\label{subsub:Types of the Krax-data}
-I am not quite sure what we mean here. Is it the content of the .xml .dtd or the .txt files? I just need to be sure what we mean before I write this part.
-% subsubsection Types of the Krax-data (end)
+Our main reason for making the user interaction the way we have, is that this way is basically the most intuitive way for a lot of people to navigate and interact with maps and alike, due to the great amount of tablets and smartphones.
+% subsubsection User interaction (end)
 
 \subsection{Outline}
 \begin{description}
