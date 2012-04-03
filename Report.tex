@@ -7,6 +7,7 @@
 \usepackage{varioref}
 \usepackage[english]{babel}
 \usepackage{hyperref}
+\usepackage{tikz}
 \newcommand{\field} [1] {\mathbb{#1}}
 \begin{document}
 
@@ -93,7 +94,7 @@ The \texttt{Model} class is the front-end class of the \texttt{Model} package (t
 \subsubsection{XMLReader class} % Reads in the data from an XML file of krax format and adds the content to a given data structure
 This class reads in data from an XML file of the KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing and edge on the roadmap), which then are added to a given data structure.
 
-The \texttt{XMLReader} makes use of an external library, \href{www.xom.nu}{xom} (\url{www.xom.nu}), for reading the XML data.
+The \texttt{XMLReader} makes use of an external library, \href{www.xom.nu}{\texttt{xom}} (\url{www.xom.nu}), for reading the XML data.
 
 \subsubsection{QuadTreeDS class} % The data structure of the application. Consists of several other classes to be explained here
 The \texttt{QuadTreeDS} is the basis of the entire application. It is in an instance of this all data is stored after being read by the \texttt{XMLReader} class. In order for it to be used as our data structure, it implements the \texttt{DataStructure} interface.
@@ -105,7 +106,43 @@ Inserting a node into a \texttt{QuadTree} is done recursively; the given node is
 Retrieving information is done using an instance of the \texttt{Interval2D} class (representing a rectangle), which again consists of to instances of the \texttt{Interval} class (representing a line). This too is done recursively; it is checked whether the coordinates of the root node is within the given rectangle. If it is, it is added to a given collection of edges. It is then checked which of the subtrees might contain nodes within the rectangle, and for each that match, the same method is invoked, now with each of the matching children as the root. The call returns at null references.
 
 Out implementation of the quadtree (including the \texttt{Interval} and \texttt{Interval2D} classes) are heavily based upon implementations from
-\url{algs4.cs.princeton.edu}. 
+\url{algs4.cs.princeton.edu}.
+
+\begin{tikzpicture}
+	[level 1/.style={sibling distance=34mm},
+	level 2/.style={sibling distance = 5mm}]
+	\tikzstyle{every node}=[circle,draw]
+	\node {x, y}
+		child {
+			node {<x, <y}
+			child
+			child
+			child
+			child
+		}
+		child {
+			node {<x, >y}
+			child
+			child
+			child
+			child		
+		}
+		child {
+			node {>x, <y}
+			child
+			child
+			child
+			child		
+		}
+		child {
+			node {>x, >y}
+			child
+			child
+			child
+			child		
+		}
+	;
+\end{tikzpicture}
 
 \subsubsection{FormatConverter class} % Converts from the data type pulled out of the data structure to the data type needed by the View package
 The \texttt{FormatConverter} has static methods only, and only one public method. This methods takes an \texttt{ArrayList<Edge>} and converts it to the type \texttt{int[][][]} (\texttt{int[type][number of edges][edge coordinates]}).
@@ -113,7 +150,7 @@ The \texttt{FormatConverter} has static methods only, and only one public method
 The FormatConverter uses an instance of the Coordinates class, which converts the given UTM32 coordinates to pixels as shown in the GUI.
 
 \subsubsection{KrakToXMLConverter class} % Not directly part of the implementation, but the class used for converting the data from Krak to the krax XML format
-The KrakToXMLConverter is not directly a part of the application (it is not used runtime). It is a util class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{xom} library).
+The KrakToXMLConverter is not directly a part of the application (it is not used runtime). It is a util class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
 
 \subsection{View package} % Consists of all the classes handling the graphical user interface
 The \texttt{View} package contains all the classes managing the graphical user interface.
