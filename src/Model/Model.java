@@ -1,18 +1,15 @@
 package Model;
 
-import java.util.ArrayList;
-import static Global.MinAndMaxValues.*;
-
-/*
+/**
  * The part of the application taking care of data handling
  * Includes classes for reading, storing and filtering data
  */
 public class Model {
 	private DataStructure edges;
 	
-	/*
+	/**
 	 * Constructor of the model class
-	 * Depends on the readXML-method of the XMLReader class
+	 * Uses the readXML-method of the XMLReader class
 	 */
 	public Model() throws RuntimeException {
 		try {
@@ -23,16 +20,11 @@ public class Model {
 		}
 	}
 	
-	/*
+	/**
 	 * Returns the data stored in the model filtered according to the given data
-	 * @return the filtered ArrayList<Edge>
+	 * @return The filtered edges
 	 */
 	public int[][][] getFilteredEdges() {
 		return FormatConverter.convertData(edges.getFilteredEdges());
 	}
-
-	
-//	private void printTreeHeights() {
-//		edges.printTreeHeights();
-//	}
 }

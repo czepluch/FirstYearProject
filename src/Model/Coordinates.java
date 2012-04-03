@@ -2,11 +2,11 @@ package Model;
 
 import static Global.MinAndMaxValues.*;
 
-/*
+/**
  * Has the responsibility of converting UTM32 coordinates to pixels
  */
 public class Coordinates {
-	// Information need to compute the conversions
+	// Information needed to compute the conversions
 	private double c;
 	private double xTranslate;
 	private double yTranslate;
@@ -14,7 +14,7 @@ public class Coordinates {
 	// Static information that needs to be either computed every time or stored once computed
 	private static final double START_X_TO_Y_FACTOR = (MAX_Y - MIN_Y) / (MAX_X - MIN_X);
 
-	/*
+	/**
 	 * Constructor
 	 * Uses variables stored in Global.MinAndMaxValues
 	 */
@@ -27,20 +27,20 @@ public class Coordinates {
 		translatedMaxY = maxY - yTranslate;
 	}
 	
-	/*
+	/**
 	 * Converts a given UTM32 x-coordinate to a corresponding pixel x-coordinate
-	 * @param x the UTM32 x-coordinate to be converted
-	 * @return the pixel x-coordinate
+	 * @param x The UTM32 x-coordinate to be converted
+	 * @return The pixel x-coordinate
 	 */
 	public int convertXToPixels(double x) {
 		double translatedX = x - xTranslate;
 		return (int) (translatedX / c);
 	}
 	
-	/*
+	/**
 	 * Converts a given UTM32 y-coordinate to a corresponding pixel y-coordinate
-	 * @param y the UTM32 y-coordinate to be converted
-	 * @return the pixel y-coordinate
+	 * @param y The UTM32 y-coordinate to be converted
+	 * @return The pixel y-coordinate
 	 */
 	public int convertYToPixels(double y) {
 		double translatedY = y - yTranslate;

@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
-/*
+/**
  * The main GUI containing the MapPanel and the rest of the GUI
  */
 public class MainFrame {
@@ -17,9 +17,10 @@ public class MainFrame {
 	private MapPanel map;
 	private MapListener listener; // Used when window is resized
 	
-	/*
+	/**
 	 * Constructor for the MainFrame class
-	 * @param lines the data to be displayed in the map of the MainFrame
+	 * @param lines The data to be displayed in the map of the MainFrame
+	 * @param listener The MapListener
 	 */
 	public MainFrame(int[][][] lines, MapListener listener) {
 		frame = new JFrame("Krax");
@@ -37,7 +38,7 @@ public class MainFrame {
 		frame.setVisible(true);
 	}
 	
-	/*
+	/**
 	 * Updates the map in the MainFrame according to the given data
 	 * (passes the method invocation on from the View to the MapPanel)
 	 * @param the new data to be displayed
@@ -46,7 +47,7 @@ public class MainFrame {
 		map.update(lines);
 	}
 	
-	/*
+	/**
 	 * Method adding the needed listeners to the components
 	 */
 	public void addListeners() {

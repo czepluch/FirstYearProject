@@ -1,11 +1,13 @@
 package Model;
 
 import java.util.ArrayList;
-
 import Cleanup.Point;
 import static Global.MinAndMaxValues.*;
 
-
+/**
+ * Used to create the Quad Tree.
+ * Contains the data structure itself as well the current filtered edges.
+ */
 public class QuadTreeDS implements DataStructure {
 	private ArrayList<Edge> filteredEdges;
 	private QuadTree[] trees;
@@ -33,14 +35,11 @@ public class QuadTreeDS implements DataStructure {
 		trees[e.getType() - 1].addEdge(e);
 	}
 	
+	/**
+	 * Adds a point to the tree
+	 * @param p The point to be added
+	 */
 	public void addPoint(Point p) {
 		trees[p.getType() - 1].addPoint(p);
 	}
-	
-//	public void printTreeHeights() {
-//		System.out.println("Height of trees:");
-//		for (int i = 0; i < NUMBER_OF_TYPES; i++) {
-//			System.out.println((i + 1) + ":\t" + trees[i].getTreeHeight());
-//		}
-//	}
 }

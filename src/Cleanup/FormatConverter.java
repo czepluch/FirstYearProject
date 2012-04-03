@@ -2,9 +2,6 @@ package Cleanup;
 
 import java.util.ArrayList;
 
-import Model.*;
-import Global.*;
-
 /*
  * Has the responsibility of converting between the data types stored in the Model
  * and data types needed by the view

@@ -1,21 +1,20 @@
 package Model;
 
 import java.util.ArrayList;
-
 import Cleanup.Point;
 import static Global.MinAndMaxValues.*;
 
+/*
+ * This implementation is taken from http://algs4.cs.princeton.edu/92search/QuadTree.java.html
+ */
 
-// http://algs4.cs.princeton.edu/92search/QuadTree.java.html
-
-/*************************************************************************
- *  Compilation:  javac QuadTree.java
- *  Execution:    java QuadTree M N
- *
- *  Quad tree.
- * 
- *************************************************************************/
-
+/**
+ * The Quad Tree data structure.
+ * Each node in the tree represents a square in the map and has four children, 
+ * which represent the northwest, northeast, southeast, and southeast
+ * sub-squares of their parent square, respectively.
+ * Also cntains methods for performing Quad Tree operations.
+ */
 public class QuadTree {
     private Node root;
 
@@ -32,14 +31,19 @@ public class QuadTree {
         }
     }
 
-
-  /***********************************************************************
-    *  Insert (x, y) into appropriate quadrant
-    ***********************************************************************/
+    /**
+     * Insert the (x, y) point into the appropriate quadrant
+     * @param x The x-coordinate of the point
+     * @param y The y-coordinate of the point
+     * @param edge The edge associated with the point
+     */
     public void insert(double x, double y, Edge edge) {
         root = insert(root, x, y, edge);
     }
 
+    /*
+     * Helper method for insert(double, double, Edge)
+     */
     private Node insert(Node h, double x, double y, Edge edge) {
         if (h == null) return new Node(x, y, edge);
         //// if (eq(x, h.x) && eq(y, h.y)) h.edge = edge;  // duplicate
@@ -51,14 +55,18 @@ public class QuadTree {
     }
 
 
-  /***********************************************************************
-    *  Range search.
-    ***********************************************************************/
-
+    /**
+     * Perform a range search in a 2D interval
+     * @param rect The 2D interval in which to perform the range search
+     * @param edges The return-arrayList to contain the edges in the given interval
+     */
     public void query2D(Interval2D rect, ArrayList<Edge> edges) {
         query2D(root, rect, edges);
     }
 
+    /*
+     * Helper method for query2D(Interval2D, ArrayList<Edge>)
+     */
     private void query2D(Node h, Interval2D rect, ArrayList<Edge> edges) {
         if (h == null) return;
         double xmin = rect.intervalX.low;
@@ -74,7 +82,7 @@ public class QuadTree {
 
 
    /*************************************************************************
-    *  helper comparison functions
+    *  helper comparison methods
     *************************************************************************/
 
     private boolean less(double k1, double k2) { return k1 < k2; }
@@ -106,57 +114,20 @@ public class QuadTree {
 		return filteredEdges;
 	}
 
+	/**
+	 * Adds an edge to the tree
+	 * @param e The edge to be added
+	 */
 	public void addEdge(Edge e) {
 		insert(e.getFromLong(), e.getFromLat(), e);
 		insert(e.getToLong(), e.getToLat(), e);
 	}
 	
+	/**
+	 * Adds a point to the tree
+	 * @param p The point to be added
+	 */
 	public void addPoint(Point p) {
 		insert(p.getX(), p.getY(), p.getEdge());
 	}
-	
-//	public int getTreeHeight() {
-//		return getTreeHeight(root);
-//	}
-//	
-//	private int getTreeHeight(Node n) {
-//		if (n != null) {
-//			return 1 + Math.max(Math.max(getTreeHeight(n.NW), getTreeHeight(n.NE)),
-//								Math.max(getTreeHeight(n.SE), getTreeHeight(n.SW)));
-//		}
-//		return 0;
-//	}
-
-
-//   /*************************************************************************
-//    *  test client
-//    *************************************************************************/
-//    public static void main(String[] args) {
-//        int M = Integer.parseInt(args[0]);   // queries
-//        int N = Integer.parseInt(args[1]);   // points
-//
-//        QuadTree<Integer, String> st = new QuadTree<Integer, String>();
-//
-//        // insert N random points in the unit square
-//        for (int i = 0; i < N; i++) {
-//            Integer x = (int) (100 * Math.random());
-//            Integer y = (int) (100 * Math.random());
-//            // System.out.println("(" + x + ", " + y + ")");
-//            st.insert(x, y, "P" + i);
-//        }
-//        System.out.println("Done preprocessing " + N + " points");
-//
-//        // do some range searches
-//        for (int i = 0; i < M; i++) {
-//            Integer xmin = (int) (100 * Math.random());
-//            Integer ymin = (int) (100 * Math.random());
-//            Integer xmax = xmin + (int) (10 * Math.random());
-//            Integer ymax = ymin + (int) (20 * Math.random());
-//            Interval<Integer> intX = new Interval<Integer>(xmin, xmax);
-//            Interval<Integer> intY = new Interval<Integer>(ymin, ymax);
-//            Interval2D<Integer> rect = new Interval2D<Integer>(intX, intY);
-//            System.out.println(rect + " : ");
-//            st.query2D(rect);
-//        }
-//    }
 }

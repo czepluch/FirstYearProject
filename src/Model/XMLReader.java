@@ -5,13 +5,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
-import Cleanup.ArrayListDS;
-
-/*
- * Has the responsibility of reading XML-files of the KRAX-format,
- * so the data can be stored
+/**
+ * Has the responsibility of reading XML-files of the KRAX-format
+ * so the data can be stored in our application
  */
 public class XMLReader
 {
@@ -22,10 +19,19 @@ public class XMLReader
 	private static final int DISTANCE = 4;
 	private static final int SPEED = 5;
 	private static final int TYPE = 6;
+	
+	/**
+	 * Empty constructor
+	 */
 	public XMLReader()
 	{
 	}
 	
+	/**
+	 * Reads the contents of an XML document and stores it in a data structure.
+	 * @param path The path of the XML file from which data is read
+	 * @param edges The data structure in which the data is stored
+	 */
 	public static void readXML(String path, DataStructure edges)
 	{
 		BufferedReader in = null;
@@ -74,10 +80,13 @@ public class XMLReader
 		}
 	}
 	
-	/*
+	/**
 	 * Receives a string representing an XML element 
 	 * and returns its value as a string,
 	 * or null if the input string was null
+	 * @param line The XML line to be parsed
+	 * @param i Indicates which element the line represents
+	 * @return The value of XML element as a string
 	 */
 	private static String parseXMLLine(String line, int i)
 	{
@@ -113,6 +122,13 @@ public class XMLReader
 		return line;
 	}
 	
+	/**
+	 * Transforms a given road type to another type.
+	 * Some types (eg. 1, 31, and 41) all go under the
+	 * same category and will thus appear the same on the map.
+	 * @param type The type to be translated
+	 * @return The type to be drawn
+	 */
 	private static int translateType(int type) {
 		int newType = 0;
 		switch (type) {
@@ -161,10 +177,5 @@ public class XMLReader
 //			default: newType = 6; 	break;
 		}
 		return newType;
-	}
-	
-	public static void main(String[] args) {
-		XMLReader xr = new XMLReader();
-		xr.readXML("krax_complete.xml", new ArrayListDS());
 	}
 }

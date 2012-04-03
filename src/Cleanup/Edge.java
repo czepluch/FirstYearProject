@@ -1,7 +1,5 @@
 package Cleanup;
 
-import nu.xom.*;
-
 /*
  * The class in which all data is stored
  */

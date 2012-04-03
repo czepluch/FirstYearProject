@@ -14,6 +14,12 @@ public class ZoomHandler {
 	private static final double START_X_DIF = MAX_X - MIN_X;
 	private static final double START_Y_DIF = MAX_Y - MIN_Y;
 	
+	/**
+	 * This method does what needs to be done when the user tries to zoom in or out
+	 * @param x The x-coordinate of the cursor
+	 * @param y The y-coordinate of the cursor
+	 * @param zoom Negative if zooming in, positive if zooming out
+	 */
 	public static void valuesChanged(int x, int y, int zoom) {
 		int absZoom = Math.abs(zoom);
 		if (zoom < 0 && canZoomIn(absZoom)) {
@@ -75,7 +81,7 @@ public class ZoomHandler {
 			needsRepaint();
 			if (types != currentTypes) { updateDrawn(); }
 			
-		} else if (canZoomOut(absZoom)) { // Set an limit for how far out to zoom
+		} else if (canZoomOut(absZoom)) { // Set a limit for how far out to zoom
 			// Zoom out
 			
 			// Change the min and max values
