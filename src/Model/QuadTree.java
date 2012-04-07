@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import Cleanup.Point;
 import static Global.MinAndMaxValues.*;
 
-/*
- * This implementation is taken from http://algs4.cs.princeton.edu/92search/QuadTree.java.html
- */
+// This implementation is taken from http://algs4.cs.princeton.edu/92search/QuadTree.java.html
+// Modified to fit this application
 
 /**
  * The Quad Tree data structure.
@@ -129,5 +128,29 @@ public class QuadTree {
 	 */
 	public void addPoint(Point p) {
 		insert(p.getX(), p.getY(), p.getEdge());
+	}
+	
+	// Methods for retrieving info about the tree
+	// _________________________________________________________________
+	
+	/*
+	 * Returns the height of the tree
+	 * @return the height of the tree
+	 */
+	public int getTreeHeight() {
+		return getTreeHeight(root);
+	}
+
+	/*
+	 * Returns the height of the subtree with the given note as the root
+	 * @param n the root node of the subtree
+	 * @return the height of the subtree
+	 */
+	private int getTreeHeight(Node n) {
+		if (n != null) {
+			return 1 + Math.max(Math.max(getTreeHeight(n.NW), getTreeHeight(n.NE)),
+								Math.max(getTreeHeight(n.SE), getTreeHeight(n.SW)));
+		}
+		return 0;
 	}
 }
