@@ -1,6 +1,7 @@
 package Model;
 
 // Taken from http://algs4.cs.princeton.edu/92search/Interval.java.html
+// Modified to fit this application
 
 /**
  * A one-dimensional interval.
