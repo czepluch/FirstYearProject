@@ -222,17 +222,29 @@ The \texttt{DragHandler} class, like the \texttt{ZoomHandler} class, changes the
 
 \pagebreak
 \section{Discussion} % (fold)
-\label{sec:Discussion}
-In this sections we will discuss what could have been done better, and/or what we think we have done right.
+\label{sec:Discussion} % In this sections we will discuss what could have been done better, and/or what we think we have done right
+Several decisions affecting the performance of and the way the user interacts with the application have been made during the implementation. The most relevant ones will be discussed here.
 
 \subsection{Platform} % The discussion of zooming and window resizing on different platforms
-The discussion of zooming and window resizing on different platforms.
+Currently, the application has been tested on computers running Mac OS X and Arch Linux, and some differences concerning the application exists.
+
+When resizing the window on Mac OS X, no message is sent to the application until the user stops resizing (releases the mouse button). On Arch Linux, each time the window is resized the slightest, a message is sent. We have therefore decided not to keep a constant width-height ratio, as this does not work correctly on the computers running Arch Linux, though this would be our preferred design choice. Instead, only the content of the frame changes according the the resizing being done.
+
+When zooming, on Mac OS X, a message with a number is sent, where the size of the number is equal to how much is to be zoomed. On Arch Linux, however, the size of the number is always 1, making the zooming a very slow process.
 
 \subsection{Data structure} % Includes the discussion of QuadTree vs KD-tree and Balanced vs unbalanced QuadTree. And one QuadTree vs 4 QuadTrees
-Includes the discussion of QuadTree vs KD-tree and Balanced vs unbalanced QuadTree. And one QuadTree vs 4 QuadTrees.
+
+\subsubsection{Quadtree or k-D tree} % The discussion of quadtree vs KD-tree
+We have decided to use a quadtrees as our data structure. We believe that we could have gotten a similar result using k-D trees. The k-D trees have the advantage that they are easy to balance. Quadtrees have the advantage that they have an overall smaller height, due to the nature of the k-D trees being binary trees.
+
+\subsubsection{Balanced or unbalanced quadtree} % The discussion of whether or not the quadtree should be balanced
+We have made experiments balancing our quadtrees, choosing pivot elements in different ways and partitioning the rest of the data, doing this recursively. However, we experimented very slight improvements at best, which is why our current implementation uses unbalanced quadtrees.
+
+\subsubsection{Our use of four quadtrees} % The discussion of whether or not it is a good idea that we use several quadtrees as our data structure
+Our current data structure consists of four quadtrees, one per type of edge stored. This results in the application having to search through several quadtrees, if several types are to be drawn. It would be preferable having everything in the same tree, allowing the overall tree height (the sum of all our tree heights) to be smaller. But since we only have four quadtrees, we believe that the performance difference would not be noticeable.
 
 \subsection{Inclusion of optional assignments} % How we gave a proper data structure and a proper basis higher priority than many features
-How we gave a proper data structure and a proper basis higher priority than many features.
+We have decided to give the implementation of our data structure and and the basic user interaction with the application higher priority than including many optional features.
 % section Discussion (end)
 
 \pagebreak
