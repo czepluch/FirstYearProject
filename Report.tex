@@ -33,23 +33,7 @@ Rasmus Pagh\\
 \pagebreak
 \section{Introduction}
 
-This will be our introduction to this small report\ldots
-
-
-This is a section. Use it. Love it.
-This is an example of a long text
-This is an example of a long text
-This is an example of a long text
-This is an example of a long text
-This is an example of a long text
-This is an example of a long text
-This is an example of a long text
-
-Then we have a new line with indent
-This is an example of a long text
-This is an example of a long text
-This is an example of a long text
-This is an example of a long text
+This is the report covering the visualisation part of our first year project, at the software development line at the IT Universitu of Copenhagen. To make this project, we were divided into random groups with the size of four to six students. Our group, group 8, consists of four students. Our group has had a very good and dynamic teamwork. We have been good at keeping deadlines and meeting times.
 
 \pagebreak
 \section{Design choices} % (fold)
@@ -98,23 +82,6 @@ We wanted to make a very simple yet featurefull user interaction. This resulted 
 Our main reason for making the user interaction the way we have, is that this way is basically the most intuitive way for a lot of people to navigate and interact with maps and alike, due to the great amount of tablets and smartphones.
 % subsubsection User interaction (end)
 
-\subsection{Outline}
-\begin{description}
-	\item[MVC] \hfill \\
-	Great!
-	\item[Data structure] \hfill \\
-	QuadTree
-	\item[Visualisation] \hfill \\
-	Platform
-	
-	How everything is drawn
-	
-	How the user interacts
-	
-	Types of the Krax-data
-\end{description}
-% section Design choices (end)
-
 \pagebreak
 \section{Implementation} % (fold)
 \label{sec:Implementation} % This sections should describe our implementation
@@ -134,7 +101,7 @@ The \texttt{Model} package consists of all the classes managing data storage, fi
 The \texttt{Model} class is the front-end class of the \texttt{Model} package (the only class which is directly connected to the \texttt{Controller} class). This is where the data structure is stored in a field and where the methods for filtering and converting data are called. The data structure is stored with the type \texttt{DataStructure}, which is an interface allowing us to easily switch between data structures, as long as they implement this interface.
 
 \subsubsection{XMLReader class} % Reads in the data from an XML file of krax format and adds the content to a given data structure
-This class reads in data from an XML file of the KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing and edge on the roadmap), which then are added to a given data structure.
+This class reads in data from an XML file of the KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing an edge on the roadmap), which then are added to a given data structure.
 
 The \texttt{XMLReader} makes use of an external library, \href{www.xom.nu}{\texttt{xom}} (\url{www.xom.nu}), for reading the XML data.
 
@@ -221,29 +188,20 @@ The \texttt{DragHandler} class, like the \texttt{ZoomHandler} class, changes the
 
 \pagebreak
 \section{Discussion} % (fold)
-\label{sec:Discussion} % In this sections we will discuss what could have been done better, and/or what we think we have done right
-Several decisions affecting the performance of and the way the user interacts with the application have been made during the implementation. The most relevant ones will be discussed here.
+\label{sec:Discussion}
+In this sections we will discuss what could have been done better, and/or what we think we have done right.
 
-\subsection{Platform} % The discussion of zooming and window resizing on different platforms
-Currently, the application has been tested on computers running Mac OS X and Arch Linux, and some differences concerning the application exists.
-
-When resizing the window on Mac OS X, no message is sent to the application until the user stops resizing (releases the mouse button). On Arch Linux, each time the window is resized the slightest, a message is sent. We have therefore decided not to keep a constant width-height ratio, as this does not work correctly on the computers running Arch Linux, though this would be our preferred design choice. Instead, only the content of the frame changes according the the resizing being done.
-
-When zooming, on Mac OS X, a message with a number is sent, where the size of the number is equal to how much is to be zoomed. On Arch Linux, however, the size of the number is always 1, making the zooming a very slow process.
-
-\subsection{Data structure} % Includes the discussion of QuadTree vs KD-tree and Balanced vs unbalanced QuadTree. And one QuadTree vs 4 QuadTrees
-
-\subsubsection{Quadtree or k-D tree} % The discussion of quadtree vs KD-tree
-We have decided to use a quadtrees as our data structure. We believe that we could have gotten a similar result using k-D trees. The k-D trees have the advantage that they are easy to balance. Quadtrees have the advantage that they have an overall smaller height, due to the nature of the k-D trees being binary trees.
-
-\subsubsection{Balanced or unbalanced quadtree} % The discussion of whether or not the quadtree should be balanced
-We have made experiments balancing our quadtrees, choosing pivot elements in different ways and partitioning the rest of the data, doing this recursively. However, we experimented very slight improvements at best, which is why our current implementation uses unbalanced quadtrees.
-
-\subsubsection{Our use of four quadtrees} % The discussion of whether or not it is a good idea that we use several quadtrees as our data structure
-Our current data structure consists of four quadtrees, one per type of edge stored. This results in the application having to search through several quadtrees, if several types are to be drawn. It would be preferable having everything in the same tree, allowing the overall tree height (the sum of all our tree heights) to be smaller. But since we only have four quadtrees, we believe that the performance difference would not be noticeable.
-
-\subsection{Inclusion of optional assignments} % How we gave a proper data structure and a proper basis higher priority than many features
-We have decided to give the implementation of our data structure and and the basic user interaction with the application higher priority than including many optional features.
+\subsection{Outline}
+\begin{description}
+	\item[Limitations] \hfill \\
+	
+	\item[Possible improvements] \hfill \\
+	
+	\item[Data structure discussion] \hfill \\
+	QuadTree vs KD-tree
+	
+	Balanced vs unbalanced QuadTree
+\end{description}
 % section Discussion (end)
 
 \pagebreak
