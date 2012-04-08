@@ -100,19 +100,19 @@ The implementation of the application consists of four different packages; the \
 
 
 \subsection{Controller package} % This is a simple description of the implementation of the Controller class.
-The \texttt{Controller} package consists solely of the \texttt{Controller} class, which is both the main class (it has the main method run when the application starts), and it is the link between the \texttt{Model} and \texttt{View packages} handling the flow of data between the two. When a change is made by the user, the View calls a method in the \texttt{Controller} once again updating the graphical user interface according the both the input from the user and the data stored in the \texttt{Model}.
+The \texttt{Controller} package consists solely of the \texttt{Controller} class, which is both the main class (it has the main method run when the application starts), and it is the link between the \texttt{Model} and \texttt{View} packages handling the flow of data between the two. When a change is made by the user, the View calls a method in the \texttt{Controller} once again updating the graphical user interface according the both the input from the user and the data stored in the \texttt{Model}.
 
 \subsection{Global package} % Contains all the global values used from all around the application
-This package contains only the \texttt{MinAndMaxValues} class which has fields that needs to be accessed from the entire application. These fields include initial values such as the current "viewbox", min and max values for x- and y-coordinates, limits for when the different types of road segments are drawn etc. It also contains methods for checking whether are not the current viewbox results in a need for re-filtering the data to be drawn. The class is statically imported by all classes needing to access this information.
+This package contains only the \texttt{MinAndMaxValues} class which has fields that needs to be accessed from the entire application. These fields include initial values such as the current "viewbox", min and max values for x- and y-coordinates, limits for when the different types of road segments are drawn etc. It also contains methods for checking whether or not the current viewbox results in a need for re-filtering the data to be drawn. The class is statically imported by all classes needing to access this information.
 
 \subsection{Model package} % The description of the Model package is more complicated and consists of descriptions of several other classes.
-The \texttt{Model} package consists of all the classes managing data storage, filtering, and conversion.
+%The \texttt{Model} package consists of all the classes managing data storage, filtering, and conversion.
 
 \subsubsection{Model class} % Makes use of the rest of the classes in the Model package. The front-end class.
-The \texttt{Model} class is the front-end class of the \texttt{Model} package (the only class which is directly connected to the \texttt{Controller} class). This is where the data structure is stored in a field and where the methods for filtering and converting data are called. The data structure is stored with the type \texttt{DataStructure}, which is an interface allowing us to easily switch between data structures, as long as they implement this interface.
+The \texttt{Model} class is the front-end class of the \texttt{Model} package (the only class which is directly connected to the \texttt{Controller} class). This is where the data structure is stored in a field and where the methods for filtering and converting data are called. The data structure is stored with the type \texttt{DataStructure}, which is an interface allowing us to easily switch between data structures.
 
 \subsubsection{XMLReader class} % Reads in the data from an XML file of krax format and adds the content to a given data structure
-This class reads in data from an XML file of the KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing an edge on the roadmap), which then are added to a given data structure.
+This class reads data from an XML file of the KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing an edge on the roadmap), which then are added to a given data structure.
 
 The \texttt{XMLReader} makes use of an external library, \href{www.xom.nu}{\texttt{xom}} (\url{www.xom.nu}), for reading the XML data.
 
@@ -121,48 +121,47 @@ The \texttt{QuadTreeDS} is the basis of the entire application. It is in an inst
 
 The class consists of four instances of the \texttt{QuadTree} class (one for each type of road segment). A \texttt{QuadTree} consists of nodes, which has an x- and a y-coordinate (stored as \texttt{double}) and a reference to an \texttt{Edge} object. Each \texttt{QuadTree} contains all edges of a given type. Each \texttt{Edge} object is stored twice; both referenced to by the start- and end-coordinates of the edge.
 
-Inserting a node into a \texttt{QuadTree} is done recursively; the given node is compared to root node, deciding to which of the four children of the root the given node is to be compared to next. This continues until a null-reference / a leaf is found.
+Inserting a node into a \texttt{QuadTree} is done recursively; the given node is compared to the root node, deciding to which of the four children of the root the given node is to be compared to next. This continues until a null-reference / a leaf is found.
 
 Retrieving information is done using an instance of the \texttt{Interval2D} class (representing a rectangle), which again consists of to instances of the \texttt{Interval} class (representing a line). This too is done recursively; it is checked whether the coordinates of the root node is within the given rectangle. If it is, it is added to a given collection of edges. It is then checked which of the subtrees might contain nodes within the rectangle, and for each that match, the same method is invoked, now with each of the matching children as the root. The call returns at null references.
 
 Out implementation of the quadtree (including the \texttt{Interval} and \texttt{Interval2D} classes) are heavily based upon implementations from
 \url{algs4.cs.princeton.edu}.
 
-\begin{tikzpicture}
-	[level 1/.style={sibling distance=34mm},
-	level 2/.style={sibling distance = 5mm}]
-	\tikzstyle{every node}=[circle,draw]
-	\node {x, y}
-		child {
-			node {<x, <y}
-			child
-			child
-			child
-			child
-		}
-		child {
-			node {<x, >y}
-			child
-			child
-			child
-			child		
-		}
-		child {
-			node {>x, <y}
-			child
-			child
-			child
-			child		
-		}
-		child {
-			node {>x, >y}
-			child
-			child
-			child
-			child		
-		}
-	;
-\end{tikzpicture}
+%\begin{tikzpicture}
+%	[level 1/.style={sibling distance=34mm},
+%	level 2/.style={sibling distance = 5mm}]
+%	\tikzstyle{every node}=[circle,draw]
+%		child {
+%			node {<x, <y}
+%			child
+%			child
+%			child
+%			child
+%		}
+%		child {
+%			node {<x, >y}
+%			child
+%			child
+%			child
+%			child		
+%		}
+%		child {
+%			node {>x, <y}
+%			child
+%			child
+%			child
+%			child		
+%		}
+%		child {
+%			node {>x, >y}
+%			child
+%			child
+%			child
+%			child		
+%		}
+%	;
+%\end{tikzpicture}
 
 \subsubsection{FormatConverter class} % Converts from the data type pulled out of the data structure to the data type needed by the View package
 The \texttt{FormatConverter} has static methods only, and only one public method. This methods takes an \texttt{ArrayList<Edge>} and converts it to the type \texttt{int[][][]} (\texttt{int[type][number of edges][edge coordinates]}).
@@ -170,10 +169,10 @@ The \texttt{FormatConverter} has static methods only, and only one public method
 The FormatConverter uses an instance of the Coordinates class, which converts the given UTM32 coordinates to pixels as shown in the GUI.
 
 \subsubsection{KrakToXMLConverter class} % Not directly part of the implementation, but the class used for converting the data from Krak to the krax XML format
-The KrakToXMLConverter is not directly a part of the application (it is not used runtime). It is a util class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
+The KrakToXMLConverter is not directly a part of the application (it is not used at runtime). It is a util class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
 
 \subsection{View package} % Consists of all the classes handling the graphical user interface
-The \texttt{View} package contains all the classes managing the graphical user interface.
+%The \texttt{View} package contains all the classes managing the graphical user interface.
 
 \subsubsection{View class} % Front end class in the MVC pattern. Contains the rest of the (non-static) GUI classes. Implements the MapListener interface. The overall class structure of the View package
 The \texttt{View} class is the front end class of the \texttt{View} package in the MVC design pattern. It contains an instance of the \texttt{MainFrame} class, which is the basic \texttt{java.swing} GUI (the window to be displayed), which then again contains an instance of our custom panel, \texttt{MapPanel}.
