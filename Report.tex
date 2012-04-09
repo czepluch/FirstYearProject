@@ -13,6 +13,8 @@
 
 \begin{titlepage}
 \centering \parindent=0pt
+obatt="$(ibam --percentbattery | grep -oE '[0-9]{1,3} ')"
+#echo $batt%
 \newcommand{\HRule}{\rule{\textwidth}{1mm}}
 \vspace*{\stretch{1}} \HRule\\[1cm]\Huge\bfseries
 Krak-vejkort\\[0.7cm]
@@ -33,39 +35,39 @@ Rasmus Pagh\\
 \pagebreak
 \section{Introduction}
 
-This is the report covering the visualisation part of our first year project, at the software development line at the IT Universitu of Copenhagen. This first visualisations part has been made in March and April in the year 2012. 
+This report covers the visualisation part of our first-year project at the MSc in Software Ddevelopment at the IT-University of Copenhagen. This first part has been made in March and April in the year 2012. 
 
-To make this project, we were divided into random groups with the size of four to six students. Our group, group 8, consists of four students. 
+To make this project, we were randomly divided into groups of size four to six. Our group, group 8, consists of four students. 
 
-The main purpose of this project is to visualise the data that we have been provided from Krak. The data shall be visualised on a map displaying all road within a given square area of Denmark.
-It must be possible to zoom in and out on a desired part of the map. And while zooming more or less details should be displayed. It is also required that the window you view the map in, can be resized. In the description of out assignment there were also given some optional possible additions to the program. 
+The main purpose of this project is to visualise the road-map data provided by Krak. The data is to be visualised as a map displaying all roads within a given square area of Denmark.
+It must be possible to zoom in and out on a desired part of the map. In addition, the level of detail should should follow the zoom level. It is also required that the window in which the map is displayed can be resized. In the description of our assignment, a few  optional, possible additions to the program were suggested. 
 
-There is a worksheet corresponding to the work we have made at and due to every meeting. The worksheet also contains information about things that we have agreed upon in the starting phase of this project and things that we agreed on during every meeting, it being a Skype meeting or a physical meeting. % Not sure the last bit of this sentence is correct.
+There are worksheets corresponding to the work we have made at, and due to every meeting. The worksheets also contain information about agreements formed in the introductory phase of the project, aswell as agreements formed throughout the project.
 
-Our advisor through out this project has been Rasmus Pagh, whom we have both received guidence and relevant lectures from. 
+Our advisor throughout this project has been Rasmus Pagh, from whom we have received both guidence and relevant lectures. 
 
-Furthermore we would like to thank Robert Sedgewick and Kevin Wayne from Princeton University for providing some very well written and easy to understand code and algorithms at http://algs4.cs.princeton.edu/ that we have chosen to use and rewrite for our own data structure in this project.
+Furthermore we would like to thank Robert Sedgewick and Kevin Wayne from Princeton University for providing well written and easy-to-understand code and algorithms at http://algs4.cs.princeton.edu that we have chosen to use and rewrite for our data structure in this project.
 
 \pagebreak
 \section{Design choices} % (fold)
 \label{sec:Design choices}
-In this section we will go through our design choices. We will go through things like design pattern, data structure, and visualisation.
-At the same time we will give explanations to our choices.
+In this section, we will go through our design choices. We will go through things like design patterns, data structures, and visualisation.
+At the same time we will explanation our choices.
 
 \subsection{Design Pattern} % (fold)
 \label{sub:Design Pattern}
-For our overall architectural pattern we have chosen to use the Model, View, Controller(MVC) pattern. We chose to do so, to make sure that we have
-a very modular and easy to maintain class structure. Using the MVC pattern results in seperation of the different aspects of our application, while still providing a loose coupling between these elements. During this first visualisation part of the application it has proven very useful to us, since we
+For our overall architectural pattern, we have chosen to use the Model, View, Controller (MVC) pattern. We chose to do so, to make sure that we have
+a very modular and easy-to-maintain class structure. Using the MVC pattern results in seperation of the different aspects of our application, while still providing a loose coupling between these elements. During this first visualisation part of the application it has proven very useful to us since we
 have been chancing our classes and data structures quite a few times.
 
 % subsection Design Pattern (end)
 
 \subsection{Data Structure} % (fold)
 \label{sub:Data Structure}
-We started out making a simple data structure that put all the edges into one big ArrayList. This was not fast, but we chose to do it, to make sure that
-things were working before we tried implementing a more complicated, but faster data structure. We had several data structures up for discusssion, but we ended up using a quad tree. We actually started out making a kd-tree, but since we had some trouble implmenting it correctly, we decided to take a look
+We started out by making a simple data structure that put all the edges into one big ArrayList. This was not fast, but we chose to do it, to make sure that
+things were working before we tried implementing a more complicated, but faster, data structure. We have had several data structures up for discusssion, but we ended up using a quad tree. We actually started out making a kd-tree, but since we had some trouble implmenting it correctly, we decided to take a look at
 the quad tree aswell. Luckily it turned out to perform very well, and we did not even have to sort our input for it to work well. In our discussion 
-section we will further discuss pros and cons of the different data structures.
+section we will further ellaborate on the pros and cons of the different data structures.
 % subsection Data Structure (end)
 
 \subsection{Visualisation} % (fold)
@@ -75,22 +77,22 @@ section we will further discuss pros and cons of the different data structures.
 
 \subsubsection{Platform} % (fold)
 \label{subsub:Platform}
-To start with we had to decided whether we wanted to use Java and Swing or Java, JavaScript, SVG, and HTML for the visualisation part. There were good and bad things about both. The good thing about Swing was that we all knew how to use it, and we were sure that we were able to do what we wanted in Swing.
-The fact that none of us never before have been using JavaScript and SVG, made it easy for us to decide on what platform to use for this project. By using Java and Swing, we would be able to spend our time making a well working program with a nice data structure. We would of course have liked to look into a new language like JavaScript, but as mentioned we prioritize a well working program over the knowledge of a new programming language.
+To start with we had to decide whether we wanted to use Java and Swing, or Java, JavaScript, SVG, and HTML for the visualisation part. There are strengths and weaknesses to both sollutions: The good thing about Swing is that we all have previous experience with it, and so we were certain that, using Swing, we would be able to do what we wanted. 
+The fact that none of us have had any notable experience with JavaScript and SVG made it easy for us to decide on a platform for this project. By using Java and Swing, we would be able to spend our time making a well working program with a nice data structure. We would, of course, have liked looking into a new language like JavaScript, but we have choosen to prioritize a well working program over the learning experience of working with a new programming language.
 % subsubsection Platform (end)
 
 \subsubsection{How everything is drawn} % (fold)
 \label{subsub:How everything is drawn}
 As mentioned above we chose to use Swing and the BasicStroke API to do the drawing of the map. 
 
-Technically the map first draws all of Denmark. It is however only the two biggest road types that are drawn. We decided to do so, because it is both unnessesary to draw all roads, when you are very far away from the map, but also to make the program run smoother. The program is designed to show more and more road types the more you zoom in towards the map. It is only the roads that are inside the given view that are drawn. We have however made a "buffer" that finds the longest road in the view, and extends the frame outside the view with the given lengt. This is done to make sure that all roads are in the view are drawn and vissible.
+Technically, the map first draws all of Denmark. It is however only the two biggest road types that are drawn in the full view. We decided to only do so because it is both unnessesary to draw all roads when you are very far away from the map, but also to make the program run smoother. The program is designed to show more and more road types the more you zoom in towards the map. Only the roads that are inside the given view are drawn. We have, however, made a "buffer" that finds the longest road in the view, and extends the frame outside the view with the given lengt. This is done to make sure that all roads in the view are drawn and vissible.
 % subsubsection How everything is drawn (end)
 
 \subsubsection{User interaction} % (fold)
 \label{subsub:User interaction}
-We wanted to make a very simple yet featurefull user interaction. This resulted in a user interface with no physical buttons. All you need to navigate the map is a mouse. To zoom in and out you either scroll up or down. The mouse pointer decides what the zooming point is. It is also very easy to go up and down or from side to side. This is done my simply dragging and dropping the map with the mouse pointer. The window is also very easily resized just by dragging in one corner of the window. There are however some differences in the way that the resizing behaves according to the OS that the program runs under.
+We wanted to make a simple, yet featureful, user interface. This resulted in a user interface with no physical buttons. All you need to navigate the map is pointing device (i.e., a mouse). To zoom in and out you scroll up and down, respectively. The mouse pointer decides what the zooming point is. It is also very easy to pan up or down, or to the sides. This is done by simply dragging and dropping the map with the mouse pointer. The window is also easily resized by dragging in one corner of the window. There are, however, some differences in the way that the resizing behaves according to the OS the program is running under.
 
-Our main reason for making the user interaction the way we have, is that this way is basically the most intuitive way for a lot of people to navigate and interact with maps and alike, due to the great amount of tablets and smartphones.
+Our main reason for designing the user interface the way that we have is that, in our strongest conviction, it is the most intuitive way for people to navigate and interact with maps. It seems that this has become the \textit{de facto} standard, probably due to the increasing number of tablets and smartphones on the market.
 % subsubsection User interaction (end)
 
 \pagebreak
@@ -100,10 +102,10 @@ The implementation of the application consists of four different packages; the \
 
 
 \subsection{Controller package} % This is a simple description of the implementation of the Controller class.
-The \texttt{Controller} package consists solely of the \texttt{Controller} class, which is both the main class (it has the main method run when the application starts), and it is the link between the \texttt{Model} and \texttt{View} packages handling the flow of data between the two. When a change is made by the user, the View calls a method in the \texttt{Controller} once again updating the graphical user interface according the both the input from the user and the data stored in the \texttt{Model}.
+The \texttt{Controller} package consists solely of the \texttt{Controller} class, which is both the main class (it has the main method, to be run when the application starts), and it is the link between the \texttt{Model} and \texttt{View} packages handling the flow of data between the two. When a change is made by the user, the View calls a method in the \texttt{Controller}, once again updating the graphical user interface according to user input and the data stored in the \texttt{Model}.
 
 \subsection{Global package} % Contains all the global values used from all around the application
-This package contains only the \texttt{MinAndMaxValues} class which has fields that needs to be accessed from the entire application. These fields include initial values such as the current "viewbox", min and max values for x- and y-coordinates, limits for when the different types of road segments are drawn etc. It also contains methods for checking whether or not the current viewbox results in a need for re-filtering the data to be drawn. The class is statically imported by all classes needing to access this information.
+This package contains only the \texttt{MinAndMaxValues} class which has fields that needs to be accessed from the entire application. These fields include initial values such as the current "viewbox", minimum and maximum values for x- and y-coordinates, definitions for when the different types of road segments are drawn etc. It also contains methods for checking whether or not the current viewbox results in a need for re-filtering the data to be drawn. The class is statically imported by all classes needing to access this information.
 
 \subsection{Model package} % The description of the Model package is more complicated and consists of descriptions of several other classes.
 %The \texttt{Model} package consists of all the classes managing data storage, filtering, and conversion.
@@ -112,20 +114,20 @@ This package contains only the \texttt{MinAndMaxValues} class which has fields t
 The \texttt{Model} class is the front-end class of the \texttt{Model} package (the only class which is directly connected to the \texttt{Controller} class). This is where the data structure is stored in a field and where the methods for filtering and converting data are called. The data structure is stored with the type \texttt{DataStructure}, which is an interface allowing us to easily switch between data structures.
 
 \subsubsection{XMLReader class} % Reads in the data from an XML file of krax format and adds the content to a given data structure
-This class reads data from an XML file of the KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing an edge on the roadmap), which then are added to a given data structure.
+This class reads data from an XML file of our KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing an edge on the roadmap), which are then added to a given data structure.
 
 The \texttt{XMLReader} makes use of an external library, \href{www.xom.nu}{\texttt{xom}} (\url{www.xom.nu}), for reading the XML data.
 
 \subsubsection{QuadTreeDS class} % The data structure of the application. Consists of several other classes to be explained here
-The \texttt{QuadTreeDS} is the basis of the entire application. It is in an instance of this all data is stored after being read by the \texttt{XMLReader} class. In order for it to be used as our data structure, it implements the \texttt{DataStructure} interface.
+The \texttt{QuadTreeDS} is the basis of the entire application. It is in an instance of this class that all data is stored after being read by the \texttt{XMLReader} class. In order for it to be used as our data structure, it implements the \texttt{DataStructure} interface.
 
-The class consists of four instances of the \texttt{QuadTree} class (one for each type of road segment). A \texttt{QuadTree} consists of nodes, which has an x- and a y-coordinate (stored as \texttt{double}) and a reference to an \texttt{Edge} object. Each \texttt{QuadTree} contains all edges of a given type. Each \texttt{Edge} object is stored twice; both referenced to by the start- and end-coordinates of the edge.
+The class consists of four instances of the \texttt{QuadTree} class (one for each type of road segment). A \texttt{QuadTree} consists of nodes, which has an x- and a y-coordinate (stored as \texttt{double}s) and a reference to an \texttt{Edge} object. Each \texttt{QuadTree} contains all edges of a designated type. Each \texttt{Edge} object is stored twice; both referenced to by the start- and end-coordinates of the edge.
 
-Inserting a node into a \texttt{QuadTree} is done recursively; the given node is compared to the root node, deciding to which of the four children of the root the given node is to be compared to next. This continues until a null-reference / a leaf is found.
+Inserting a node into a \texttt{QuadTree} is a recursive process; the given node is compared to the root node, deciding which of the four children the given node is to be compared with next. This continues until a null-reference / a leaf is found.
 
-Retrieving information is done using an instance of the \texttt{Interval2D} class (representing a rectangle), which again consists of to instances of the \texttt{Interval} class (representing a line). This too is done recursively; it is checked whether the coordinates of the root node is within the given rectangle. If it is, it is added to a given collection of edges. It is then checked which of the subtrees might contain nodes within the rectangle, and for each that match, the same method is invoked, now with each of the matching children as the root. The call returns at null references.
+Retrieving information is done using an instance of the \texttt{Interval2D} class (representing a rectangle), which again consists of to instances of the \texttt{Interval} class (each representing a line). This too is done recursively; it is checked whether the coordinates of the root node are within the given rectangle. If it is, it is added to a given collection of edges. It is then checked which of the subtrees might contain nodes within the rectangle, and for each that match, the same method is invoked, now with each of the matching children as the root. The call returns at null references.
 
-Out implementation of the quadtree (including the \texttt{Interval} and \texttt{Interval2D} classes) are heavily based upon implementations from
+Our implementation of the quadtree (including the \texttt{Interval} and \texttt{Interval2D} classes) is heavily based upon implementations from
 \url{algs4.cs.princeton.edu}.
 
 %\begin{tikzpicture}
@@ -166,25 +168,25 @@ Out implementation of the quadtree (including the \texttt{Interval} and \texttt{
 \subsubsection{FormatConverter class} % Converts from the data type pulled out of the data structure to the data type needed by the View package
 The \texttt{FormatConverter} has static methods only, and only one public method. This methods takes an \texttt{ArrayList<Edge>} and converts it to the type \texttt{int[][][]} (\texttt{int[type][number of edges][edge coordinates]}).
 
-The FormatConverter uses an instance of the Coordinates class, which converts the given UTM32 coordinates to pixels as shown in the GUI.
+The FormatConverter uses an instance of the Coordinates class to convert the given UTM32 coordinates to pixels as shown in the GUI.
 
 \subsubsection{KrakToXMLConverter class} % Not directly part of the implementation, but the class used for converting the data from Krak to the krax XML format
-The KrakToXMLConverter is not directly a part of the application (it is not used at runtime). It is a util class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
+The KrakToXMLConverter is not, strictly speaking, a part of the application (it is not used at runtime). It is a utility class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
 
 \subsection{View package} % Consists of all the classes handling the graphical user interface
 %The \texttt{View} package contains all the classes managing the graphical user interface.
 
 \subsubsection{View class} % Front end class in the MVC pattern. Contains the rest of the (non-static) GUI classes. Implements the MapListener interface. The overall class structure of the View package
-The \texttt{View} class is the front end class of the \texttt{View} package in the MVC design pattern. It contains an instance of the \texttt{MainFrame} class, which is the basic \texttt{java.swing} GUI (the window to be displayed), which then again contains an instance of our custom panel, \texttt{MapPanel}.
+The \texttt{View} class is the front-end class of the \texttt{View} package in the MVC design pattern. It contains an instance of the \texttt{MainFrame} class, which is the basic \texttt{java.swing} GUI (the window to be displayed), which then again contains an instance of our custom panel, \texttt{MapPanel}.
 
-The \texttt{View} itself implements the interface \texttt{ViewListener}, of which an instance is stored in both the \texttt{MainFrame} and the \texttt{MapPanel} classes. This allows for these class to invoke a method in the \texttt{View}, telling it that changes has been made, which then invokes a similar method in the \texttt{Controller}, which then updates the GUI according the the changes.
+The \texttt{View} itself implements the interface \texttt{ViewListener}, of which an instance is stored in both the \texttt{MainFrame} and the \texttt{MapPanel} classes. This allows for these classes to invoke a method in the \texttt{View}, telling it that changes has been made, which then invokes a similar method in the \texttt{Controller}, which then updates the GUI according the the changes.
 
 \subsubsection{MapPanel class} % Draws lines according to input data
-The \texttt{MapPanel} class extends the \texttt{java.swing.JPanel} class and cuntions as a panel with added functionality and with an overridden \texttt{paint} method.
+The \texttt{MapPanel} class extends the \texttt{java.swing.JPanel} class and functions as a panel with added functionality and with an overridden \texttt{paint} method.
 
-The \texttt{MapPanel} stored an \texttt{int[][][]} (as generated by the \texttt{FormatConverter}), from which it it draws lines of the canvas, each corresponding to an edge stored in the \texttt{Model}.
+The \texttt{MapPanel} stores an \texttt{int[][][]} (as generated by the \texttt{FormatConverter}), from which it it draws lines of the canvas, each corresponding to an edge stored in the \texttt{Model}.
 
-The \texttt{MapPanel} also has to listeners from the \texttt{java.awt} library; a MouseWheelListener, which invokes a static method of the \texttt{ZoomHandler} class when the user scrolls on the panel, sending info about the mouse coordinates and the amount scrolled, and a MouseMotionListener, which invokes a static method of the \texttt{DragHandler} class when the user drags the mouse on the panel, sending info about how far the mouse has been dragged (and along which axes).
+The \texttt{MapPanel} also has two listeners from the \texttt{java.awt} library; a MouseWheelListener, which invokes a static method of the \texttt{ZoomHandler} class when the user scrolls on the panel, sending data about the mouse coordinates and the scrolled amount, and a MouseMotionListener, which invokes a static method of the \texttt{DragHandler} class when the user drags the mouse on the panel, letting the \texttt{DragHandler} know how far the mouse has been dragged (and along which axes).
 
 \subsubsection{ZoomHandler class} % Handles all the zooming
 The \texttt{ZoomHandler} handles all the zooming. When receiving a method call (from the \texttt{MapPanel}) saying that the user tries to zoom out, there are to possible cases; if the current viewbox is not close to the max of the width and height values, it zooms out, keeping the current center of the viewbox the center. Else, zooming is done so  the viewbox follows the borders created by the max values.
