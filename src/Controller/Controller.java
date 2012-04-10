@@ -1,4 +1,5 @@
 package Controller;
+
 import View.*;
 import Model.*;
 
@@ -15,7 +16,12 @@ public class Controller implements ViewListener {
 	 * Constructor for the Controller class
 	 */
 	public Controller() {
-		model = new Model();
+		try {
+			model = new Model();
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		view = new View(this, model.getFilteredEdges());
 	}
 	

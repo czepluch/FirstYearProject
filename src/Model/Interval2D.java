@@ -1,7 +1,6 @@
 package Model;
 
 // Taken from http://algs4.cs.princeton.edu/91primitives/Interval2D.java.html
-// Modified to fit this application
 
 /**
  * A two-dimensional interval (rectangle)

@@ -85,10 +85,6 @@ public class MapPanel extends JPanel {
 	private void addListeners(){
 		addMouseWheelListener(new MouseWheelListener(){
 			
-			/*
-			 * Calls the zoomHandler class according to user scrolling and
-			 * calls for update according the the zooming
-			 */
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent mwe) {
 				ZoomHandler.valuesChanged(mwe.getX(), mwe.getY(), mwe.getWheelRotation());
@@ -107,9 +103,6 @@ public class MapPanel extends JPanel {
 			@Override
 			public void mouseExited(MouseEvent arg0) { }
 
-			/*
-			 * Stores info needed for the dragging in the mouseDragge method
-			 */
 			@Override
 			public void mousePressed(MouseEvent e) {
 				lastEndX = (int) e.getPoint().getX();
@@ -126,10 +119,6 @@ public class MapPanel extends JPanel {
 			@Override
 			public void mouseMoved(MouseEvent e) { }
 			
-			/*
-			 * Makes changes in the global variables and calls for needed
-			 * update, making it possible to navigate the map by dragging
-			 */
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				endX = (int) e.getPoint().getX();
