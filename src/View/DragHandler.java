@@ -47,6 +47,10 @@ public class DragHandler {
 		needsRepaint();
 	}
 	
+	/*
+	 * Updates the variable storing info about how much is to be dragged
+	 * according the the viewbox size
+	 */
 	public static void updateDrag() {
 		drag = (maxX - minX) * DRAG_CONSTANT;
 	}

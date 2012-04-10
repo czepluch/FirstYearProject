@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import Cleanup.Point;
 import static Global.MinAndMaxValues.*;
 
 // This implementation is taken from http://algs4.cs.princeton.edu/92search/QuadTree.java.html
@@ -120,14 +119,6 @@ public class QuadTree {
 	public void addEdge(Edge e) {
 		insert(e.getFromLong(), e.getFromLat(), e);
 		insert(e.getToLong(), e.getToLat(), e);
-	}
-	
-	/**
-	 * Adds a point to the tree
-	 * @param p The point to be added
-	 */
-	public void addPoint(Point p) {
-		insert(p.getX(), p.getY(), p.getEdge());
 	}
 	
 	// Methods for retrieving info about the tree

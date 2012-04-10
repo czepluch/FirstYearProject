@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import Cleanup.Point;
 import static Global.MinAndMaxValues.*;
 
 /**
@@ -12,6 +11,9 @@ public class QuadTreeDS implements DataStructure {
 	private ArrayList<Edge> filteredEdges;
 	private QuadTree[] trees;
 	
+	/*
+	 * Constructor
+	 */
 	public QuadTreeDS() {
 		trees = new QuadTree[NUMBER_OF_TYPES];
 		for (int i = 0; i < NUMBER_OF_TYPES; i++) {
@@ -33,13 +35,5 @@ public class QuadTreeDS implements DataStructure {
 	@Override
 	public void addEdge(Edge e) {
 		trees[e.getType() - 1].addEdge(e);
-	}
-	
-	/**
-	 * Adds a point to the tree
-	 * @param p The point to be added
-	 */
-	public void addPoint(Point p) {
-		trees[p.getType() - 1].addPoint(p);
 	}
 }
