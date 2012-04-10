@@ -8,6 +8,7 @@
 \usepackage[english]{babel}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage[vmargin=3.5cm]{geometry}
 \newcommand{\field} [1] {\mathbb{#1}}
 \begin{document}
 
@@ -125,44 +126,47 @@ Inserting a node into a \texttt{QuadTree} is a recursive process; the given node
 
 Retrieving information is done using an instance of the \texttt{Interval2D} class (representing a rectangle), which again consists of to instances of the \texttt{Interval} class (each representing a line). This too is done recursively; it is checked whether the coordinates of the root node are within the given rectangle. If it is, it is added to a given collection of edges. It is then checked which of the subtrees might contain nodes within the rectangle, and for each that match, the same method is invoked, now with each of the matching children as the root. The call returns at null references.
 
-Our implementation of the quadtree (including the \texttt{Interval} and \texttt{Interval2D} classes) is heavily based upon implementations from
-\url{algs4.cs.princeton.edu}.
-
-%\begin{tikzpicture}
-%	[level 1/.style={sibling distance=34mm},
-%	level 2/.style={sibling distance = 5mm}]
-%	\tikzstyle{every node}=[circle,draw]
-%		child {
-%			node {<x, <y}
-%			child
-%			child
-%			child
-%			child
-%		}
-%		child {
-%			node {<x, >y}
-%			child
-%			child
-%			child
-%			child		
-%		}
-%		child {
-%			node {>x, <y}
-%			child
-%			child
-%			child
-%			child		
-%		}
-%		child {
-%			node {>x, >y}
-%			child
-%			child
-%			child
-%			child		
-%		}
-%	;
-%\end{tikzpicture}
-
+Our implementation of the quadtree (including the \texttt{Interval} and \texttt{Interval2D} classes) is heavily based upon implementations from \url{algs4.cs.princeton.edu}.
+\\
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	[level 1/.style={sibling distance=34mm},
+	level 2/.style={sibling distance = 5mm}]
+	\tikzstyle{every node}=[circle,draw]
+	\node {x, y}		
+		child {
+			node {<x, <y}
+			child
+			child
+			child
+			child
+		}
+		child {
+			node {<x, >y}
+			child
+			child
+			child
+			child		
+		}
+		child {
+			node {>x, <y}
+			child
+			child
+			child
+			child		
+		}
+		child {
+			node {>x, >y}
+			child
+			child
+			child
+			child		
+		}
+	;
+\end{tikzpicture}
+\end{figure}
+\\
 \subsubsection{FormatConverter class} % Converts from the data type pulled out of the data structure to the data type needed by the View package
 The \texttt{FormatConverter} has static methods only, and only one public method. This methods takes an \texttt{ArrayList<Edge>} and converts it to the type \texttt{int[][][]} (\texttt{int[type][number of edges][edge coordinates]}).
 
