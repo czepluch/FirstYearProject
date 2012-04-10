@@ -39,11 +39,11 @@ This report covers the visualisation part of our first-year project at the MSc i
 To make this project, we were randomly divided into groups of size four to six. Our group, group 8, consists of four students. 
 
 The main purpose of this project is to visualise road-map data provided by Krak. The data is to be visualised as a map displaying all roads within a given square area of Denmark.
-It must be possible to zoom in and out on a desired part of the map. In addition, the level of detail should should follow the zoom level. It is also required that the window in which the map is displayed can be resized. In the description of our assignment, a few  optional, possible additions to the program were suggested. 
+It must be possible to zoom in and out on a desired part of the map. In addition, the level of detail should follow the zoom level. It is also required that the window in which the map is displayed can be resized. In the description of our assignment, a few  optional, possible additions to the program were suggested. 
 
 There are worksheets corresponding to the work we have made at, and due to every meeting. The worksheets also contain information about agreements formed in the introductory phase of the project, as well as agreements formed throughout the project.
 
-Our advisor throughout this project has been Rasmus Pagh, from whom we have received both guidence and relevant lectures. 
+Our advisor throughout this project has been Rasmus Pagh, from whom we have received both guidance and relevant lectures. 
 
 Furthermore we would like to thank Robert Sedgewick and Kevin Wayne from Princeton University for providing well written and easy-to-understand code and algorithms at http://algs4.cs.princeton.edu that we have chosen to use and rewrite for our data structure in this project.
 
@@ -51,13 +51,13 @@ Furthermore we would like to thank Robert Sedgewick and Kevin Wayne from Princet
 \section{Design choices} % (fold)
 \label{sec:Design choices}
 In this section, we will go through our design choices. We will go through things like design patterns, data structures, and visualisation.
-At the same time we will explanation our choices.
+At the same time we will explain our choices.
 
 \subsection{Design Pattern} % (fold)
 \label{sub:Design Pattern}
 For our overall architectural pattern, we have chosen to use the Model, View, Controller (MVC) pattern. We chose to do so, to make sure that we have
 a very modular and easy-to-maintain class structure. Using the MVC pattern results in seperation of the different aspects of our application, while still providing a loose coupling between these elements. During this first visualisation part of the application it has proven very useful to us since we
-have been chancing our classes and data structures quite a few times.
+have been changing our classes and data structures quite a few times.
 
 % subsection Design Pattern (end)
 
@@ -89,7 +89,7 @@ Technically, the map first draws all of Denmark. It is however only the two bigg
 
 \subsubsection{User interaction} % (fold)
 \label{subsub:User interaction}
-We wanted to make a simple, yet featureful, user interface. This resulted in a user interface with no physical buttons. All you need to navigate the map is pointing device (i.e., a mouse). To zoom in and out you scroll up and down, respectively. The mouse pointer decides what the zooming point is. It is also very easy to pan up or down, or to the sides. This is done by simply dragging and dropping the map with the mouse pointer. The window is also easily resized by dragging in one corner of the window. There are, however, some differences in the way that the resizing behaves according to the OS the program is running under.
+We wanted to make a simple, yet featureful, user interface. This resulted in a user interface with no physical buttons. All you need to navigate the map is a pointing device (i.e., a mouse). To zoom in and out you scroll up and down, respectively. The mouse pointer decides what the zooming point is. It is also very easy to pan up or down, or to the sides. This is done by simply dragging and dropping the map with the mouse pointer. The window is also easily resized by dragging in one corner of the window. There are, however, some differences in the way that the resizing behaves according to the OS the program is running under.
 
 Our main reason for designing the user interface the way that we have is that, in our strongest conviction, it is the most intuitive way for people to navigate and interact with maps. It seems that this has become the \textit{de facto} standard, probably due to the increasing number of tablets and smartphones on the market.
 % subsubsection User interaction (end)
@@ -168,7 +168,7 @@ Our implementation of the quadtree (including the \texttt{Interval} and \texttt{
 \end{figure}
 \\
 \subsubsection{FormatConverter class} % Converts from the data type pulled out of the data structure to the data type needed by the View package
-The \texttt{FormatConverter} has static methods only, and only one public method. This methods takes an \texttt{ArrayList<Edge>} and converts it to the type \texttt{int[][][]} (\texttt{int[type][number of edges][edge coordinates]}).
+The \texttt{FormatConverter} has static methods only, and only one public method. This method takes an \texttt{ArrayList<Edge>} and converts it to the type \texttt{int[][][]} (\texttt{int[type][number of edges][edge coordinates]}).
 
 The FormatConverter uses an instance of the Coordinates class to convert the given UTM32 coordinates to pixels as shown in the GUI.
 
@@ -235,12 +235,11 @@ To conclude and sum up this first part of the project, we are very happy with th
 Our group has a good dynamic way of working and we are good at keeping deadlines and meeting times. This has made it easy for us to focus on making
 capable design choices and making our program work as intended. And we have succeeded in making a program that works as intended. One could argue that our program could be a bit quicker, but we are convinced that our program is fast enough for its purpose, and we have not experienced any mentionable slowdowns. 
 
-There are few things would have wanted to do differently, if we were to re-do this project. We would have liked to add more of the optional features to the program, as we have only included one; a fast data structure.
+There are few things we would have wanted to do differently, if we were to re-do this project. We would have liked to add more of the optional features to the program, as we have only included one; a fast data structure.
 It is possible to navigate the application using touchpad only, and the implementation of the overall navigation works as intended in the design.
 Our final project will in all likelines have more extraneous features and improvements added to the application.
 
 We are, all in all, very pleased with both our work as a group, and our program so far.
-%Our group has had a very good and dynamic teamwork. We have been good at keeping deadlines and meeting times, which has lead to a product that we are very satisfied with.
 % section Conclusion (end)
 
 \end{document}
