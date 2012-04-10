@@ -13,10 +13,11 @@ public class Model {
 	 */
 	public Model() throws RuntimeException {
 		try {
-			edges = new QuadTreeDS();
-			XMLReader.readXML("krax_complete.xml", edges);
-		} catch (Exception e) { // Exception needs to be specified
-			throw new RuntimeException("Could not read map data from file");
+		edges = new QuadTreeDS();
+		XMLReader.readXML("krax_complete.xml", edges);
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
