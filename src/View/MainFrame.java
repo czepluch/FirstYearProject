@@ -15,6 +15,7 @@ public class MainFrame {
 	private JFrame frame;
 	private JPanel cp;
 	private MapPanel map;
+	private SearchPanel sp;
 	private MapListener listener; // Used when window is resized
 	
 	/**
@@ -22,17 +23,23 @@ public class MainFrame {
 	 * @param lines The data to be displayed in the map of the MainFrame
 	 * @param listener The MapListener
 	 */
-	public MainFrame(int[][][] lines, MapListener listener) {
+	public MainFrame(int[][][] lines, MapListener mapListener, SearchListener searchListener) {
 		frame = new JFrame("Krax");
-		frame.setSize(new Dimension(width, height));
+		frame.setSize(new Dimension(width + SEARCH_PANEL_WIDTH + EXTRA_LAYOUT_WIDTH, height));
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		cp = (JPanel) frame.getContentPane();
-		map = new MapPanel(lines, listener);
-		cp.add(map);
+		cp.setLayout(new BorderLayout(6, 6));
 		
-		this.listener = listener;
+		map = new MapPanel(lines, mapListener);
+		map.setSize(new Dimension(width, 1));
+		cp.add(map, BorderLayout.CENTER);
+		
+		sp = new SearchPanel(searchListener);
+		cp.add(sp, BorderLayout.WEST);
+		
+		this.listener = mapListener;
 		addListeners();
 		
 		frame.setVisible(true);
@@ -60,7 +67,7 @@ public class MainFrame {
 			@Override public void componentResized(ComponentEvent e) {
 				Dimension newSize = e.getComponent().getSize();
 				height = (int) newSize.getHeight();
-				width = (int) newSize.getWidth();
+				width = (int) newSize.getWidth() - (SEARCH_PANEL_WIDTH + EXTRA_LAYOUT_WIDTH);
 				map.setSize(newSize);
 				
 				repaint = false;

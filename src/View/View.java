@@ -5,7 +5,7 @@ package View;
  * Contains the controller as a listener, which is notified, when updates in the GUI in
  * need of accessing the stored data are needed
  */
-public class View implements MapListener {
+public class View implements MapListener, SearchListener {
 	private MainFrame mf;
 	private ViewListener listener;
 	
@@ -15,7 +15,7 @@ public class View implements MapListener {
 	 * @param lines The edges to be drawn
 	 */
 	public View(ViewListener listener, int[][][] lines) {
-		mf = new MainFrame(lines, this);
+		mf = new MainFrame(lines, this, this);
 		this.listener = listener;
 	}
 	
