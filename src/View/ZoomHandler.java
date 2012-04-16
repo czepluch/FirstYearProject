@@ -7,7 +7,6 @@ public class ZoomHandler {
 	private static final double ZOOM_CONSTANT = 0.0017;
 	private static double zoomRateX = (maxX - minX) * ZOOM_CONSTANT;
 	private static double zoomRateY = ((maxY - minY) / (maxX - minX)) * zoomRateX;
-	private static final float LINE_WIDTH_CONSTANT = (float) 0.0000002;
 	private static final int ZOOM_LIMIT = 1000;
 	private static final int DRAG_WHEN_ZOOM_IN = 2;
 	// Values needed only be computed once
@@ -90,7 +89,7 @@ public class ZoomHandler {
 			minY -= absZoom * zoomRateY;
 			maxY += absZoom * zoomRateY;
 			
-			updateTypesLineWidthDragAndRepaint();
+			updateTypesLineWidthDragAndRepaint(zoom);
 			
 			
 			// Additional cases for zooming out:
@@ -129,7 +128,7 @@ public class ZoomHandler {
 				maxY += absZoom * zoomRateY;
 			}
 			
-			updateTypesLineWidthDragAndRepaint();
+			updateTypesLineWidthDragAndRepaint(zoom);
 		}
 	}
 	
@@ -145,13 +144,13 @@ public class ZoomHandler {
 	 * Helper method for updating the line widths
 	 */
 	private static void updateLineWidths() {
-		lineWidth = (float) (maxX - minX) * LINE_WIDTH_CONSTANT;
+		lineWidth = (float) 1;
 	}
 	
 	/*
 	 * Helper method called for each zoom-out
 	 */
-	private static void updateTypesLineWidthDragAndRepaint() {
+	private static void updateTypesLineWidthDragAndRepaint(int zoom) {
 		// Compute shown types
 		int currentTypes = types; // Needed for computing the need for repaint
 		updateTypesToBeDisplayed();

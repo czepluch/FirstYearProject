@@ -19,7 +19,8 @@ public class MinAndMaxValues {
 	public static int width = 800;
 	public static int height = (int) (((MAX_Y - MIN_Y) / (MAX_X - MIN_X)) * width);
 	public static int types = 2;
-	public static float lineWidth = (float) 0.1;
+	public static final float LINE_WIDTH_CONSTANT = (float) 1;
+	public static float lineWidth = (float) 1;
 	public static boolean repaint = true;
 	// Current min and max values of what is drawn
 	public static double drawnMinX = MIN_X;

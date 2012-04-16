@@ -54,7 +54,7 @@ public class MapPanel extends JPanel {
 						g2.setStroke(new BasicStroke(3 * MinAndMaxValues.lineWidth)); break;
 				// Highways
 				case 3: g2.setColor(Color.red);
-						g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth)); break;
+						g2.setStroke(new BasicStroke(5 * MinAndMaxValues.lineWidth)); break;
 				// Unknown types are not drawn
 				default:	break;
 			}
