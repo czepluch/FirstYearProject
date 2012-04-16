@@ -37,6 +37,8 @@ public class MainFrame {
 		cp.add(map, BorderLayout.CENTER);
 		
 		sp = new SearchPanel(searchListener);
+		sp.setSize(new Dimension(SEARCH_PANEL_WIDTH, 10));
+		sp.setBorder(BorderFactory.createRaisedBevelBorder());
 		cp.add(sp, BorderLayout.WEST);
 		
 		this.listener = mapListener;

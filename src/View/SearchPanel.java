@@ -18,7 +18,7 @@ public class SearchPanel extends JPanel {
 	private JComboBox secondCB;
 	private JButton swapButton;
 	private JButton findButton;
-	
+
 	private JPanel tablePanel;
 	private JScrollPane tableSP;
 	private JTable table;
@@ -32,7 +32,6 @@ public class SearchPanel extends JPanel {
 		this.listener = listener;
 		
 		this.setLayout(new BorderLayout(6, 6));
-		this.setSize(new Dimension(SEARCH_PANEL_WIDTH, 10));
 		
 		createInputPanel();
 		createTablePanel();
@@ -46,7 +45,7 @@ public class SearchPanel extends JPanel {
 	private void createInputPanel() {
 		inputPanel = new JPanel();
 		inputPanel.setLayout(new MigLayout("wrap 1"));
-		this.add(inputPanel);
+		this.add(inputPanel, BorderLayout.NORTH);
 		
 		Dimension CBSize = new Dimension(180, 10);
 		
@@ -71,7 +70,14 @@ public class SearchPanel extends JPanel {
 	 * Creates the panel containing the table showing trip info
 	 */
 	private void createTablePanel() {
+		tablePanel = new JPanel();
+		this.add(tablePanel, BorderLayout.CENTER);
 		
+		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableSP = new JScrollPane(table);
+		tableSP.setPreferredSize(new Dimension(180, 400));
+		tablePanel.add(tableSP);
 	}
 	
 	/*
