@@ -42,6 +42,25 @@ public class FormatConverter {
 	}
 	
 	/*
+	 * Creates a trip edge, converting the coordinates of a given Edge object
+	 * @param e			the edge which has coordinates to be converted
+	 * @param prevEdge	prevEdge the previous TripEdge on the trip
+	 * 					null if no such exists
+	 * @param speed 	the speed of the edge
+	 * @return the created TripEdge
+	 */
+	public static TripEdge createTripEdge(Edge e, TripEdge prevEdge, int speed) {
+		int[] pixelCoords = convertEdge(e);
+		return new TripEdge(pixelCoords[0],
+							pixelCoords[1],
+							pixelCoords[2],
+							pixelCoords[3],
+							e.getDistance(),
+							prevEdge,
+							speed);
+	}
+	
+	/*
 	 * Helper method for convertData(ArrayList<Edge>).
 	 * Converts an ArrayList<int[]> to int[][]
 	 */

@@ -4,27 +4,42 @@ package Model;
  * Class representing an edge on a trip
  */
 public class TripEdge {
-	private Edge edge;
-	private Edge prevEdge;
+	private TripEdge prevEdge;
+	
+	private int fromX;
+	private int fromY;
+	private int toX;
+	private int toY;
+	
+	private double distance;
 	private int time;
 	private int speed;
 	private Turn turn;
 	
 	/*
 	 * Constructor
-	 * @param edge 		the edge to which the TripEdge corresponds
-	 * @param prevEdge 	the previous edge on the trip. null if
-	 * 					no such exists
+	 * @param fromX		the first from coordinate in pixels
+	 * @param fromY		the second from coordinate in pixels
+	 * @param toX		the first to coordinate in pixels
+	 * @param toY		the first to coordinate in pixels
+	 * @param distance	the distance of the edge
+	 * @param prevEdge	the previous edge on the trip
+	 * 					null if no such exists
+	 * @param speed		the speed of the edge
 	 */
-	public TripEdge(Edge edge, Edge prevEdge, int speed) {
-		this.edge = edge;
+	public TripEdge(int fromX, int fromY, int toX, int toY, double distance, TripEdge prevEdge, int speed) {
+		this.fromX = fromX;
+		this.fromY = fromY;
+		this.toX = toX;
+		this.toY = toY;
+		this.distance = distance;
 		this.prevEdge = prevEdge;
 		this.speed = speed;
 		computeTime();
 		computeTurn();
 	}
 	
-	// Getter methods for TripEdge
+	// Getter methods
 	// ______________________________________________________________
 	
 	public int getSpeed() {
@@ -39,28 +54,24 @@ public class TripEdge {
 		return time;
 	}
 	
-	
-	// Getter methods from Edge
-	// ______________________________________________________________
-	
 	public double getFromY() {
-		return edge.getFromLat();
+		return fromY;
 	}
 
 	public double getFromX() {
-		return edge.getFromLong();
+		return fromX;
 	}
 
 	public double getToY() {
-		return edge.getToLat();
+		return toY;
 	}
 
 	public double getToX() {
-		return edge.getToLong();
+		return toX;
 	}
 
 	public double getDistance() {
-		return edge.getDistance();
+		return distance;
 	}
 	
 	/*
