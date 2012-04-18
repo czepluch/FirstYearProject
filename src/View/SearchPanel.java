@@ -1,15 +1,24 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 import net.miginfocom.swing.MigLayout;
 import java.awt.*;
 import static Global.MinAndMaxValues.*;
+import Model.Trip;
+import Model.TripEdge;
+import Model.Turn;
+import java.util.List;
 
 /*
  * Panel containing components for user interaction other than the map
  */
 public class SearchPanel extends JPanel {
 	private SearchListener listener;
+	private Trip trip;
 	
 	private JPanel inputPanel;
 	private JLabel firstLabel;
@@ -21,6 +30,7 @@ public class SearchPanel extends JPanel {
 
 	private JPanel tablePanel;
 	private JScrollPane tableSP;
+	private DefaultTableModel tm;
 	private JTable table;
 	
 	/*
@@ -39,6 +49,21 @@ public class SearchPanel extends JPanel {
 		setTableListeners();
 	}
 	
+	public void updateTrip(Trip trip) {
+		this.trip = trip;
+		
+		tm.setRowCount(0); // Clear the table model
+		
+		if (trip != null) {
+			List<TripEdge> edges = trip.getEdges();
+			String[] tableRows = new String[edges.size()];
+			
+			for (int i = 0; i < edges.size(); i++) { // Add new data to the table model
+				tm.addRow(new String[] { edges.get(i).toString() });
+			}
+		}
+	}
+	
 	/*
 	 * Creates the panel containing the input fields
 	 */
@@ -52,9 +77,11 @@ public class SearchPanel extends JPanel {
 		firstLabel = new JLabel("Point / from");
 		firstCB = new JComboBox();
 		firstCB.setPreferredSize(CBSize);
+		AutoCompleteDecorator.decorate(firstCB);
 		secondLabel = new JLabel("To");
 		secondCB = new JComboBox();
 		secondCB.setPreferredSize(CBSize);
+		AutoCompleteDecorator.decorate(secondCB);
 		swapButton = new JButton("Swap");
 		findButton = new JButton("Find");
 		
@@ -73,7 +100,12 @@ public class SearchPanel extends JPanel {
 		tablePanel = new JPanel();
 		this.add(tablePanel, BorderLayout.CENTER);
 		
-		table = new JTable();
+		tm = new DefaultTableModel() {
+			@Override
+			public boolean isCellEditable(int row, int column) { return false; }
+		};
+		tm.addColumn("Directions");
+		table = new JTable(tm);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableSP = new JScrollPane(table);
 		tableSP.setPreferredSize(new Dimension(180, 400));
