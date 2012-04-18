@@ -54,19 +54,19 @@ public class TripEdge {
 		return time;
 	}
 	
-	public double getFromY() {
+	public int getFromY() {
 		return fromY;
 	}
 
-	public double getFromX() {
+	public int getFromX() {
 		return fromX;
 	}
 
-	public double getToY() {
+	public int getToY() {
 		return toY;
 	}
 
-	public double getToX() {
+	public int getToX() {
 		return toX;
 	}
 
