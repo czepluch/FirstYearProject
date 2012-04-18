@@ -1,5 +1,9 @@
 package View;
 
+import Model.Trip;
+import Model.TripEdge;
+import Model.Turn;
+
 /**
  * The View/GUI of the application
  * Contains the controller as a listener, which is notified, when updates in the GUI in
@@ -30,7 +34,7 @@ public class View implements MapListener, SearchListener {
 	/**
 	 * Updates the map in the view according to the given data
 	 */
-	public void updateView(int[][][] lines) {
-		mf.updateMap(lines);
+	public void updateView(int[][][] lines, Trip trip) {
+		mf.updateMap(lines, trip);
 	}
 }

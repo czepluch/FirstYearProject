@@ -3,6 +3,9 @@ package View;
 import javax.swing.*;
 
 import static Global.MinAndMaxValues.*;
+import Model.Trip;
+import Model.TripEdge;
+import Model.Turn;
 
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -17,6 +20,7 @@ public class MainFrame {
 	private MapPanel map;
 	private SearchPanel sp;
 	private MapListener listener; // Used when window is resized
+	private Trip trip;
 	
 	/**
 	 * Constructor for the MainFrame class
@@ -52,8 +56,8 @@ public class MainFrame {
 	 * (passes the method invocation on from the View to the MapPanel)
 	 * @param the new data to be displayed
 	 */
-	public void updateMap(int[][][] lines) {
-		map.update(lines);
+	public void updateMap(int[][][] lines, Trip trip) {
+		map.update(lines, trip);
 	}
 	
 	/**

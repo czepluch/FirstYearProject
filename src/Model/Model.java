@@ -28,4 +28,12 @@ public class Model {
 	public int[][][] getFilteredEdges() {
 		return FormatConverter.convertData(edges.getFilteredEdges());
 	}
+	
+	/**
+	 * Returns the current trip
+	 * @return the current trip
+	 */
+	public Trip getTrip() {
+		return null;
+	}
 }

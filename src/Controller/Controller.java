@@ -33,7 +33,7 @@ public class Controller implements ViewListener {
 	public void viewboxUpdated() {
 		// Call for the model to filter the data according to the given viewbox
 		// Update the view according the the new data
-		view.updateView(model.getFilteredEdges());
+		view.updateView(model.getFilteredEdges(), model.getTrip());
 	}
 
 	/**
@@ -42,5 +42,4 @@ public class Controller implements ViewListener {
 	public static void main(String[] args) {
 		new Controller();
 	}
-
 }

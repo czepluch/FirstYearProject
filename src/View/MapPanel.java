@@ -69,7 +69,7 @@ public class MapPanel extends JPanel {
 			}
 		}
 		if (trip != null) {
-			g2.setColor(Color.pink);
+			g2.setColor(Color.magenta);
 			g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth));
 			List<TripEdge> edges = trip.getEdges();
 			for (TripEdge e : edges) g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
@@ -80,25 +80,18 @@ public class MapPanel extends JPanel {
 	 * Notifies the listener that the viewbox has changed
 	 * (Correct parameters are missing)
 	 */
-	public void viewboxUpdated () {
+	public void viewboxUpdated() {
 		listener.viewboxUpdated();
 	}
 	
 	/**
 	 * Updates the map according the the given data and repaints.
 	 * @param lines the new data to be displayed
-	 */
-	public void update(int[][][] lines) {
-		this.lines = lines;
-		repaint();
-	}
-	
-	/*
-	 * Updates the map according the the given trip
 	 * @param trip	the trip of which info is to be displayed
 	 * 				null if no trip is to be displayed
 	 */
-	public void updateTrip(Trip trip) {
+	public void update(int[][][] lines, Trip trip) {
+		this.lines = lines;
 		this.trip = trip;
 		repaint();
 	}
