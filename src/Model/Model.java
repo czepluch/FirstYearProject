@@ -36,4 +36,11 @@ public class Model {
 	public Trip getTrip() {
 		return null;
 	}
+	
+	/**
+	 * Updates the stored trip
+	 */
+	public void updateTrip(Edge from, Edge to) {
+		
+	}
 }
