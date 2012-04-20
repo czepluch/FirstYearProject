@@ -121,4 +121,11 @@ public class SearchPanel extends JPanel {
 	private void setTableListeners() {
 		// Not yet implemented
 	}
+	
+	/*
+	 * Sets the text field listeners
+	 */
+	private void setTextFieldListeners() {
+		// Not yet implemented
+	}
 }
