@@ -7,6 +7,9 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import net.miginfocom.swing.MigLayout;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import static Global.MinAndMaxValues.*;
 import Model.Trip;
 import Model.TripEdge;
@@ -112,7 +115,14 @@ public class SearchPanel extends JPanel {
 	 * Sets the button listeners
 	 */
 	private void setButtonListeners() {
-		
+		swapButton.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e) {
+											String newFrom = secondTF.getText();
+											String newTo = firstTF.getText();
+											firstTF.setText(newFrom);
+											secondTF.setText(newTo);
+										}
+									});
 	}
 	
 	/*

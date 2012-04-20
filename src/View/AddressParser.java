@@ -4,7 +4,7 @@ import java.util.regex.*;
 
 public class AddressParser {
 	
-	public String[] parseAddress(String s) throws IllegalArgumentException
+	public static String[] parseAddress(String s) throws IllegalArgumentException
 	{
 		String street, number, letter, floor, zip, city;
 		street = number = letter = floor = zip = city = "";
