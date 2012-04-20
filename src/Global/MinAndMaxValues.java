@@ -9,7 +9,7 @@ public class MinAndMaxValues {
 	public static final double MAX_X = 900000;
 	public static final double MIN_Y = 6000000;
 	public static final double MAX_Y = 6410000;
-	public static final int SEARCH_PANEL_WIDTH = 200;
+	public static final int SEARCH_PANEL_WIDTH = 300;
 	public static final int EXTRA_LAYOUT_WIDTH = 12;
 	// Current values
 	public static double minX = MIN_X;

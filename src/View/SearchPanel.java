@@ -22,9 +22,9 @@ public class SearchPanel extends JPanel {
 	
 	private JPanel inputPanel;
 	private JLabel firstLabel;
-	private JComboBox firstCB;
+	private JTextField firstTF;
 	private JLabel secondLabel;
-	private JComboBox secondCB;
+	private JTextField secondTF;
 	private JButton swapButton;
 	private JButton findButton;
 
@@ -72,23 +72,19 @@ public class SearchPanel extends JPanel {
 		inputPanel.setLayout(new MigLayout("wrap 1"));
 		this.add(inputPanel, BorderLayout.NORTH);
 		
-		Dimension CBSize = new Dimension(180, 10);
+		int textFieldColums = 20;
 		
 		firstLabel = new JLabel("Point / from");
-		firstCB = new JComboBox();
-		firstCB.setPreferredSize(CBSize);
-		AutoCompleteDecorator.decorate(firstCB);
+		firstTF = new JTextField(textFieldColums);
 		secondLabel = new JLabel("To");
-		secondCB = new JComboBox();
-		secondCB.setPreferredSize(CBSize);
-		AutoCompleteDecorator.decorate(secondCB);
+		secondTF = new JTextField(textFieldColums);
 		swapButton = new JButton("Swap");
 		findButton = new JButton("Find");
 		
 		inputPanel.add(firstLabel);
-		inputPanel.add(firstCB);
+		inputPanel.add(firstTF);
 		inputPanel.add(secondLabel);
-		inputPanel.add(secondCB);
+		inputPanel.add(secondTF);
 		inputPanel.add(swapButton, "split 2");
 		inputPanel.add(findButton);
 	}
@@ -108,7 +104,7 @@ public class SearchPanel extends JPanel {
 		table = new JTable(tm);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableSP = new JScrollPane(table);
-		tableSP.setPreferredSize(new Dimension(180, 400));
+		tableSP.setPreferredSize(new Dimension(250, 400));
 		tablePanel.add(tableSP);
 	}
 	
