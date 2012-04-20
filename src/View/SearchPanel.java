@@ -1,6 +1,8 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -105,7 +107,7 @@ public class SearchPanel extends JPanel {
 		};
 		tm.addColumn("Directions");
 		table = new JTable(tm);
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		// table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableSP = new JScrollPane(table);
 		tableSP.setPreferredSize(new Dimension(250, 400));
 		tablePanel.add(tableSP);
@@ -115,12 +117,26 @@ public class SearchPanel extends JPanel {
 	 * Sets the button listeners
 	 */
 	private void setButtonListeners() {
+		// Add ActionListener to swap button
 		swapButton.addActionListener(new ActionListener() {
+										@Override
 										public void actionPerformed(ActionEvent e) {
 											String newFrom = secondTF.getText();
 											String newTo = firstTF.getText();
 											firstTF.setText(newFrom);
 											secondTF.setText(newTo);
+										}
+									});
+		
+		// Add ActionListener to find button
+		findButton.addActionListener(new ActionListener() {
+										@Override
+										public void actionPerformed(ActionEvent e) {
+											if (secondTF.getText().length() <= 0) {
+												// Find a point
+											} else {
+												// Find directions
+											}
 										}
 									});
 	}
@@ -129,7 +145,19 @@ public class SearchPanel extends JPanel {
 	 * Sets the table listeners
 	 */
 	private void setTableListeners() {
-		// Not yet implemented
+		ListSelectionModel sm = table.getSelectionModel();
+		sm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		sm.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				int row = table.getSelectedRow();			// Get the selected row
+				TripEdge e = trip.getEdges().get(row);		// Find the corresponding edge
+				double x = (e.getToX() - e.getFromX()) / 2; // Compute the x- ...
+				double y = (e.getToY() - e.getFromY()) / 2; // and y-values
+				DragHandler.moveTo(x, y);					// Move the view to that point
+			}
+		});
 	}
 	
 	/*
