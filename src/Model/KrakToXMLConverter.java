@@ -15,6 +15,7 @@ public class KrakToXMLConverter
 	// Constants for reading the correct parts of the input
 	private final int nFromId = 0;
 	private final int nToId = 1;
+	private final int E_ID = 3;
 	private final int eSpeed = 25;
 	
 	/**
@@ -67,7 +68,7 @@ public class KrakToXMLConverter
 			String inputString = in.readLine();
 			inputString = in.readLine();
 			String[] line = null;
-			int tmpId = 1;
+			int id = 0;
 			double fromLat = 0;
 			double fromLong = 0;
 			double toLat = 0;
@@ -76,16 +77,16 @@ public class KrakToXMLConverter
 			// Continue reading in edges, until no lines are left
 			while (inputString != null) {
 				line = inputString.split(",");
+				id = Integer.parseInt(line[E_ID]);
 				fromLat = nodes.get(Integer.parseInt(line[nFromId]) - 1).y;
 				fromLong = nodes.get(Integer.parseInt(line[nFromId]) - 1).x;
 				toLat = nodes.get(Integer.parseInt(line[nToId]) - 1).y;
 				toLong = nodes.get(Integer.parseInt(line[nToId]) - 1).x;
 				speed = Integer.parseInt(line[eSpeed]);
 	
-				Edge edge = new Edge(tmpId, fromLat, fromLong, toLat, toLong, speed);
+				Edge edge = new Edge(id, fromLat, fromLong, toLat, toLong, speed);
 				edges.add(edge);
-				
-				tmpId++;
+
 				inputString = in.readLine();
 			}
 		} catch (FileNotFoundException e) {
@@ -178,30 +179,23 @@ public class KrakToXMLConverter
 		 */
 		public Element getXML() {
 			Element edge = new Element("edge");
+			
 			Attribute id = new Attribute("id", this.getId() + "");
+			Attribute fromLat = new Attribute("fromLat", this.getFromLat() + "");
+			Attribute fromLong = new Attribute("fromLong", this.getFromLong() + "");
+			Attribute toLat = new Attribute("toLat", this.getToLat() + "");
+			Attribute toLong = new Attribute("toLong", this.getToLong() + "");
+			Attribute distance = new Attribute("distance", this.getDistance() + "");
+			Attribute speed = new Attribute("speed", this.getSpeed() + "");
+			
 			edge.addAttribute(id);
+			edge.addAttribute(fromLat);
+			edge.addAttribute(fromLong);
+			edge.addAttribute(toLat);
+			edge.addAttribute(toLong);
+			edge.addAttribute(distance);
+			edge.addAttribute(speed);
 			
-			Element fromLat = new Element("fromLat");
-			fromLat.appendChild(this.getFromLat() + "");
-			Element fromLong = new Element("fromLong");
-			fromLong.appendChild(this.getFromLong() + "");
-			
-			Element toLat = new Element("toLat");
-			toLat.appendChild(this.getToLat() + "");
-			Element toLong = new Element("toLong");
-			toLong.appendChild(this.getToLong() + "");
-			
-			Element distance = new Element("distance");
-			distance.appendChild(this.getDistance() + "");
-			Element speed = new Element("speed");
-			speed.appendChild(this.getSpeed() + "");
-			
-			edge.appendChild(fromLat);
-			edge.appendChild(fromLong);
-			edge.appendChild(toLat);
-			edge.appendChild(toLong);
-			edge.appendChild(distance);
-			edge.appendChild(speed);
 			return edge;
 		}
 	}
@@ -215,7 +209,7 @@ public class KrakToXMLConverter
 	public static void format(OutputStream os, Document doc) throws Exception {
 		Serializer serializer = new Serializer(os, "UTF-8");
 		serializer.setIndent(4);
-		serializer.setMaxLength(60);
+		serializer.setMaxLength(1337);
 		serializer.write(doc);
 		serializer.flush();
 	}
