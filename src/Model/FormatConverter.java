@@ -49,13 +49,13 @@ public class FormatConverter {
 	 * @param speed 	the speed of the edge
 	 * @return the created TripEdge
 	 */
-	public static TripEdge createTripEdge(Edge e, TripEdge prevEdge, int speed) {
-		int[] pixelCoords = convertEdge(e);
+	public static TripEdge createTripEdge(double fromX, double fromY, double toX, double toY, double distance, TripEdge prevEdge, int speed) {
+		int[] pixelCoords = convertEdge(fromX, fromY, toX, toY);
 		return new TripEdge(pixelCoords[0],
 							pixelCoords[1],
 							pixelCoords[2],
 							pixelCoords[3],
-							e.getDistance(),
+							distance,
 							prevEdge,
 							speed);
 	}
@@ -83,6 +83,20 @@ public class FormatConverter {
 		int y1 = c.convertYToPixels(e.getFromLat());
 		int x2 = c.convertXToPixels(e.getToLong());
 		int y2 = c.convertYToPixels(e.getToLat());
+		int[] edge = { x1, y1, x2, y2 };
+		return edge;
+	}
+	
+	/*
+	 * Helper method for converting edges to int[4]
+	 * @param e the Edge to be converted
+	 * @return the int[4] (x1, y1, x2, y2) representing an edge with four coordinates
+	 */
+	private static int[] convertEdge(double fromX, double fromY, double toX, double toY) {
+		int x1 = c.convertXToPixels(fromX);
+		int y1 = c.convertYToPixels(fromY);
+		int x2 = c.convertXToPixels(toX);
+		int y2 = c.convertYToPixels(toY);
 		int[] edge = { x1, y1, x2, y2 };
 		return edge;
 	}
