@@ -14,7 +14,7 @@ public class Model {
 	public Model() throws RuntimeException {
 		try {
 		edges = new QuadTreeDS();
-		XMLReader.readXML("krax_complete.xml", edges);
+		XMLReader.readXML("short.xml", edges);
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

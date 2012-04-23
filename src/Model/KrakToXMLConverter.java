@@ -15,8 +15,9 @@ public class KrakToXMLConverter
 	// Constants for reading the correct parts of the input
 	private final int nFromId = 0;
 	private final int nToId = 1;
-	private final int E_ID = 3;
+	private final int eId = 3;
 	private final int eSpeed = 25;
+	private final int eType = 5;
 	
 	/**
 	 * Constructor the the KrakToXMLConverter-class
@@ -74,17 +75,19 @@ public class KrakToXMLConverter
 			double toLat = 0;
 			double toLong = 0;
 			int speed = 0;
+			int type = 0;
 			// Continue reading in edges, until no lines are left
 			while (inputString != null) {
 				line = inputString.split(",");
-				id = Integer.parseInt(line[E_ID]);
+				id = Integer.parseInt(line[eId]);
 				fromLat = nodes.get(Integer.parseInt(line[nFromId]) - 1).y;
 				fromLong = nodes.get(Integer.parseInt(line[nFromId]) - 1).x;
 				toLat = nodes.get(Integer.parseInt(line[nToId]) - 1).y;
 				toLong = nodes.get(Integer.parseInt(line[nToId]) - 1).x;
 				speed = Integer.parseInt(line[eSpeed]);
+				type = Integer.parseInt(line[eType]);
 	
-				Edge edge = new Edge(id, fromLat, fromLong, toLat, toLong, speed);
+				Edge edge = new Edge(id, fromLat, fromLong, toLat, toLong, speed, type);
 				edges.add(edge);
 
 				inputString = in.readLine();
@@ -126,7 +129,7 @@ public class KrakToXMLConverter
 	 */
 	private class Edge
 	{
-		int id, speed;
+		int id, speed, type;
 		double distance, fromLat, fromLong, toLat, toLong;
 		
 		/*
@@ -135,7 +138,7 @@ public class KrakToXMLConverter
 		 * @param from the Node representing the coordinate which is the beginning of the edge
 		 * @param to the Node representing the coordinate which is the end of the edge
 		 */
-		public Edge(int id, double fromLat, double fromLong, double toLat, double toLong, int speed) {
+		public Edge(int id, double fromLat, double fromLong, double toLat, double toLong, int speed, int type) {
 			this.id = id;
 			
 			
@@ -148,6 +151,7 @@ public class KrakToXMLConverter
 			setDistance();
 			
 			this.speed = speed;
+			this.type = type;
 		}
 	
 		/*
@@ -160,6 +164,7 @@ public class KrakToXMLConverter
 		public double getToLong() { return toLong; }
 		public double getDistance() { return distance; }
 		public int getSpeed() { return speed; }
+		public int getType() { return type; }
 		
 		/*
 		 * Computes the distance using the coordinates stored in the from and to nodes
@@ -187,6 +192,7 @@ public class KrakToXMLConverter
 			Attribute toLong = new Attribute("toLong", this.getToLong() + "");
 			Attribute distance = new Attribute("distance", this.getDistance() + "");
 			Attribute speed = new Attribute("speed", this.getSpeed() + "");
+			Attribute type = new Attribute("type", this.getType() + "");
 			
 			edge.addAttribute(id);
 			edge.addAttribute(fromLat);
@@ -195,6 +201,7 @@ public class KrakToXMLConverter
 			edge.addAttribute(toLong);
 			edge.addAttribute(distance);
 			edge.addAttribute(speed);
+			edge.addAttribute(type);
 			
 			return edge;
 		}

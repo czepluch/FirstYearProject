@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.regex.*;
 
 /**
  * Has the responsibility of reading XML-files of the KRAX-format
@@ -21,13 +22,6 @@ public class XMLReader
 	private static final int TYPE = 6;
 	
 	/**
-	 * Empty constructor
-	 */
-	public XMLReader()
-	{
-	}
-	
-	/**
 	 * Reads the contents of an XML document and stores it in a data structure.
 	 * @param path The path of the XML file from which data is read
 	 * @param edges The data structure in which the data is stored
@@ -38,88 +32,62 @@ public class XMLReader
 		try {
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
 			
+			// Create the regex
+			String regex = "\\s*<edge\\sid=\"" +
+								"([0-9]+)" +
+						   "\"\\sfromLat=\"" +
+						   		"([0-9\\.]+)" +
+						   "\"\\sfromLong=\"" +
+						   		"([0-9\\.]+)" +
+						   "\"\\stoLat=\"" +
+						   		"([0-9\\.]+)" +
+						   "\"\\stoLong=\"" +
+						   		"([0-9\\.]+)" +
+						   "\"\\sdistance=\"" +
+						   		"([0-9\\.]+)" +
+						   "\"\\sspeed=\"" +
+						   		"([0-9]+)" +
+						   "\"\\stype=\"" +
+						   		"([0-9]+)" +
+						   "\"/>";
+
+			Pattern pattern = Pattern.compile(regex);
+			
 			// Skip first two strings
 			String line = in.readLine();
 			line = in.readLine();
+			
+			line = in.readLine(); // Read the first usable line
 			
 			while (line != null)
 			{
 				double fromLat, fromLong, toLat, toLong, distance = 0;
 				int speed, type = 0;
-				line = in.readLine(); // Skip line
 				
-				line = parseXMLLine(in.readLine(),FROM_LAT); // fromLat
-				if (line != null) fromLat = Double.parseDouble(line);
-				else break;		// End of XML document, assuming it has the right format
+				Matcher m = pattern.matcher(line);
 				
-				line = parseXMLLine(in.readLine(),FROM_LONG); // fromLong
-				fromLong = Double.parseDouble(line);
+				if (m.matches()) { // Parse the line
+					fromLat = Double.parseDouble(m.group(2));
+					fromLong = Double.parseDouble(m.group(3));
+					toLat = Double.parseDouble(m.group(4));
+					toLong = Double.parseDouble(m.group(5));
+					distance = Double.parseDouble(m.group(6));
+					speed = Integer.parseInt(m.group(7));
+					type = translateType(Integer.parseInt(m.group(8)));
+					
+					// Store the edge
+					edges.addEdge(new Edge(fromLat, fromLong, toLat, toLong, distance, speed, type));
+				} else {
+					// Reached the end of the file
+				}
 				
-				line = parseXMLLine(in.readLine(),TO_LAT); // toLat
-				toLat = Double.parseDouble(line);
-				
-				line = parseXMLLine(in.readLine(),TO_LONG); // toLong
-				toLong = Double.parseDouble(line);
-				
-				line = parseXMLLine(in.readLine(),DISTANCE); // distance
-				distance = Double.parseDouble(line);
-				
-				line = parseXMLLine(in.readLine(),SPEED); // speed
-				speed = Integer.parseInt(line);
-				
-				line = parseXMLLine(in.readLine(),TYPE); // type
-				type = translateType(Integer.parseInt(line));
-				
-				edges.addEdge(new Edge(fromLat, fromLong, toLat, toLong, distance, speed, type));
-				line = in.readLine(); // skip line
+				line = in.readLine(); // Go to the next line
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("Oh noes!: "+ e.getMessage());
 		} catch (IOException e) {
  			System.out.println("Oh noes!: "+ e.getMessage());
 		}
-	}
-	
-	/**
-	 * Receives a string representing an XML element 
-	 * and returns its value as a string,
-	 * or null if the input string was null
-	 * @param line The XML line to be parsed
-	 * @param i Indicates which element the line represents
-	 * @return The value of XML element as a string
-	 */
-	private static String parseXMLLine(String line, int i)
-	{
-		if (line != null)
-		{
-			switch (i)
-			{
-				case FROM_LAT:
-					line = line.trim().substring(9).split("<")[0];
-					break;
-				case FROM_LONG:
-					line = line.trim().substring(10).split("<")[0];
-					break;
-				case TO_LAT:
-					line = line.trim().substring(7).split("<")[0];
-					break;
-				case TO_LONG:
-					line = line.trim().substring(8).split("<")[0];
-					break;
-				case DISTANCE:
-					line = line.trim().substring(10).split("<")[0];
-					break;
-				case SPEED:
-					line = line.trim().substring(7).split("<")[0];
-					break;
-				case TYPE:
-					line = line.trim().substring(6).split("<")[0];
-					break;
-				default:
-					break;
-			}
-		}
-		return line;
 	}
 	
 	/**
