@@ -58,7 +58,8 @@ public class DragHandler {
 	 */
 	public static void moveTo(double x, double y) {
 		int steps = 30;
-		int sleepTime = 15;
+		int time = 600;
+		int sleepTime = steps / time;
 		int xStep = (int) (((((maxX - minX) / 2) - x) / steps) / drag);
 		int yStep = (int) (((((maxY - minY) / 2) - y) / steps) / drag);
 		
