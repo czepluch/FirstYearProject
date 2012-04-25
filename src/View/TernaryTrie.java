@@ -89,6 +89,7 @@ public class TernaryTrie {
 	 * @return String
 	 */
 	public Iterable<String> startsWith(String pre) {
+		if (pre.length==0) return null;)
 		Queue<String> q = new LinkedList<String>();
 		Node n = get(root, pre, 0);
 		if (n == null) return q;
