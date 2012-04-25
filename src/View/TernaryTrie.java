@@ -7,23 +7,47 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-public class TernaryTrie<Value extends String> {
+public class TernaryTrie {
 
 	Node root;
-
-	private class Node{
-		char c;
-		Value val;
-		Node l, m, r;
-
-		public Node(char c) {
-			this.c = c;
-		}
-
-		public Node() {}
-	}
 	
-	public Value get(String s) {
+	/**
+	 * Do-nothing constructor
+	 */
+	public TernaryTrie() {}; 
+
+	/**
+	 * Build the trie from the file denoted by the given string path
+	 * @param String path to file
+	 */
+	public TernaryTrie(String fp) {
+		this(new File(fp));
+	}
+
+	/**
+	 * build the trie from a file
+	 * @param String the file to build the trie from
+	 */
+	public TernaryTrie(File f) {
+		try (
+			Scanner fileScan = new Scanner(f);
+		) {
+			while (fileScan.hasNext()) {
+				String[] name = fileScan.nextLine().split(";");
+				put(name[0], name[1]);
+			}
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+	}	
+
+	/**
+	 * Retrieve the value correspoding to a given string.
+	 * if the given string can not be found, null is returned
+	 * @param String string to search for. (exact match).
+	 * @return String
+	 */
+	public String get(String s) {
 		Node n = get(root, s, 0);
 		return n.val;
 	}
@@ -37,11 +61,16 @@ public class TernaryTrie<Value extends String> {
 		else return node;
 	}
 
-	public void put(String s, Value v) {
+	/**
+	 * insert a key-value pair into the trie
+	 * @param String key
+	 * @param String value
+	 */
+	public void put(String s, String v) {
 		root = put(root, s, v, 0 );
 	}
 
-	private Node put(Node node, String s, Value v, int d) {
+	private Node put(Node node, String s, String v, int d) {
 		char c = s.charAt(d);
 		if (node == null) node = new Node(c);
 		if 	(c < node.c) node.l = put(node.l, s, v, d);
@@ -52,6 +81,11 @@ public class TernaryTrie<Value extends String> {
 		return node;
 	}
 
+	/**
+	 * Get the keys that are prefixed with a given String
+	 * @param String prefix
+	 * @return String
+	 */
 	public Iterable<String> startsWith(String pre) {
 		Queue<String> q = new LinkedList<String>();
 		Node n = get(root, pre, 0);
@@ -63,12 +97,15 @@ public class TernaryTrie<Value extends String> {
 
 	private void collect(Node node, String pre, Queue<String> q){
 		if (node == null) return;
-		collect(node.l, pre, q);	//swapped with next line to easily arange output lexiographically
+		collect(node.l, pre, q);	//swapped with next line to arange output lexiographically (well, sort of)
 		if (node.val != null) q.offer(pre + node.c);
 		collect(node.m, pre + node.c, q);
 		collect(node.r, pre, 		q);
 	}
 
+	/**
+	 * Prints a 60 character wide chart of characters from ascii code 0 through 600
+	 */
 	public void testChars() {
 		for (int i=0; i<600; i++){
 			if(i%60==0) System.out.println();
@@ -76,12 +113,28 @@ public class TernaryTrie<Value extends String> {
 		}		
 	}
 
+
 	//helper
 	private String cut(String s) {
 		return s.substring(0, s.length()-1);
 	}
 
-	//The main method is for testing/goofing around.
+	//private helper class
+	private class Node{
+		char c;
+		String val;
+		Node l, m, r;
+
+		public Node(char c) {
+			this.c = c;
+		}
+
+		public Node() {}
+	}	
+	
+	/**
+	 * Mainly for testing purposes
+	 */
 	public static void main (String[] args) {
 		if (args.length < 1) {
 			System.out.println("yeah, giving me no parameters is the way to go!\n" +
@@ -89,31 +142,18 @@ public class TernaryTrie<Value extends String> {
 				return;
 		}
 
-		TernaryTrie<String> tt = new TernaryTrie<String>();
-		
-		try (
-			Scanner fileScan = new Scanner(new File(args[0]));
-			Scanner inputScan = new Scanner(System.in);
-		) {
-			System.out.println("Loading " + args[0] + ", please wait.");
-			while (fileScan.hasNext()) {
-				String name = fileScan.nextLine();
-				name = name.toLowerCase();
-				tt.put(name, name);
-			}
+		System.out.println("Loading " + args[0] + ", please wait.");
+		TernaryTrie tt = new TernaryTrie(args[0]);
+		Scanner inputScan = new Scanner(System.in);
+		while (true) {
+			System.out.println("Waiting for a search-prefix...");
+			String q = inputScan.nextLine().toLowerCase();
+			System.out.println("Entries beginning with " + q + ":");
 
-			while (true) {
-				System.out.println("Waiting for a search-prefix...");
-				String q = inputScan.nextLine().toLowerCase();
-				System.out.println("Entries beginning with " + q + ":");
-
-				for (String r : tt.startsWith(q)) {
-					System.out.println(r);
-				}
-				System.out.println();
+			for (String r : tt.startsWith(q)) {
+				System.out.println(r);
 			}
-		} catch (FileNotFoundException e) {
-			System.out.println("Could not access file " + args[0]);
+			System.out.println();
 		}
 	}
 }
