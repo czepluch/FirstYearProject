@@ -29,15 +29,17 @@ public class TernaryTrie {
 	 * @param String the file to build the trie from
 	 */
 	public TernaryTrie(File f) {
-		try (
-			Scanner fileScan = new Scanner(f);
-		) {
+		Scanner fileScan = null;
+		try {
+			fileScan = new Scanner(f);
 			while (fileScan.hasNext()) {
 				String[] name = fileScan.nextLine().split(";");
 				put(name[0], name[1]);
 			}
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
+		} finally {
+			fileScan.close();
 		}
 	}	
 
