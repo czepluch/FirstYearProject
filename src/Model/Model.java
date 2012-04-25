@@ -40,7 +40,7 @@ public class Model {
 	/**
 	 * Updates the stored trip
 	 */
-	public void updateTrip(Edge from, Edge to) {
+	public void updateTrip(int from, int to) {
 		
 	}
 }

@@ -22,6 +22,8 @@ import java.util.List;
  * Panel containing components for user interaction other than the map
  */
 public class SearchPanel extends JPanel {
+	private TernaryTrie trie;
+	
 	private SearchListener listener;
 	private Trip trip;
 	
@@ -45,6 +47,8 @@ public class SearchPanel extends JPanel {
 		super();
 		
 		this.listener = listener;
+		
+		trie = new TernaryTrie();
 		
 		this.setLayout(new BorderLayout(6, 6));
 		

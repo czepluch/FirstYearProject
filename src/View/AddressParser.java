@@ -8,9 +8,9 @@ public class AddressParser {
 	{
 		String street, number, letter, floor, zip, city;
 		street = number = letter = floor = zip = city = "";
-		String regex = "([-a-z¾¿ŒA-Z®¯.\\s\']+)[,\\s]*([0-9]{0,3})[,\\s]*([a-z¾¿ŒA-Z®¯]?)" +
+		String regex = "([-a-zÃ¦Ã¸Ã¥A-ZÃ†Ã˜Ã….\\s\']+)[,\\s]*([0-9]{0,3})[,\\s]*([a-zÃ¦Ã¸Ã¥A-ZÃ†Ã˜Ã…]?)" +
 						"[.[,]]*\\s*(\\s[0-9]{1,3}[.]?\\s*(sal[\\s[,]]*)?([tT][[hH][vV]]\\s*[.]?,*)?)?" +
-						"\\s*([,\\s][0-9]{4})?[,\\s]*(\\s[-a-z¾¿ŒA-Z®¯.\\s\']+)?";
+						"\\s*([,\\s][0-9]{4})?[,\\s]*(\\s[-a-zÃ¦Ã¸Ã¥A-ZÃ†Ã˜Ã….\\s\']+)?";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher m = pattern.matcher(s);
 
@@ -53,7 +53,7 @@ public class AddressParser {
 		AddressParser p = new AddressParser();
 		String[] addr;
 		try {
-			addr = p.parseAddress("Vestergade 5, 5. sal Tv K¿benhavn");
+			addr = p.parseAddress("Vestergade 5, 5. sal Tv KÃ¸benhavn");
 			for (String s : addr)
 				System.out.println(s);
 		} catch (IllegalArgumentException e) {
