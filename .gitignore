@@ -11,3 +11,16 @@ Report.out
 *.dropbox
 *.pdf
 *.swp
+.name
+compiler.xml
+profiles_settings.xml
+encodings.xml
+Project.xml
+misc.xml
+modules.xml
+scope_settings.xml
+uiDesigner.xml
+vcs.xml
+workspace.xml
+org.eclipse.core.resources.prefs
+Project.iml
