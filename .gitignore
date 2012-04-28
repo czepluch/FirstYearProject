@@ -24,3 +24,4 @@ vcs.xml
 workspace.xml
 org.eclipse.core.resources.prefs
 Project.iml
+ant.xml

@@ -5,4 +5,8 @@ package View;
  */
 public interface ViewListener {
 	public void viewboxUpdated();
+	
+	public void findLocation(int nodeId);
+	
+	public void findDirections(int fromId, int toId);
 }

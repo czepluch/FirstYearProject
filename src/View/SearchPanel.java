@@ -117,7 +117,7 @@ public class SearchPanel extends JPanel {
 		tablePanel.add(tableSP);
 	}
 	
-	/*
+	/**
 	 * Sets the button listeners
 	 */
 	private void setButtonListeners() {
@@ -125,10 +125,7 @@ public class SearchPanel extends JPanel {
 		swapButton.addActionListener(new ActionListener() {
 										@Override
 										public void actionPerformed(ActionEvent e) {
-											String newFrom = secondTF.getText();
-											String newTo = firstTF.getText();
-											firstTF.setText(newFrom);
-											secondTF.setText(newTo);
+											swapAction();
 										}
 									});
 		
@@ -136,16 +133,23 @@ public class SearchPanel extends JPanel {
 		findButton.addActionListener(new ActionListener() {
 										@Override
 										public void actionPerformed(ActionEvent e) {
-											if (secondTF.getText().length() <= 0) {
-												// Find a point
+											// If only the second text field contains something, swap the fields
+											if (firstTF.getText().length() == 0 &&
+												secondTF.getText().length() > 0) swapAction();
+											
+											// If only one field contains something, find a location
+											if (firstTF.getText().length() > 0 &&
+												secondTF.getText().length() <= 0) {
+												listener.findLocation(firstTF.getText());
+											// Else find directions
 											} else {
-												// Find directions
+												listener.findDirections(firstTF.getText(), secondTF.getText());
 											}
 										}
 									});
 	}
 	
-	/*
+	/**
 	 * Sets the table listeners
 	 */
 	private void setTableListeners() {
@@ -157,9 +161,7 @@ public class SearchPanel extends JPanel {
 			public void valueChanged(ListSelectionEvent arg0) {
 				int row = table.getSelectedRow();			// Get the selected row
 				TripEdge e = trip.getEdges().get(row);		// Find the corresponding edge
-				double x = (e.getToX() - e.getFromX()) / 2; // Compute the x- ...
-				double y = (e.getToY() - e.getFromY()) / 2; // and y-values
-				DragHandler.moveTo(x, y);					// Move the view to that point
+				DragHandler.moveTo(e.getToX(), e.getToY());	// Move the view to the end point
 			}
 		});
 	}
@@ -169,5 +171,15 @@ public class SearchPanel extends JPanel {
 	 */
 	private void setTextFieldListeners() {
 		// Not yet implemented
+	}
+	
+	/**
+	 * Swaps the content of the two input text fields
+	 */
+	private void swapAction() {
+		String newFrom = secondTF.getText();
+		String newTo = firstTF.getText();
+		firstTF.setText(newFrom);
+		secondTF.setText(newTo);
 	}
 }

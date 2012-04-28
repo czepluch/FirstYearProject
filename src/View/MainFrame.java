@@ -6,6 +6,7 @@ import static Global.MinAndMaxValues.*;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
+import Model.MapLocation;
 
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -56,8 +57,8 @@ public class MainFrame {
 	 * (passes the method invocation on from the View to the MapPanel)
 	 * @param the new data to be displayed
 	 */
-	public void updateMap(int[][][] lines, Trip trip) {
-		map.update(lines, trip);
+	public void updateMap(int[][][] lines, Trip trip, MapLocation location) {
+		map.update(lines, trip, location);
 	}
 	
 	/**

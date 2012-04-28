@@ -4,6 +4,7 @@ import Global.*;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
+import Model.MapLocation;
 import java.util.List;
 
 import java.awt.*;
@@ -21,6 +22,7 @@ public class MapPanel extends JPanel {
 	private int[][][] lines;
 	private MapListener listener;
 	private Trip trip;
+	private MapLocation location;
 	// Variables used when dragging
 	private int lastEndX;
 	private int lastEndY;
@@ -36,6 +38,7 @@ public class MapPanel extends JPanel {
 		this.lines = lines;
 		this.listener = listener;
 		trip = null;
+		location = null;
 		addListeners();
 	}
 	
@@ -74,6 +77,13 @@ public class MapPanel extends JPanel {
 			List<TripEdge> edges = trip.getEdges();
 			for (TripEdge e : edges) g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
 		}
+		if (location != null) {
+			g2.setColor(Color.magenta);
+			int cwh = 5;
+			int x = location.getX() - cwh;
+			int y = location.getY() - cwh;
+			g2.drawOval(x, y, cwh, cwh);
+		}
 	}
 	
 	/**
@@ -90,9 +100,10 @@ public class MapPanel extends JPanel {
 	 * @param trip	the trip of which info is to be displayed
 	 * 				null if no trip is to be displayed
 	 */
-	public void update(int[][][] lines, Trip trip) {
+	public void update(int[][][] lines, Trip trip, MapLocation location) {
 		this.lines = lines;
 		this.trip = trip;
+		this.location = location;
 		repaint();
 	}
 	

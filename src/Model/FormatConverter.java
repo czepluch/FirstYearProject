@@ -60,6 +60,16 @@ public class FormatConverter {
 							speed);
 	}
 	
+	/**
+	 * Creates a MapLocation from the given coordinates
+	 * @param x the x-coordinate in UTM-32 format
+	 * @param y the y-coordinate in UTM-32 format
+	 * @return the MapLocation containing coordinates in pixels
+	 */
+	public static MapLocation createMapLocation(double x, double y) {
+		return new MapLocation(c.convertXToPixels(x), c.convertYToPixels(y));
+	}
+	
 	/*
 	 * Helper method for convertData(ArrayList<Edge>).
 	 * Converts an ArrayList<int[]> to int[][]

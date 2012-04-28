@@ -12,9 +12,11 @@ public class TernaryTrie {
 	Node root;
 	
 	/**
-	 * Do-nothing constructor
+	 * Build a trie from the standard path
 	 */
-	public TernaryTrie() {}; 
+	public TernaryTrie() {
+		this(new File("TrieData.txt"));
+	}; 
 
 	/**
 	 * Build the trie from the file denoted by the given string path
@@ -89,7 +91,7 @@ public class TernaryTrie {
 	 * @return String
 	 */
 	public Iterable<String> startsWith(String pre) {
-		if (pre.length==0) return null;)
+		if (pre.length()==0) return null;
 		Queue<String> q = new LinkedList<String>();
 		Node n = get(root, pre, 0);
 		if (n == null) return q;

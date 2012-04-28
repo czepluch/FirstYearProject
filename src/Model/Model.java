@@ -38,9 +38,28 @@ public class Model {
 	}
 	
 	/**
+	 * Gets the current MapLocation
+	 * @return the current MapLocation
+	 */
+	public MapLocation getLocation() {
+		return null;
+	}
+	
+	/*
 	 * Updates the stored trip
 	 */
-	public void updateTrip(int from, int to) {
-		
+	public void updateTrip(int fromId, int toId) {
+		System.out.println("Updating the trip:");
+		System.out.println("\tFrom:\t" + fromId);
+		System.out.println("\tTo:\t" + toId);
+	}
+	
+	/**
+	 * Updates the stored MapLocation
+	 * @param point the id of the node to be stored
+	 */
+	public void updateLocation(int nodeId) {
+		System.out.println("Updating the location:");
+		System.out.println("\tNode:\t" + nodeId);
 	}
 }

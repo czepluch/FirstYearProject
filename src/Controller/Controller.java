@@ -33,7 +33,19 @@ public class Controller implements ViewListener {
 	public void viewboxUpdated() {
 		// Call for the model to filter the data according to the given viewbox
 		// Update the view according the the new data
-		view.updateView(model.getFilteredEdges(), model.getTrip());
+		view.updateView(model.getFilteredEdges(), model.getTrip(), model.getLocation());
+	}
+	
+	@Override
+	public void findLocation(int nodeId) {
+		model.updateLocation(nodeId);
+		view.updateView(model.getFilteredEdges(), null, model.getLocation());
+	}
+
+	@Override
+	public void findDirections(int fromId, int toId) {
+		model.updateTrip(fromId, toId);
+		view.updateView(model.getFilteredEdges(), model.getTrip(), null);
 	}
 
 	/**

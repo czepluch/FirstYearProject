@@ -13,7 +13,7 @@ public class NewAddressParser {
 												 CRAP_REGEX_PART + "*" + 
 												 	"(" + CITY_STREET_REGEX_PART + "*)" +
 												 CRAP_REGEX_PART + "*" +
-												 	"(" + ZIP_REGEX_PART + ")";
+												 	"([" + ZIP_REGEX_PART + "]*)";
 	
 	private final static String ZIP_FIRST_REGEX = CRAP_REGEX_PART + "*" +
 														"(" + ZIP_REGEX_PART + ")" +
@@ -71,7 +71,7 @@ public class NewAddressParser {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String s = "4600-Lærkevej,    Køge";
+		String s = "Køge";
 		System.out.println("Input:\t" + s);
 		System.out.println(NewAddressParser.parseAddress(s));
 	}
