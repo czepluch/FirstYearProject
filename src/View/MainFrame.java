@@ -62,6 +62,22 @@ public class MainFrame {
 	}
 	
 	/**
+	 * Updates the first list of the search panel according to the given strings
+	 * @param listItems the strings to be displayed
+	 */
+	public void updateFirstList(String[] listItems) {
+		sp.updateFirstList(listItems);
+	}
+	
+	/**
+	 * Updates the second list of the search panel according to the given strings
+	 * @param listItems the strings to be displayed
+	 */
+	public void updateSecondList(String[] listItems) {
+		sp.updateSecondList(listItems);
+	}
+	
+	/**
 	 * Method adding the needed listeners to the components
 	 */
 	public void addListeners() {

@@ -1,6 +1,8 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -30,8 +32,10 @@ public class SearchPanel extends JPanel {
 	private JPanel inputPanel;
 	private JLabel firstLabel;
 	private JTextField firstTF;
+	private JList firstList;
 	private JLabel secondLabel;
 	private JTextField secondTF;
+	private JList secondList;
 	private JButton swapButton;
 	private JButton findButton;
 
@@ -56,6 +60,7 @@ public class SearchPanel extends JPanel {
 		createTablePanel();
 		setButtonListeners();
 		setTableListeners();
+		setTextFieldListeners();
 	}
 	
 	public void updateTrip(Trip trip) {
@@ -73,6 +78,22 @@ public class SearchPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * Updates the first list according to the given strings
+	 * @param listItems the strings to be displayed
+	 */
+	public void updateFirstList(String[] listItems) {
+		firstList.setListData(listItems);
+	}
+	
+	/**
+	 * Updates the second list according to the given strings
+	 * @param listItems the strings to be displayed
+	 */
+	public void updateSecondList(String[] listItems) {
+		secondList.setListData(listItems);
+	}
+	
 	/*
 	 * Creates the panel containing the input fields
 	 */
@@ -85,15 +106,25 @@ public class SearchPanel extends JPanel {
 		
 		firstLabel = new JLabel("Point / from");
 		firstTF = new JTextField(textFieldColums);
+		firstList = new JList();
+		firstList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		firstList.setVisibleRowCount(-1);
+		
 		secondLabel = new JLabel("To");
 		secondTF = new JTextField(textFieldColums);
+		secondList = new JList();
+		secondList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		secondList.setVisibleRowCount(-1);
+		
 		swapButton = new JButton("Swap");
 		findButton = new JButton("Find");
 		
 		inputPanel.add(firstLabel);
 		inputPanel.add(firstTF);
+		inputPanel.add(firstList);
 		inputPanel.add(secondLabel);
 		inputPanel.add(secondTF);
+		inputPanel.add(secondList);
 		inputPanel.add(swapButton, "split 2");
 		inputPanel.add(findButton);
 	}
@@ -170,7 +201,57 @@ public class SearchPanel extends JPanel {
 	 * Sets the text field listeners
 	 */
 	private void setTextFieldListeners() {
-		// Not yet implemented
+		// Add a document listener to the first text field
+		firstTF.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) { firstTFAction(); }
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) { firstTFAction(); }
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) { firstTFAction(); }
+		});
+		
+		// Add a document listener to the second text field
+		secondTF.getDocument().addDocumentListener(new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) { secondTFAction(); }
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) { secondTFAction(); }
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) { secondTFAction(); }
+		});
+	}
+	
+	/**
+	 * The action of the first text field
+	 * Calls the listener for a change in the content of the first list
+	 */
+	private void firstTFAction() {
+		if (firstTF.getText().length() == 0) {
+			String[] clearContent = new String[0];
+			updateFirstList(clearContent);
+		} else {
+			listener.findOptionsFirstList(firstTF.getText());
+		}
+	}
+	
+	/**
+	 * The action of the second text field
+	 * Calls the listener for a change in the content of the second list
+	 */
+	private void secondTFAction() {
+		if (secondTF.getText().length() == 0) {
+			String[] clearContent = new String[0];
+			updateFirstList(clearContent);
+		} else {
+			listener.findOptionsSecondList(secondTF.getText());
+		}
 	}
 	
 	/**

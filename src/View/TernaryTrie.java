@@ -161,4 +161,32 @@ public class TernaryTrie {
 			System.out.println();
 		}
 	}
+	
+	// Mock method for testing
+	public Iterable<String> workDamnit(String s) {
+		Queue<String> q = new LinkedList<String>();
+		double r = Math.random();
+		if (r < 0.2) {
+			q.add("Number 1, 1");
+			q.add("Number 1, 2");
+			q.add("Number 1, 3");
+		} else if (r < 0.4) {
+			q.add("Number 2, 1");
+			q.add("Number 2, 2");
+			q.add("Number 2, 3");
+		} else if (r < 0.6) {
+			q.add("Number 3, 1");
+			q.add("Number 3, 2");
+			q.add("Number 3, 3");
+		} else if (r < 0.8) {
+			q.add("Number 4, 1");
+			q.add("Number 4, 2");
+			q.add("Number 4, 3");
+		} else {
+			q.add("Number 5, 1");
+			q.add("Number 5, 2");
+			q.add("Number 5, 3");
+		}
+		return q;
+	}
 }

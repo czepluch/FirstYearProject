@@ -1,5 +1,7 @@
 package View;
 
+import java.util.ArrayList;
+
 import Model.MapLocation;
 import Model.Trip;
 import Model.TripEdge;
@@ -24,6 +26,7 @@ public class View implements MapListener, SearchListener {
 		mf = new MainFrame(lines, this, this);
 		this.listener = listener;
 		trie = new TernaryTrie();
+		System.out.println(trie);
 	}
 	
 	/**
@@ -44,12 +47,18 @@ public class View implements MapListener, SearchListener {
 	@Override
 	public void findLocation(String input) {
 		String address = NewAddressParser.parseAddress(input);
-		System.out.println("Address parsed:\t" + address);
-		String value = trie.get(address);
-		System.out.println(value);
-		if (value != null) {
-			int nodeId = Integer.parseInt(value);
-			listener.findLocation(nodeId);
+		
+		System.out.println("Address parsed:\t" + address); // For testing
+		
+		if (address != null) {
+			String value = trie.get(address);
+			
+			System.out.println(value); // For testing
+			
+			if (value != null) {
+				int nodeId = Integer.parseInt(value);
+				listener.findLocation(nodeId);
+			}
 		}
 	}
 
@@ -57,12 +66,50 @@ public class View implements MapListener, SearchListener {
 	public void findDirections(String input1, String input2) {
 		String address1 = NewAddressParser.parseAddress(input1);
 		String address2 = NewAddressParser.parseAddress(input2);
-		String value1 = trie.get(address1);
-		String value2 = trie.get(address2);
-		if ((value1 != null) && (value2 != null)) {
-			int fromId = Integer.parseInt(value1);
-			int toId = Integer.parseInt(value2);
-			listener.findDirections(fromId, toId);
+		if ((address1 != null) & address2 != null) {
+			String value1 = trie.get(address1);
+			String value2 = trie.get(address2);
+			if ((value1 != null) && (value2 != null)) {
+				int fromId = Integer.parseInt(value1);
+				int toId = Integer.parseInt(value2);
+				listener.findDirections(fromId, toId);
+			}
 		}
+	}
+
+	@Override
+	public void findOptionsFirstList(String input) {
+		mf.updateFirstList(findListOptions(input));
+	}
+
+	@Override
+	public void findOptionsSecondList(String input) {
+		mf.updateSecondList(findListOptions(input));
+	}
+	
+	/**
+	 * Helper method for finding the content to be shown in the search lists
+	 * @param input the input to be interpreted as an address
+	 * @return String[] the list of addresses to be displayed
+	 */
+	private String[] findListOptions(String input) {
+		String address = NewAddressParser.parseAddress(input);
+		if (address != null) {
+			Iterable<String> c = trie.startsWith(input); // Using input instead of address for testing
+			if (c != null) {
+				int maxItems = 5;
+				ArrayList<String> listItems = new ArrayList<String>();
+				int counter = 0;
+				for (String s : c) {
+					listItems.add(s);
+					counter++;
+					if (!(counter < maxItems)) break;
+				}
+				String[] liStrings = new String[listItems.size()];
+				for (int i = 0; i < listItems.size(); i++) liStrings[i] = listItems.get(i);
+				return liStrings;
+			}
+		}
+		return new String[0];
 	}
 }

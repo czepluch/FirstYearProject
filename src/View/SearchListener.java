@@ -14,4 +14,18 @@ public interface SearchListener {
 	 * @param input2 the second address to be looked up
 	 */
 	public void findDirections(String input1, String input2);
+	
+	/**
+	 * Looks up the five addresses which it is most likely the user is looking for
+	 * and updates the list accordingly
+	 * @param input the input to be interpreted as an address
+	 */
+	public void findOptionsFirstList(String input);
+	
+	/**
+	 * Looks up the five addresses which it is most likely the user is looking for
+	 * and updates the list accordingly
+	 * @param input the input to be interpreted as an address
+	 */
+	public void findOptionsSecondList(String input);
 }

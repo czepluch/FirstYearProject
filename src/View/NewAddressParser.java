@@ -56,7 +56,7 @@ public class NewAddressParser {
 			city = zipFirstMatcher.group(2).toLowerCase();
 			street = zipFirstMatcher.group(3).toLowerCase();
 		} else {
-			return "Damn!";
+			return null;
 		}
 		
 		if (city == null) 	city = "";
