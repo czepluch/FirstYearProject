@@ -67,6 +67,18 @@ public class NewAddressParser {
 	}
 	
 	/**
+	 * Parses the address using the parseAddress method and then cleans
+	 * up the address for it to be used with the trie
+	 * @param s
+	 * @return
+	 */
+	public static String parseAddressLive(String s) {
+		String address = parseAddress(s);
+		// Missing
+		return address;
+	}
+	
+	/**
 	 * Test client
 	 * @param args
 	 */

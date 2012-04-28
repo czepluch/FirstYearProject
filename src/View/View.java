@@ -23,10 +23,9 @@ public class View implements MapListener, SearchListener {
 	 * @param lines The edges to be drawn
 	 */
 	public View(ViewListener listener, int[][][] lines) {
+		trie = new TernaryTrie();
 		mf = new MainFrame(lines, this, this);
 		this.listener = listener;
-		trie = new TernaryTrie();
-		System.out.println(trie);
 	}
 	
 	/**
@@ -106,10 +105,55 @@ public class View implements MapListener, SearchListener {
 					if (!(counter < maxItems)) break;
 				}
 				String[] liStrings = new String[listItems.size()];
-				for (int i = 0; i < listItems.size(); i++) liStrings[i] = listItems.get(i);
+				for (int i = 0; i < listItems.size(); i++) {
+					// Clean up each string
+					liStrings[i] = cleanString(listItems.get(i));
+				}
 				return liStrings;
 			}
 		}
 		return new String[0];
+	}
+	
+	/**
+	 * First removes empty parts of the address.
+	 * Then makes each word in the string start with a capitalized letter
+	 * and replace "#" with ", "
+	 * @param s the String to be cleaned
+	 * @return the cleaned up String
+	 */
+	private String cleanString(String s) {
+		// First find the first non-empty part
+		String[] parts = s.split("#");
+		
+		int h = 0;
+		while (h < parts.length) {
+			if (parts[h].length() > 0) break;
+			h++;
+		}
+		
+		// Put the string back together, replacing the "#" with ", "
+		s = parts[h];
+		for (int k = h + 1; k < parts.length; k++) {
+			if (parts[k].length() > 0) s+= ", " + parts[k];
+		}
+		
+		// Make each word in the string start with a capitalised letter
+		parts = s.split(" ");
+		if (parts.length > 0) {
+			for (int i = 0; i < parts.length; i++) {
+				String part = parts[i];
+				if (part.length() > 0) {
+					parts[i] = part.substring(0, 1).toUpperCase() + part.substring(1).toLowerCase();
+				}
+			}
+			
+			// Put the string back together
+			s = parts[0];
+			for (int j = 1; j < parts.length; j++) {
+				s += " " + parts[j];
+			}
+		}
+		return s;
 	}
 }

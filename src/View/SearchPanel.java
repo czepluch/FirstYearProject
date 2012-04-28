@@ -61,6 +61,7 @@ public class SearchPanel extends JPanel {
 		setButtonListeners();
 		setTableListeners();
 		setTextFieldListeners();
+		setListListeners();
 	}
 	
 	public void updateTrip(Trip trip) {
@@ -228,6 +229,38 @@ public class SearchPanel extends JPanel {
 		});
 	}
 	
+	private void setListListeners() {
+		firstList.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!(firstList.getSelectedIndex() == -1)) {
+					// Set the text field to contain the corresponding list item
+					String s = (String) firstList.getSelectedValue();
+					firstTF.setText(s);
+					// Clear the list content
+					String[] clearContent = new String[0];
+					updateFirstList(clearContent);
+				}
+			}
+		});
+		
+		secondList.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!(secondList.getSelectedIndex() == -1)) {
+					// Set the text field to contain the corresponding list item
+					String s = (String) secondList.getSelectedValue();
+					secondTF.setText(s);
+					// Clear the list content
+					String[] clearContent = new String[0];
+					updateSecondList(clearContent);
+				}
+			}
+		});
+	}
+	
 	/**
 	 * The action of the first text field
 	 * Calls the listener for a change in the content of the first list
@@ -248,7 +281,7 @@ public class SearchPanel extends JPanel {
 	private void secondTFAction() {
 		if (secondTF.getText().length() == 0) {
 			String[] clearContent = new String[0];
-			updateFirstList(clearContent);
+			updateSecondList(clearContent);
 		} else {
 			listener.findOptionsSecondList(secondTF.getText());
 		}
