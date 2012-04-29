@@ -57,8 +57,9 @@ public class MainFrame {
 	 * (passes the method invocation on from the View to the MapPanel)
 	 * @param the new data to be displayed
 	 */
-	public void updateMap(int[][][] lines, Trip trip, MapLocation location) {
+	public void updateMap(int[][][] lines, Trip<Integer> trip, MapLocation<Integer> location) {
 		map.update(lines, trip, location);
+		sp.updateTrip(trip);
 	}
 	
 	/**

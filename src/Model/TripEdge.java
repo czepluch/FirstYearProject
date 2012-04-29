@@ -27,7 +27,7 @@ public class TripEdge<T> {
 	 */
 	public TripEdge(T fromX, T fromY, T toX, T toY, double distance, TripEdge<T> prevEdge, int speed) {
 		// Make sure the TripEdge is of type Double or Integer
-		if (fromX.getClass() != Integer.class || fromX.getClass() != Double.class) {
+		if (fromX.getClass() != Integer.class && fromX.getClass() != Double.class) {
 			throw new IllegalStateException("TripEdge must have the type Double or Integer");
 		}
 		this.fromX = fromX;
@@ -42,7 +42,7 @@ public class TripEdge<T> {
 	
 	public TripEdge(T fromX, T fromY, T toX, T toY, double distance, Turn turn, int speed) {
 		// Make sure the TripEdge is of type Double or Integer
-		if (fromX.getClass() != Integer.class || fromX.getClass() != Double.class) {
+		if (fromX.getClass() != Integer.class && fromX.getClass() != Double.class) {
 			throw new IllegalStateException("TripEdge must have the type Double or Integer");
 		}
 		this.fromX = fromX;

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.HashMap;
 import static Model.Graph.G;
+import static Global.MinAndMaxValues.maxSpeed;
 
 // Class used to represent a vertex in the shortest path clases: Dijkstra, Graph, and GraphInput
 class GVertex implements Comparable<GVertex>
@@ -113,23 +114,44 @@ public class Dijkstra
 	 * @param source The starting point of the path
 	 * @param target The end point of the path
      */
-	public static void run(String source, String target)
+	public static Trip<Double> run(String source, String target)
 	{
 		// run the algorithm from j'th to k'th vertex
 		ArrayList<GVertex> vs = G.getGraph();
 		HashMap<String,GVertex> map = G.getMap();
 		GVertex u = map.get(source);
 		computePaths(u, map.get(target), vs);
+		Trip<Double> trip = new Trip<Double>();
        	for (GVertex v : vs)
 		{
-			// only print the desired path
-			if (v.id.equals(target)) 
+       		if (v.id.equals(target)) 
 			{
-				System.out.printf("Distance from %s to %s: %5.16f\n", u, v, v.minDistance);
-	   			List<GVertex> path = getShortestPathTo(v);
-				System.out.println("Path: " + path);
+       			List<GVertex> path = getShortestPathTo(v);
+       			TripEdge<Double> prevEdge = null;
+       			GVertex firstPoint = path.get(0);
+       			double fromX = firstPoint.getX();
+       			double fromY = firstPoint.getY();
+       			for (int i = 1; i < path.size(); i++) {
+       				GVertex point = path.get(i);
+       				double x = point.getX();
+       				double y = point.getY();
+       				TripEdge<Double> e = new TripEdge<Double>(fromX,
+       														  fromY,
+       														  x,
+       														  y,
+       														  distance(firstPoint, point),
+       														  prevEdge,
+       														  maxSpeed);
+       				trip.addEdge(e);
+       				
+       				fromX = x;
+       				fromY = y;
+       				firstPoint = point;
+       				prevEdge = e;
+       			}
 			}
 		}
+       	return trip;
 	}
 
 	/**

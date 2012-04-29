@@ -61,7 +61,7 @@ public class Model {
 		System.out.println("\tFrom:\t" + fromId);	// Testing
 		System.out.println("\tTo:\t" + toId);		// Testing
 		// Update the trip
-		
+		trip = Dijkstra.run(fromId + "", toId + "");
 		// Set the location to null
 		location = null;
 	}

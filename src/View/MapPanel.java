@@ -100,7 +100,7 @@ public class MapPanel extends JPanel {
 	 * @param trip	the trip of which info is to be displayed
 	 * 				null if no trip is to be displayed
 	 */
-	public void update(int[][][] lines, Trip trip, MapLocation location) {
+	public void update(int[][][] lines, Trip<Integer> trip, MapLocation<Integer> location) {
 		this.lines = lines;
 		this.trip = trip;
 		this.location = location;
