@@ -27,7 +27,7 @@ public class SearchPanel extends JPanel {
 	private TernaryTrie trie;
 	
 	private SearchListener listener;
-	private Trip trip;
+	private Trip<Integer> trip;
 	
 	private JPanel inputPanel;
 	private JLabel firstLabel;
@@ -64,13 +64,13 @@ public class SearchPanel extends JPanel {
 		setListListeners();
 	}
 	
-	public void updateTrip(Trip trip) {
+	public void updateTrip(Trip<Integer> trip) {
 		this.trip = trip;
 		
 		tm.setRowCount(0); // Clear the table model
 		
 		if (trip != null) {
-			List<TripEdge> edges = trip.getEdges();
+			List<TripEdge<Integer>> edges = trip.getEdges();
 			String[] tableRows = new String[edges.size()];
 			
 			for (int i = 0; i < edges.size(); i++) { // Add new data to the table model
@@ -93,6 +93,22 @@ public class SearchPanel extends JPanel {
 	 */
 	public void updateSecondList(String[] listItems) {
 		secondList.setListData(listItems);
+	}
+	
+	/**
+	 * Clears the content of the first list
+	 */
+	private void clearFirstList() {
+		String[] c = new String[0];
+		updateFirstList(c);
+	}
+	
+	/**
+	 * Clears the content of the second list
+	 */
+	private void clearSecondList() {
+		String[] c = new String[0];
+		updateSecondList(c);
 	}
 	
 	/*
@@ -191,9 +207,9 @@ public class SearchPanel extends JPanel {
 			
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
-				int row = table.getSelectedRow();			// Get the selected row
-				TripEdge e = trip.getEdges().get(row);		// Find the corresponding edge
-				DragHandler.moveTo(e.getToX(), e.getToY());	// Move the view to the end point
+				int row = table.getSelectedRow();					// Get the selected row
+				TripEdge<Integer> e = trip.getEdges().get(row);		// Find the corresponding edge
+				DragHandler.moveTo(e.getToX(), e.getToY());			// Move the view to the end point
 			}
 		});
 	}
@@ -267,8 +283,7 @@ public class SearchPanel extends JPanel {
 	 */
 	private void firstTFAction() {
 		if (firstTF.getText().length() == 0) {
-			String[] clearContent = new String[0];
-			updateFirstList(clearContent);
+			clearFirstList();
 		} else {
 			listener.findOptionsFirstList(firstTF.getText());
 		}
@@ -280,8 +295,7 @@ public class SearchPanel extends JPanel {
 	 */
 	private void secondTFAction() {
 		if (secondTF.getText().length() == 0) {
-			String[] clearContent = new String[0];
-			updateSecondList(clearContent);
+			clearSecondList();
 		} else {
 			listener.findOptionsSecondList(secondTF.getText());
 		}
@@ -295,5 +309,7 @@ public class SearchPanel extends JPanel {
 		String newTo = firstTF.getText();
 		firstTF.setText(newFrom);
 		secondTF.setText(newTo);
+		clearFirstList();
+		clearSecondList();
 	}
 }

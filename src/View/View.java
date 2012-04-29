@@ -92,9 +92,9 @@ public class View implements MapListener, SearchListener {
 	 * @return String[] the list of addresses to be displayed
 	 */
 	private String[] findListOptions(String input) {
-		String address = NewAddressParser.parseAddress(input);
+		String address = NewAddressParser.parseAddressLive(input);
 		if (address != null) {
-			Iterable<String> c = trie.startsWith(input); // Using input instead of address for testing
+			Iterable<String> c = trie.startsWith(address);
 			if (c != null) {
 				int maxItems = 5;
 				ArrayList<String> listItems = new ArrayList<String>();

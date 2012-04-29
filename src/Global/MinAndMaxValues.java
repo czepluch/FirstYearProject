@@ -34,6 +34,8 @@ public class MinAndMaxValues {
 	static final int TYPE2 = 550000;	// 200000
 	static final int TYPE3 = 25000;
 	static final int TYPE4 = 7500;		// 10000
+	// The max speed selected
+	public static int maxSpeed = 130;
 	
 	private	MinAndMaxValues () {} //neverton - fuckyeah!
 	

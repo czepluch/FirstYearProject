@@ -1,11 +1,15 @@
 package Model;
 
+import static Global.MinAndMaxValues.*;
+
 /**
  * The part of the application taking care of data handling
  * Includes classes for reading, storing and filtering data
  */
 public class Model {
 	private DataStructure edges;
+	private Trip<Double> trip;
+	private MapLocation<Double> location;
 	
 	/**
 	 * Constructor of the model class
@@ -33,7 +37,8 @@ public class Model {
 	 * Returns the current trip
 	 * @return the current trip
 	 */
-	public Trip getTrip() {
+	public Trip<Integer> getTrip() {
+		if (trip != null) return FormatConverter.createTrip(trip, maxSpeed);
 		return null;
 	}
 	
@@ -41,7 +46,8 @@ public class Model {
 	 * Gets the current MapLocation
 	 * @return the current MapLocation
 	 */
-	public MapLocation getLocation() {
+	public MapLocation<Integer> getLocation() {
+		if (location != null) return FormatConverter.createMapLocation(location);
 		return null;
 	}
 	

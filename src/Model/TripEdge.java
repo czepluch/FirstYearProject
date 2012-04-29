@@ -3,13 +3,11 @@ package Model;
 /*
  * Class representing an edge on a trip
  */
-public class TripEdge {
-	private TripEdge prevEdge;
-	
-	private int fromX;
-	private int fromY;
-	private int toX;
-	private int toY;
+public class TripEdge<T> {
+	private T fromX;
+	private T fromY;
+	private T toX;
+	private T toY;
 	
 	private double distance;
 	private int time;
@@ -27,16 +25,34 @@ public class TripEdge {
 	 * 					null if no such exists
 	 * @param speed		the speed of the edge
 	 */
-	public TripEdge(int fromX, int fromY, int toX, int toY, double distance, TripEdge prevEdge, int speed) {
+	public TripEdge(T fromX, T fromY, T toX, T toY, double distance, TripEdge<T> prevEdge, int speed) {
+		// Make sure the TripEdge is of type Double or Integer
+		if (fromX.getClass() != Integer.class || fromX.getClass() != Double.class) {
+			throw new IllegalStateException("TripEdge must have the type Double or Integer");
+		}
 		this.fromX = fromX;
 		this.fromY = fromY;
 		this.toX = toX;
 		this.toY = toY;
 		this.distance = distance;
-		this.prevEdge = prevEdge;
 		this.speed = speed;
 		computeTime();
-		computeTurn();
+		computeTurn(prevEdge);
+	}
+	
+	public TripEdge(T fromX, T fromY, T toX, T toY, double distance, Turn turn, int speed) {
+		// Make sure the TripEdge is of type Double or Integer
+		if (fromX.getClass() != Integer.class || fromX.getClass() != Double.class) {
+			throw new IllegalStateException("TripEdge must have the type Double or Integer");
+		}
+		this.fromX = fromX;
+		this.fromY = fromY;
+		this.toX = toX;
+		this.toY = toY;
+		this.distance = distance;
+		this.speed = speed;
+		computeTime();
+		this.turn = turn;
 	}
 	
 	// Getter methods
@@ -54,19 +70,19 @@ public class TripEdge {
 		return time;
 	}
 	
-	public int getFromY() {
+	public T getFromY() {
 		return fromY;
 	}
 
-	public int getFromX() {
+	public T getFromX() {
 		return fromX;
 	}
 
-	public int getToY() {
+	public T getToY() {
 		return toY;
 	}
 
-	public int getToX() {
+	public T getToX() {
 		return toX;
 	}
 
@@ -86,7 +102,7 @@ public class TripEdge {
 	 * Helper method
 	 * Computes the time according to the two edges
 	 */
-	private void computeTurn() {
+	private void computeTurn(TripEdge<T> prevEdge) {
 		turn = Turn.LEFT; // Mock implementation
 	}
 }

@@ -2,17 +2,19 @@ package Model;
 
 /**
  * Class representing a location on a map
+ * This location stored the coordinates in
+ * the type specified at the instantiation
  */
-public class MapLocation {
-	private int x;
-	private int y;
+public class MapLocation<T> {
+	private T x;
+	private T y;
 	
 	/**
 	 * Constructor
 	 * @param x the x-coordinate
 	 * @param y the y-coordinate
 	 */
-	public MapLocation(int x, int y) {
+	public MapLocation(T x, T y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -21,11 +23,11 @@ public class MapLocation {
 	 * Gets the x coordinated
 	 * @return the x coordinate
 	 */
-	public int getX() { return x; }
+	public T getX() { return x; }
 	
 	/**
 	 * Gets the y-coordinate
 	 * @return the y-coordinate
 	 */
-	public int getY() { return y; }
+	public T getY() { return y; }
 }

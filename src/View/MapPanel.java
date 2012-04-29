@@ -21,8 +21,8 @@ import java.awt.event.MouseWheelListener;
 public class MapPanel extends JPanel {
 	private int[][][] lines;
 	private MapListener listener;
-	private Trip trip;
-	private MapLocation location;
+	private Trip<Integer> trip;
+	private MapLocation<Integer> location;
 	// Variables used when dragging
 	private int lastEndX;
 	private int lastEndY;
@@ -74,8 +74,8 @@ public class MapPanel extends JPanel {
 		if (trip != null) {
 			g2.setColor(Color.magenta);
 			g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth));
-			List<TripEdge> edges = trip.getEdges();
-			for (TripEdge e : edges) g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+			List<TripEdge<Integer>> edges = trip.getEdges();
+			for (TripEdge<Integer> e : edges) g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
 		}
 		if (location != null) {
 			g2.setColor(Color.magenta);
