@@ -59,9 +59,13 @@ public class NewAddressParser {
 			return null;
 		}
 		
+		// Make sure no values display null and trim the address parts
 		if (city == null) 	city = "";
+		else				city = city.trim();
 		if (street == null) street = "";
+		else				street = street.trim();
 		if (zip == null) 	zip = "";
+		else				zip = zip.trim();
 		
 		return String.format("%s#%s#%s", city, zip, street);
 	}
@@ -69,12 +73,32 @@ public class NewAddressParser {
 	/**
 	 * Parses the address using the parseAddress method and then cleans
 	 * up the address for it to be used with the trie
-	 * @param s
-	 * @return
+	 * @param s	The input String to be interpreted as an address
+	 * @return	The parsed and cleaned up address String
 	 */
 	public static String parseAddressLive(String s) {
 		String address = parseAddress(s);
-		// Missing
+		String[] parts = address.split("#");
+		int max = 0;
+		int min = 0;
+		
+		// Find the last part that is "in use"
+		for (max = parts.length - 1; max >= 0; max--)
+		{
+			if (parts[max].length() > 0) break;
+		}
+		
+		// Find the first part that is "in use"
+		for (min = 0; min <= max; min ++) {
+			if (parts[min].length() > 0) break;
+		}
+		
+		// Put together the new address
+		address = parts[min];
+		for (min++; min <= max; min++) {
+			address += "#" + parts[min];
+		}
+		
 		return address;
 	}
 	
