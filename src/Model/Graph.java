@@ -14,9 +14,15 @@ import java.io.InputStreamReader;
  */
 public class Graph
 {
-	public static final Graph G = new Graph("out.txt");
+	public static Graph G;
 	private static final ArrayList<GVertex> graph = new ArrayList<GVertex>();
 	private static final HashMap<String,GVertex> map = new HashMap<String,GVertex>();
+	private static int awake = -1;
+	
+	public static void wakeUp() { 
+		awake++;
+		if (awake < 1) G = new Graph("out.txt");
+	}
 	
 	/**
 	 * Constructor
@@ -77,5 +83,15 @@ public class Graph
 	public HashMap<String,GVertex> getMap()
 	{
 		return map;
+	}
+	
+	public double[] getNodeCoordinates(int nodeId) {
+		GVertex v = map.get(nodeId + "");
+		double[] coords = { v.getX(), v.getY() };
+		return coords;
+	}
+	
+	public static void main(String[] args) {
+		wakeUp();
 	}
 }

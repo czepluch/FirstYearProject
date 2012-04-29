@@ -90,6 +90,11 @@ public class TripEdge<T> {
 		return distance;
 	}
 	
+	@Override
+	public String toString() {
+		return distance + ", " + time + ", " + turn;
+	}
+	
 	/*
 	 * Helper method
 	 * Computes the time according to the distance and speed

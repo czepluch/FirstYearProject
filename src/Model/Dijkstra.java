@@ -43,9 +43,12 @@ class GVertex implements Comparable<GVertex>
     {
         return Double.compare(minDistance, other.minDistance);
     }
+    
+    public double getX() { return x; }
+    public double getY() { return y; }
 }
 
-//Class used to represent an edge in the shortest path clases: Dijkstra, Graph, and GraphInput
+//Class used to represent an edge in the shortest path classes: Dijkstra, Graph, and GraphInput
 class GEdge
 {
     public final GVertex target;
