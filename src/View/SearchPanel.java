@@ -36,6 +36,11 @@ public class SearchPanel extends JPanel {
 	private JList secondList;
 	private JButton swapButton;
 	private JButton findButton;
+	
+	private JLabel tripLengthLab;
+	private JLabel tripLengthLabVar;
+	private JLabel tripTimeLab;
+	private JLabel tripTimeLabVar;
 
 //	private JPanel tablePanel;
 //	private JScrollPane tableSP;
@@ -64,6 +69,14 @@ public class SearchPanel extends JPanel {
 	
 	public void updateTrip(Trip<Integer> trip) {
 		this.trip = trip;
+		
+		if (trip == null) {
+			tripLengthLabVar.setText("");
+			tripTimeLabVar.setText("");
+		} else {
+			tripLengthLabVar.setText(trip.getDistance() + "");
+			tripTimeLabVar.setText(trip.getTime() + "");
+		}
 		
 		
 //		tm.setRowCount(0); // Clear the table model
@@ -135,6 +148,11 @@ public class SearchPanel extends JPanel {
 		swapButton = new JButton("Swap");
 		findButton = new JButton("Find");
 		
+		tripLengthLab = new JLabel("Distance:");
+		tripLengthLabVar = new JLabel("");
+		tripTimeLab = new JLabel("Time:");
+		tripTimeLabVar = new JLabel("");
+		
 		inputPanel.add(firstLabel);
 		inputPanel.add(firstTF);
 		inputPanel.add(firstList);
@@ -142,7 +160,11 @@ public class SearchPanel extends JPanel {
 		inputPanel.add(secondTF);
 		inputPanel.add(secondList);
 		inputPanel.add(swapButton, "split 2");
-		inputPanel.add(findButton);
+		inputPanel.add(findButton, "wrap 40");
+		inputPanel.add(tripLengthLab, "split 2");
+		inputPanel.add(tripLengthLabVar);
+		inputPanel.add(tripTimeLab, "split 2");
+		inputPanel.add(tripTimeLabVar);
 	}
 	
 //	/*
@@ -308,5 +330,19 @@ public class SearchPanel extends JPanel {
 		secondTF.setText(newTo);
 		clearFirstList();
 		clearSecondList();
+	}
+	
+	/**
+	 * Main method for testing the SearchPanel
+	 * This is only for displaying the layout
+	 * No actions will work
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.getContentPane().add(new SearchPanel(null));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
 	}
 }
