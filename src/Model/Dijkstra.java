@@ -9,62 +9,10 @@ import java.util.HashMap;
 import static Model.Graph.G;
 import static Global.MinAndMaxValues.maxSpeed;
 
-// Class used to represent a vertex in the shortest path clases: Dijkstra, Graph, and GraphInput
-class GVertex implements Comparable<GVertex>
-{
-	public final double x, y;
-    public final String id;
-    public ArrayList<GEdge> adjacencies;
-	public String[] neighbours;
-    public double minDistance = Double.POSITIVE_INFINITY;
-    public GVertex previous;
-
-	/**
-	 * Constructor
-	 * @param id Vertex id
-	 * @param x x-coordinate
-	 * @param y y-coordinate
-	 * @param neighbours String array of neighbour id's
-	 */
-    public GVertex(String id, double x, double y, String[] neighbours) 
-	{ 
-		this.id = id;
-		this.x = x;
-		this.y = y;
-		this.neighbours = neighbours;
-		adjacencies = new ArrayList<GEdge>();
-	}
-    
-    public String toString()
-    {
-    	return id;
-    }
-    
-    public int compareTo(GVertex other)
-    {
-        return Double.compare(minDistance, other.minDistance);
-    }
-    
-    public double getX() { return x; }
-    public double getY() { return y; }
-}
-
-//Class used to represent an edge in the shortest path classes: Dijkstra, Graph, and GraphInput
-class GEdge
-{
-    public final GVertex target;
-    public final double weight;
-    public GEdge(GVertex argTarget, double argWeight)
-    {
-		target = argTarget; 
-		weight = argWeight;
-	}
-}
-
 /**
  * Class used to compute the shortest path between two given vertices
  */
-public class Dijkstra
+public class Dijkstra implements PathFinder
 {	
 	/**
 	 * Compute the shortest path from one vertex to another.
@@ -73,7 +21,7 @@ public class Dijkstra
 	 * @param target The end point of the path
 	 * @param vs The graph
 	 */
-    public static void computePaths(GVertex source, GVertex target, ArrayList<GVertex> vs)
+    private void computePaths(GVertex source, GVertex target, ArrayList<GVertex> vs)
     {
         source.minDistance = 0.;
         PriorityQueue<GVertex> vertexQueue = new PriorityQueue<GVertex>(vs);
@@ -114,7 +62,7 @@ public class Dijkstra
 	 * @param source The starting point of the path
 	 * @param target The end point of the path
      */
-	public static Trip<Double> run(String source, String target)
+	public Trip<Double> run(String source, String target)
 	{
 		// run the algorithm from j'th to k'th vertex
 		ArrayList<GVertex> vs = G.getGraph();
@@ -139,7 +87,7 @@ public class Dijkstra
        														  fromY,
        														  x,
        														  y,
-       														  distance(firstPoint, point),
+       														  GVertex.distance(firstPoint, point),
        														  prevEdge,
        														  maxSpeed);
        				trip.addEdge(e);
@@ -159,7 +107,7 @@ public class Dijkstra
 	 * @param target The vertex to return the shortest path to
 	 * @return The shortest path to a given vertex
 	 */
-    public static List<GVertex> getShortestPathTo(GVertex target)
+    public List<GVertex> getShortestPathTo(GVertex target)
     {
         List<GVertex> path = new ArrayList<GVertex>();
         for (GVertex vertex = target; vertex != null; vertex = vertex.previous)
@@ -167,15 +115,4 @@ public class Dijkstra
         Collections.reverse(path);
         return path;
     }
-	
-    /**
-     * Compute the distance between two vertices
-     * @param v1 The first vertex
-     * @param v2 The second vertex
-     * @return The distance between two vertices
-     */
-	public static double distance(GVertex v1, GVertex v2)
-	{
-		return Math.sqrt(Math.pow((v2.x - v1.x), 2) + Math.pow((v2.y - v1.y), 2));
-	}
 }

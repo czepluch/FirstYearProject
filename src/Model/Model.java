@@ -9,6 +9,7 @@ import static Model.Graph.G;
  */
 public class Model {
 	private DataStructure edges;
+	private PathFinder pathFinder = new Dijkstra();
 	private Trip<Double> trip;
 	private MapLocation<Double> location;
 	
@@ -58,7 +59,7 @@ public class Model {
 	 */
 	public void updateTrip(int fromId, int toId) {
 		// Update the trip
-		trip = Dijkstra.run(fromId + "", toId + "");
+		trip = pathFinder.run(fromId + "", toId + "");
 		// Set the location to null
 		location = null;
 	}

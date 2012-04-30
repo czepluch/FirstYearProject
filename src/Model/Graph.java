@@ -68,7 +68,7 @@ public class Graph
 					
 			for (GVertex w : adj)
 			{
-				double dist = Dijkstra.distance(v, w);
+				double dist = GVertex.distance(v, w);
 				v.adjacencies.add(new GEdge(w, dist));
 			}
 		}
