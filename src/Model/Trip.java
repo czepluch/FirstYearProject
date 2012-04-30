@@ -59,8 +59,8 @@ public class Trip<T> {
 	 * times and distances of the stored edges
 	 */
 	public void computeTimeAndDistance() {
-		double distance = 0;
-		int time = 0;
+		distance = 0;
+		time = 0;
 		for (TripEdge<T> e : edges) {
 			distance += e.getDistance(); 
 			time += e.getTime();
