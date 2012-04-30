@@ -57,9 +57,6 @@ public class Model {
 	 * Updates the stored trip
 	 */
 	public void updateTrip(int fromId, int toId) {
-		System.out.println("Updating the trip:");	// Testing
-		System.out.println("\tFrom:\t" + fromId);	// Testing
-		System.out.println("\tTo:\t" + toId);		// Testing
 		// Update the trip
 		trip = Dijkstra.run(fromId + "", toId + "");
 		// Set the location to null
@@ -71,13 +68,9 @@ public class Model {
 	 * @param point the id of the node to be stored
 	 */
 	public void updateLocation(int nodeId) {
-		System.out.println("Updating the location:");	// Testing
-		System.out.println("\tNode:\t" + nodeId);		// Testing
 		// Update the location
 		double[] coords = G.getNodeCoordinates(nodeId);
 		location = new MapLocation(coords[0], coords[1]);
-		System.out.println("x:\t" + coords[0]);			// Testing
-		System.out.println("y:\t" + coords[1]);			// Testing
 		// Set the trip to null
 		trip = null;
 	}

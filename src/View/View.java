@@ -6,6 +6,7 @@ import Model.MapLocation;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
+import Global.ErrorHandler;
 
 /**
  * The View/GUI of the application
@@ -45,35 +46,46 @@ public class View implements MapListener, SearchListener {
 
 	@Override
 	public void findLocation(String input) {
-		String address = NewAddressParser.parseAddress(input);
-		
-		System.out.println("Address parsed:\t" + address); // For testing
-		
-		if (address != null) {
-			String value = trie.get(address);
-			
-			System.out.println(value); // For testing
-			
-			if (value != null) {
-				int nodeId = Integer.parseInt(value);
-				listener.findLocation(nodeId);
-			}
+		int nodeId = getNodeId(input);
+		if (nodeId >= 0) {
+			listener.findLocation(nodeId);
+		} else {
+			ErrorHandler.showWarning("Invalid address", "Could not find the given address");
 		}
 	}
 
 	@Override
 	public void findDirections(String input1, String input2) {
-		String address1 = NewAddressParser.parseAddress(input1);
-		String address2 = NewAddressParser.parseAddress(input2);
-		if ((address1 != null) & address2 != null) {
-			String value1 = trie.get(address1);
-			String value2 = trie.get(address2);
-			if ((value1 != null) && (value2 != null)) {
-				int fromId = Integer.parseInt(value1);
-				int toId = Integer.parseInt(value2);
-				listener.findDirections(fromId, toId);
+		int fromId = getNodeId(input1);
+		int toId = getNodeId(input2);
+		if ((fromId >= 0) && (toId >= 0)) {
+			listener.findDirections(fromId, toId);
+		} else {
+			if ((fromId >= 0) && (toId < 0)) {
+				ErrorHandler.showWarning("Invalid address", "Could not find the second of the given addresses");
+			} else if ((fromId < 0) && (toId >= 0)) {
+				ErrorHandler.showWarning("Invalid address", "Could not find the first of the given addresses");
+			} else {
+				ErrorHandler.showWarning("Invalid addresses", "Could not find any of the given addresses");
 			}
 		}
+	}
+	
+	/**
+	 * Gets the node id corresponding to the input
+	 * @param input the input to be interpreted
+	 * @return	the found nodeId
+	 * 			-1 if no such is found
+	 */
+	private int getNodeId(String input) {
+		// Find the list of "recognized" address
+		String[] s = findListOptions(input);
+		// If no address is recognized, return -1
+		if (s.length == 0) return -1;
+		// Else parse the address which is most likely to be
+		// correct (the one at index 0) and get it
+		String address = NewAddressParser.parseAddress(s[0]);
+		return Integer.parseInt(trie.get(address));
 	}
 
 	@Override
