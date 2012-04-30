@@ -1,6 +1,7 @@
 package View;
 
 import static Global.MinAndMaxValues.*;
+import Model.MapLocation;
 
 public class DragHandler {
 	// Drag constants
@@ -49,28 +50,5 @@ public class DragHandler {
 	
 	public static void updateDrag() {
 		drag = (maxX - minX) * DRAG_CONSTANT;
-	}
-	
-	/**
-	 * Moves the current viewbox to the given location
-	 * @param x the x coordinate about which the view is to be centered
-	 * @param y the y coordinate about which the view is to be centered
-	 */
-	public static void moveTo(double x, double y) {
-		int steps = 30;
-		int time = 600;
-		int sleepTime = steps / time;
-		int xStep = (int) (((((maxX - minX) / 2) - x) / steps) / drag);
-		int yStep = (int) (((((maxY - minY) / 2) - y) / steps) / drag);
-		
-		// For each step, move the screen and wait
-		for (int i = 0; i < steps; i++) {
-			valuesChanged(xStep, yStep);
-			try {
-				Thread.sleep(sleepTime);
-			} catch (InterruptedException ie) {
-				// Do nothing
-			}
-		}
 	}
 }
