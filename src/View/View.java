@@ -7,6 +7,7 @@ import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
 import Global.ErrorHandler;
+import Global.MinAndMaxValues;
 
 /**
  * The View/GUI of the application
@@ -54,8 +55,18 @@ public class View implements MapListener, SearchListener {
 
 	@Override
 	public void findLocation(String input) {
+		// Trim the input
+		input = input.trim();
+		
+		// Check if the input is in binary
+		// If it is, convert it
+		if (NewAddressParser.isBinary(input)) {
+			input = NewAddressParser.convertBinaryToString(input);
+		}
+		
 		int nodeId = getNodeId(input, InputField.FIRST);
 		if (nodeId >= 0) {
+			mf.updateFirstTextField(firstAddress);
 			listener.findLocation(nodeId);
 		} else {
 			// Show a warning
@@ -65,6 +76,19 @@ public class View implements MapListener, SearchListener {
 
 	@Override
 	public void findDirections(String input1, String input2) {
+		// Trim the input
+		input1 = input1.trim();
+		input2 = input2.trim();
+		
+		// Check if each input is in binary
+		// If it is, convert it
+		if (NewAddressParser.isBinary(input1)) {
+			input1 = NewAddressParser.convertBinaryToString(input1);
+		}
+		if (NewAddressParser.isBinary(input2)) {
+			input2 = NewAddressParser.convertBinaryToString(input2);
+		}
+		
 		int fromId = getNodeId(input1, InputField.FIRST);
 		int toId = getNodeId(input2, InputField.SECOND);
 		if ((fromId >= 0) && (toId >= 0)) {
@@ -107,6 +131,8 @@ public class View implements MapListener, SearchListener {
 		// Parse the address which is most likely to be
 		// correct (the one at index 0) and get it
 		String address = NewAddressParser.parseAddress(s[0]);
+		// Make sure the address is valid
+		if (address == null) return -1;
 		return Integer.parseInt(trie.get(address));
 	}
 

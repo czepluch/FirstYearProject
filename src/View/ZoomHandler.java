@@ -65,8 +65,6 @@ public class ZoomHandler {
 			
 			DragHandler.valuesChanged(xDrag, yDrag);
 			
-			// Then vertically
-			
 			// Compute shown types
 			int currentTypes = types; // Needed for computing the need for repaint
 			updateTypesToBeDisplayed();
@@ -78,7 +76,7 @@ public class ZoomHandler {
 			
 			// Compute whether or not repaint is needed
 			needsRepaint();
-			if (types != currentTypes) { updateDrawn(); }
+			if (types != currentTypes) updateDrawn();
 			
 		} else if (canZoomOut(absZoom)) { // Set a limit for how far out to zoom
 			// Zoom out
@@ -89,7 +87,7 @@ public class ZoomHandler {
 			minY -= absZoom * zoomRateY;
 			maxY += absZoom * zoomRateY;
 			
-			updateTypesLineWidthDragAndRepaint(zoom);
+			updateTypesLineWidthDragAndRepaint();
 			
 			
 			// Additional cases for zooming out:
@@ -128,8 +126,29 @@ public class ZoomHandler {
 				maxY += absZoom * zoomRateY;
 			}
 			
-			updateTypesLineWidthDragAndRepaint(zoom);
+			updateTypesLineWidthDragAndRepaint();
 		}
+	}
+	
+	/**
+	 * Zooms in as until the view fits the given
+	 * width
+	 * param width The width in which to zoom
+	 * 			   -1 if the minimum width is to be
+	 * 			   used
+	 */
+	public static void zoomIn(double width) {
+		// Missing
+	}
+	
+	public static void zoomOut(MapListener listener) {
+		// Not working
+		int x = (int) width / 2;
+		int y = (int) height / 2;
+		for (int i = 0; i < 30; i++) {
+			valuesChanged(x, y, 2);
+		}
+		listener.viewboxUpdated();
 	}
 	
 	/*
@@ -150,7 +169,7 @@ public class ZoomHandler {
 	/*
 	 * Helper method called for each zoom-out
 	 */
-	private static void updateTypesLineWidthDragAndRepaint(int zoom) {
+	private static void updateTypesLineWidthDragAndRepaint() {
 		// Compute shown types
 		int currentTypes = types; // Needed for computing the need for repaint
 		updateTypesToBeDisplayed();
