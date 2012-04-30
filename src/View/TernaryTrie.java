@@ -53,6 +53,7 @@ public class TernaryTrie {
 	 */
 	public String get(String s) {
 		Node n = get(root, s, 0);
+		if (n== null) return null;
 		return n.val;
 	}
 
