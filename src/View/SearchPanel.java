@@ -7,8 +7,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
-
 import net.miginfocom.swing.MigLayout;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -59,7 +57,7 @@ public class SearchPanel extends JPanel {
 		createInputPanel();
 		createTablePanel();
 		setButtonListeners();
-		setTableListeners();
+//		setTableListeners();
 		setTextFieldListeners();
 		setListListeners();
 	}
@@ -255,8 +253,7 @@ public class SearchPanel extends JPanel {
 					String s = (String) firstList.getSelectedValue();
 					firstTF.setText(s);
 					// Clear the list content
-					String[] clearContent = new String[0];
-					updateFirstList(clearContent);
+					clearFirstList();
 				}
 			}
 		});
@@ -270,8 +267,7 @@ public class SearchPanel extends JPanel {
 					String s = (String) secondList.getSelectedValue();
 					secondTF.setText(s);
 					// Clear the list content
-					String[] clearContent = new String[0];
-					updateSecondList(clearContent);
+					clearSecondList();
 				}
 			}
 		});
