@@ -78,28 +78,64 @@ public class NewAddressParser {
 	 */
 	public static String parseAddressLive(String s) {
 		String address = parseAddress(s);
-		String[] parts = address.split("#");
-		int max = 0;
-		int min = 0;
-		
-		// Find the last part that is "in use"
-		for (max = parts.length - 1; max >= 0; max--)
-		{
-			if (parts[max].length() > 0) break;
+		if (address != null) {
+			String[] parts = address.split("#");
+			int max = 0;
+			int min = 0;
+			
+			// Find the last part that is "in use"
+			for (max = parts.length - 1; max >= 0; max--)
+			{
+				if (parts[max].length() > 0) break;
+			}
+			
+			// Find the first part that is "in use"
+			for (min = 0; min <= max; min ++) {
+				if (parts[min].length() > 0) break;
+			}
+			
+			// Put together the new address
+			address = parts[min];
+			for (min++; min <= max; min++) {
+				address += "#" + parts[min];
+			}
 		}
-		
-		// Find the first part that is "in use"
-		for (min = 0; min <= max; min ++) {
-			if (parts[min].length() > 0) break;
-		}
-		
-		// Put together the new address
-		address = parts[min];
-		for (min++; min <= max; min++) {
-			address += "#" + parts[min];
-		}
-		
 		return address;
+	}
+	
+	/**
+	 * Checks if the given string argument can be interpreted
+	 * as an ascii binary
+	 * @param s	The String to be interpreted
+	 * @return	Whether or not the given String can be interpreted
+	 */
+	public static boolean isBinary(String s) {
+		Pattern binaryPattern = Pattern.compile("[01]+");
+		Matcher m = binaryPattern.matcher(s);
+		if ((s.length() % 8 == 0) && (m.matches())) return true;
+		return false;
+	}
+	
+	/**
+	 * Assumes the given string can be interpreted as a binary number
+	 * Converts the binary number to a String
+	 * @param s	The String to be converted
+	 * @return	The converted String
+	 */
+	public static String convertBinaryToString(String s) {
+		String[] chars = new String[s.length() / 8];
+		int lo;
+		int hi;
+		int i;
+		for (lo = 0, hi = 8, i = 0; hi <= s.length(); lo += 8, hi += 8, i++) {
+			chars[i] = s.substring(lo, hi);
+		}
+		StringBuilder sb = new StringBuilder();
+		for (String charString : chars) {
+			int charInt = Integer.parseInt(charString, 2);
+			sb.append((char) charInt);
+		}
+		return sb + "";
 	}
 	
 	/**
