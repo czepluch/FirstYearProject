@@ -50,20 +50,29 @@ public class MapPanel extends JPanel {
 		super.paintComponent(g);
 		// doLayout();
 		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		for (int i = 0; i < lines.length; i++) {
 			switch(i) {
 				// Other roads
 				case 0:	g2.setColor(Color.green);
-						g2.setStroke(new BasicStroke(1 * MinAndMaxValues.lineWidth)); break;
+						g2.setStroke(new BasicStroke((1 * MinAndMaxValues.lineWidth),
+													 BasicStroke.CAP_ROUND,
+													 BasicStroke.JOIN_ROUND)); break;
 				// Secondary roads
 				case 1: g2.setColor(Color.black);
-						g2.setStroke(new BasicStroke(2 * MinAndMaxValues.lineWidth)); break;
+						g2.setStroke(new BasicStroke((2 * MinAndMaxValues.lineWidth),
+								 					 BasicStroke.CAP_ROUND,
+								 					 BasicStroke.JOIN_ROUND)); break;
 				// Primary roads
 				case 2: g2.setColor(Color.blue);
-						g2.setStroke(new BasicStroke(3 * MinAndMaxValues.lineWidth)); break;
+						g2.setStroke(new BasicStroke((3 * MinAndMaxValues.lineWidth),
+								 					 BasicStroke.CAP_ROUND,
+								 					 BasicStroke.JOIN_ROUND)); break;
 				// Highways
 				case 3: g2.setColor(Color.red);
-						g2.setStroke(new BasicStroke(5 * MinAndMaxValues.lineWidth)); break;
+						g2.setStroke(new BasicStroke((5 * MinAndMaxValues.lineWidth),
+								 					 BasicStroke.CAP_ROUND,
+								 					 BasicStroke.JOIN_ROUND)); break;
 				// Unknown types are not drawn
 				default:	break;
 			}
@@ -72,10 +81,14 @@ public class MapPanel extends JPanel {
 			}
 		}
 		if (trip != null) {
-			g2.setColor(Color.magenta);
-			g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth));
+			g2.setStroke(new BasicStroke((4 * MinAndMaxValues.lineWidth),
+					 					 BasicStroke.CAP_ROUND,
+					 					 BasicStroke.JOIN_ROUND));
 			List<TripEdge<Integer>> edges = trip.getEdges();
-			for (TripEdge<Integer> e : edges) g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+			for (TripEdge<Integer> e : edges) {
+				g2.setColor(RainbowGenerator.nextColor());
+				g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+			}
 		}
 		if (location != null) {
 			g2.setColor(Color.magenta);

@@ -36,11 +36,16 @@ public class SearchPanel extends JPanel {
 	private JList secondList;
 	private JButton swapButton;
 	private JButton findButton;
+	
+	private JLabel tripLengthLab;
+	private JLabel tripLengthLabVar;
+	private JLabel tripTimeLab;
+	private JLabel tripTimeLabVar;
 
-	private JPanel tablePanel;
-	private JScrollPane tableSP;
-	private DefaultTableModel tm;
-	private JTable table;
+//	private JPanel tablePanel;
+//	private JScrollPane tableSP;
+//	private DefaultTableModel tm;
+//	private JTable table;
 	
 	/*
 	 * Constructor
@@ -55,7 +60,7 @@ public class SearchPanel extends JPanel {
 		this.setLayout(new BorderLayout(6, 6));
 		
 		createInputPanel();
-		createTablePanel();
+//		createTablePanel();
 		setButtonListeners();
 //		setTableListeners();
 		setTextFieldListeners();
@@ -65,16 +70,25 @@ public class SearchPanel extends JPanel {
 	public void updateTrip(Trip<Integer> trip) {
 		this.trip = trip;
 		
-		tm.setRowCount(0); // Clear the table model
-		
-		if (trip != null) {
-			List<TripEdge<Integer>> edges = trip.getEdges();
-			String[] tableRows = new String[edges.size()];
-			
-			for (int i = 0; i < edges.size(); i++) { // Add new data to the table model
-				tm.addRow(new String[] { edges.get(i).toString() });
-			}
+		if (trip == null) {
+			tripLengthLabVar.setText("");
+			tripTimeLabVar.setText("");
+		} else {
+			tripLengthLabVar.setText(trip.getDistance() + "");
+			tripTimeLabVar.setText(trip.getTime() + "");
 		}
+		
+		
+//		tm.setRowCount(0); // Clear the table model
+//		
+//		if (trip != null) {
+//			List<TripEdge<Integer>> edges = trip.getEdges();
+//			String[] tableRows = new String[edges.size()];
+//			
+//			for (int i = 0; i < edges.size(); i++) { // Add new data to the table model
+//				tm.addRow(new String[] { edges.get(i).toString() });
+//			}
+//		}
 	}
 	
 	/**
@@ -134,6 +148,11 @@ public class SearchPanel extends JPanel {
 		swapButton = new JButton("Swap");
 		findButton = new JButton("Find");
 		
+		tripLengthLab = new JLabel("Distance:");
+		tripLengthLabVar = new JLabel("");
+		tripTimeLab = new JLabel("Time:");
+		tripTimeLabVar = new JLabel("");
+		
 		inputPanel.add(firstLabel);
 		inputPanel.add(firstTF);
 		inputPanel.add(firstList);
@@ -141,27 +160,31 @@ public class SearchPanel extends JPanel {
 		inputPanel.add(secondTF);
 		inputPanel.add(secondList);
 		inputPanel.add(swapButton, "split 2");
-		inputPanel.add(findButton);
+		inputPanel.add(findButton, "wrap 40");
+		inputPanel.add(tripLengthLab, "split 2");
+		inputPanel.add(tripLengthLabVar);
+		inputPanel.add(tripTimeLab, "split 2");
+		inputPanel.add(tripTimeLabVar);
 	}
 	
-	/*
-	 * Creates the panel containing the table showing trip info
-	 */
-	private void createTablePanel() {
-		tablePanel = new JPanel();
-		this.add(tablePanel, BorderLayout.CENTER);
-		
-		tm = new DefaultTableModel() {
-			@Override
-			public boolean isCellEditable(int row, int column) { return false; }
-		};
-		tm.addColumn("Directions");
-		table = new JTable(tm);
-		// table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableSP = new JScrollPane(table);
-		tableSP.setPreferredSize(new Dimension(250, 400));
-		tablePanel.add(tableSP);
-	}
+//	/*
+//	 * Creates the panel containing the table showing trip info
+//	 */
+//	private void createTablePanel() {
+//		tablePanel = new JPanel();
+//		this.add(tablePanel, BorderLayout.CENTER);
+//		
+//		tm = new DefaultTableModel() {
+//			@Override
+//			public boolean isCellEditable(int row, int column) { return false; }
+//		};
+//		tm.addColumn("Directions");
+//		table = new JTable(tm);
+//		// table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		tableSP = new JScrollPane(table);
+//		tableSP.setPreferredSize(new Dimension(250, 400));
+//		tablePanel.add(tableSP);
+//	}
 	
 	/**
 	 * Sets the button listeners
@@ -195,22 +218,22 @@ public class SearchPanel extends JPanel {
 									});
 	}
 	
-	/**
-	 * Sets the table listeners
-	 */
-	private void setTableListeners() {
-		ListSelectionModel sm = table.getSelectionModel();
-		sm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		sm.addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				int row = table.getSelectedRow();					// Get the selected row
-				TripEdge<Integer> e = trip.getEdges().get(row);		// Find the corresponding edge
-				DragHandler.moveTo(e.getToX(), e.getToY());			// Move the view to the end point
-			}
-		});
-	}
+//	/**
+//	 * Sets the table listeners
+//	 */
+//	private void setTableListeners() {
+//		ListSelectionModel sm = table.getSelectionModel();
+//		sm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		sm.addListSelectionListener(new ListSelectionListener() {
+//			
+//			@Override
+//			public void valueChanged(ListSelectionEvent arg0) {
+//				int row = table.getSelectedRow();					// Get the selected row
+//				TripEdge<Integer> e = trip.getEdges().get(row);		// Find the corresponding edge
+//				DragHandler.moveTo(e.getToX(), e.getToY());			// Move the view to the end point
+//			}
+//		});
+//	}
 	
 	/*
 	 * Sets the text field listeners
@@ -307,5 +330,19 @@ public class SearchPanel extends JPanel {
 		secondTF.setText(newTo);
 		clearFirstList();
 		clearSecondList();
+	}
+	
+	/**
+	 * Main method for testing the SearchPanel
+	 * This is only for displaying the layout
+	 * No actions will work
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.getContentPane().add(new SearchPanel(null));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setVisible(true);
 	}
 }
