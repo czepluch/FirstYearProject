@@ -79,9 +79,25 @@ public class MainFrame {
 	}
 	
 	/**
+	 * Updates the first text field of the search panel according to the given string
+	 * @param s the string to be inserted
+	 */
+	public void updateFirstTextField(String s) {
+		sp.updateFirstTextField(s);
+	}
+	
+	/**
+	 * Updates the second text field of the search panel according to the given string
+	 * @param s the string to be inserted
+	 */
+	public void updateSecondTextField(String s) {
+		sp.updateSecondTextField(s);
+	}
+	
+	/**
 	 * Method adding the needed listeners to the components
 	 */
-	public void addListeners() {
+	private void addListeners() {
 		frame.addComponentListener(new ComponentListener() {
 			
 			@Override public void componentShown(ComponentEvent arg0) { }

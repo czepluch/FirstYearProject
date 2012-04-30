@@ -108,6 +108,24 @@ public class SearchPanel extends JPanel {
 	}
 	
 	/**
+	 * Updates the first text field according to the given string
+	 * @param s the string to be inserted
+	 */
+	public void updateFirstTextField(String s) {
+		firstTF.setText(s);
+		clearFirstList();
+	}
+	
+	/**
+	 * Updates the second text field according to the given string
+	 * @param s the string to be inserted
+	 */
+	public void updateSecondTextField(String s) {
+		secondTF.setText(s);
+		clearSecondList();
+	}
+	
+	/**
 	 * Clears the content of the first list
 	 */
 	private void clearFirstList() {

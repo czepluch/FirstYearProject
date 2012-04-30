@@ -18,6 +18,11 @@ public class View implements MapListener, SearchListener {
 	private ViewListener listener;
 	private TernaryTrie trie;
 	
+	private String firstAddress;
+	private String secondAddress;
+	
+	private enum InputField { FIRST, SECOND }
+	
 	/**
 	 * Constructor for the View class
 	 * @param listener The ViewListener of the view
@@ -27,6 +32,9 @@ public class View implements MapListener, SearchListener {
 		trie = new TernaryTrie();
 		mf = new MainFrame(lines, this, this);
 		this.listener = listener;
+		
+		firstAddress = "";
+		secondAddress = "";
 	}
 	
 	/**
@@ -46,26 +54,35 @@ public class View implements MapListener, SearchListener {
 
 	@Override
 	public void findLocation(String input) {
-		int nodeId = getNodeId(input);
+		int nodeId = getNodeId(input, InputField.FIRST);
 		if (nodeId >= 0) {
 			listener.findLocation(nodeId);
 		} else {
+			// Show a warning
 			ErrorHandler.showWarning("Invalid address", "Could not find the given address");
 		}
 	}
 
 	@Override
 	public void findDirections(String input1, String input2) {
-		int fromId = getNodeId(input1);
-		int toId = getNodeId(input2);
+		int fromId = getNodeId(input1, InputField.FIRST);
+		int toId = getNodeId(input2, InputField.SECOND);
 		if ((fromId >= 0) && (toId >= 0)) {
+			// Update the valid fields and notify the ViewListener
+			mf.updateFirstTextField(firstAddress);
+			mf.updateSecondTextField(secondAddress);
 			listener.findDirections(fromId, toId);
 		} else {
 			if ((fromId >= 0) && (toId < 0)) {
+				// Show a warning but update the valid field
+				mf.updateFirstTextField(firstAddress);
 				ErrorHandler.showWarning("Invalid address", "Could not find the second of the given addresses");
 			} else if ((fromId < 0) && (toId >= 0)) {
+				// Show a warning but update the valid field
+				mf.updateSecondTextField(secondAddress);
 				ErrorHandler.showWarning("Invalid address", "Could not find the first of the given addresses");
 			} else {
+				// Show a warning
 				ErrorHandler.showWarning("Invalid addresses", "Could not find any of the given addresses");
 			}
 		}
@@ -77,12 +94,17 @@ public class View implements MapListener, SearchListener {
 	 * @return	the found nodeId
 	 * 			-1 if no such is found
 	 */
-	private int getNodeId(String input) {
+	private int getNodeId(String input, InputField IF) {
 		// Find the list of "recognized" address
 		String[] s = findListOptions(input);
 		// If no address is recognized, return -1
 		if (s.length == 0) return -1;
-		// Else parse the address which is most likely to be
+		// Else store the address in the correct field
+		switch (IF) {
+			case FIRST:	firstAddress = s[0]; break;
+			default:	secondAddress = s[0]; break;
+		}
+		// Parse the address which is most likely to be
 		// correct (the one at index 0) and get it
 		String address = NewAddressParser.parseAddress(s[0]);
 		return Integer.parseInt(trie.get(address));
