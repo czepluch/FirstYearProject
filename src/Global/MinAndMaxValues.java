@@ -31,9 +31,9 @@ public class MinAndMaxValues {
 	private static int DRAWN_TOO_BIG = 2;
 	// Int limits used for determining which types to be drawn
 	public static final int NUMBER_OF_TYPES = 4;
-	static final int TYPE2 = 550000;	// 200000
+	static final int TYPE2 = 550000;
 	static final int TYPE3 = 25000;
-	static final int TYPE4 = 7500;		// 10000
+	static final int TYPE4 = 11000;
 	// The max speed selected
 	public static int maxSpeed = 130;
 	

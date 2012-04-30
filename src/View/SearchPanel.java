@@ -37,10 +37,10 @@ public class SearchPanel extends JPanel {
 	private JButton swapButton;
 	private JButton findButton;
 
-	private JPanel tablePanel;
-	private JScrollPane tableSP;
-	private DefaultTableModel tm;
-	private JTable table;
+//	private JPanel tablePanel;
+//	private JScrollPane tableSP;
+//	private DefaultTableModel tm;
+//	private JTable table;
 	
 	/*
 	 * Constructor
@@ -55,7 +55,7 @@ public class SearchPanel extends JPanel {
 		this.setLayout(new BorderLayout(6, 6));
 		
 		createInputPanel();
-		createTablePanel();
+//		createTablePanel();
 		setButtonListeners();
 //		setTableListeners();
 		setTextFieldListeners();
@@ -65,16 +65,17 @@ public class SearchPanel extends JPanel {
 	public void updateTrip(Trip<Integer> trip) {
 		this.trip = trip;
 		
-		tm.setRowCount(0); // Clear the table model
 		
-		if (trip != null) {
-			List<TripEdge<Integer>> edges = trip.getEdges();
-			String[] tableRows = new String[edges.size()];
-			
-			for (int i = 0; i < edges.size(); i++) { // Add new data to the table model
-				tm.addRow(new String[] { edges.get(i).toString() });
-			}
-		}
+//		tm.setRowCount(0); // Clear the table model
+//		
+//		if (trip != null) {
+//			List<TripEdge<Integer>> edges = trip.getEdges();
+//			String[] tableRows = new String[edges.size()];
+//			
+//			for (int i = 0; i < edges.size(); i++) { // Add new data to the table model
+//				tm.addRow(new String[] { edges.get(i).toString() });
+//			}
+//		}
 	}
 	
 	/**
@@ -144,24 +145,24 @@ public class SearchPanel extends JPanel {
 		inputPanel.add(findButton);
 	}
 	
-	/*
-	 * Creates the panel containing the table showing trip info
-	 */
-	private void createTablePanel() {
-		tablePanel = new JPanel();
-		this.add(tablePanel, BorderLayout.CENTER);
-		
-		tm = new DefaultTableModel() {
-			@Override
-			public boolean isCellEditable(int row, int column) { return false; }
-		};
-		tm.addColumn("Directions");
-		table = new JTable(tm);
-		// table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableSP = new JScrollPane(table);
-		tableSP.setPreferredSize(new Dimension(250, 400));
-		tablePanel.add(tableSP);
-	}
+//	/*
+//	 * Creates the panel containing the table showing trip info
+//	 */
+//	private void createTablePanel() {
+//		tablePanel = new JPanel();
+//		this.add(tablePanel, BorderLayout.CENTER);
+//		
+//		tm = new DefaultTableModel() {
+//			@Override
+//			public boolean isCellEditable(int row, int column) { return false; }
+//		};
+//		tm.addColumn("Directions");
+//		table = new JTable(tm);
+//		// table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		tableSP = new JScrollPane(table);
+//		tableSP.setPreferredSize(new Dimension(250, 400));
+//		tablePanel.add(tableSP);
+//	}
 	
 	/**
 	 * Sets the button listeners
@@ -195,22 +196,22 @@ public class SearchPanel extends JPanel {
 									});
 	}
 	
-	/**
-	 * Sets the table listeners
-	 */
-	private void setTableListeners() {
-		ListSelectionModel sm = table.getSelectionModel();
-		sm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		sm.addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				int row = table.getSelectedRow();					// Get the selected row
-				TripEdge<Integer> e = trip.getEdges().get(row);		// Find the corresponding edge
-				DragHandler.moveTo(e.getToX(), e.getToY());			// Move the view to the end point
-			}
-		});
-	}
+//	/**
+//	 * Sets the table listeners
+//	 */
+//	private void setTableListeners() {
+//		ListSelectionModel sm = table.getSelectionModel();
+//		sm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		sm.addListSelectionListener(new ListSelectionListener() {
+//			
+//			@Override
+//			public void valueChanged(ListSelectionEvent arg0) {
+//				int row = table.getSelectedRow();					// Get the selected row
+//				TripEdge<Integer> e = trip.getEdges().get(row);		// Find the corresponding edge
+//				DragHandler.moveTo(e.getToX(), e.getToY());			// Move the view to the end point
+//			}
+//		});
+//	}
 	
 	/*
 	 * Sets the text field listeners
