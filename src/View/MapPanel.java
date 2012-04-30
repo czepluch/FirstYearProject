@@ -72,10 +72,12 @@ public class MapPanel extends JPanel {
 			}
 		}
 		if (trip != null) {
-			g2.setColor(Color.magenta);
 			g2.setStroke(new BasicStroke(4 * MinAndMaxValues.lineWidth));
 			List<TripEdge<Integer>> edges = trip.getEdges();
-			for (TripEdge<Integer> e : edges) g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+			for (TripEdge<Integer> e : edges) {
+				g2.setColor(RainbowGenerator.nextColor());
+				g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+			}
 		}
 		if (location != null) {
 			g2.setColor(Color.magenta);
