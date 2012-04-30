@@ -9,8 +9,10 @@ public class TernaryTrieTest {
 		long start = System.currentTimeMillis();
 		tt = new TernaryTrie();
 		long stop = System.currentTimeMillis();
-		System.out.println("Done loading trie");
-		System.out.println(tt.get("ryryryryry"));
+		System.out.println("Done loading trie "+ (stop-start)/1000 + " seconds");
+		for (String s : tt.startsWith("køge")) {
+			System.out.println(s);
+		}
 	} 
 	
 	public static void main(String[] args) {
