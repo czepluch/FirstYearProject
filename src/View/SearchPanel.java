@@ -74,8 +74,9 @@ public class SearchPanel extends JPanel {
 			tripLengthLabVar.setText("");
 			tripTimeLabVar.setText("");
 		} else {
-			tripLengthLabVar.setText(trip.getDistance() + "");
-			tripTimeLabVar.setText(trip.getTime() + "");
+			String distance = String.format("%.2g", trip.getDistance() / 1000);
+			tripLengthLabVar.setText(distance + "  km");
+			tripTimeLabVar.setText(trip.getTime() + " min");
 		}
 		
 		
@@ -167,9 +168,9 @@ public class SearchPanel extends JPanel {
 		findButton = new JButton("Find");
 		
 		tripLengthLab = new JLabel("Distance:");
-		tripLengthLabVar = new JLabel("");
+		tripLengthLabVar = new JLabel("", SwingConstants.RIGHT);
 		tripTimeLab = new JLabel("Time:");
-		tripTimeLabVar = new JLabel("");
+		tripTimeLabVar = new JLabel("", SwingConstants.RIGHT);
 		
 		inputPanel.add(firstLabel);
 		inputPanel.add(firstTF);
@@ -180,9 +181,9 @@ public class SearchPanel extends JPanel {
 		inputPanel.add(swapButton, "split 2");
 		inputPanel.add(findButton, "wrap 40");
 		inputPanel.add(tripLengthLab, "split 2");
-		inputPanel.add(tripLengthLabVar);
+		inputPanel.add(tripLengthLabVar, "gapleft push");
 		inputPanel.add(tripTimeLab, "split 2");
-		inputPanel.add(tripTimeLabVar);
+		inputPanel.add(tripTimeLabVar, "gapleft push");
 	}
 	
 //	/*
