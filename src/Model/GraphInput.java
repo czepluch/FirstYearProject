@@ -9,25 +9,16 @@ import java.io.InputStreamReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
-/**
- * Class used to create the file 
- * that we use to make our graph for finding shortest paths.
- * The file created is called "out.txt"
- */
 public class GraphInput
 {
 	private ArrayList<Vertex> vertices;
+	private ArrayList<GEdge> edges;
 	private ArrayList<Vertex>[] adj;
 	
-	/**
-	 * Constructor
-	 * @param vertex_path Path to vertex file ("kdv_node_unload.txt")
-	 * @param edge_path Path to edge file ("kdv_unload.txt")
-	 */
-	@SuppressWarnings("unchecked")
 	public GraphInput(String vertex_path, String edge_path)
 	{
 		vertices = new ArrayList<Vertex>();
+		edges = new ArrayList<GEdge>();
 		
 		BufferedReader in = null;
 		try {
@@ -45,20 +36,25 @@ public class GraphInput
 				line = in.readLine();
 			}
 			adj = (ArrayList<Vertex>[]) new ArrayList[vertices.size()];
-			System.out.println(vertices.size() + " - " + adj.length);
 			
+			// read edges
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(edge_path), "UTF-8"));
 			in.readLine(); 	// skip first line
 			line = in.readLine();
 			
 			while (line != null)
 			{
-				String[] tokens = line.split(",", 3);
+				String[] tokens = line.split(",");
 				int id1 = Integer.parseInt(tokens[0]), id2 = Integer.parseInt(tokens[1]);
+				double speed = Double.parseDouble(tokens[25]);
 				
 				Vertex v1 = vertices.get(id1-1), v2 = vertices.get(id2-1);		// vertices (endpoints) of the edge
 				ArrayList<Vertex> adj1, adj2;									// adjacencies for each of the two vertices
-					
+				
+				double dist = Math.sqrt(Math.pow(v2.x - v1.x, 2) + Math.pow(v2.y - v1.y, 2));
+				if (speed <= 0) speed = 5;		// value must be revised
+				edges.add(new GEdge(tokens[0], tokens[1], (100 * dist) / speed));
+				
 				// add v2 as adjacent to v1
 				if (adj[id1-1] != null) adj1 = adj[id1-1];
 				else adj1 = new ArrayList<Vertex>();
@@ -73,18 +69,16 @@ public class GraphInput
 				
 				line = in.readLine();
 			}
-			
-			if (adj.length != vertices.size()) System.out.println("Something went wrong");
 		} catch (FileNotFoundException e) {
-			System.out.println("Oh noes!: "+ e.getMessage());
+			System.out.println("Oh noes!!!: "+ e.getMessage());
 		} catch (IOException e) {
  			System.out.println("Oh noes!: "+ e.getMessage());
 		}
 				
 		try
 		{
-		  	// create file 
-		  	FileWriter fstream = new FileWriter("out.txt");
+		  	// create vertex file 
+		  	FileWriter fstream = new FileWriter("vertex.txt");
 		  	BufferedWriter out = new BufferedWriter(fstream);
 		
 			// write to file
@@ -98,6 +92,18 @@ public class GraphInput
 			}
 		  	// close the output stream
 		  	out.close();
+		
+			// create edge file
+			fstream = new FileWriter("edges.txt");
+			out = new BufferedWriter(fstream);
+			
+			// write to file
+			for (int i = 0; i < edges.size(); i++)
+			{
+				GEdge e = edges.get(i);
+				out.write(e.id1 + "," + e.id2 + "," + e.weight + "\n");
+			}
+			out.close();
 		} catch (Exception e) {
 		  	System.err.println("Oh noes!: " + e.getMessage());
 		}
@@ -108,7 +114,7 @@ public class GraphInput
 	 	int id;
 		double x, y;
 		
-		public Vertex (int id, double x, double y)
+		public Vertex(int id, double x, double y)
 		{
 			this.id = id;
 			this.x = x;

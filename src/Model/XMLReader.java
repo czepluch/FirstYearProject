@@ -76,7 +76,7 @@ public class XMLReader
 					type = translateType(Integer.parseInt(m.group(8)));
 					
 					// Store the edge
-					edges.addEdge(new Edge(fromLat, fromLong, toLat, toLong, distance, speed, type));
+					edges.addEdge(new KEdge(fromLat, fromLong, toLat, toLong, distance, speed, type));
 				} else {
 					// Reached the end of the file
 				}
