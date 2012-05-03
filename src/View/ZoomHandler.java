@@ -4,6 +4,8 @@ import static Global.MinAndMaxValues.*;
 
 import java.util.ArrayList;
 
+import java.util.List;
+
 import Model.MapLocation;
 import Model.Trip;
 import Model.TripEdge;
@@ -136,33 +138,31 @@ public class ZoomHandler {
 		}
 	}
 	
-	public static void zoomTo(MapLocation<Integer> location, MapListener listener) {
+	public static void zoomTo(MapLocation<Double> location, MapListener listener) {
 		// Compute the constant to be added / subtracted from the coordinates
 		int coordConstant = (int) ZOOM_LIMIT / 2;
-		// Convert the coordinates to UTM32 coordinates
-		double c = (maxX - minX) / width;
-		double xUTM = (location.getX() * c) + minX;
-		double yUTM = (location.getY() * c) + minY;
+		double x = location.getX();
+		double y = location.getY();
 		// Set the min and max values
-		maxX = xUTM + coordConstant;
-		minX = xUTM - coordConstant;
-		maxY = yUTM + coordConstant;
-		minY = yUTM - coordConstant;
+		maxX = x + coordConstant;
+		minX = x - coordConstant;
+		maxY = y + coordConstant;
+		minY = y - coordConstant;
 		// Update what needs to be updated
 		updateTypesLineWidthDragAndRepaint();
 		// Notify the MapListener
 		listener.viewboxUpdated();
 	}
 	
-	public static void zoomTo(Trip<Integer> trip, MapListener listener) {
+	public static void zoomTo(Trip<Double> trip, MapListener listener) {
 		// Find the smallest and highest x- and y-values
 		int localMinX = 999999999;
 		int localMaxX = -999999999;
 		int localMinY = 999999999;
 		int localMaxY = -999999999;
 		
-		ArrayList<TripEdge<Integer>> edges = new ArrayList<TripEdge<Integer>>();
-		for (TripEdge<Integer> e : edges) {
+		List<TripEdge<Double>> edges = trip.getEdges();
+		for (TripEdge<Double> e : edges) {
 			
 		}
 		

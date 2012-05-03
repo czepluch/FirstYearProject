@@ -51,7 +51,7 @@ public class View implements MapListener, SearchListener {
 	/**
 	 * Updates the map in the view according to the given data
 	 */
-	public void updateView(int[][][] lines, Trip trip, MapLocation location) {
+	public void updateView(int[][][] lines, Trip<Integer> trip, MapLocation<Integer> location) {
 		mf.updateMap(lines, trip, location);
 		// Check if the view must move to a newly found location or trip
 		if (isSearching) {
@@ -60,12 +60,20 @@ public class View implements MapListener, SearchListener {
 			// Check for what is updated
 			if (trip != null) {
 				// Move the view to the found trip
-				ZoomHandler.zoomTo(trip, this);
+				listener.moveToTrip();
 			} else if (location != null) {
 				// Move the view to the found location
-				ZoomHandler.zoomTo(location, this);
+				listener.moveToLocation();
 			}
 		}
+	}
+	
+	public void moveTo(MapLocation<Double> location) {
+		ZoomHandler.zoomTo(location, this);
+	}
+	
+	public void moveTo(Trip<Double> trip) {
+		ZoomHandler.zoomTo(trip, this);
 	}
 
 	@Override

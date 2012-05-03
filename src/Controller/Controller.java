@@ -47,6 +47,16 @@ public class Controller implements ViewListener {
 		model.updateTrip(fromId, toId);
 		view.updateView(model.getFilteredEdges(), model.getTrip(), null);
 	}
+	
+	@Override
+	public void moveToTrip() {
+		view.moveTo(model.getUTMTrip());
+	}
+
+	@Override
+	public void moveToLocation() {
+		view.moveTo(model.getUTMLocation());
+	}
 
 	/**
 	 * @param args -

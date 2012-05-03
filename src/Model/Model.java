@@ -75,4 +75,20 @@ public class Model {
 		// Set the trip to null
 		trip = null;
 	}
+	
+	/**
+	 * Gets the stored trip containing UTM coordinates
+	 * @return the stored trip containing UTM coordinates
+	 */
+	public Trip<Double> getUTMTrip() {
+		return trip;
+	}
+	
+	/**
+	 * Gets the stored location containing UTM coordinates
+	 * @return the stored location containing UTM coordinates
+	 */
+	public MapLocation<Double> getUTMLocation() {
+		return location;
+	}
 }

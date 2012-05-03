@@ -9,4 +9,8 @@ public interface ViewListener {
 	public void findLocation(int nodeId);
 	
 	public void findDirections(int fromId, int toId);
+	
+	public void moveToTrip();
+	
+	public void moveToLocation();
 }
