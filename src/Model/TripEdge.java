@@ -100,7 +100,7 @@ public class TripEdge<T> {
 	 * Computes the time according to the distance and speed
 	 */
 	private void computeTime() {
-		time = (int) (getDistance() / speed);
+		time = (int) (((getDistance() / 1000) / speed) * 60);
 	}
 	
 	/*
