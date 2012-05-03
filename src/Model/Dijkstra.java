@@ -21,17 +21,17 @@ public class Dijkstra implements PathFinder
 	 * @param target The end point of the path
 	 * @param vs The graph
 	 */
-    private void computePaths(GVertex source, GVertex target, ArrayList<GVertex> vs)
+    private void computePaths(Vertex source, Vertex target, ArrayList<Vertex> vs)
     {
         source.minDistance = 0.;
-        PriorityQueue<GVertex> vertexQueue = new PriorityQueue<GVertex>(vs);
+        PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>(vs);
 
 		while (!vertexQueue.isEmpty()) 
 		{
-	    	GVertex u = vertexQueue.poll();		// retrieve vertex with shortest distance to source
+	    	Vertex u = vertexQueue.poll();		// retrieve vertex with shortest distance to source
 			if (u == target)
 			{
-				LinkedList<GVertex> S = new LinkedList<GVertex>();
+				LinkedList<Vertex> S = new LinkedList<Vertex>();
 				// trace back
 				while (u.previous != null)
 				{
@@ -41,9 +41,9 @@ public class Dijkstra implements PathFinder
 				return;
 			}
         	// Visit each edge exiting u
-        	for (GEdge e : u.adjacencies)
+        	for (Edge e : u.adjacencies)
       		{
-        		GVertex v = e.target;
+        		Vertex v = e.target;
 				double weight = e.weight;
             	double distanceThroughU = u.minDistance + weight;
 				if (distanceThroughU < v.minDistance) 
@@ -61,33 +61,36 @@ public class Dijkstra implements PathFinder
      * Call this method to compute the shortest path between two vertices
 	 * @param source The starting point of the path
 	 * @param target The end point of the path
+	 * @param type Determines whether to compute the fastest or shortest path. If 0, compute fastets, otherwise shortest.
      */
-	public Trip<Double> run(String source, String target)
+	public Trip<Double> run(String source, String target, int type)
 	{
 		// run the algorithm from j'th to k'th vertex
-		ArrayList<GVertex> vs = G.getGraph();
-		HashMap<String,GVertex> map = G.getMap();
-		GVertex u = map.get(source);
+		ArrayList<Vertex> vs;
+		if (type == 0) vs = G.getFastVertices();
+		else vs = G.getShortVertices();
+		HashMap<String,Vertex> map = G.getMap();
+		Vertex u = map.get(source);
 		computePaths(u, map.get(target), vs);
 		Trip<Double> trip = new Trip<Double>();
-       	for (GVertex v : vs)
+       	for (Vertex v : vs)
 		{
        		if (v.id.equals(target)) 
 			{
-       			List<GVertex> path = getShortestPathTo(v);
+       			List<Vertex> path = getShortestPathTo(v);
        			TripEdge<Double> prevEdge = null;
-       			GVertex firstPoint = path.get(0);
+       			Vertex firstPoint = path.get(0);
        			double fromX = firstPoint.getX();
        			double fromY = firstPoint.getY();
        			for (int i = 1; i < path.size(); i++) {
-       				GVertex point = path.get(i);
+       				Vertex point = path.get(i);
        				double x = point.getX();
        				double y = point.getY();
        				TripEdge<Double> e = new TripEdge<Double>(fromX,
        														  fromY,
        														  x,
        														  y,
-       														  GVertex.distance(firstPoint, point),
+       														  Vertex.distance(firstPoint, point),
        														  prevEdge,
        														  maxSpeed);
        				trip.addEdge(e);
@@ -107,10 +110,10 @@ public class Dijkstra implements PathFinder
 	 * @param target The vertex to return the shortest path to
 	 * @return The shortest path to a given vertex
 	 */
-    public List<GVertex> getShortestPathTo(GVertex target)
+    public List<Vertex> getShortestPathTo(Vertex target)
     {
-        List<GVertex> path = new ArrayList<GVertex>();
-        for (GVertex vertex = target; vertex != null; vertex = vertex.previous)
+        List<Vertex> path = new ArrayList<Vertex>();
+        for (Vertex vertex = target; vertex != null; vertex = vertex.previous)
             path.add(vertex);
         Collections.reverse(path);
         return path;

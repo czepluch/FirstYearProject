@@ -16,13 +16,13 @@ public class FormatConverter {
 	 * @param edges The Edge ArrayList containing the data we want to convert
 	 * @return A three-dimensional int array containing the data
 	 */
-	public static int[][][] convertData(ArrayList<Edge> edges) {
+	public static int[][][] convertData(ArrayList<KEdge> edges) {
 		c = new Coordinates();
 		ArrayList<int[]> type1 = new ArrayList<int[]>();
 		ArrayList<int[]> type2 = new ArrayList<int[]>();
 		ArrayList<int[]> type3 = new ArrayList<int[]>();
 		ArrayList<int[]> type4 = new ArrayList<int[]>();
-		for (Edge e : edges) {
+		for (KEdge e : edges) {
 			switch (e.getType()) {
 				case 1: type1.add(convertEdge(e)); break; // Highways
 				case 2: type2.add(convertEdge(e)); break; // Primary roads
@@ -141,7 +141,7 @@ public class FormatConverter {
 	 * @param e the Edge to be converted
 	 * @return the int[4] (x1, y1, x2, y2) representing an edge with four coordinates
 	 */
-	private static int[] convertEdge(Edge e) {
+	private static int[] convertEdge(KEdge e) {
 		int x1 = c.convertXToPixels(e.getFromLong());
 		int y1 = c.convertYToPixels(e.getFromLat());
 		int x2 = c.convertXToPixels(e.getToLong());

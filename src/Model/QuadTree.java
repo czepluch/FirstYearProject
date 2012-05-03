@@ -22,9 +22,9 @@ public class QuadTree {
     private class Node {
         double x, y;              // x- and y- coordinates
         Node NW, NE, SE, SW;   // four subtrees
-        Edge edge;           // associated data
+        KEdge edge;           // associated data
 
-        Node(double x, double y, Edge edge) {
+        Node(double x, double y, KEdge edge) {
             this.x = x;
             this.y = y;
             this.edge = edge;
@@ -37,14 +37,14 @@ public class QuadTree {
      * @param y The y-coordinate of the point
      * @param edge The edge associated with the point
      */
-    public void insert(double x, double y, Edge edge) {
+    public void insert(double x, double y, KEdge edge) {
         root = insert(root, x, y, edge);
     }
 
     /*
      * Helper method for insert(double, double, Edge)
      */
-    private Node insert(Node h, double x, double y, Edge edge) {
+    private Node insert(Node h, double x, double y, KEdge edge) {
         if (h == null) return new Node(x, y, edge);
         //// if (eq(x, h.x) && eq(y, h.y)) h.edge = edge;  // duplicate
         else if ( less(x, h.x) &&  less(y, h.y)) h.SW = insert(h.SW, x, y, edge);
@@ -60,14 +60,14 @@ public class QuadTree {
      * @param rect The 2D interval in which to perform the range search
      * @param edges The return-arrayList to contain the edges in the given interval
      */
-    public void query2D(Interval2D rect, ArrayList<Edge> edges) {
+    public void query2D(Interval2D rect, ArrayList<KEdge> edges) {
         query2D(root, rect, edges);
     }
 
     /*
      * Helper method for query2D(Interval2D, ArrayList<Edge>)
      */
-    private void query2D(Node h, Interval2D rect, ArrayList<Edge> edges) {
+    private void query2D(Node h, Interval2D rect, ArrayList<KEdge> edges) {
         if (h == null) return;
         double xmin = rect.intervalX.low;
         double ymin = rect.intervalY.low;
@@ -93,8 +93,8 @@ public class QuadTree {
      *  Methods from the DataStructure interface, though not implemented
      *************************************************************************/
     
-	public ArrayList<Edge> getFilteredEdges() {
-		ArrayList<Edge> filteredEdges = new ArrayList<Edge>();
+	public ArrayList<KEdge> getFilteredEdges() {
+		ArrayList<KEdge> filteredEdges = new ArrayList<KEdge>();
 		double x1 = 0;
 		double x2 = 0;
 		double y1 = 0;
@@ -118,7 +118,7 @@ public class QuadTree {
 	 * Adds an edge to the tree
 	 * @param e The edge to be added
 	 */
-	public void addEdge(Edge e) {
+	public void addEdge(KEdge e) {
 		insert(e.getFromLong(), e.getFromLat(), e);
 		insert(e.getToLong(), e.getToLat(), e);
 	}

@@ -1,14 +1,14 @@
 package Model;
 
 import static Model.Directions.*;
-import Model.Edge;
+import Model.KEdge;
 
 public class Point{
 	double x;
 	double y;
-	Edge e;
+	KEdge e;
 	
-	public Point(double x, double y, Edge e) {
+	public Point(double x, double y, KEdge e) {
 		this.x = x;
 		this.y = y;
 		this.e = e;
@@ -17,7 +17,7 @@ public class Point{
 	public int getType() { return e.getType(); }
 	public double getX() { return x; }
 	public double getY() { return y; }
-	public Edge getEdge() { return e; }
+	public KEdge getEdge() { return e; }
 	
 	/*
 	 * NW:	Smaller than x, bigger than y

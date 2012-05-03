@@ -1,13 +1,14 @@
 package Model;
 
-//Class used to represent an edge in the shortest path classes: Dijkstra, Graph, and GraphInput
-class GEdge
+public class GEdge
 {
-  public final GVertex target;
-  public final double weight;
-  public GEdge(GVertex argTarget, double argWeight)
-  {
-		target = argTarget; 
-		weight = argWeight;
+	String id1, id2;
+	double weight;
+	
+	public GEdge(String id1, String id2, double weight)
+	{
+		this.id1 = id1;
+		this.id2 = id2;
+		this.weight = weight;
 	}
 }

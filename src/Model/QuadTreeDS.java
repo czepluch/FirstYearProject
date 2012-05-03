@@ -9,7 +9,7 @@ import static Global.MinAndMaxValues.*;
  * Contains the data structure itself as well the current filtered edges.
  */
 public class QuadTreeDS implements DataStructure {
-	private ArrayList<Edge> filteredEdges;
+	private ArrayList<KEdge> filteredEdges;
 	private QuadTree[] trees;
 	
 	public QuadTreeDS() {
@@ -20,9 +20,9 @@ public class QuadTreeDS implements DataStructure {
 	}
 
 	@Override
-	public ArrayList<Edge> getFilteredEdges() {
+	public ArrayList<KEdge> getFilteredEdges() {
 		if (repaint) {
-			filteredEdges = new ArrayList<Edge>();
+			filteredEdges = new ArrayList<KEdge>();
 			for (int i = 0; i < types; i++) {
 				filteredEdges.addAll(trees[i].getFilteredEdges());
 			}
@@ -31,7 +31,7 @@ public class QuadTreeDS implements DataStructure {
 	}
 
 	@Override
-	public void addEdge(Edge e) {
+	public void addEdge(KEdge e) {
 		trees[e.getType() - 1].addEdge(e);
 	}
 	
