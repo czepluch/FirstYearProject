@@ -11,13 +11,15 @@ public class MinAndMaxValues {
 	public static final double MAX_Y = 6410000;
 	public static final int SEARCH_PANEL_WIDTH = 300;
 	public static final int EXTRA_LAYOUT_WIDTH = 12;
+	public static final double X_TO_Y_RATIO = (MAX_Y - MIN_Y) / (MAX_X - MIN_X);
+	public static final double Y_TO_X_RATIO = (MAX_X - MIN_X) / (MAX_Y - MIN_Y);
 	// Current values
 	public static double minX = MIN_X;
 	public static double maxX = MAX_X;
 	public static double minY = MIN_Y;
 	public static double maxY = MAX_Y;
 	public static int width = 800;
-	public static int height = (int) (((MAX_Y - MIN_Y) / (MAX_X - MIN_X)) * width);
+	public static int height = (int) (X_TO_Y_RATIO * width);
 	public static int types = 2;
 	public static final float LINE_WIDTH_CONSTANT = (float) 1;
 	public static float lineWidth = (float) 1;

@@ -17,6 +17,7 @@ public class ZoomHandler {
 	private static double zoomRateY = ((maxY - minY) / (maxX - minX)) * zoomRateX;
 	private static final int ZOOM_LIMIT = 1000;
 	private static final int DRAG_WHEN_ZOOM_IN = 2;
+	private static final double ZOOM_TO_TRIP_PADDING_CONSTANT = 0.1;
 	// Values needed only be computed once
 	private static final double START_X_DIF = MAX_X - MIN_X;
 	private static final double START_Y_DIF = MAX_Y - MIN_Y;
@@ -140,14 +141,18 @@ public class ZoomHandler {
 	
 	public static void zoomTo(MapLocation<Double> location, MapListener listener) {
 		// Compute the constant to be added / subtracted from the coordinates
-		int coordConstant = (int) ZOOM_LIMIT / 2;
+		double coordConstant = ZOOM_LIMIT / 2;
 		double x = location.getX();
 		double y = location.getY();
 		// Set the min and max values
 		maxX = x + coordConstant;
 		minX = x - coordConstant;
-		maxY = y + coordConstant;
-		minY = y - coordConstant;
+		
+		double yDif = (maxX - minX) * X_TO_Y_RATIO;
+		double yDifConstant = yDif / 2;
+		
+		maxY = y + yDifConstant;
+		minY = y - yDifConstant;
 		// Update what needs to be updated
 		updateTypesLineWidthDragAndRepaint();
 		// Notify the MapListener
@@ -156,25 +161,78 @@ public class ZoomHandler {
 	
 	public static void zoomTo(Trip<Double> trip, MapListener listener) {
 		// Find the smallest and highest x- and y-values
-		int localMinX = 999999999;
-		int localMaxX = -999999999;
-		int localMinY = 999999999;
-		int localMaxY = -999999999;
+		double localMinX = 999999999;
+		double localMaxX = -999999999;
+		double localMinY = 999999999;
+		double localMaxY = -999999999;
 		
 		List<TripEdge<Double>> edges = trip.getEdges();
-		for (TripEdge<Double> e : edges) {
-			
-		}
 		
-		// Set the min and max values
-		maxX = MAX_X;
-		minX = MIN_X;
-		maxY = MAX_Y;
-		minY = MIN_Y;
-		// Update what needs to be updated
-		updateTypesLineWidthDragAndRepaint();
-		// Notify the MapListener
-		listener.viewboxUpdated();
+		// Make sure the trip is not empty
+		if (edges.size() > 0) {
+			// Look at the "to" coordinates
+			// That means that we have to check the "from" node
+			// of the first edge first
+			
+			TripEdge<Double> ed = edges.get(0);
+			double x = ed.getFromX();
+			double y = ed.getFromY();
+			if (x < localMinX) localMinX = x;
+			if (x > localMaxX) localMaxX = x;
+			if (y < localMinY) localMinY = y;
+			if (y < localMaxY) localMaxY = y;
+					
+			// Then check the rest
+			for (TripEdge<Double> e : edges) {
+				x = e.getToX();
+				y = e.getToY();
+				if (x < localMinX) localMinX = x;
+				if (x > localMaxX) localMaxX = x;
+				if (y < localMinY) localMinY = y;
+				if (y > localMaxY) localMaxY = y;
+			}
+			
+			// Check whether the width or height is "dominant"
+			double localXToYRatio = (localMaxY - localMinY) / (localMaxX - localMinX);
+			if (localXToYRatio > X_TO_Y_RATIO) {
+				// The height is dominant
+				double yDif = localMaxY - localMinY;
+				double padding = yDif * ZOOM_TO_TRIP_PADDING_CONSTANT;
+				// Set the min and max values
+				maxY = localMaxY + padding;
+				minY = localMinY - padding;
+				
+				double xDif = (maxY - minY) * Y_TO_X_RATIO;
+				double xDifConstant = xDif / 2;
+				
+				double centerX = localMinX + ((localMaxX - localMinX) / 2);
+				
+				maxX = centerX + xDifConstant;
+				minX = centerX - xDifConstant;
+				
+			} else {
+				// The width is dominant
+				double xDif = localMaxX - localMinX;
+				double padding = xDif * ZOOM_TO_TRIP_PADDING_CONSTANT;
+				
+				// Set the min and max values
+				maxX = localMaxX + padding;
+				minX = localMinX - padding;
+				
+				double yDif = (maxX - minX) * X_TO_Y_RATIO;
+				double yDifConstant = yDif / 2;
+				
+				double centerY = localMinY + ((localMaxY - localMinY) / 2);
+				
+				maxY = centerY + yDifConstant;
+				minY = centerY - yDifConstant;
+			}
+			
+			// Update what needs to be updated
+			updateTypesLineWidthDragAndRepaint();
+			// Notify the MapListener
+			listener.viewboxUpdated();
+		}
 	}
 	
 	public static void zoomOut(MapListener listener) {

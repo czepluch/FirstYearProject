@@ -71,7 +71,7 @@ public class Model {
 	public void updateLocation(int nodeId) {
 		// Update the location
 		double[] coords = G.getNodeCoordinates(nodeId);
-		location = new MapLocation(coords[0], coords[1]);
+		location = new MapLocation<Double>(coords[0], coords[1]);
 		// Set the trip to null
 		trip = null;
 	}
