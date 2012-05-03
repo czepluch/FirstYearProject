@@ -227,9 +227,15 @@ public class SearchPanel extends JPanel {
 											// If only one field contains something, find a location
 											if (firstTF.getText().length() > 0 &&
 												secondTF.getText().length() <= 0) {
+												// Signal to the listener that a search is starting
+												listener.startSearching();
+												// Start the search
 												listener.findLocation(firstTF.getText());
 											// Else find directions
 											} else {
+												// Signal to the listener that a search is starting
+												listener.startSearching();
+												// Start the search
 												listener.findDirections(firstTF.getText(), secondTF.getText());
 											}
 										}

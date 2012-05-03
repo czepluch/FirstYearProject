@@ -2,6 +2,12 @@ package View;
 
 import static Global.MinAndMaxValues.*;
 
+import java.util.ArrayList;
+
+import Model.MapLocation;
+import Model.Trip;
+import Model.TripEdge;
+
 public class ZoomHandler {
 	// Zoom constant
 	private static final double ZOOM_CONSTANT = 0.0017;
@@ -130,24 +136,56 @@ public class ZoomHandler {
 		}
 	}
 	
-	/**
-	 * Zooms in as until the view fits the given
-	 * width
-	 * param width The width in which to zoom
-	 * 			   -1 if the minimum width is to be
-	 * 			   used
-	 */
-	public static void zoomIn(double width) {
-		// Missing
+	public static void zoomTo(MapLocation<Integer> location, MapListener listener) {
+		// Compute the constant to be added / subtracted from the coordinates
+		int coordConstant = (int) ZOOM_LIMIT / 2;
+		// Convert the coordinates to UTM32 coordinates
+		double c = (maxX - minX) / width;
+		double xUTM = (location.getX() * c) + minX;
+		double yUTM = (location.getY() * c) + minY;
+		// Set the min and max values
+		maxX = xUTM + coordConstant;
+		minX = xUTM - coordConstant;
+		maxY = yUTM + coordConstant;
+		minY = yUTM - coordConstant;
+		// Update what needs to be updated
+		updateTypesLineWidthDragAndRepaint();
+		// Notify the MapListener
+		listener.viewboxUpdated();
+	}
+	
+	public static void zoomTo(Trip<Integer> trip, MapListener listener) {
+		// Find the smallest and highest x- and y-values
+		int localMinX = 999999999;
+		int localMaxX = -999999999;
+		int localMinY = 999999999;
+		int localMaxY = -999999999;
+		
+		ArrayList<TripEdge<Integer>> edges = new ArrayList<TripEdge<Integer>>();
+		for (TripEdge<Integer> e : edges) {
+			
+		}
+		
+		// Set the min and max values
+		maxX = MAX_X;
+		minX = MIN_X;
+		maxY = MAX_Y;
+		minY = MIN_Y;
+		// Update what needs to be updated
+		updateTypesLineWidthDragAndRepaint();
+		// Notify the MapListener
+		listener.viewboxUpdated();
 	}
 	
 	public static void zoomOut(MapListener listener) {
-		// Not working
-		int x = (int) width / 2;
-		int y = (int) height / 2;
-		for (int i = 0; i < 30; i++) {
-			valuesChanged(x, y, 2);
-		}
+		// Set the min and max values
+		maxX = MAX_X;
+		minX = MIN_X;
+		maxY = MAX_Y;
+		minY = MIN_Y;
+		// Update what needs to be updated
+		updateTypesLineWidthDragAndRepaint();
+		// Notify the MapListener
 		listener.viewboxUpdated();
 	}
 	

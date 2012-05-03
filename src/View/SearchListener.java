@@ -28,4 +28,9 @@ public interface SearchListener {
 	 * @param input the input to be interpreted as an address
 	 */
 	public void findOptionsSecondList(String input);
+	
+	/**
+	 * Signals to the SearchListener that a search has started
+	 */
+	public void startSearching();
 }

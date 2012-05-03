@@ -21,6 +21,7 @@ public class View implements MapListener, SearchListener {
 	
 	private String firstAddress;
 	private String secondAddress;
+	private boolean isSearching;
 	
 	private enum InputField { FIRST, SECOND }
 	
@@ -36,6 +37,7 @@ public class View implements MapListener, SearchListener {
 		
 		firstAddress = "";
 		secondAddress = "";
+		isSearching = false;
 	}
 	
 	/**
@@ -51,6 +53,19 @@ public class View implements MapListener, SearchListener {
 	 */
 	public void updateView(int[][][] lines, Trip trip, MapLocation location) {
 		mf.updateMap(lines, trip, location);
+		// Check if the view must move to a newly found location or trip
+		if (isSearching) {
+			// Reset the isSearching variable
+			isSearching = false;
+			// Check for what is updated
+			if (trip != null) {
+				// Move the view to the found trip
+				ZoomHandler.zoomTo(trip, this);
+			} else if (location != null) {
+				// Move the view to the found location
+				ZoomHandler.zoomTo(location, this);
+			}
+		}
 	}
 
 	@Override
@@ -110,6 +125,11 @@ public class View implements MapListener, SearchListener {
 				ErrorHandler.showWarning("Invalid addresses", "Could not find any of the given addresses");
 			}
 		}
+	}
+	
+	@Override
+	public void startSearching() {
+		isSearching = true;
 	}
 	
 	/**
