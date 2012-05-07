@@ -154,10 +154,16 @@ public class TernaryTrie {
 		while (true) {
 			System.out.println("Waiting for a search-prefix...");
 			String q = inputScan.nextLine().toLowerCase();
-			System.out.println("Entries beginning with " + q + ":");
 
-			for (String r : tt.startsWith(q)) {
-				System.out.println(r);
+			if (q.substring(0, 2).equals("g:")) {
+				q=q.substring(3);
+				System.out.println("Search result for " + q + ":");
+				System.out.println(tt.get(q));
+			} else {
+				System.out.println("Entries beginning with " + q + ":");
+				for (String r : tt.startsWith(q)) {
+					System.out.println(r);
+				}
 			}
 			System.out.println();
 		}
