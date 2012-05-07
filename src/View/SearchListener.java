@@ -33,4 +33,16 @@ public interface SearchListener {
 	 * Signals to the SearchListener that a search has started
 	 */
 	public void startSearching();
+	
+	/**
+	 * Signals to the SearchListener that the the trip searches
+	 * must search for the shortest trips
+	 */
+	public void setShortSearch();
+	
+	/**
+	 * Signals to the SearchListener that the the trip searches
+	 * must search for the fastest trips
+	 */
+	public void setFastSearch();
 }

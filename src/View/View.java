@@ -174,6 +174,16 @@ public class View implements MapListener, SearchListener {
 		mf.updateSecondList(findListOptions(input));
 	}
 	
+	@Override
+	public void setShortSearch() {
+		listener.setShortSearch();
+	}
+
+	@Override
+	public void setFastSearch() {
+		listener.setFastSearch();
+	}
+	
 	/**
 	 * Helper method for finding the content to be shown in the search lists
 	 * @param input the input to be interpreted as an address

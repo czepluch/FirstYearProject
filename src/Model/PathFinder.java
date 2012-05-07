@@ -7,5 +7,5 @@ public interface PathFinder {
 	 * @param source The starting point of the path
 	 * @param target The end point of the path
      */
-	public Trip<Double> run(String source, String target, int type);
+	public Trip<Double> run(String source, String target, TripCriteria type);
 }
