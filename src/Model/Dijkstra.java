@@ -49,7 +49,6 @@ public class Dijkstra implements PathFinder
             	double distanceThroughU = u.minDistance + weight;
 				if (distanceThroughU < v.minDistance) 
 				{
-		    		vertexQueue.remove(v);
 		    		v.minDistance = distanceThroughU;
 		    		v.previous = u;
 		    		vertexQueue.add(v);
@@ -70,7 +69,7 @@ public class Dijkstra implements PathFinder
 		ArrayList<Vertex> vs;
 		if (type == FAST) vs = G.getFastVertices();
 		else vs = G.getShortVertices();
-		HashMap<String,Vertex> map = G.getMap();
+		HashMap<String,Vertex> map = G.getMap(type);
 		Vertex u = map.get(source);
 		computePaths(u, map.get(target), vs);
 		Trip<Double> trip = new Trip<Double>();
