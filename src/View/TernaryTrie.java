@@ -72,7 +72,7 @@ public class TernaryTrie {
 	 * @param String value
 	 */
 	public void put(String s, String v) {
-		root = put(root, s, v, 0 );
+		root = put(root, s.toLowerCase(), v, 0 );
 	}
 
 	private Node put(Node node, String s, String v, int d) {
