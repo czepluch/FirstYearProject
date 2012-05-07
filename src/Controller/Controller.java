@@ -57,6 +57,16 @@ public class Controller implements ViewListener {
 	public void moveToLocation() {
 		view.moveTo(model.getUTMLocation());
 	}
+	
+	@Override
+	public void setShortSearch() {
+		model.setShortSearch();
+	}
+
+	@Override
+	public void setFastSearch() {
+		model.setFastSearch();
+	}
 
 	/**
 	 * @param args -

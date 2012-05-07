@@ -13,4 +13,8 @@ public interface ViewListener {
 	public void moveToTrip();
 	
 	public void moveToLocation();
+	
+	public void setShortSearch();
+	
+	public void setFastSearch();
 }

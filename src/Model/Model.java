@@ -2,6 +2,7 @@ package Model;
 
 import static Global.MinAndMaxValues.*;
 import static Model.Graph.G;
+import static Model.TripCriteria.*;
 
 /**
  * The part of the application taking care of data handling
@@ -12,6 +13,7 @@ public class Model {
 	private PathFinder pathFinder = new Dijkstra();
 	private Trip<Double> trip;
 	private MapLocation<Double> location;
+	private TripCriteria fastOrShort = FAST;
 	
 	/**
 	 * Constructor of the model class
@@ -59,7 +61,7 @@ public class Model {
 	 */
 	public void updateTrip(int fromId, int toId) {
 		// Update the trip
-		trip = pathFinder.run(fromId + "", toId + "");
+		trip = pathFinder.run(fromId + "", toId + "", fastOrShort);
 		// Set the location to null
 		location = null;
 	}
@@ -90,5 +92,19 @@ public class Model {
 	 */
 	public MapLocation<Double> getUTMLocation() {
 		return location;
+	}
+	
+	/**
+	 * Signals to the Model to search for fastest path
+	 */
+	public void setFastSearch() {
+		fastOrShort = FAST;
+	}
+	
+	/**
+	 * Signals to the Model to search for shortest path
+	 */
+	public void setShortSearch() {
+		fastOrShort = SHORT;
 	}
 }

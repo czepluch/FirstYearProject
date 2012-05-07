@@ -31,11 +31,17 @@ public class SearchPanel extends JPanel {
 	private JLabel firstLabel;
 	private JTextField firstTF;
 	private JList firstList;
+	
 	private JLabel secondLabel;
 	private JTextField secondTF;
 	private JList secondList;
+	
 	private JButton swapButton;
 	private JButton findButton;
+	
+	private ButtonGroup buttonGroup;
+	private JRadioButton fastRB;
+	private JRadioButton shortRB;
 	
 	private JLabel tripLengthLab;
 	private JLabel tripLengthLabVar;
@@ -65,6 +71,7 @@ public class SearchPanel extends JPanel {
 //		setTableListeners();
 		setTextFieldListeners();
 		setListListeners();
+		setRBListeners();
 	}
 	
 	public void updateTrip(Trip<Integer> trip) {
@@ -167,6 +174,13 @@ public class SearchPanel extends JPanel {
 		swapButton = new JButton("Swap");
 		findButton = new JButton("Find");
 		
+		buttonGroup = new ButtonGroup();
+		fastRB = new JRadioButton("Fast");
+		fastRB.setSelected(true);
+		shortRB = new JRadioButton("Short");
+		buttonGroup.add(fastRB);
+		buttonGroup.add(shortRB);
+		
 		tripLengthLab = new JLabel("Distance:");
 		tripLengthLabVar = new JLabel("", SwingConstants.RIGHT);
 		tripTimeLab = new JLabel("Time:");
@@ -175,11 +189,17 @@ public class SearchPanel extends JPanel {
 		inputPanel.add(firstLabel);
 		inputPanel.add(firstTF);
 		inputPanel.add(firstList);
+		
 		inputPanel.add(secondLabel);
 		inputPanel.add(secondTF);
 		inputPanel.add(secondList);
+		
 		inputPanel.add(swapButton, "split 2");
-		inputPanel.add(findButton, "wrap 40");
+		inputPanel.add(findButton);
+		
+		inputPanel.add(fastRB, "split 2");
+		inputPanel.add(shortRB, "wrap 40");
+		
 		inputPanel.add(tripLengthLab, "split 2");
 		inputPanel.add(tripLengthLabVar, "gapleft push");
 		inputPanel.add(tripTimeLab, "split 2");
@@ -317,6 +337,24 @@ public class SearchPanel extends JPanel {
 					// Clear the list content
 					clearSecondList();
 				}
+			}
+		});
+	}
+	
+	private void setRBListeners() {
+		fastRB.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.setFastSearch();
+			}
+		});
+		
+		shortRB.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				listener.setShortSearch();
 			}
 		});
 	}
