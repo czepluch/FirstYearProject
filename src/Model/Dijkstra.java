@@ -4,7 +4,6 @@ import java.util.PriorityQueue;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.HashMap;
 import static Model.Graph.G;
 import static Global.MinAndMaxValues.maxSpeed;
@@ -14,7 +13,7 @@ import static Model.TripCriteria.*;
  * Class used to compute the shortest path between two given vertices
  */
 public class Dijkstra implements PathFinder
-{	
+{
 	/**
 	 * Compute the shortest path from one vertex to another.
 	 * Should not be called directly. Instead, call the run()-method
@@ -24,7 +23,12 @@ public class Dijkstra implements PathFinder
 	 */
     private void computePaths(Vertex source, Vertex target, ArrayList<Vertex> vs)
     {
-        source.minDistance = 0.;
+    	for (Vertex v : vs)
+    	{
+    		v.minDistance = Double.POSITIVE_INFINITY;
+    		v.previous = null;
+    	}
+        source.minDistance = 0.;		// distance to self is zero   
         PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>(vs);
 
 		while (!vertexQueue.isEmpty()) 
@@ -32,13 +36,12 @@ public class Dijkstra implements PathFinder
 	    	Vertex u = vertexQueue.poll();		// retrieve vertex with shortest distance to source
 			if (u == target)
 			{
-				LinkedList<Vertex> S = new LinkedList<Vertex>();
 				// trace back
 				while (u.previous != null)
-				{
-					S.add(u);
+				{;
 					u = u.previous;
 				}
+				vertexQueue.clear();
 				return;
 			}
         	// Visit each edge exiting u
@@ -49,6 +52,7 @@ public class Dijkstra implements PathFinder
             	double distanceThroughU = u.minDistance + weight;
 				if (distanceThroughU < v.minDistance) 
 				{
+		    		//vertexQueue.remove(v);
 		    		v.minDistance = distanceThroughU;
 		    		v.previous = u;
 		    		vertexQueue.add(v);
@@ -61,7 +65,7 @@ public class Dijkstra implements PathFinder
      * Call this method to compute the shortest path between two vertices
 	 * @param source The starting point of the path
 	 * @param target The end point of the path
-	 * @param type Determines whether to compute the fastest or shortest path. If 0, compute fastets, otherwise shortest.
+	 * @param type Determines whether to compute the fastest or shortest path.
      */
 	public Trip<Double> run(String source, String target, TripCriteria type)
 	{

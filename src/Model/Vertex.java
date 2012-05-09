@@ -6,11 +6,11 @@ import java.util.ArrayList;
 class Vertex implements Comparable<Vertex>
 {
 	public final double x, y;
- public final String id;
- public ArrayList<Edge> adjacencies;
+	public final String id;
+	public ArrayList<Edge> adjacencies;
 	public String[] neighbours;
- public double minDistance = Double.POSITIVE_INFINITY;
- public Vertex previous;
+	public double minDistance = Double.POSITIVE_INFINITY;
+	public Vertex previous = null;
 
 	/**
 	 * Constructor
