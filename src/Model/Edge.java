@@ -5,9 +5,11 @@ class Edge
 {
   public final Vertex target;
   public final double weight;
-  public Edge(Vertex argTarget, double argWeight)
+  public final int speed;
+  public Edge(Vertex target, double weight, int speed)
   {
-		target = argTarget; 
-		weight = argWeight;
+		this.target = target; 
+		this.weight = weight;
+		this.speed = speed;
 	}
 }

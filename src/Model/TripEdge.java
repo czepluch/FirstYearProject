@@ -10,7 +10,7 @@ public class TripEdge<T> {
 	private T toY;
 	
 	private double distance;
-	private int time;
+	private double time;
 	private int speed;
 	private Turn turn;
 	
@@ -66,7 +66,7 @@ public class TripEdge<T> {
 		return turn;
 	}
 	
-	public int getTime() {
+	public double getTime() {
 		return time;
 	}
 	
@@ -100,7 +100,7 @@ public class TripEdge<T> {
 	 * Computes the time according to the distance and speed
 	 */
 	private void computeTime() {
-		time = (int) (((getDistance() / 1000) / speed) * 60);
+		time = ((getDistance() / 1000) * 60) / speed;
 	}
 	
 	/*

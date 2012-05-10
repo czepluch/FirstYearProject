@@ -15,6 +15,7 @@ public class GraphInput
 	private ArrayList<GEdge> edges;
 	private ArrayList<Vertex>[] adj;
 	
+	@SuppressWarnings("unchecked")
 	public GraphInput(String vertex_path, String edge_path)
 	{
 		vertices = new ArrayList<Vertex>();
@@ -53,7 +54,7 @@ public class GraphInput
 				
 				double dist = Math.sqrt(Math.pow(v2.x - v1.x, 2) + Math.pow(v2.y - v1.y, 2));
 				if (speed <= 0) speed = 5;		// value must be revised
-				edges.add(new GEdge(tokens[0], tokens[1], (100 * dist) / speed));
+				edges.add(new GEdge(tokens[0], tokens[1], (100 * dist) / speed, (int)speed));
 				
 				// add v2 as adjacent to v1
 				if (adj[id1-1] != null) adj1 = adj[id1-1];
@@ -101,7 +102,7 @@ public class GraphInput
 			for (int i = 0; i < edges.size(); i++)
 			{
 				GEdge e = edges.get(i);
-				out.write(e.id1 + "," + e.id2 + "," + e.weight + "\n");
+				out.write(e.id1 + "," + e.id2 + "," + e.weight + "," + e.speed + "\n");
 			}
 			out.close();
 		} catch (Exception e) {

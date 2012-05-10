@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import static Model.TripCriteria.*;
 
 /**
  * Class used to build the graph from a file containing graph information.
@@ -18,7 +19,8 @@ public class Graph
 	private static final ArrayList<Vertex> fastVertices = new ArrayList<Vertex>();
 	private static final ArrayList<Vertex> shortVertices = new ArrayList<Vertex>();
 	private static final ArrayList<GEdge> edges = new ArrayList<GEdge>();
-	private static final HashMap<String,Vertex> map = new HashMap<String,Vertex>();
+	private static final HashMap<String,Vertex> fastMap = new HashMap<String,Vertex>();
+	private static final HashMap<String,Vertex> shortMap = new HashMap<String,Vertex>();
 	private static final HashMap<String,ArrayList<GEdge>> emap = new HashMap<String,ArrayList<GEdge>>();
 	private static int awake = -1;
 	
@@ -33,7 +35,6 @@ public class Graph
 	 */
 	private Graph(String vpath, String epath)
 	{
-		System.out.println("Startup");
 		BufferedReader in = null;
 		try {
 			// parse vertex input
@@ -48,13 +49,14 @@ public class Graph
 				double y = Double.parseDouble(tokens[2]);		// y-coord
 				String[] neighbours = tokens[3].split(" ");		// neighbour vertices
 				Vertex v = new Vertex(id, x, y, neighbours);
+				Vertex w = new Vertex(id, x, y, neighbours);
 				fastVertices.add(v);
-				shortVertices.add(v);
-				map.put(id,v);
+				shortVertices.add(w);
+				fastMap.put(id,v);
+				shortMap.put(id,w);
 				line = in.readLine();
 			}
 			
-			System.out.println("Read vertices");
 			// parse edge input
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(epath), "UTF-8"));
 			
@@ -65,7 +67,8 @@ public class Graph
 				String[] tokens = line.split(",");
 				String id1 = tokens[0], id2 = tokens[1];
 				double weight = Double.parseDouble(tokens[2]);
-				GEdge e = new GEdge(id1, id2, weight);
+				int speed = Integer.parseInt(tokens[3]);
+				GEdge e = new GEdge(id1, id2, weight, speed);
 				edges.add(e);
 				
 				ArrayList<GEdge> adj1, adj2;
@@ -88,9 +91,6 @@ public class Graph
 		} catch (IOException e) {
  			System.out.println("Oh noes!: "+ e.getMessage());
 		}
-		System.out.println(edges.size());
-		
-		System.out.println("Done reading\n");
 		
 		// build adjacencies for each vertex
 		// first build the graph used to find the fastest path
@@ -102,8 +102,8 @@ public class Graph
 				String s;
 				if (v.id.equals(e.id1))	s = e.id2;
 				else					s = e.id1;
-				Vertex w = map.get(s);
-				v.adjacencies.add(new Edge(w, e.weight));
+				Vertex w = fastMap.get(s);
+				v.adjacencies.add(new Edge(w, e.weight, e.speed));
 			}
 		}
 		
@@ -114,18 +114,16 @@ public class Graph
 			ArrayList<Vertex> adj = new ArrayList<Vertex>();
 			for (String s : nb)
 			{
-				Vertex w = map.get(s);
+				Vertex w = shortMap.get(s);
 				adj.add(w);
 			}
 					
 			for (Vertex w : adj)
 			{
 				double dist = Vertex.distance(v, w);
-				v.adjacencies.add(new Edge(w, dist));
+				v.adjacencies.add(new Edge(w, dist, 5));
 			}
 		}
-		
-		System.out.println("Built adjacencies\n");
 	}
 	
 	public double distance(Vertex v, Vertex w)
@@ -148,13 +146,14 @@ public class Graph
 		return edges;
 	}
 	
-	public HashMap<String,Vertex> getMap()
+	public HashMap<String,Vertex> getMap(TripCriteria type)
 	{
-		return map;
+		if (type == FAST) return fastMap;
+		else return shortMap;
 	}
 	
 	public double[] getNodeCoordinates(int nodeId) {
-		Vertex v = map.get(nodeId + "");
+		Vertex v = fastMap.get(nodeId + "");
 		double[] coords = { v.getX(), v.getY() };
 		return coords;
 	}
