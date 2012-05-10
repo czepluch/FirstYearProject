@@ -4,6 +4,11 @@ Report.log
 Report.synctex.gz
 Report.toc
 Report.out
+final-report.aux
+final-report.log
+final-report.synctex.gz
+final-report.toc
+final-report.out
 .metadata/
 *.class
 *.classpath
