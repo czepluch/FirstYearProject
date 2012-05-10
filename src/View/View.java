@@ -147,6 +147,24 @@ public class View implements MapListener, SearchListener {
 	 * 			-1 if no such is found
 	 */
 	private int getNodeId(String input, InputField IF) {
+		// First check if the given address is stored
+		// Parse the address
+		String address = NewAddressParser.parseAddress(input);
+		// Get the id
+		String id = null;
+		if (address != null) id = trie.get(address);
+		// If the id is not null, return it
+		if (id != null) {
+			// First store the address in the correct field
+			String displayedAddress = cleanString(address);
+			switch (IF) {
+				case FIRST:	firstAddress = displayedAddress; break;
+				default:	secondAddress = displayedAddress; break;
+			}
+			return Integer.parseInt(trie.get(address));
+		}
+		// Else the address is not stored. Instead, do a prefix
+		// search on the given string
 		// Find the list of "recognized" address
 		String[] s = findListOptions(input);
 		// If no address is recognized, return -1
@@ -158,7 +176,7 @@ public class View implements MapListener, SearchListener {
 		}
 		// Parse the address which is most likely to be
 		// correct (the one at index 0) and get it
-		String address = NewAddressParser.parseAddress(s[0]);
+		address = NewAddressParser.parseAddress(s[0]);
 		// Make sure the address is valid
 		if (address == null) return -1;
 		return Integer.parseInt(trie.get(address));

@@ -35,6 +35,9 @@ public class NewAddressParser {
 	
 
 	public static String parseAddress(String s) {
+		//TODO Remove syso
+		System.out.println("AP: Input = " + s);
+		
 		String city = "";
 		String street = "";
 		String zip = "";
@@ -47,15 +50,27 @@ public class NewAddressParser {
 			city = zipLastMatcher.group(1).toLowerCase();
 			street = zipLastMatcher.group(2).toLowerCase();
 			zip = zipLastMatcher.group(3).toLowerCase();
+			
+			//TODO Remove syso
+			System.out.println("AP: Matches ZipLast");
 		} else if (zipMiddleMatcher.matches()) {
 			city = zipMiddleMatcher.group(1).toLowerCase();
 			zip = zipMiddleMatcher.group(2).toLowerCase();
 			street = zipMiddleMatcher.group(3).toLowerCase();
+			
+			//TODO Remove syso
+			System.out.println("AP: Matches ZipMiddle");
 		} else if (zipFirstMatcher.matches()) {
 			zip = zipFirstMatcher.group(1).toLowerCase();
 			city = zipFirstMatcher.group(2).toLowerCase();
 			street = zipFirstMatcher.group(3).toLowerCase();
+			
+			//TODO Remove syso
+			System.out.println("AP: Matches ZipFirst");
 		} else {
+			//TODO Remove syso
+			System.out.println("AP: No match");
+			
 			return null;
 		}
 		
@@ -66,6 +81,9 @@ public class NewAddressParser {
 		else				street = street.trim();
 		if (zip == null) 	zip = "";
 		else				zip = zip.trim();
+		
+		//TODO Remove syso
+		System.out.println("AP: Out = " + String.format("%s#%s#%s", city, zip, street));
 		
 		return String.format("%s#%s#%s", city, zip, street);
 	}
