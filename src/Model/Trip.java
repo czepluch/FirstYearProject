@@ -7,7 +7,7 @@ import java.util.List;
  * Represents a trip from one location to another
  */
 public class Trip<T> {
-	private int time;
+	private double time;
 	private double distance;
 	private ArrayList<TripEdge<T>> edges;
 	
@@ -33,7 +33,7 @@ public class Trip<T> {
 	 * Gets the stored time
 	 * @return the stored time
 	 */
-	public int getTime() {
+	public double getTime() {
 		return time;
 	}
 	

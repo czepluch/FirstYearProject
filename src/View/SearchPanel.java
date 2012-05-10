@@ -82,8 +82,9 @@ public class SearchPanel extends JPanel {
 			tripTimeLabVar.setText("");
 		} else {
 			String distance = String.format("%.2g", trip.getDistance() / 1000);
+			String time = String.format("%.2g", trip.getTime());
 			tripLengthLabVar.setText(distance + "  km");
-			tripTimeLabVar.setText(trip.getTime() + " min");
+			tripTimeLabVar.setText(time + " min");
 		}
 		
 		
