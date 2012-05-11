@@ -72,7 +72,12 @@ Rasmus Pagh\\
 		\textsl{Jacob}
 	\begin{itemize}
 		\item Not more precise than road names
+		    
+		    Since it is not required that the program is able to search for road numbers, we decided not to implement them. Another reason to not implement road numbers is that it is not very well defined in the dataset, where a given road number is located on an edge. We would have liked to implement road numbers, but we could not figure out a decent way to do this with the data given from Krak. The biggest and most important consequence of this decision is that on very long roads, it can be very difficult to find a desired exact address, since you will not know in which end or side of the road that the address is located.   
+
 		\item Route description
+
+		    It was part of our plan to make a route description located under the distance and time in the left side of the window. The description should describe when and where to turn and to what side to turn. It was however a bigger implementation than first assumed and we down prioritized the implementation to make sure that more important implementations were made. ****Skriv noget mere om hvorfor vi ikke lavede implementationen**** 
 		\item One user, one system
 	\end{itemize}
 \end{itemize}
