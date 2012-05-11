@@ -42,6 +42,99 @@ Rasmus Pagh\\
 \pagebreak
 \section{Design choices}
 \label{sec:Design choices}
+In this section, we will go through our design choices. We will go through things like design patterns, data structures, and visualisation. At the same time we will gives explanation of our choices.
+
+This section does not contain any information about the implementation of the application, which for several reasons can vary from the design choices made. Variations will be discussed in the Discussion section on page \pageref{sec:Discussion}.
+
+\subsection{Architectural Pattern}
+\label{sub:Design Pattern}
+For our overall architectural pattern, we have chosen to use the Model, View, Controller (MVC) pattern. We chose to do so, to make sure that we have a very modular and easy-to-maintain class structure. Using the MVC pattern results in separation of the different aspects of our application, while still providing a loose coupling between these elements. During the making of the application it has proven very useful to us since we have been chancing our classes and data structures quite a few times. 
+
+
+\subsection{Visualisation and user interaction}
+
+\subsubsection{Platform}
+To start with we had to decide whether we wanted to use \texttt{Java} and \texttt{Swing}, or \texttt{Java}, \texttt{JavaScript}, \texttt{SVG}, and \texttt{HTML} for the visualisation part. There are strengths and weaknesses to both solutions: The good thing about \texttt{Swing} is that we all have previous experience with it, and so we were certain that, using \texttt{Swing}, we would be able to do what we wanted. 
+The fact that none of us have had any notable experience with \texttt{JavaScript} and \texttt{SVG} made it easy for us to decide on a platform for this project. By using \texttt{Java} and \texttt{Swing}, we would be able to spend our time making a well working program with a nice data structure. We would, of course, have liked looking into a new language like \texttt{JavaScript}, but we have chosen to prioritize a well working program over the learning experience of working with a new programming language.
+
+\subsubsection{How the roads are drawn}
+As mentioned above we chose to use \texttt{Swing} and the \texttt{BasicStroke API} to do the drawing of the map. 
+
+Technically, the map first draws all of Denmark. It is however only the largest of the road types that is drawn when the whole of Denmark is shown. We decided to only do so because it is both unnecessary to draw all roads when you are very far away from the map, but also to make the program run smoother. The program is designed to show more and more road types the more you zoom in towards the map. Only the roads that are inside the given view are drawn.
+
+We decided to make the thickness of the roads relative (so for example highways are displayed as being wider than smaller roads). The different types of roads are displayed using different colors, making is possible for the user to distinct between them.
+
+\subsubsection{User interaction with the map}
+We wanted to make a simple, yet featureful, user interaction with the map. This resulted in a user interface with no physical buttons. All you need to navigate the map is pointing device (i.e., a mouse). To zoom in and out you scroll up and down, respectively. The mouse pointer decides what the zooming point is. It is also very easy to pan up or down, or to the sides. This is done by simply dragging and dropping the map with the mouse pointer. The window is also easily resized by dragging in one corner of the window. There are, however, some differences in the way that the resizing behaves according to the OS the program is running under.
+
+There must be a limit of how far in and out the user can zoom on the map. The limit on zooming out is to avoid the user at some point being zoomed out so far that it is no longer possible to navigate back to display a wished part of the map (and since only the roads of Denmark are to be drawn, nothing will be visible other than maybe a very small amount of pixels representing Denmark). The limit of zooming in must prevent the user from being zoomed in so far the map is no longer recognizable as a map. If no boundaries for zooming were to be made, it is imaginable that the user by accident zooms either too far in or out, no longer recognizing what is displayed. The result is very likely to look similar to no roads being draw at all, which might again cause it to seem as if an error has occurred, forcing the user to restart the application.
+
+Limits must also be present when dragging the current view for similar reasons (Ex. dragging to some places away from the roads drawn, making it look as if no roads are displayed).
+
+We want a user interface design with a minimal number of buttons and other components on the graphical user interface because it, in our strongest conviction, is the most intuitive way for people to navigate and interact with maps. It seems that this has become the \textit{de facto} standard, probably due to the increasing number of tablets and smartphones on the market.
+
+\subsubsection{Finding locations and trips}
+As with the user interaction with the map, we decided to make the graphical user interface for finding either a location or a trips as simple as possible (and with that having as few as possible buttons to push and places to type text). The result was having two fields in which addresses can be typed in by the user and a button for executing the search for either location or trip. When the button is pressed, the content of the input fields decides what is to be executed. The possibilities are the following:
+\begin{itemize}
+	\item \textbf{Only one address is typed in} \\
+		A search for the location according to the given address is executed, giving that the address is understood by the application as a valid address.
+	\item \textbf{Two addresses are typed in} \\
+		A search for the trip from the first given address to the second given address is executing, given both the the addresses are understood by the application as valid addresses.
+\end{itemize}
+In addition to that, when a search for a trip is executed, the search can actually be of two different types:
+\begin{itemize}
+	\item A search for the \textit{shortest} trip from one location to another (the one with the shortest distance).
+	\item A search for the \textit{fastest} tip from one location to another (the one taking the shortest period of time to follow).
+\end{itemize}
+This second search criteria is also to be selected by the user. This is to be done with radio buttons allowing the user to toggle between the two.
+
+All input fields, button(s) and radio buttons are to be labeled with either names which in themselves describe the purpose of the component to a satisfactory level, or with a short description of the purpose.
+
+\subsubsection{What is a valid address}
+The validity of a typed in address is dependent upon two different things; the \textit{content} of the address and the \textit{format} in which the address is written.
+
+The \textit{content} can be different combinations of the following three:
+\begin{itemize}
+	\item \textbf{City name} \\
+		Containing the letters a - z and A - Z, white spaces, and the letters special the the "Nordic" alphabets.
+	\item \textbf{Zip code} \\
+		Consisting only of the digits 0 - 9 (without white spaces).
+	\item \textbf{Street name} \\
+		Similar to the city name.
+\end{itemize}
+It must be possible to search for:
+\begin{itemize}
+	\item City name only
+	\item Zip code only
+	\item City name and zip code
+	\item Street name with city name and/or zip code
+\end{itemize}
+This means that in order to find a road, you must include include either the corresponding zip code or city name in the given address.
+
+!!!Maybe move the limitations of the address content Jacob wrote to this place instead?
+
+The \textit{format} must be easy to get used to / similar to the way we write addresses in letters, mails etc.
+
+When writing city name and street name next to each other, they must be separated with one or more characters not "legally" part of either of them. An obvious option is separating the city name and street name with a comma (\texttt{","}) or with a comma followed by a white space (\texttt{", "}), but other characters must be accepted as well.
+
+When writing either city name or street name next to the zip code, it should not be necessary to use any special characters to separate them. For example, it should be possible to write an entire address containing both street name, zip code, and city name without using any special characters to separate them, having the zip code in the middle of the others (Ex. \texttt{"Street name 1234 city"}).
+
+Extra spaces within in in either the beginning or end of a city name or street name should be ignored and not cause the application to not accept the address as being valid (Ex. \texttt{"City    name"}).
+
+It should not matter whether capitalized letters are used or not. Capitalized and non-capitalized letters should be understood as being the same. For example should \texttt{"CiTy NAMe"} and \texttt{"city name"} result in the same address search.
+
+If an address is not accepted as being valid, the user must be alerted, telling which of the addresses which are not valid. A similar such warning must be provided given the user executes a search without having entered any address at all. The user must not be left in a situation where he/she might thinks a search has been executed, though that is not the case.
+
+\subsubsection{Automatic text completion}
+In order to aid the user in finding the wanted address with a minimum of clutter and issues with the content and format of the address to be typed in, we want the application to provide the user with a list of the addresses which best match what is currently typed in. The list will be empty when nothing is written, but the content of the list must appear as soon as a characters is typed in, and the list must update for each additional character typed / for each character removed. The list has to contain between zero and five possible addresses.
+
+Why we have decided to display up to five addresses is a matter of taste. We find that it is a reasonable amount of addresses, having enough for the user to have several options to choose between, but not having so many that the list dominates the rest of the graphical user interface.
+
+It has to be possible for the user to select the addresses on the list, copying the selected address to the input field and hiding the list from the view, avoiding that the list is in the way of other operation the user might want to perform.
+
+\subsubsection{User manual}
+// Missing
+
 
 \subsection{Outline}
 \begin{itemize}
@@ -85,6 +178,107 @@ Rasmus Pagh\\
 \pagebreak
 \section{Implementation}
 \label{sec:Implementation}
+The implementation of the application consists of four different packages; the \texttt{Model}, \texttt{View} and \texttt{Controller} packages used as in the MVC design pattern, and a \texttt{Global} package storing global fields to be accessed and modified from all other packages.
+
+\subsection{Controller package} % This is a simple description of the implementation of the Controller class.
+The \texttt{Controller} package consists solely of the \texttt{Controller} class, which is both the main class (it has the main method, to be run when the application starts), and it is the link between the \texttt{Model} and \texttt{View} packages handling the flow of data between the two. When a change is made by the user, the \texttt{View} calls a method in the \texttt{Controller}, once again updating the graphical user interface according to user input and the data stored in the \texttt{Model}.
+
+\subsection{Global package} % Contains all the global values used from all around the application
+This package contains only the \texttt{MinAndMaxValues} class which has fields that need to be accessed from the entire application. These fields include initial values such as the current "viewbox", minimum and maximum values for x- and y-coordinates, definitions for when the different types of road segments are drawn etc. It also contains methods for checking whether or not the current viewbox results in a need for re-filtering the data to be drawn. The class is statically imported by all classes needing to access this information.
+
+\subsection{Model package} % The description of the Model package is more complicated and consists of descriptions of several other classes.
+%The \texttt{Model} package consists of all the classes managing data storage, filtering, and conversion.
+
+\subsubsection{Model class} % Makes use of the rest of the classes in the Model package. The front-end class.
+The \texttt{Model} class is the front-end class of the \texttt{Model} package (the only class which is directly connected to the \texttt{Controller} class). This is where the data structure is stored in a field and where the methods for filtering and converting data are called. The data structure is stored with the type \texttt{DataStructure}, which is an interface allowing us to easily switch between data structures.
+
+\subsubsection{XMLReader class} % Reads in the data from an XML file of krax format and adds the content to a given data structure
+This class reads data from an XML file of our KRAX format and converts it to instances of the \texttt{Edge} class (a simple class representing an edge on the roadmap), which are then added to a given data structure.
+
+The \texttt{XMLReader} makes use of an external library, \href{www.xom.nu}{\texttt{xom}} (\url{www.xom.nu}), for reading the XML data.
+
+\subsubsection{QuadTreeDS class} % The data structure of the application. Consists of several other classes to be explained here
+The \texttt{QuadTreeDS} is the basis of the entire application. It is in an instance of this class that all data is stored after being read by the \texttt{XMLReader} class. In order for it to be used as our data structure, it implements the \texttt{DataStructure} interface.
+
+The class consists of four instances of the \texttt{QuadTree} class (one for each type of road segment). A \texttt{QuadTree} consists of nodes, which has an x- and a y-coordinate (stored as \texttt{double}s) and a reference to an \texttt{Edge} object. Each \texttt{QuadTree} contains all edges of a designated type. Each \texttt{Edge} object is stored twice; both referenced to by the start- and end-coordinates of the edge.
+
+Inserting a node into a \texttt{QuadTree} is a recursive process; the given node is compared to the root node, deciding which of the four children the given node is to be compared with next. This continues until a null-reference / a leaf is found.
+
+Retrieving information is done using an instance of the \texttt{Interval2D} class (representing a rectangle), which again consists of two instances of the \texttt{Interval} class (each representing a line). This too is done recursively; it is checked whether the coordinates of the root node are within the given rectangle. If it is, it is added to a given collection of edges. It is then checked which of the subtrees might contain nodes within the rectangle, and for each that match, the same method is invoked, now with each of the matching children as the root. The call returns at null references.
+
+Our implementation of the quadtree (including the \texttt{Interval} and \texttt{Interval2D} classes) is heavily based upon implementations from \url{algs4.cs.princeton.edu}.
+\\
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	[level 1/.style={sibling distance=34mm},
+	level 2/.style={sibling distance = 5mm}]
+	\tikzstyle{every node}=[circle,draw]
+	\node {x, y}		
+		child {
+			node {<x, <y}
+			child
+			child
+			child
+			child
+		}
+		child {
+			node {<x, >y}
+			child
+			child
+			child
+			child		
+		}
+		child {
+			node {>x, <y}
+			child
+			child
+			child
+			child		
+		}
+		child {
+			node {>x, >y}
+			child
+			child
+			child
+			child		
+		}
+	;
+\end{tikzpicture}
+\end{figure}
+\\
+\subsubsection{FormatConverter class} % Converts from the data type pulled out of the data structure to the data type needed by the View package
+The \texttt{FormatConverter} has static methods only, and only one public method. This methods takes an \texttt{ArrayList<Edge>} and converts it to the type \texttt{int[][][]} \\(\texttt{int[type][number of edges][edge coordinates]}).
+
+The FormatConverter uses an instance of the Coordinates class to convert the given UTM32 coordinates to pixels as shown in the GUI.
+
+\subsubsection{KrakToXMLConverter class} % Not directly part of the implementation, but the class used for converting the data from Krak to the krax XML format
+The KrakToXMLConverter is not, strictly speaking, a part of the application (it is not used at runtime). It is a utility class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
+
+\subsection{View package} % Consists of all the classes handling the graphical user interface
+%The \texttt{View} package contains all the classes managing the graphical user interface.
+
+\subsubsection{View class} % Front end class in the MVC pattern. Contains the rest of the (non-static) GUI classes. Implements the MapListener interface. The overall class structure of the View package
+The \texttt{View} class is the front-end class of the \texttt{View} package in the MVC design pattern. It contains an instance of the \texttt{MainFrame} class, which is the basic \texttt{java.swing} GUI (the window to be displayed), which then again contains an instance of our custom panel, \texttt{MapPanel}.
+
+The \texttt{View} itself implements the interface \texttt{ViewListener}, of which an instance is stored in both the \texttt{MainFrame} and the \texttt{MapPanel} classes. This allows for these classes to invoke a method in the \texttt{View}, telling it that changes has been made, which then invokes a similar method in the \texttt{Controller}, which then updates the GUI according the the changes.
+
+\subsubsection{MapPanel class} % Draws lines according to input data
+The \texttt{MapPanel} class extends the \texttt{java.swing.JPanel} class and functions as a panel with extended functionality and with an overridden \texttt{paint} method.
+
+The \texttt{MapPanel} stores an \texttt{int[][][]} (as generated by the \texttt{FormatConverter}), from which it draws lines of the canvas, each corresponding to an edge stored in the \texttt{Model}.
+
+The \texttt{MapPanel} also has two listeners from the \texttt{java.awt} library; a \\\texttt{MouseWheelListener}, which invokes a static method of the \texttt{ZoomHandler} class when the user scrolls on the panel, sending data about the mouse coordinates and the scrolled amount, and a \texttt{MouseMotionListener}, which invokes a static method of the \texttt{DragHandler} class when the user drags the mouse on the panel, letting the \texttt{DragHandler} know how far the mouse has been dragged (and along which axes).
+
+\subsubsection{ZoomHandler class} % Handles all the zooming
+The \texttt{ZoomHandler} handles all zooming. When a call is received (from the \texttt{MapPanel}), signaling that the user wishes to zoom out, there are two possible outcomes: If the current viewbox is not too close to the maximum width and height values; it zooms out, maintaining the current center of the viewbox. Otherwise, if the viewbox is near its extrema, zooming is done with the viewbox bound to the borders imposed by the maximum values.
+
+Subsequently to zooming in, a call is made to the \texttt{DragHandler} class, moving the viewbox towards the current location of the cursor.
+
+Zooming is simply a matter of changing the global values indicating what is being displayed (in the \texttt{MinAndMaxValues} class) / changing the size of the viewbox and then invoking a repaint of the \texttt{MapPanel}.
+
+\subsubsection{DragHandler class} % Handles all the dragging
+The \texttt{DragHandler} class, like the \texttt{ZoomHandler} class, changes the viewbox according to input data (drag amount and direction) and according the the maximum values that definine the extrema of the viewbox.
 
 \subsection{Outline}
 \begin{itemize}
@@ -138,6 +332,8 @@ Rasmus Pagh\\
 	\item Reading the XML-file as a text file \\
 		\textsl{Mikkel}
 	\item Memory usage \\
+		\textsl{Mikkel}
+	\item The MVC pattern
 		\textsl{Mikkel}
 \end{itemize}
 
