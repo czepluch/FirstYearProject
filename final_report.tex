@@ -1321,7 +1321,7 @@ Both the \texttt{GVertex} and \texttt{Vertex} classes share the \texttt{distance
 	Decimal numbers & $(3.7, 5.9)$, $(-3.3, 2.3)$ & $7.8715$ & ??? \\
 	Large numbers (UTM) & $(892250.58771$, $6147885.93632)$, $(892297.17852$, $6147868.40019)$ & $49.7817$ & ??? \\
 	Low numbers & $(0.58171$, $0.93432)$, $(-0.18852$, $0.43019)$ & $0.9205$ & ??? \\
-	Large and low numbers & $(2, 5)$, $(892250.58771$, $6147885.93632)$ & $6212290,0407$ & ???
+	Large and low numbers & $(2, 5)$, $(892250.58771$, $6147885.93632)$ & $6212290.0407$ & ???
 \end{tabular}
 \\ \\ \\
 Each of the results have been rounded to the nearest $1/10000$
@@ -1339,8 +1339,8 @@ The \texttt{TripEdge} class includes the \texttt{computeTime} method for computi
 \begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
 	Input property & Input (speed, distance) & Expected output & Actual output \\
 	\hline
-	Ordinary numbers, large distance & 120, 60000 & ??? & ??? \\
-	Ordinary numbers, large speed & 6000, 200 & 30 \\
+	Ordinary numbers, large distance & 120, 60000 & 30 & ??? \\
+	Ordinary numbers, large speed & 6000, 200 & 0.002 \\
 	Ordinary numbers, small distance & 80, 120 & 0.09 & ??? \\
 	Ordinary numbers, distance smaller than speed & 30, 3 & 0.006 & ??? \\
 	Negative speed & -30, 120 & Exception & ??? \\
