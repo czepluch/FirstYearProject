@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AddressParser {
-	private final static String CITY_STREET_REGEX_PART = 	"[-a-zæøåA-ZÆØÅ.\\s\']";
-	private final static String CRAP_REGEX_PART = 			"[^a-zæøåA-ZÆØÅ0-9]";
+	private final static String CITY_STREET_REGEX_PART = 	"[-a-z√¶√∏√•A-Z√Ü√ò√Ö.\\s\']";
+	private final static String CRAP_REGEX_PART = 			"[^a-z√¶√∏√•A-Z√Ü√ò√Ö0-9]";
 	private final static String ZIP_REGEX_PART = 			"[0-9]{3,5}";
 	private final static String END_REGEX =					CRAP_REGEX_PART + "*[.]*";
 	
@@ -147,7 +147,7 @@ public class AddressParser {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String s = "Køge 5123 la";
+		String s = "K√∏ge 5123 la";
 		System.out.println("Input:\t" + s);
 		System.out.println(AddressParser.parseAddress(s));
 	}

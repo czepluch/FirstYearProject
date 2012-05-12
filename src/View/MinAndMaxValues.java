@@ -20,7 +20,7 @@ public class MinAndMaxValues {
 	public static double maxY = MAX_Y;
 	public static int width = 800;
 	public static int height = (int) (X_TO_Y_RATIO * width);
-	public static int types = 2;
+	public static int types = 1;
 	public static final float LINE_WIDTH_CONSTANT = (float) 1;
 	public static float lineWidth = (float) 1;
 	public static boolean repaint = true;
@@ -33,7 +33,7 @@ public class MinAndMaxValues {
 	private static int DRAWN_TOO_BIG = 2;
 	// Int limits used for determining which types to be drawn
 	public static final int NUMBER_OF_TYPES = 4;
-	static final int TYPE2 = 550000;
+	static final int TYPE2 = 250000;
 	static final int TYPE3 = 25000;
 	static final int TYPE4 = 11000;
 	// The max speed selected
