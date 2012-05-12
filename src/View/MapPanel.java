@@ -27,6 +27,8 @@ public class MapPanel extends JPanel {
 	private int lastEndY;
 	private int endX;
 	private int endY;
+	// Variable for the Rainbow Road easter egg
+	private boolean rainbow;
 	
 	/**
 	 * Constructor
@@ -38,6 +40,7 @@ public class MapPanel extends JPanel {
 		this.listener = listener;
 		trip = null;
 		location = null;
+		rainbow = false;
 		addListeners();
 	}
 	
@@ -90,9 +93,16 @@ public class MapPanel extends JPanel {
 					 					 BasicStroke.CAP_ROUND,
 					 					 BasicStroke.JOIN_ROUND));
 			List<TripEdge<Integer>> edges = trip.getEdges();
-			for (TripEdge<Integer> e : edges) {
-				g2.setColor(RainbowGenerator.nextColor());
-				g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+			if (rainbow) {
+				for (TripEdge<Integer> e : edges) {
+					g2.setColor(RainbowGenerator.nextColor());
+					g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+				} 
+			} else {
+				g2.setColor(Color.magenta);
+				for (TripEdge<Integer> e : edges) {
+					g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+				} 
 			}
 		}
 		if (location != null) {
@@ -123,6 +133,15 @@ public class MapPanel extends JPanel {
 		this.trip = trip;
 		this.location = location;
 		repaint();
+	}
+	
+	/**
+	 * Sets whether or not found trips should be displayed as rainbows.
+	 * @param rainbowOn true if the trips are to be displayed as a rainbow,
+	 * 					else false
+	 */
+	public void setRainbow(boolean rainbowOn) {
+		rainbow = rainbowOn;
 	}
 	
 	//Circumstantial methods:

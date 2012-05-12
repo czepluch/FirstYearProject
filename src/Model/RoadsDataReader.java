@@ -51,6 +51,8 @@ public class RoadsDataReader
 				
 				line = in.readLine(); // Go to the next line
 			}
+			
+			in.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Oh noes!: "+ e.getMessage());
 		} catch (IOException e) {

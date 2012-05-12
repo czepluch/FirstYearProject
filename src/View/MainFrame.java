@@ -95,6 +95,15 @@ public class MainFrame {
 	}
 	
 	/**
+	 * Sets whether or not found trips should be displayed as rainbows.
+	 * @param rainbowOn true if the trips are to be displayed as a rainbow,
+	 * 					else false
+	 */
+	public void setRainbow(boolean rainbowOn) {
+		map.setRainbow(rainbowOn);
+	}
+	
+	/**
 	 * Method adding the needed listeners to the components
 	 */
 	private void addListeners() {

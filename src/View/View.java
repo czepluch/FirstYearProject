@@ -80,19 +80,33 @@ public class View implements MapListener, SearchListener {
 		// Trim the input
 		input = input.trim();
 		
-		// Check if the input is in binary
-		// If it is, convert it
-		if (AddressParser.isBinary(input)) {
-			input = AddressParser.convertBinaryToString(input);
-		}
-		
-		int nodeId = getNodeId(input, InputField.FIRST);
-		if (nodeId >= 0) {
-			mf.updateFirstTextField(firstAddress);
-			listener.findLocation(nodeId);
+		// Check if the string is the command for activating or
+		// deactivating the Rainbow Road easter egg
+		if (input.toLowerCase().equals("rainbow road")) {
+			// Set the MapPanel class to draw found trips as rainbows
+			mf.setRainbow(true);
+			// Clear the text field
+			mf.updateFirstTextField("");
+		} else if (input.toLowerCase().equals("ordinary road")) {
+			// Set the MapPanel class to draw found trips as rainbows
+			mf.setRainbow(false);
+			// Clear the text field
+			mf.updateFirstTextField("");
 		} else {
-			// Show a warning
-			ErrorHandler.showWarning("Invalid address", "Could not find the given address");
+			// Check if the input is in binary
+			// If it is, convert it
+			if (AddressParser.isBinary(input)) {
+				input = AddressParser.convertBinaryToString(input);
+			}	
+		
+			int nodeId = getNodeId(input, InputField.FIRST);
+			if (nodeId >= 0) {
+				mf.updateFirstTextField(firstAddress);
+				listener.findLocation(nodeId);
+			} else {
+				// Show a warning
+				ErrorHandler.showWarning("Invalid address", "Could not find the given address");
+			}
 		}
 	}
 
