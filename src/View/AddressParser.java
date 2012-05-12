@@ -4,30 +4,34 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AddressParser {
-	private final static String CITY_STREET_REGEX_PART = 	"[-a-z√¶√∏√•A-Z√Ü√ò√Ö.\\s\']";
-	private final static String CRAP_REGEX_PART = 			"[-,\\.\\s]";
+	private final static String CITY_STREET_REGEX_PART = 	"[-a-zæøåA-ZÆØÅ.\\s\']";
+	private final static String CRAP_REGEX_PART = 			"[^a-zæøåA-ZÆØÅ0-9]";
 	private final static String ZIP_REGEX_PART = 			"[0-9]{3,5}";
+	private final static String END_REGEX =					CRAP_REGEX_PART + "*[.]*";
 	
 	private final static String ZIP_LAST_REGEX = CRAP_REGEX_PART + "*" +
 													"(" + CITY_STREET_REGEX_PART + "+)" +
 												 CRAP_REGEX_PART + "*" + 
 												 	"(" + CITY_STREET_REGEX_PART + "*)" +
 												 CRAP_REGEX_PART + "*" +
-												 	"([" + ZIP_REGEX_PART + "]*)";
+												 	"([" + ZIP_REGEX_PART + "]*)" + 
+												 END_REGEX;
 	
 	private final static String ZIP_FIRST_REGEX = CRAP_REGEX_PART + "*" +
 														"(" + ZIP_REGEX_PART + ")" +
 												  CRAP_REGEX_PART + "*" + 
 												  		"(" + CITY_STREET_REGEX_PART + "*)" +
 												  CRAP_REGEX_PART + "*" +
-												  		"(" + CITY_STREET_REGEX_PART + "*)";
+												  		"(" + CITY_STREET_REGEX_PART + "*)" + 
+												  END_REGEX;
 	
 	private final static String ZIP_MIDDLE_REGEX = CRAP_REGEX_PART + "*" +
 														"(" + CITY_STREET_REGEX_PART + "+)" +
 												   CRAP_REGEX_PART + "+" + 
 												   		"(" + ZIP_REGEX_PART + ")" +
 												   CRAP_REGEX_PART + "*" +
-												   		"(" + CITY_STREET_REGEX_PART + "*)";
+												   		"(" + CITY_STREET_REGEX_PART + "*)" +
+												   END_REGEX;
 	
 	private static final Pattern ZIP_LAST_PATTERN = Pattern.compile(ZIP_LAST_REGEX);
 	private static final Pattern ZIP_MIDDLE_PATTERN = Pattern.compile(ZIP_MIDDLE_REGEX);
@@ -35,9 +39,6 @@ public class AddressParser {
 	
 
 	public static String parseAddress(String s) {
-		//TODO Remove syso
-		System.out.println("AP: Input = " + s);
-		
 		String city = "";
 		String street = "";
 		String zip = "";
@@ -50,27 +51,15 @@ public class AddressParser {
 			city = zipLastMatcher.group(1).toLowerCase();
 			street = zipLastMatcher.group(2).toLowerCase();
 			zip = zipLastMatcher.group(3).toLowerCase();
-			
-			//TODO Remove syso
-			System.out.println("AP: Matches ZipLast");
 		} else if (zipMiddleMatcher.matches()) {
 			city = zipMiddleMatcher.group(1).toLowerCase();
 			zip = zipMiddleMatcher.group(2).toLowerCase();
 			street = zipMiddleMatcher.group(3).toLowerCase();
-			
-			//TODO Remove syso
-			System.out.println("AP: Matches ZipMiddle");
 		} else if (zipFirstMatcher.matches()) {
 			zip = zipFirstMatcher.group(1).toLowerCase();
 			city = zipFirstMatcher.group(2).toLowerCase();
 			street = zipFirstMatcher.group(3).toLowerCase();
-			
-			//TODO Remove syso
-			System.out.println("AP: Matches ZipFirst");
 		} else {
-			//TODO Remove syso
-			System.out.println("AP: No match");
-			
 			return null;
 		}
 		
@@ -81,9 +70,6 @@ public class AddressParser {
 		else				street = street.trim();
 		if (zip == null) 	zip = "";
 		else				zip = zip.trim();
-		
-		//TODO Remove syso
-		System.out.println("AP: Out = " + String.format("%s#%s#%s", city, zip, street));
 		
 		return String.format("%s#%s#%s", city, zip, street);
 	}
@@ -161,7 +147,7 @@ public class AddressParser {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String s = "K√∏ge";
+		String s = "Køge 5123 la";
 		System.out.println("Input:\t" + s);
 		System.out.println(AddressParser.parseAddress(s));
 	}

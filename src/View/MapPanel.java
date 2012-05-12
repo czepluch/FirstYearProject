@@ -52,23 +52,29 @@ public class MapPanel extends JPanel {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		for (int i = 0; i < lines.length; i++) {
 			switch(i) {
+				// Feries
+				case 0:	g2.setColor(Color.pink);
+				g2.setStroke(new BasicStroke((3 * MinAndMaxValues.lineWidth),
+										 			BasicStroke.CAP_ROUND,
+										 			BasicStroke.JOIN_ROUND)); break;
+			
 				// Other roads
-				case 0:	g2.setColor(Color.green);
+				case 1:	g2.setColor(Color.green);
 						g2.setStroke(new BasicStroke((1 * MinAndMaxValues.lineWidth),
 													 BasicStroke.CAP_ROUND,
 													 BasicStroke.JOIN_ROUND)); break;
 				// Secondary roads
-				case 1: g2.setColor(Color.black);
+				case 2: g2.setColor(Color.black);
 						g2.setStroke(new BasicStroke((2 * MinAndMaxValues.lineWidth),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;
 				// Primary roads
-				case 2: g2.setColor(Color.blue);
+				case 3: g2.setColor(Color.blue);
 						g2.setStroke(new BasicStroke((3 * MinAndMaxValues.lineWidth),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;
 				// Highways
-				case 3: g2.setColor(Color.red);
+				case 4: g2.setColor(Color.red);
 						g2.setStroke(new BasicStroke((5 * MinAndMaxValues.lineWidth),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;

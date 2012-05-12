@@ -75,7 +75,7 @@ public class XMLReader
 					speed = Integer.parseInt(m.group(7));
 					type = translateType(Integer.parseInt(m.group(8)));
 					
-					// Store the edge
+					// Store the edge in the data structure
 					edges.addEdge(new KEdge(fromLat, fromLong, toLat, toLong, distance, speed, type));
 				} else {
 					// Reached the end of the file
@@ -110,6 +110,8 @@ public class XMLReader
 			case 4: case 34: case 44:
 				newType = 3;	break;
 			// Other roads
+			case 80:
+				newType = 5;	break;
 			default:
 				newType = 4;	break;
 		}
