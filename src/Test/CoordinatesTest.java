@@ -42,22 +42,24 @@ public class CoordinatesTest {
 		assertEquals(10, newX);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testConvertXToPixelsTooLow() {
+	@Test
+	public void testConvertXToPixelsLowerThanMin() {
 		initMinAndMaxValues();
 		Coordinates c = new Coordinates();
 		
-		double x = 19;
+		double x = 10;
 		int newX = c.convertXToPixels(x);
+		assertEquals(-1, newX);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testConvertXToPixelsTooHigh() {
+	@Test
+	public void testConvertXToPixelsHigherThanMax() {
 		initMinAndMaxValues();
 		Coordinates c = new Coordinates();
 		
-		double x = 121;
+		double x = 130;
 		int newX = c.convertXToPixels(x);
+		assertEquals(11, newX);
 	}
 	
 	// Test for ConvertYToPixels-method
@@ -94,22 +96,24 @@ public class CoordinatesTest {
 		assertEquals(0, newY);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testConvertYToPixelsTooLow() {
+	@Test
+	public void testConvertYToPixelsLowerThanMax() {
 		initMinAndMaxValues();
 		Coordinates c = new Coordinates();
 		
-		double y = 29;
+		double y = 20;
 		int newY = c.convertYToPixels(y);
+		assertEquals(11, newY);
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
-	public void testConvertYToPixelsTooHigh() {
+	@Test
+	public void testConvertYToPixelsHigherThanMax() {
 		initMinAndMaxValues();
 		Coordinates c = new Coordinates();
 		
-		double y = 131;
+		double y = 140;
 		int newY = c.convertYToPixels(y);
+		assertEquals(-1, newY);
 	}
 	
 	public void initMinAndMaxValues() {

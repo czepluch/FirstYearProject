@@ -83,8 +83,8 @@ public class View implements MapListener, SearchListener {
 		
 		// Check if the input is in binary
 		// If it is, convert it
-		if (NewAddressParser.isBinary(input)) {
-			input = NewAddressParser.convertBinaryToString(input);
+		if (AddressParser.isBinary(input)) {
+			input = AddressParser.convertBinaryToString(input);
 		}
 		
 		int nodeId = getNodeId(input, InputField.FIRST);
@@ -105,11 +105,11 @@ public class View implements MapListener, SearchListener {
 		
 		// Check if each input is in binary
 		// If it is, convert it
-		if (NewAddressParser.isBinary(input1)) {
-			input1 = NewAddressParser.convertBinaryToString(input1);
+		if (AddressParser.isBinary(input1)) {
+			input1 = AddressParser.convertBinaryToString(input1);
 		}
-		if (NewAddressParser.isBinary(input2)) {
-			input2 = NewAddressParser.convertBinaryToString(input2);
+		if (AddressParser.isBinary(input2)) {
+			input2 = AddressParser.convertBinaryToString(input2);
 		}
 		
 		int fromId = getNodeId(input1, InputField.FIRST);
@@ -149,7 +149,7 @@ public class View implements MapListener, SearchListener {
 	private int getNodeId(String input, InputField IF) {
 		// First check if the given address is stored
 		// Parse the address
-		String address = NewAddressParser.parseAddress(input);
+		String address = AddressParser.parseAddress(input);
 		// Get the id
 		String id = null;
 		if (address != null) id = trie.get(address);
@@ -176,7 +176,7 @@ public class View implements MapListener, SearchListener {
 		}
 		// Parse the address which is most likely to be
 		// correct (the one at index 0) and get it
-		address = NewAddressParser.parseAddress(s[0]);
+		address = AddressParser.parseAddress(s[0]);
 		// Make sure the address is valid
 		if (address == null) return -1;
 		return Integer.parseInt(trie.get(address));
@@ -208,7 +208,7 @@ public class View implements MapListener, SearchListener {
 	 * @return String[] the list of addresses to be displayed
 	 */
 	private String[] findListOptions(String input) {
-		String address = NewAddressParser.parseAddressLive(input);
+		String address = AddressParser.parseAddressLive(input);
 		if (address != null) {
 			Iterable<String> c = trie.startsWith(address);
 			if (c != null) {
