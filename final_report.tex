@@ -297,12 +297,29 @@ given a such search has been executed recently (and a search for a location has 
 All component listeners on the SearchPanel (be it ActionListeners, DocumentListeners etc.) either only affect things within the \texttt{SearchPanel} class or signals to the \texttt{SearchListener} (in this case the \texttt{View} class) to take action according to the input given by the user.
 
 \subsection{AddressParser class}
-// Missing - \textit{Mikkel}
+The \texttt{ParseAddress} method is the basis of the \texttt{AddressParser} class. It uses regular expressions and pattern matching to parse an input address. The basic idea is that an input address can consist of up to three different "kinds" of parts:
+\begin{itemize}
+	\item Zero, one, or two city name / street name parts consisting of the characters allowed in them (i will reference to this as "\textit{name}").
+	\item Zero or one zip code part consisting of digits (i will reference to this as "\textit{zip}").
+	\item Zero or more parts containing the characters not allowed elsewhere, which allows the other parts to be determined from each other (i will reference to this as "\textit{other}").
+\end{itemize}
+The input \texttt{String} is matched with up to three different patterns (i will use the $\sharp$ as a separator. The words \underline{underlined} must be present, the rest are optional):
+\begin{itemize}
+	\item Pattern with the zip code last: \\
+		\textit{other$\sharp$\underline{name}$\sharp$other$\sharp$name$\sharp$other$\sharp$zip}
+	\item Pattern with the zip code first \\
+	\textit{other$\sharp$\underline{zip}$\sharp$other$\sharp$name$\sharp$other$\sharp$name}
+	\item Pattern with the zip code in the middle \\
+	\textit{other$\sharp$\underline{name$\sharp$other$\sharp$zip}$\sharp$other$\sharp$name}
+\end{itemize}
+If the first pattern matches, the city name, street name and zip code (or at least the parts found) are parsed to the format \textit{city name$\sharp$zip code$\sharp$street name}. If it doesn't match, the parser tries matching the input with the next pattern, parsing to the same format, and so on. If none of the patterns match, \texttt{null} is returned.
+
+The \texttt{ParseAddressLive} method makes use of the \texttt{ParseAddress} method, but it cleans up the result for it to be optimal for doing a prefix search in the \texttt{TernaryTrie}. It removes any "empty" parts of the address which are in either the beginning or the end of the parse address. An example is the parsed address \textit{$\sharp$1234$\sharp$}, which will be cleaned to being simply \textit{1234}.
 
 \subsection{Connecting the graphical user interface and the TernaryTrie}
 The connection between the graphical user interface and the \texttt{TernaryTrie} makes use of the \texttt{Observer} design pattern. The \texttt{View} class implements the \texttt{SearchListener} interface, which contain methods to be invoked when the user interacts with the graphical user interface in a way, creating a need for classes other than the \texttt{SearchPanel} being active. The instance of the \texttt{View} class is stored in both the \texttt{SearchPanel} and the \texttt{MainFrame} classes.
 
-Whenever the user types something in one of the text fields for inputting addresses (in the \texttt{SearchPanel} class), the following happens:
+Whenever the user types something in one of the text fields for inputting addresses (in the \texttt{SearchPanel} class), the following happens (as also illustrated in figure \ref{fig:autocompletion} on page \pageref{fig:autocompletion}):
 \begin{itemize}
 	\item A method \texttt{findOptions>>Number<<List()} (where \texttt{>>Number<<} is either \texttt{"First"} or \texttt{"Second"} depending on the text field being edited) in the \texttt{SearchListener} / \texttt{View} class is invoked.
 	\item The input is parsed by the \texttt{AddressParser} class.
@@ -316,19 +333,20 @@ There is a special case, where the text field is empty (the user just deleted th
 \centering
 \begin{tikzpicture}
 	\node [place, minimum size=2cm]	(SearchPanel)	at (0, 0) {SearchPanel}
-		edge [in=-100, out=-80, loop] node[auto] {first validation} (SearchPanel);
+		edge [in=-100, out=-80, loop] node[auto] {1. first validation} (SearchPanel);
 	\node [place, minimum size=2cm]	(MainFrame)		at (0, 3) {MainFrame}
-		edge [post] node [auto, swap] {update list} (SearchPanel);
+		edge [post] node [auto, swap] {7. update list} (SearchPanel);
 	\node [place, minimum size=2cm]	(View)			at (5, 3) {View}
-		edge [pre]	node [auto]	{input} (SearchPanel)
-		edge [post] node [auto, swap] {if valid id} (MainFrame);
+		edge [pre]	node [auto]	{2. input} (SearchPanel)
+		edge [post] node [auto, swap] {6. if valid id} (MainFrame);
 	\node [place, minimum size=2cm]	(AddressParser)	at (10, 3) {AddressParser}
-		edge [pre] node [auto, swap] {parse input} (View);
+		edge [pre] node [auto, swap] {3. parse input} (View);
 	\node [place, minimum size=2cm]	(TernaryTrie)	at (10, -1) {TernaryTrie}
-		edge [post, bend left=12] node [auto] {vertex id} (View)
-		edge [pre, bend right=12] node [auto, swap] {if valid} (View);
+		edge [post, bend left=12] node [auto] {5. vertex id} (View)
+		edge [pre, bend right=12] node [auto, swap] {4. if valid} (View);
 \end{tikzpicture}
 \caption{An illustration of the automatic input completion. It is simplified in the way that in some cases, two method calls a actually made by the \texttt{View} to the \texttt{TernaryTrie}.}
+\label{fig:autocompletion}
 \end{figure}
 
 This process completely relies on the speed of the \texttt{TernaryTrie}, as the user would otherwise have to wait for all this to happen each time a character is type or removed.
@@ -338,7 +356,7 @@ Whenever the user presses the \texttt{"Find"} button (for executing a search), t
 
 We will describe the process of searching for a location. The process of searching for a trip is the same, only it includes validating the contents of both input text fields and invoking a different method in the \texttt{Model} package.
 
-The validity checking is a follows:
+The validity checking is a follows (as also illustrated on figure \ref{fig:ControlFlow} on page \pageref{fig:ControlFlow}):
 \begin{itemize}
 	\item The first address validation is done withing the \texttt{SearchPanel} class, checking that both of the input text fields are not empty, and if only the first is empty, the content of the second text field is moved to the first text field.
 	\item The contents of the text field is sent to the \texttt{View}, where the vertex id corresponding to the given address is found.
@@ -351,21 +369,46 @@ The validity checking is a follows:
 \end{itemize}
 
 \begin{figure}[!h]
-\label{fig:ControlFlow}
 \centering
 \begin{tikzpicture}
 	\node [place, minimum size=2cm]	(View)			at (0,0)		{View}
-		edge [in=-100, out=-80, loop] 	node [auto]	{updates} (View);
-	\node [place, minimum size=2cm]	(Controller)		at (5,3)		{Controller}
-		edge [pre, bend right=30]	node [auto, swap]	{vertex id}		(View)
-		edge [post, bend left=30, very near end]	node [auto]	{MapLocation}		(View);
-	\node [place, minimum size=2cm]	(Model)			at (10,0)		{Model}
-		edge [pre, bend right=30]	node [auto, swap]	{vertex id}		(Controller)
-		edge [post, bend left=30, dashed, very near start]	node [auto]	{return: MapLocation}		(Controller)
-		edge [in=-100, out=-80, loop] 	node [auto]	{filters} (Model);
+		edge [in=-100, out=-80, loop] 	node [auto]	{6. updates} (View);
+	\node [place, minimum size=2cm]	(Controller)		at (5.5,3)		{Controller}
+		edge [pre, bend right=30]	node [auto, swap]	{1. vertex id}		(View)
+		edge [post, bend left=30, very near end]	node [auto]	{5. MapLocation}		(View);
+	\node [place, minimum size=2cm]	(Model)			at (11,0)		{Model}
+		edge [pre, bend right=30]	node [auto, swap]	{2. vertex id}		(Controller)
+		edge [post, bend left=30, dashed, very near start]	node [auto]	{4. return: MapLocation}		(Controller)
+		edge [in=-100, out=-80, loop] 	node [auto]	{3. filters} (Model);
 \end{tikzpicture}
 \caption{An illustration of the flow of the application when a search for a location is executed. If the arrows of the text was changed, this would actually be a general illustration if the communication happening in all the processes within the application in which both the \texttt{Model} and the \texttt{View} packages are active.}
+\label{fig:ControlFlow}
 \end{figure}
+
+\subsection{Use of external libraries}
+!!!Note: This must be updated if we do not find the time to stop using xml.
+
+The application makes use of the external package MigLayout (\texttt{net.miginfocom.swing.MigLayout}, \url{http://www.miglayout.com/}) for laying out the \texttt{javax.swing} components of the \texttt{SearchPanel} class. The library allows arranging the components relative to each other using a lot less code than would be necessary using the \texttt{layout managers} of the \texttt{java.awt} library.
+
+\subsection{Use of "external" code}
+A few of the classes of the application contains code which is not entirely written by ourselves. The classes \texttt{QuadTree}, \texttt{Interval}, and \texttt{Interval2D} are classes from \url{http://algs4.cs.princeton.edu/}, which is then modified to fit the needs of our application. The exact URLs / links to each of the classes are to be found as a comment within each of the classes, just below the imports.
+
+The original classes generic of a type extending \texttt{Comparable}. Our modification extend to changing the generic type to be of the simple type \texttt{double}, allowing us to do comparisons using the \texttt{>}, \texttt{<}, and \texttt{==} operators and avoid auto-boxing and -unboxing.
+
+Actually, the three classes were not compliant as they were first downloaded (or more exactly, the \texttt{Interval2D} class were not compliant with the others). But few modifications removed the issues. The logic of the code is still more or less exactly the same as it originally were.
+
+!!! Missing information about from where the Dijkstra is found...
+
+\subsection{Easter eggs}
+!!! This section must be edited, given we do not have the time to make the "\textit{rainbow path}" an easter egg.
+
+The application includes two hidden features, so called easter eggs.
+
+The first is concerning the input typed in by the user. The application allows the input being written as ASCII characters in binary, whereas the application will translate the input numbers to the corresponding address (similar to a regular search), once a search is executed.
+
+The binary conversion, however, has its limitation. Since only ASCII characters are allowed, characters such as the "Nordic" letters are not allowed, or more precisely they are not possible to write. Also, the automatic text completion does not update the list of possible addresses while a binary input is typed by the user. This is, because the binary addresses are not stored withing the \texttt{TernaryTrie} class, but it is translated once the \texttt{Find}-button is pushed.
+
+The second easter egg is that if the user types in the string "\textit{Rainbow Road}", trips will from there on be drawn using six different colors. For each road segment on the trip, a new color is used. Typing "\textit{Ordinary Road}" will reset the application to display trips in the default manner once again.
 
 \subsection{Outline}
 \begin{itemize}
@@ -394,6 +437,12 @@ The validity checking is a follows:
 \section{Discussion}
 \label{sec:Discussion}
 
+\subsection{Quadtree or k-D tree}
+We have decided on a quadtree for our data structure. We believe that we could have got a similar result using k-D trees. The k-D trees have the advantage that they are easy to balance. Quadtrees have the advantage that they have an overall smaller height, due to the nature of the k-D trees being binary trees.
+
+\subsection{Our use of four quadtrees}
+Our current data structure consists of four quadtrees, one per type of edge stored. This means the application has to search through several quadtrees, if several types are to be drawn. It would be preferable having everything in the same tree, allowing the overall tree height (the sum of all our tree heights) to be smaller. But since we only have four quadtrees, we believe that the performance difference would be un-noticeable.
+
 \subsection{Outline}
 \begin{itemize}
 	\item Platform - Must be expanded to include slow search etc. \\
@@ -421,6 +470,8 @@ The validity checking is a follows:
 	\item Memory usage \\
 		\textsl{Mikkel}
 	\item The MVC pattern \\
+		\textsl{Mikkel}
+	\item Easter eggs \\
 		\textsl{Mikkel}
 \end{itemize}
 
