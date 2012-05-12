@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 
 //Class used to represent a vertex in the shortest path clases: Dijkstra, Graph, and GraphInput
-class Vertex implements Comparable<Vertex>
+public class Vertex implements Comparable<Vertex>
 {
 	public final double x, y;
 	public final String id;
