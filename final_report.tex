@@ -144,7 +144,7 @@ It has to be possible for the user to select the addresses on the list, copying 
 	\item Data structures
 	\begin{itemize}
 		\item Preprocessed files \\
-		\textsl{Niels}
+		We have decided on using preprocessed files containing the edge and vertex data needed to create graphs for pathfinding. This speeds up the graph creation process since the files we have to read through contain only the information that is strictly necessary to create the graphs. Also, since the files only need to be created once (ever), this can be done outside of the application, not adding to the start-up time, and in contrast to having the krak files lying around in the application, these files serve the same purpose but without taking up nearly as much memory.
 		\item Storing the edges (quadtrees, in the app and in the file) \\
 		\textsl{Niels}
 		\item The graph data structures (in the app and the files) \\
