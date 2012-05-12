@@ -22,7 +22,7 @@ public class Model {
 	public Model() throws RuntimeException {
 		try {
 		edges = new QuadTreeDS();
-		XMLReader.readXML("short.xml", edges);
+		RoadsDataReader.readXML("data.roads", edges);
 		Graph.wakeUp();
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block
