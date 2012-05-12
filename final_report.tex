@@ -450,7 +450,7 @@ The second easter egg is that if the user types in the string "\textit{Rainbow R
 		\item QuadTree
 			\textsl{Make a sample input with a know output and compare}
 		\item TripEdge
-			\textsl{Blackbox testing of the \texttt{computTime} method}
+			\textsl{Blackbox testing of the \texttt{computeTime} method}
 	\end{itemize}
 	\item View package
 	\begin{itemize}
@@ -533,8 +533,6 @@ The \textit{Binary Input} easter egg has not, like the \textit{Rainbow Road}, be
 	\item Reading the XML-file as a text file \\
 		\textsl{Mikkel}
 	\item Memory usage \\
-		\textsl{Mikkel}
-	\item The MVC pattern \\
 		\textsl{Mikkel}
 	\item Easter eggs \\
 		\textsl{Mikkel}
@@ -1251,6 +1249,122 @@ Sunday 13/5-2012, 10:00 at ITU
 
 \pagebreak
 \section{Work sheets made on Monday, 17/4-2012}
+
+
+\pagebreak
+\section{Testing}
+
+\pagebreak
+\subsection{AddressParser class}
+The testing of the \texttt{parseAddress} method of the \texttt{AddressParser} class includes a whitebox test and a blackbox test. The whitebox test consists of input data sets from the blackbox testing, making the two tests share a single expectancy table.
+
+\subsubsection{Whitebox test of the parseAddress method}
+
+
+\subsubsection{Blackbox test of the parseAddress method}
+
+
+\subsubsection{Shared expectancy table}
+
+
+\subsection{Coordinates class}
+For the testing of both of the following methods, the values of the \texttt{MinAndMaxValues} class, which are used are set to the following:
+\begin{itemize}
+	\item $minX = 20$
+	\item $maxX = 120$
+	\item $minY = 30$
+	\item $maxY = 130$
+	\item $width = 10$
+	\item $height = 10$
+\end{itemize}
+
+\subsubsection{Blackbox test of the \texttt{convertXToPixels method}}
+The \texttt{convertXToPixels} methods has been tested according to the following expectancy table: \\ \\
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input & Expected output & Actual output \\
+	\hline
+	Ordinary number & 50 & 3 & 3 \\
+	Minimum value & 20 & 0 & 0 \\
+	Maximum value & 120 & 10 & 10 \\
+	Lower than minimum & 10 & -1 & -1 \\
+	Higher than maximum & 130 & 11 & 11
+\end{tabular}
+
+\subsubsection{Blackbox test of the \texttt{convertXToPixels method}}
+The \texttt{convertYToPixels} methods has been tested according to the following expectancy table: \\ \\
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input & Expected output & Actual output \\
+	\hline
+	Ordinary number & 60 & 7 & 7 \\
+	Minimum value & 30 & 10 & 10 \\
+	Maximum value & 130 & 0 & 0 \\
+	Lower than minimum & 20 & 11 & 11 \\
+	Higher than maximum & 140 & -1 & -1
+\end{tabular}
+
+\pagebreak
+\subsection{Dijkstra class}
+
+\pagebreak
+\subsection{GVertex and Vertex classes}
+Both the \texttt{GVertex} and \texttt{Vertex} classes share the \texttt{distance} method, only taking different parameters. Both methods have been blackbox tested according to the following expectancy table: \\ \\
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input & Expected output & Actual output \\
+	\hline
+	Positive numbers, increasing & $(8,4$), $(16,12)$ & $11.3137$ & ??? \\
+	Positive numbers, decreasing & $(20,15)$, $(13,12)$ & $7.6158$ & ??? \\
+	Positive numbers, one coordinate increasing, one decreasing & $(10, 5)$, $(5, 10)$ & $7.0711$ & ??? \\
+	Negative numbers & $(-10, -3)$, $(-3, -1)$ & $7.2801$ & ??? \\
+	Negative and positive numbers & $(7, 5)$, $(-7, -5)$ & $17.2047$ & ??? \\
+	Positive and negative numbers mixed & $(1, -3)$, $(17, 2)$ & $16.7631$ & ??? \\
+	All numbers zero & (0, 0), (0, 0) & 0.0000 & ??? \\
+	One number zero & (0, 0), (-3, 7) & $7.6158$ & ??? \\
+	Decimal numbers & $(3.7, 5.9)$, $(-3.3, 2.3)$ & $7.8715$ & ??? \\
+	Large numbers (UTM) & $(892250.58771$, $6147885.93632)$, $(892297.17852$, $6147868.40019)$ & $49.7817$ & ??? \\
+	Low numbers & $(0.58171$, $0.93432)$, $(-0.18852$, $0.43019)$ & $0.9205$ & ??? \\
+	Large and low numbers & $(2, 5)$, $(892250.58771$, $6147885.93632)$ & $6212290,0407$ & ???
+\end{tabular}
+\\ \\ \\
+Each of the results have been rounded to the nearest $1/10000$
+0.37704
+0.2541470569
+\pagebreak
+\subsection{KrakToXMLConverter class}
+
+\pagebreak
+\subsection{Quadtree class}
+
+\pagebreak
+\subsection{TripEdge class}
+The \texttt{TripEdge} class includes the \texttt{computeTime} method for computing time. The method has been tested according to the following expectancy table: \\ \\
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input (speed, distance) & Expected output & Actual output \\
+	\hline
+	Ordinary numbers, large distance & 120, 60000 & ??? & ??? \\
+	Ordinary numbers, large speed & 6000, 200 & 30 \\
+	Ordinary numbers, small distance & 80, 120 & 0.09 & ??? \\
+	Ordinary numbers, distance smaller than speed & 30, 3 & 0.006 & ??? \\
+	Negative speed & -30, 120 & Exception & ??? \\
+	Negative distance & 120, -30 & Exception & ??? \\
+	Negative both & -60, -120 & Exception & ??? \\
+	Zero speed & 0, 2000 & Exception & ??? \\
+	Zero distance & 80, 0 & 0 & ??? \\
+	Zero both & 0, 0 & 0 & ???
+\end{tabular}
+
+\pagebreak
+\subsection{TernaryTrie class}
+
+\pagebreak
+\subsection{Testing the graphical user interface}
+
+\pagebreak
+\subsection{Blackbox test template}
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input & Expected output & Actual output \\
+	\hline
+	??? & ??? & ??? & ???
+\end{tabular}
 
 
 \pagebreak
