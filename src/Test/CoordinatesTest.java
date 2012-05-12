@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import Model.Coordinates;
-import Global.*;
+import View.MinAndMaxValues;
 
 public class CoordinatesTest {
 	

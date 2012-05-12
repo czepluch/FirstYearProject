@@ -1,4 +1,4 @@
-package Global;
+package Controller;
 
 import javax.swing.JOptionPane;
 

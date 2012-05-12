@@ -1,4 +1,4 @@
-package Global;
+package View;
 
 /**
  * Contains global variables and methods used when drawing the map.

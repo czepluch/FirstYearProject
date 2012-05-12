@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static Global.MinAndMaxValues.*;
+import static View.MinAndMaxValues.*;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;

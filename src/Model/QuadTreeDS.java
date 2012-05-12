@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import Model.Point;
-import static Global.MinAndMaxValues.*;
+import static View.MinAndMaxValues.*;
 
 /**
  * Used to create the Quad Tree.

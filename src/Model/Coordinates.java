@@ -1,6 +1,6 @@
 package Model;
 
-import static Global.MinAndMaxValues.*;
+import static View.MinAndMaxValues.*;
 
 /**
  * Has the responsibility of converting UTM32 coordinates to pixels

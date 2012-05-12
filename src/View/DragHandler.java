@@ -1,6 +1,6 @@
 package View;
 
-import static Global.MinAndMaxValues.*;
+import static View.MinAndMaxValues.*;
 import Model.MapLocation;
 
 public class DragHandler {

@@ -1,8 +1,8 @@
 package Model;
 
-import static Global.MinAndMaxValues.*;
 import static Model.Graph.G;
 import static Model.TripCriteria.*;
+import static View.MinAndMaxValues.*;
 
 /**
  * The part of the application taking care of data handling

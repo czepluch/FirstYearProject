@@ -1,6 +1,5 @@
 package View;
 import javax.swing.*;
-import Global.*;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;

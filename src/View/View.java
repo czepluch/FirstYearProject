@@ -6,8 +6,7 @@ import Model.MapLocation;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
-import Global.ErrorHandler;
-import Global.MinAndMaxValues;
+import Controller.ErrorHandler;
 
 /**
  * The View/GUI of the application

@@ -2,7 +2,7 @@ package View;
 
 import javax.swing.*;
 
-import static Global.MinAndMaxValues.*;
+import static View.MinAndMaxValues.*;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
