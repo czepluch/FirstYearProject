@@ -400,6 +400,7 @@ Actually, the three classes were not compliant as they were first downloaded (or
 !!! Missing information about from where the Dijkstra is found...
 
 \subsection{Easter eggs}
+\label{sec:Imp, Easter eggs}
 !!! This section must be edited, given we do not have the time to make the "\textit{rainbow path}" an easter egg.
 
 The application includes two hidden features, so called easter eggs.
@@ -442,6 +443,39 @@ We have decided on a quadtree for our data structure. We believe that we could h
 
 \subsection{Our use of four quadtrees}
 Our current data structure consists of four quadtrees, one per type of edge stored. This means the application has to search through several quadtrees, if several types are to be drawn. It would be preferable having everything in the same tree, allowing the overall tree height (the sum of all our tree heights) to be smaller. But since we only have four quadtrees, we believe that the performance difference would be un-noticeable.
+
+\subsection{Reading XML as if it was simply text}
+!!! Maybe i think we should just change this?
+
+\subsection{Memory usage}
+The application stores a lot of information, which is read from several large text files at start-up. The information stored is for example information about each road segment in the quadtree data structure, each searchable address in different formats allowing the user to search efficiently with corresponding vertex ids, and a graph structure representing all the locations from the data from Krak and connections between them. The result is that the application already before any user interaction has been performed uses close to ??? of memory.
+
+The memory uses is increased even further once the search for a trip is executed. A search, where the two given addresses are valid, results in the need of using extra space for the trip computation, bringing the memory usage up to about ???.
+
+Another downside to all the information needed to be stored is the start-up time. It takes about ??? seconds on an average computer to launch the application. The major time consumers during the launch are the following: \\ \\
+\begin{tabular}{ p{5cm} | p{3cm} }
+	\textbf{Thing to be created} & \textbf{Launch time} \\
+	\hline
+	\texttt{QuadtreeDS} & ??? \\
+	\texttt{Graph} & ??? \\
+	\texttt{TernaryTrie} & ??? \\
+	\texttt{Graphical user interface} & ???
+\end{tabular}
+\\ \\ \\
+If the application were to be distributed, ??? seconds is a quite long start-up time for an application. And since the application shows no information to the user about the progress of the application, the user might think that the application has not started to launch at all. In the worst case, the user could then try to run the application multiple time, which would result in an even larger usage of memory, and with an average personal computer, the memory usage would most likely try to exceed the physical limits.
+
+Even that standard memory usage of the application will use up such a vast amount of memory on the computer on the user that running other applications simultaneously with running this application would most likely be a slow experience, given the application is running on an average personal computer.
+
+We do, however, believe that the upsides to the memory usage by far exceeds the downsides. To be more exact, it would not be possible for the application to run as it does, were the information not stored in the memory of the computer, since the application is based on data structures optimized for searching in different ways.
+
+An alternative to having such a vast memory usage on the computer of the user could be a client-server situation, where all the information is stored in the memory of the server, allowing for optimized searches, whereas the client side needs only the very small part of the information which is currently to be displayed in the graphical user interface. This would moreover open up for the possibility of have more than one client accessing the same server simultaneously. But it was a design decision of ours having everything within the application and thereby also making the application accessible by only one user at the time, e.g. the user on the computer itself. Having it any other would, as mention in ??? demand changes to the overall structure of the application.
+
+\subsection{Easter eggs}
+The easter eggs of the application as described in section \ref{sec:Imp, Easter eggs} og page \pageref{sec:Imp, Easter eggs} does not really add anything to the application itself from the user's point of view. However, we decided to include them anyway because the add a lot to the application from our point of view as the makers of the application.
+
+More or less as soon as we had implemented the finding of trips, the implementation of the \textit{Rainbow Road} easter egg was implemented as well (actually this was through most of the writing of the application the default way of displaying roads with no other options available). And it is something we have actually had quite a lot of fun with. We find it unnecessary or at least sad to remove a, though small, part of the application which has been essential to the process of making the application. Instead we decided to hide it as an easter egg.
+
+The \textit{Binary Input} easter egg has not, like the \textit{Rainbow Road}, been a part of application for a long time. The main reasons for having this hidden feature is that it is the only feature supported by our application, which is not supported by the major providers of map services.
 
 \subsection{Outline}
 \begin{itemize}
