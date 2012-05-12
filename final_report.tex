@@ -386,8 +386,6 @@ The validity checking is a follows (as also illustrated on figure \ref{fig:Contr
 \end{figure}
 
 \subsection{Use of external libraries}
-!!!Note: This must be updated if we do not find the time to stop using xml.
-
 The application makes use of the external package MigLayout (\texttt{net.miginfocom.swing.MigLayout}, \url{http://www.miglayout.com/}) for laying out the \texttt{javax.swing} components of the \texttt{SearchPanel} class. The library allows arranging the components relative to each other using a lot less code than would be necessary using the \texttt{layout managers} of the \texttt{java.awt} library.
 
 \subsection{Use of "external" code}
@@ -401,8 +399,6 @@ Actually, the three classes were not compliant as they were first downloaded (or
 
 \subsection{Easter eggs}
 \label{sec:Imp, Easter eggs}
-!!! This section must be edited, given we do not have the time to make the "\textit{rainbow path}" an easter egg.
-
 The application includes two hidden features, so called easter eggs.
 
 The first is concerning the input typed in by the user. The application allows the input being written as ASCII characters in binary, whereas the application will translate the input numbers to the corresponding address (similar to a regular search), once a search is executed.
@@ -474,9 +470,6 @@ We have decided on a quadtree for our data structure. We believe that we could h
 
 \subsection{Our use of four quadtrees}
 Our current data structure consists of four quadtrees, one per type of edge stored. This means the application has to search through several quadtrees, if several types are to be drawn. It would be preferable having everything in the same tree, allowing the overall tree height (the sum of all our tree heights) to be smaller. But since we only have four quadtrees, we believe that the performance difference would be un-noticeable.
-
-\subsection{Reading XML as if it was simply text}
-!!! Maybe i think we should just change this?
 
 \subsection{Memory usage}
 The application stores a lot of information, which is read from several large text files at start-up. The information stored is for example information about each road segment in the quadtree data structure, each searchable address in different formats allowing the user to search efficiently with corresponding vertex ids, and a graph structure representing all the locations from the data from Krak and connections between them. The result is that the application already before any user interaction has been performed uses close to ??? of memory.
