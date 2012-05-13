@@ -35,6 +35,17 @@ This second search criteria is also to be selected by the user. This is to be do
 
 All input fields, button(s) and radio buttons are to be labeled with either names which in themselves describe the purpose of the component to a satisfactory level, or with a short description of the purpose.
 
+When a trip is found, all of the roads segments of which is consists are drawn on the \texttt{MapPanel} using a purple color. They are drawn on top of the roads already visualised. In addition to that, below that radio buttons for toggling the search criteria, the following information is displayed to the user:
+\begin{itemize}
+	\item The length of the road in kilometers
+	\item The time it takes to follow the trip in minutes
+\end{itemize}
+When finding the fastest path, the time displayed is according the the speed limit of the road segments (you move as fast as your allowed to). When finding the shortest path, the time displayed is 5 kilometers per hour (about the average walking speed of a human being).
+
+When a location is found, the locations is drawn as a purple, filled out circle on the map.
+
+When either a trip or location is found, the current view is changed so the trip / location is in the center of the map, and the map is zoomed to a fitting level.
+
 \subsubsection{What is a valid address}
 The validity of a typed in address is dependent upon two different things; the \textit{content} of the address and the \textit{format} in which the address is written.
 

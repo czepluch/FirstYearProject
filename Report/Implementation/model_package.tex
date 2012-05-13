@@ -73,3 +73,6 @@ The \texttt{Graph} class actually contains two graph structures representing the
 The static \texttt{Graph} object itself contains \texttt{ArrayList} representations of each of these graphs. These will be referred to as graphs from now on. The graphs contain \texttt{Vertex} objects which have a position, some neighbouring vertices, and some adjacent edges (of the type \texttt{GEdge}). A \texttt{HashMap} for each of these two graphs is used to quickly access a vertex, given its id. Two \texttt{HashMaps} are used since each graph has its representation of each edge (the edges have different weights across the graphs). When searching for a path, the correct \texttt{ArrayList} and \texttt{HashMap} are returned, depending on whether the user requests the fastest path of the shortest path.
 
 Furthermore, a third \texttt{HashMap} is used to keep track of each \texttt{Vertex's} adjacent \texttt{GEdges}.
+
+\subsubsection{Dijkstra}
+The \texttt{Dijkstra} class contains the path finding algorithm used by our application. As the name of the class would suggest, this algorithm is Dijkstra's path finding algorithm. We chose to implement this algorithm because it is fairly simple and runs fast enough for our needs.
