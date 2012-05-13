@@ -98,9 +98,13 @@ public class TripEdge<T> {
 	/*
 	 * Helper method
 	 * Computes the time according to the distance and speed
+	 * @throws IllegalArgumentException
 	 */
-	private void computeTime() {
-		time = ((getDistance() / 1000) * 60) / speed;
+	private void computeTime() throws IllegalArgumentException {
+		if ((distance == 0) && (speed == 0)) time = 0;
+		else if (speed == 0) throw new IllegalArgumentException("Speed is zero");
+		else if ((distance < 0) || (speed < 0)) throw new IllegalArgumentException("Negative speed and/or distance");
+		else time = ((getDistance() / 1000) * 60) / speed;
 	}
 	
 	/*

@@ -1,6 +1,5 @@
 package View;
 import javax.swing.*;
-import Global.*;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
@@ -28,6 +27,8 @@ public class MapPanel extends JPanel {
 	private int lastEndY;
 	private int endX;
 	private int endY;
+	// Variable for the Rainbow Road easter egg
+	private boolean rainbow;
 	
 	/**
 	 * Constructor
@@ -39,6 +40,7 @@ public class MapPanel extends JPanel {
 		this.listener = listener;
 		trip = null;
 		location = null;
+		rainbow = false;
 		addListeners();
 	}
 	
@@ -53,23 +55,29 @@ public class MapPanel extends JPanel {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		for (int i = 0; i < lines.length; i++) {
 			switch(i) {
+				// Feries
+				case 0:	g2.setColor(Color.pink);
+				g2.setStroke(new BasicStroke((3 * MinAndMaxValues.lineWidth),
+										 			BasicStroke.CAP_ROUND,
+										 			BasicStroke.JOIN_ROUND)); break;
+			
 				// Other roads
-				case 0:	g2.setColor(Color.green);
+				case 1:	g2.setColor(Color.green);
 						g2.setStroke(new BasicStroke((1 * MinAndMaxValues.lineWidth),
 													 BasicStroke.CAP_ROUND,
 													 BasicStroke.JOIN_ROUND)); break;
 				// Secondary roads
-				case 1: g2.setColor(Color.black);
+				case 2: g2.setColor(Color.black);
 						g2.setStroke(new BasicStroke((2 * MinAndMaxValues.lineWidth),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;
 				// Primary roads
-				case 2: g2.setColor(Color.blue);
+				case 3: g2.setColor(Color.blue);
 						g2.setStroke(new BasicStroke((3 * MinAndMaxValues.lineWidth),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;
 				// Highways
-				case 3: g2.setColor(Color.red);
+				case 4: g2.setColor(Color.red);
 						g2.setStroke(new BasicStroke((5 * MinAndMaxValues.lineWidth),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;
@@ -85,9 +93,16 @@ public class MapPanel extends JPanel {
 					 					 BasicStroke.CAP_ROUND,
 					 					 BasicStroke.JOIN_ROUND));
 			List<TripEdge<Integer>> edges = trip.getEdges();
-			for (TripEdge<Integer> e : edges) {
-				g2.setColor(RainbowGenerator.nextColor());
-				g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+			if (rainbow) {
+				for (TripEdge<Integer> e : edges) {
+					g2.setColor(RainbowGenerator.nextColor());
+					g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+				} 
+			} else {
+				g2.setColor(Color.magenta);
+				for (TripEdge<Integer> e : edges) {
+					g2.drawLine(e.getFromX(), e.getFromY(), e.getToX(), e.getToY());
+				} 
 			}
 		}
 		if (location != null) {
@@ -118,6 +133,15 @@ public class MapPanel extends JPanel {
 		this.trip = trip;
 		this.location = location;
 		repaint();
+	}
+	
+	/**
+	 * Sets whether or not found trips should be displayed as rainbows.
+	 * @param rainbowOn true if the trips are to be displayed as a rainbow,
+	 * 					else false
+	 */
+	public void setRainbow(boolean rainbowOn) {
+		rainbow = rainbowOn;
 	}
 	
 	//Circumstantial methods:

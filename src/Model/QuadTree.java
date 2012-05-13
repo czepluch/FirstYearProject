@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import Model.Point;
-import static Global.MinAndMaxValues.*;
+import static View.MinAndMaxValues.*;
 
 /*
  * This implementation is taken from http://algs4.cs.princeton.edu/92search/QuadTree.java.html

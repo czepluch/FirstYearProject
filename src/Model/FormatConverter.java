@@ -22,12 +22,14 @@ public class FormatConverter {
 		ArrayList<int[]> type2 = new ArrayList<int[]>();
 		ArrayList<int[]> type3 = new ArrayList<int[]>();
 		ArrayList<int[]> type4 = new ArrayList<int[]>();
+		ArrayList<int[]> type5 = new ArrayList<int[]>();
 		for (KEdge e : edges) {
 			switch (e.getType()) {
 				case 1: type1.add(convertEdge(e)); break; // Highways
 				case 2: type2.add(convertEdge(e)); break; // Primary roads
 				case 3: type3.add(convertEdge(e)); break; // Secondary roads
 				case 4: type4.add(convertEdge(e)); break; // Other roads
+				case 5: type5.add(convertEdge(e)); break; // Feries
 				// If some other type exists, it is not drawn
 				default: break;
 			}
@@ -37,8 +39,9 @@ public class FormatConverter {
 		int[][] edges2 = listToArray(type2);
 		int[][] edges3 = listToArray(type3);
 		int[][] edges4 = listToArray(type4);
+		int[][] edges5 = listToArray(type5);
 		
-		int[][][] convertedEdges = { edges4, edges3, edges2, edges1 };
+		int[][][] convertedEdges = { edges5, edges4, edges3, edges2, edges1 };
 		return convertedEdges;
 	}
 	

@@ -1,8 +1,8 @@
 package Model;
 
-import static Global.MinAndMaxValues.*;
 import static Model.Graph.G;
 import static Model.TripCriteria.*;
+import static View.MinAndMaxValues.*;
 
 /**
  * The part of the application taking care of data handling
@@ -22,7 +22,7 @@ public class Model {
 	public Model() throws RuntimeException {
 		try {
 		edges = new QuadTreeDS();
-		XMLReader.readXML("short.xml", edges);
+		RoadsDataReader.readXML("data.roads", edges);
 		Graph.wakeUp();
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block

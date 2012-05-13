@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static Global.MinAndMaxValues.*;
+import static View.MinAndMaxValues.*;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
@@ -81,8 +81,8 @@ public class SearchPanel extends JPanel {
 			tripLengthLabVar.setText("");
 			tripTimeLabVar.setText("");
 		} else {
-			String distance = String.format("%.2g", trip.getDistance() / 1000);
-			String time = String.format("%.2g", trip.getTime());
+			String distance = String.format("%.2f", trip.getDistance() / 1000);
+			String time = String.format("%.2f", trip.getTime());
 			tripLengthLabVar.setText(distance + "  km");
 			tripTimeLabVar.setText(time + " min");
 		}

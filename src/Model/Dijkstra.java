@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import static Model.Graph.G;
-import static Global.MinAndMaxValues.maxSpeed;
 import static Model.TripCriteria.*;
+import static View.MinAndMaxValues.maxSpeed;
 
 /**
  * Class used to compute the shortest path between two given vertices
