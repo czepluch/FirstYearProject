@@ -1,0 +1,931 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{inputenc}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{varioref}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
+\usepackage{enumitem}
+\usepackage{newclude}
+\newcommand{\field} [1] {\mathbb{#1}}
+\begin{document}
+
+\begin{titlepage}
+\centering \parindent=0pt
+\newcommand{\HRule}{\rule{\textwidth}{1mm}}
+\vspace*{\stretch{1}} \HRule\\[1cm]\Huge\bfseries
+Roadmap\\[0.7cm]
+\large Visualisation and path finding\\[1cm]
+\HRule\\[4cm]  \large by \\Jacob Stenum Czepluch (jstc@itu.dk), \\Niels Liljedahl Christensen (nlch@itu.dk), \\Mikkel Larsen (milar@itu.dk), \\Sigurt Bladt Dinesen (sidi@itu.dk) \\
+\vspace*{\stretch{2}} \normalsize %
+\begin{flushleft}
+IT-University\\
+Copenhagen\\
+First year project\\
+Rasmus Pagh\\
+\today \end{flushleft}
+\end{titlepage}
+
+\tableofcontents
+\pagebreak
+
+\pagebreak
+\section{Introduction}
+\include*{Introduction/introduction}
+
+\pagebreak
+\section{User manual}
+\include*{User_manual/main}
+
+\subsection{Navigating the map}
+\include*{User_manual/navigating_the_map}
+
+\subsection{Finding specific locations and trips}
+\include*{User_manual/finding_specific_locations_and_trips}
+
+\pagebreak
+\section{Design choices}
+\label{sec:Design choices}
+\include*{Design_choices/main}
+
+\subsection{Architectural Pattern}
+\label{sub:Design Pattern}
+\include*{Design_choices/architectural_pattern}
+
+\subsection{Data structures}
+\include*{Design_choices/data_structures}
+
+\subsection{Visualisation and user interaction}
+\include*{Design_choices/visualisation_and_user_interaction}
+
+\subsection{Outline}
+\include*{Design_choices/outline}
+
+\pagebreak
+\section{Implementation}
+\label{sec:Implementation}
+\include*{Implementation/main}
+
+\subsection{Controller package} % This is a simple description of the implementation of the Controller class.
+\include*{Implementation/controller_package}
+
+\subsection{Model package} % The description of the Model package is more complicated and consists of descriptions of several other classes.
+\include*{Implementation/model_package}
+
+\subsection{View package} % Consists of all the classes handling the graphical user interface
+\include*{Implementation/view_package}
+
+\subsection{Connecting the graphical user interface and the TernaryTrie}
+\include*{Implementation/connecting_the_graphical_user_interface_and_the_ternarytrie}
+
+\subsection{Connecting the graphical user interface and the \texttt{TernaryTrie} with the Model for searching for trips and locations}
+\include*{Implementation/connecting_gui_ternarytrie_model}
+
+\subsection{Trie.class}
+\label{sec:Trie.class}
+\include*{Implementation/trie_class}
+
+\subsection{Use of external libraries}
+\include*{Implementation/use_of_external_libraries}
+
+\subsection{Use of "external" code}
+\include*{Implementation/use_of_external_code}
+
+\subsection{Easter eggs}
+\label{sec:Imp, Easter eggs}
+\include*{Implementation/easter_eggs}
+
+\subsection{Outline}
+\include*{Implementation/outline}
+
+\pagebreak
+\section{Testing}
+\label{sec:Testing}
+\include*{Testing/outline}
+
+\pagebreak
+\section{Discussion}
+\label{sec:Discussion}
+
+\subsection{Quadtree or k-D tree}
+\include*{Discussion/quadtree_or_kd_tree}
+
+\subsection{Our use of four quadtrees}
+\include*{Discussion/our_use_of_four_quadtrees}
+
+\subsection{Optimizing the quadtree}
+\include*{Discussion/optimizing_the_quadtree}
+
+\subsection{Alternatives to the path finding algorithm}
+\include*{Discussion/alternatives_to_the_path_finding_algorithm}
+
+\subsection{The Condition of the Trie}
+\include*{Implementation/condition_of_the_trie}
+
+\subsection{Memory usage}
+\include*{Discussion/memory_usage}
+
+\subsection{Easter eggs}
+\include*{Discussion/easter_eggs}
+
+\subsection{Outline}
+\include*{Discussion/outline}
+
+
+\pagebreak
+\section{Reflection}
+\subsection{Means of Communication}
+\include*{Reflection/means_of_communication}
+
+\subsection{Workflow}
+\include*{Reflection/workflow}
+
+\subsection{Overall}
+\include*{Reflection/overall}
+
+\subsection{Outline}
+\include*{Reflection/outline}
+
+
+\pagebreak
+\section{Conclusion}
+\label{sec:Conclusion}
+\include*{Conclusion/conclusion}
+
+
+\pagebreak
+\appendix
+\section{Group constitution}
+\include*{Appendices/Group_constitution/constitution}
+
+
+\pagebreak
+\section{Project diary}
+\label{sec:Diary}
+
+\subsection{Monday, 19/3-2012}
+\include*{Appendices/Project_diary/monday_19_3_12}
+
+\pagebreak
+\subsection{Wednesday, 21/3-2012}
+\include*{Appendices/Project_diary/wednesday_21_3_12}
+
+\pagebreak
+\subsection{Monday, 26/3-2012}
+\include*{Appendices/Project_diary/monday_26_3_12}
+
+\pagebreak
+\subsection{Wednesday, 28/3-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Data structure
+	\item MapPanel
+\end{enumerate}
+Today is following the class structures we have made previously. We are going to work with the implementations. \\ \\
+\underline{1. Data structure} \\
+We are currently working on a custom-implementation of a kd-tree, but it is causing many difficulties. Most of the work to follow will be concerning this \\ \\
+\underline{2. MapPanel (The visualization of the data)} \\
+We now have decent zoom- and panning-capabilities, and everything runs fairly well (considering it is running on a ?mock?-implementation of our data structure). One last modification concerning zoom coordinates is to be made.
+
+\subsubsection*{Reflection}
+We are having many difficulties concerning the kd-tree, which might be because we have not completely understood how we can use it / how to make it the base of our storage of data.
+
+We continue having a very relaxed tone at our group meetings, were were discuss issues (the only issues are really about the project) as they come.
+
+We all feel that we are moving towards a result we are very satisfied with.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Implement the last needed zoom capability \\
+		\textsl{Mikkel will do this}
+	\item Make the kd-tree replace the mock-implementation of our data structure \\
+		\textsl{Niels work on this}
+	\item Start making descriptions of our project / parts of the report \\
+		\textsl{Jacob might look into this if he finds the time}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Monday, 2/4-2012, 10:00
+
+
+\pagebreak
+\subsection{Monday, 2/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Do we have questions for Rasmus?
+	\item Discuss data structure
+	\item How should window resizing work
+	\item Are we missing any part of the implementation
+	\item Testing
+	\item Report
+\end{enumerate}
+\underline{1. Do we have questions for Rasmus?} \\
+We had and asked a question about balancing QuadTrees. We got an acceptable answer and tested balanced vs unbalance QuadTrees and decided to go with unbalanced. \\ \\
+\underline{2. Discuss data structure} \\
+We decided on using a QuadTree, since the implementation was already working. \\ \\
+\underline{3. How should window resizing work} \\
+We tried keeping a constant width / height ratio, but it worked poorly on the Linux computers. Now the window is only resized according to the most significant of x or y. \\ \\
+\underline{4. Are we missing any part of the implementation} \\
+Currently, nothing is missing. The rest has been implemented today. \\ \\
+\underline{5. Testing} \\
+We have made test classes for the classes to which it seemed fair to test that way. \\ \\
+\underline{6. Report} \\
+We have made an outline for the report. We have split the report into three parts after discussion (other than introduction and conclusions). As earlier decided, the report is written in a LaTex document, which is part of our git repository. The outlines of each section is in the document. The layout is done as well. \\ \\
+
+\subsubsection*{Reflection}
+We are all very satisfied with the product as it currently is.
+We have (quite easily) come to agreement about the contents of the report.
+We are aware that we will need time making the report homogeneous.
+The works sheets are due to tomorrow (next meeting) as far as possible.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Cleanup \\
+		\textsl{Mikkel}
+	\item UML (after cleanup) \\
+		\textsl{Sigurt}
+	\item Javadoc \\
+		\textsl{Niels}
+	\item Design choices (report section) \\
+		\textsl{Jacob}
+	\item Implementation (report section) \\
+		\textsl{Mikkel}
+	\item Discussion / reflection (report section) \\
+		\textsl{// Wait 'til later}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Tuesday 3/4-2012, 19:00
+
+
+\pagebreak
+\subsection{Tuesday, 3/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item The sections of the report already written
+	\item What to do with the rest of the report
+\end{enumerate}
+\underline{1. The sections of the report already written} \\
+They need to be corrected / spellchecked (One person will run through the entire report in the end), but they are written to a satisfying level and will not need major changes. \\ \\
+\underline{2. What to do with the rest of the report} \\
+The introduction and conclusion will be written by the same person, so they are alike. One person will write the Discussion section.
+
+\subsubsection*{Reflection}
+
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Introduction and conclusion \\
+		\textsl{Jacob}
+	\item Discussion \\
+		\textsl{Mikkel}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Sunday 8/4/12 1001 hours via Skype
+
+\subsubsection*{Note}
+\begin{itemize}
+	\item Unspecified exception in Model class
+\end{itemize}
+
+
+\pagebreak
+\subsection{Sunday, 8/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Look through newly written parts of the report
+\end{enumerate}
+\underline{1. Look through newly written parts of the report} \\
+Only minor corrections have been made
+
+\subsubsection*{Reflection}
+The current task are very small, and we are very close to being done.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Correct the entire report \\
+		\textsl{Sigurt}
+	\item Shorten the Implementation and Discussion sections \\
+		\textsl{Sigurt}
+	\item Specify the Exception in the Model class \\
+		\textsl{Niels}
+	\item Have a final look through the source code \\
+		\textsl{Niels and Mikkel}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Tuesday 10/04-2012, 17:00 at ITU
+
+
+\pagebreak
+\subsection{Tuesday, 10/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Look through the report
+	\item Make a jar file
+	\item Organize the source code
+	\item Make pdf with the report
+	\item Send the entire assignment
+\end{enumerate}
+
+\subsubsection*{Reflection}
+Everything is finished, though it took a bit longer time than first expected.
+
+We has issues with creating executable .jar files, which would work on the computers running Mac OS X (no issues on Arch Linux and Windows). However, when avoiding using Java 7 (as it is not yet available for Mac) and by running the .jar file from command line allowing it to use at least 256mb memory, everything works on Mac as well.
+
+Everything is now handed in.
+
+\subsubsection*{Work sheets}
+Nothing until the next part of the assignment is given.
+
+\subsubsection*{Next meeting}
+Monday 16/4-2012, after the lecture.
+
+
+\pagebreak
+\subsection{Monday, 16/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Appointments with TA / Rasmus
+	\item Plan the future
+	\begin{enumerate}
+		\item Design decisions
+		\item Make well-defined work sheets
+	\end{enumerate}
+	\item Get started
+\end{enumerate}
+
+\subsubsection*{Reflection}
+A list of fairly well defined work sheets has been made.
+
+Along with each assignment (work sheet), we have agreed to write part of the report concerning the assignment, containing:
+\begin{itemize}
+	\item Design decisions
+	\item Implementation
+	\item Discussion
+\end{itemize}
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item The search GUI \\
+		\textsl{Mikkel}
+	\item Auto completion \\
+		\textsl{Sigurt}
+	\item Draw the fastest / shortest path \\
+		\textsl{Mikkel}
+	\item Dynamic road resizing \\
+		\textsl{Mikkel}
+	\item Compute the shortest / fastest path \\
+		\textsl{Jacob and Niels}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Wednesday 18/4-2012, 17:00 at ITU
+
+
+\pagebreak
+\subsection{Wednsday, 18/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Work day
+	\item Recap
+\end{enumerate}
+
+\subsubsection*{Reflection}
+We have decided to end the meeting at 19:30.
+
+The graph structure is finished buts needs to be integrated in the rest of the application
+
+The graphical user interface is progressing.
+
+The overall flow of the application is currently being expanded to include the new features.
+
+Work on the  ?street name lookup system? seems to be progressing.
+
+\subsubsection*{Work sheets}
+Same as last time
+
+\subsubsection*{Next meeting}
+Monday 23/4-2012, 10:00 at ITU
+
+
+\pagebreak
+\subsection{Monday, 23/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Match the modules
+	\begin{enumerate}
+		\item The graph
+		\item the user interface
+		\item the trie
+	\end{enumerate}
+	\item File containing the graph info
+	\begin{enumerate}
+		\item Format: \textsl{id,x,y otherId otherId otherId \ldots}
+	\end{enumerate}
+	\item File containing the trie info
+	\begin{enumerate}
+		\item Format: \textsl{Something\#Something else\#Something else;nodeId}
+	\end{enumerate}
+\end{enumerate}
+
+\subsubsection*{Reflection}
+We have spend quite a lot of time discussing how to make the different ?modules? of the application that we have created fit together.
+The result of the discussion was a solution, which we then started working on (seperate people working on seperate parts of the solution).
+
+The solution is not currently finished, but we are quite certain, that it will work properly.
+
+The issues were as following:
+\begin{itemize}
+	\item The interfaces of the class for finding shortest paths and the classes allowing the user to search for addresses were not compliant
+\end{itemize}
+
+The solution is as following:
+\begin{itemize}
+	\item All the valid addresses are store in a trie (several addresses / ways of typing an address are stored and referenced to the same ids).
+	\item We will pre-compute a file containing the graph structure, allowing for it to be read when the application starts, whereas it will be stored in a field. The field is then used when finding shortest paths.
+	\item The graph will support shortest-path queries of the following form: pathTo(int nodeID, int nodeID). The trie stores the addresses and their corresponding nodeID.
+\end{itemize}
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Finishing the trie \\
+		\textsl{Sigurt will \textsl{try}}
+	\item Add validation to / finish the application creating the file containing the trie data \\
+		\textsl{Mikkel}
+	\item Optimize the graph (making it usable) \\
+		\textsl{Niels}
+	\item Reach max level in the Diablo III beta \\
+		\textsl{Jacob}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Wednesday 25/04-2012, 17:00 at ITU
+
+
+\pagebreak
+\subsection{Wednesday, 25/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Make a proper graph file
+	\item Make the graph respond with the rest
+	\item Test (and fix) the Trie file
+	\item Make the Trie talk with the Trie file
+\end{enumerate}
+
+\subsubsection*{Reflection}
+Deadline:\quad 20:00
+
+The finding of shortest paths is functional, but the graph needs a seperate class.
+
+The trie is functional, and so is the address parser we will use. We will need to make them interact.
+
+There are currently issues with the trie file, as it stores each city many times. This must be fixed.
+
+We are having issues with Eclipse using different character encodings on our different machines. We will need to coordinate changing to the same format the next time we meet.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Create a seperate class for the graph \\
+		\textsl{Niels}
+	\item Make interaction between the GUI, trie, and the model \\
+		\textsl{Mikkel}
+	\item Fix issues with the trie data file \\
+		\textsl{Sigurt (look at line 162)}
+	\item Get well \\
+		\textsl{Jacob (done)}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Sunday 29/4-2012, 12:00 at ITU
+
+
+\pagebreak
+\subsection{Monday, 30/4-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item What to do with the meeting with Filip
+	\item What to do with the meeting with Rasmus
+	\item How far are we
+	\item What are we missing
+	\item Decide on extras
+\end{enumerate}
+\underline{1, What to do with the meeting with Filip} \\
+We will meet with Filip on Wednesday, 2/5-2012 at 10 am. \\ \\
+\underline{2. What to do with the meeting with Rasmus} \\
+We will write a mail to Rasmus, hoping to be able to discuss extensions on Monday, 7/5-2012. Hopefully this will be possible after 11 am, so all group members can take part. \\ \\
+\underline{3. How far are we} \\
+The project currently passes the minimum requirements. \\ \\
+\underline{4. What are we missing} \\
+
+\underline{5. Decide on extras}
+\begin{enumerate}
+	\item Description of the route
+	\item Coastline / landscape
+	\item Displaying the road names
+	\item Choose transportation type
+\end{enumerate}
+
+\begin{enumerate}
+	\item Feries
+	\item Improve the trie data
+	\item Improve the speed of the path-finding
+	\item Find quickest path, not only shortest
+	\item Make the screen move to what is found
+	\item Take care of commas in the street name of the Krak data
+	\item Splash screen for the long loading time
+\end{enumerate}
+
+\subsubsection*{Reflection}
+The improvement on the path finding is currently not working. We have started using a new algorithm. We will need more time working on this.
+
+The trie data is fine now (we think).
+
+Making the screen move correctly is not as trivial is hoped and will take some more time.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Write to Filip and Rasmus \\
+		\textsl{Mikkel}
+	\item Feries \\
+		\textsl{Mikkel (not first priority)}
+	\item Trie data \\
+		\textsl{Sigurt}
+	\item Speed of path finding \\
+		\textsl{Niels and Jacob}
+	\item Edge weight by time (not length) \\
+		\textsl{Niels and Jacob}
+	\item Move the screen when searching \\
+		\textsl{Mikkel}
+	\item Clean up the shared folder \\
+		\textsl{Sigurt}
+	\item Splash screen
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Niels and Mikkel will meet with Filip Wednesday 2/5-2012, 10.00 at ITU.
+Next group meeting: \\
+Thursday 10.00, 3/5-2012 at ITU
+
+
+\pagebreak
+\subsection{Thursday, 3/5-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item What \underline{needs} to be done
+	\item Plan the meeting with Rasmus on Monday
+	\item Outline the report (12:00)
+\end{enumerate}
+\underline{1. What needs to be done} \\
+\begin{itemize}
+	\item Fastest path (done)
+	\item Trie data
+	\item Zoom to the right location (semi-done. It works, but currently is does not check if the location is too close to the ?borders?)
+	\item Testing (what can be tested)
+\end{itemize}
+\underline{2. Plan the meeting with Rasmus} \\
+\begin{itemize}
+	\item The length of the report \\
+		\textsl{It is fine if it is short}
+	\item The roads ?disappearing? when dragging (since we check only for edge end coordinates) \\
+		\textsl{Discussion of how it could be done}
+	\item Optimising the quadtree
+	\item Running path-finding in a separate thread
+	\item Global package
+	\item Landscape drawing
+	\item Displaying road names
+	\item a*
+	\item Different ways to transport
+	\item Route description
+\end{itemize}
+\underline{3. Outline the report} \\
+Done somewhere else. \\ \\
+
+\subsubsection*{Reflection}
+Issues:
+\begin{itemize}
+	\item Somewhere old ?dropdown lists? are stored, which are interfering with the searches.
+	\item We have issues concerning the application getting slower. We need to look at some garbage collection.
+	\item The displayed time is incorrect - Should be stored as double.
+\end{itemize}
+We have decided to ?stop? implementing (finishing) on Monday 7/5-2012.
+After that day, we will finish the report before continuing the work on the implementation.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Testing / what can we test \\
+		\textsl{Jacob}
+	\item Trie data and JLists \\
+		\textsl{Sigurt}
+	\item Including the fastest path search in the application \\
+		\textsl{Mikkel}
+	\item Issues \\
+		\textsl{Niels}
+	\item Consider if we miss anything in the Design decisions section of the report \\
+		\textsl{Everyone}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Monday 7/5-2012, 11:00 at ITU
+
+
+\pagebreak
+\subsection{Monday, 7/5-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Prepare for the meeting with Rasmus
+	\item Finish / fix the critical problem
+	\item How to write the report
+	\item Testing
+\end{enumerate}
+
+\subsubsection*{Reflection}
+The meeting with Rasmus went well. We got the information we needed and we are close to the planned implementation stop.
+
+We are still missing a lot of testing.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Clean up memory? \\
+		\textsl{Niels}
+	\item Faster PQ (remove method) \\
+		\textsl{Done. Our path-finding is quite fast now (though it uses some memory)}
+	\item Trie data \\
+		\textsl{Sigurt}
+	\item Issue: Sometimes the point from which a path is found can not be changed \\
+		\textsl{Jacob}
+	\item Insert project diaries into the report \\
+		\textsl{Mikkel}
+\end{itemize}
+All the work sheets for this day will be completely finished for next meeting, where we will start writing the report.
+
+\subsubsection*{Next meeting}
+Thursday 10/5-2012, 10:00 at ITU
+
+
+\pagebreak
+\subsection{Thursday, 10/5-2012}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Discuss the application as it currently is
+	\item Outline / discuss the report (12:00)
+\end{enumerate}
+
+\subsubsection*{Reflection}
+We have reached the implementation stop. We are currently focusing on the report. Some things are still missing in the implementation, but for now they will be discussed in the report rather than being fixed. If we have time later (when the report is finished), we might look at the issues again.
+
+The report has been outlined (in the LaTeX document), and each section has been assign to a group member. In order for us to have time to evaluate our report in several stages of the writing process, we will finish the draft of the report for the next meeting (in three days), where we will discuss it.
+
+We will write to Filip, hoping that he has the time to look at the report draft and discuss it.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item Write the sections / report
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Sunday 13/5-2012, 10:00 at ITU
+
+\pagebreak
+\section{Work sheets made on Monday, 17/4-2012}
+
+
+\pagebreak
+\section{Testing}
+
+\subsection{AddressParser class}
+The testing of the \texttt{parseAddress} method of the \texttt{AddressParser} class includes a whitebox test and a blackbox test. The whitebox test consists of input data sets from the blackbox testing, making the two tests share a single expectancy table.
+
+\subsubsection{Whitebox test of the parseAddress method}
+\begin{tabular}{ p{7cm} | p{4cm}}
+	\textbf{Input property} & \textbf{Input data set} \\
+	\hline
+	Zip code last match & D1 \\
+	Zip code middle match & E1 \\
+	Zip code first match & F1 \\
+	No match & G1
+\end{tabular}
+
+\subsubsection{Blackbox test of the parseAddress method}
+In the input property, we will use the letter \textit{c} to refer to a series of characters not matching the city name / street name pattern nor the zip code pattern.
+\begin{tabular}{ p{9cm} | p{2cm}}
+	\textbf{Input property} & \textbf{Input data set} \\
+	\hline
+	City only & A1 \\
+	City only, c first & A2 \\
+	City only, c first and last & A3 \\
+	City only, Nordic characters & A4 \\
+	City name with "-" & A5 \\
+	City name with "'" & A6 \\
+	Zip only & B1 \\
+	Zip only, c first & B2 \\
+	Zip only, c first and last & B3 \\
+	"Negative" zip code & B4 \\
+	Zip code of length 2 & B5 \\
+	Zip code of length 6 & B6 \\
+	City/street and zip, zip first & C1 \\
+	City/street and zip, zip first, c first & C2 \\
+	City/street and zip, zip first, c last & C3 \\
+	City/street and zip, zip last & C4 \\
+	City/street and zip, zip last, c in between & C5 \\
+	City, street and zip, comma separation & D1 \\
+	City, street and zip, comma separation between city and street & D2 \\
+	City, street and zip, space separation & D3 \\
+	City, zip, street, no separation & E1 \\
+	City, zip, street, space separation & E2 \\
+	City, zip, street, c separation between city and zip & E3 \\
+	Zip, city, street, space separation & F1 \\
+	Zip, city, street, comma separation & F2 \\
+	Three times city/street, comma separated & G1 \\
+	City and street, long separation with different symbols & H1 \\
+	Two zip codes, space separated & I1 \\
+	Two zip codes, comma separated & I2 \\
+	c only & J1 \\
+	Empty input & J2
+\end{tabular}
+
+\subsubsection{Shared expectancy table}
+\begin{tabular}{ p{1cm} | p{4cm} | p{3cm} | p{2.5cm} }
+	Input data set & Input & Expected output & Actual output \\
+	\hline
+	A1 & Odense & odense\#\# & ? \\
+	A2 & ! Odense & odense\#\# & ? \\
+	A3 & +Odense 9/? & odense\#\# & ? \\
+	A4 & Ødense æå by üäÖ & ødense æå by üäö\#\# & ? \\
+	A5 & Odense-By & odense-by\#\# & ? \\
+	A6 & Odense' den fine by & odense' den fine by\#\# & ? \\
+	B1 & 1234 & \#1234\# & ? \\
+	B2 & ,!1234 & \#1234\# & ? \\
+	B3 & ??1234  ) & \#1234\# & ? \\
+	B4 & -1234 & -\#1234\# & ? \\
+	B5 & 12 & null & ? \\
+	B6 & 123456 & null & ? \\
+	C1 & 8765 kØGe & køge\#8765\# & ? \\
+	C2 & =?8765 kØGe & køge\#8765\# & ? \\
+	C3 & 8765 kØGe=? & køge\#8765\# & ? \\
+	C4 & køge 8765 & køge\#8765\# & ? \\
+	C5 & køge,?=!8765 & køge\#8765\# & ? \\
+	D1 & Skive, vejen, 4567 & skive\#4567\#vejen & ? \\
+	D2 & Skive, vejen4567 & skive\#4567\#vejen & ? \\
+	D3 & Skive,vejen 4567 & skive\#4567\#vejen & ? \\
+	E1 & Rådby9876allegade & rådby\#9876\#allegade & ? \\
+	E2 & Rådby 9876 allegade & rådby\#9876\#allegade & ? \\
+	E3 & Rådby?=+" +?3?9876 allegade & rådby\#9876\#allegade & ? \\
+	F1 & malmö Vegen 95667 & malmö vegen\#95667\# & ? \\
+	F2 & malmö,Vegen,95667 & malmö\#95667\#vegen & ? \\
+	G1 & københavn, roskilde, ålbæk & null & ? \\
+	H1 & brøndby-øster +12+3 03+1 9,!?Nygade & brøndby-øster\#\#nygade & ? \\
+	I1 & 1234 56789 & null & ? \\
+	I2 & 1234,56789 & null & ? \\
+	J1 & !?23++ & null & ? \\
+	J2 & "\textit{empty}" & null & ?
+\end{tabular}
+
+\pagebreak
+\subsection{Coordinates class}
+For the testing of both of the following methods, the values of the \texttt{MinAndMaxValues} class, which are used are set to the following:
+\begin{itemize}
+	\item $minX = 20$
+	\item $maxX = 120$
+	\item $minY = 30$
+	\item $maxY = 130$
+	\item $width = 10$
+	\item $height = 10$
+\end{itemize}
+
+\subsubsection{Blackbox test of the \texttt{convertXToPixels method}}
+The \texttt{convertXToPixels} methods has been tested according to the following expectancy table: \\ \\
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input & Expected output & Actual output \\
+	\hline
+	Ordinary number & 50 & 3 & 3 \\
+	Minimum value & 20 & 0 & 0 \\
+	Maximum value & 120 & 10 & 10 \\
+	Lower than minimum & 10 & -1 & -1 \\
+	Higher than maximum & 130 & 11 & 11
+\end{tabular}
+
+\subsubsection{Blackbox test of the \texttt{convertXToPixels method}}
+The \texttt{convertYToPixels} methods has been tested according to the following expectancy table: \\ \\
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input & Expected output & Actual output \\
+	\hline
+	Ordinary number & 60 & 7 & 7 \\
+	Minimum value & 30 & 10 & 10 \\
+	Maximum value & 130 & 0 & 0 \\
+	Lower than minimum & 20 & 11 & 11 \\
+	Higher than maximum & 140 & -1 & -1
+\end{tabular}
+
+\pagebreak
+\subsection{Dijkstra class}
+
+\pagebreak
+\subsection{GVertex and Vertex classes}
+Both the \texttt{GVertex} and \texttt{Vertex} classes share the \texttt{distance} method, only taking different parameters. Both methods have been blackbox tested according to the following expectancy table: \\ \\
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input & Expected output & Actual output \\
+	\hline
+	Positive numbers, increasing & $(8,4$), $(16,12)$ & $11.3137$ & ??? \\
+	Positive numbers, decreasing & $(20,15)$, $(13,12)$ & $7.6158$ & ??? \\
+	Positive numbers, one coordinate increasing, one decreasing & $(10, 5)$, $(5, 10)$ & $7.0711$ & ??? \\
+	Negative numbers & $(-10, -3)$, $(-3, -1)$ & $7.2801$ & ??? \\
+	Negative and positive numbers & $(7, 5)$, $(-7, -5)$ & $17.2047$ & ??? \\
+	Positive and negative numbers mixed & $(1, -3)$, $(17, 2)$ & $16.7631$ & ??? \\
+	All numbers zero & (0, 0), (0, 0) & 0.0000 & ??? \\
+	One number zero & (0, 0), (-3, 7) & $7.6158$ & ??? \\
+	Decimal numbers & $(3.7, 5.9)$, $(-3.3, 2.3)$ & $7.8715$ & ??? \\
+	Large numbers (UTM) & $(892250.58771$, $6147885.93632)$, $(892297.17852$, $6147868.40019)$ & $49.7817$ & ??? \\
+	Low numbers & $(0.58171$, $0.93432)$, $(-0.18852$, $0.43019)$ & $0.9205$ & ??? \\
+	Large and low numbers & $(2, 5)$, $(892250.58771$, $6147885.93632)$ & $6212290.0407$ & ???
+\end{tabular}
+\\ \\ \\
+Each of the results have been rounded to the nearest $1/10000$
+0.37704
+0.2541470569
+\pagebreak
+\subsection{KrakToXMLConverter class}
+
+\pagebreak
+\subsection{Quadtree class}
+
+\pagebreak
+\subsection{TripEdge class}
+The \texttt{TripEdge} class includes the \texttt{computeTime} method for computing time. The method has been tested according to the following expectancy table: \\ \\
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input (speed, distance) & Expected output & Actual output \\
+	\hline
+	Ordinary numbers, large distance & 120, 60000 & 30 & ??? \\
+	Ordinary numbers, large speed & 6000, 200 & 0.002 \\
+	Ordinary numbers, small distance & 80, 120 & 0.09 & ??? \\
+	Ordinary numbers, distance smaller than speed & 30, 3 & 0.006 & ??? \\
+	Negative speed & -30, 120 & Exception & ??? \\
+	Negative distance & 120, -30 & Exception & ??? \\
+	Negative both & -60, -120 & Exception & ??? \\
+	Zero speed & 0, 2000 & Exception & ??? \\
+	Zero distance & 80, 0 & 0 & ??? \\
+	Zero both & 0, 0 & 0 & ???
+\end{tabular}
+
+\pagebreak
+\subsection{TernaryTrie class}
+
+\pagebreak
+\subsection{Testing the graphical user interface}
+
+\pagebreak
+\subsection{Blackbox test template}
+\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+	Input property & Input & Expected output & Actual output \\
+	\hline
+	??? & ??? & ??? & ???
+\end{tabular}
+
+
+\pagebreak
+\subsection{Template}
+
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item ???
+	\item ???
+\end{enumerate}
+\underline{???} \\
+??? \\ \\
+\underline{???} \\
+??? \\ \\
+
+\subsubsection*{Reflection}
+???
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item ??? \\
+		\textsl{???}
+	\item ??? \\
+		\textsl{???}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+???
+
+
+\end{document}

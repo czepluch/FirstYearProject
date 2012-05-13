@@ -1,0 +1,55 @@
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Platform decision - SVG or Swing
+	\item Versioning
+	\item IDE?
+	\item Set up verisoning
+	\item Report-writing
+	\item How to get started
+\end{enumerate}
+\underline{1. Platform decision} \\
+Will have decided using Java Swing. \\ \\
+\underline{2. Versioning} \\
+We will use git, since some group members are familiar with it. \\ \\
+\underline{3. IDE?} \\
+Eclipse is our decision. \\ \\
+\underline{4. Set up versioning} \\
+This is mostly done (it is done on most of our computers. The repository is working). \\ \\
+\underline{5. Report writing} \\
+We will write the repot in LaTeX.
+
+\subsubsection*{Reflection}
+\underline{Discussion of the main class structure (packages):}
+\begin{itemize}
+	\item Controller \\
+		\textsl{Controller (main class)}
+	\item View \\
+		\textsl{MapPanel} \\
+		\textsl{MainFrame} \\
+		\textsl{View} \\
+		\textsl{ViewListener}
+	\item Model \\
+		\textsl{Edge} \\
+		\textsl{DataFilter} \\
+		\textsl{KrakToXMLConverter} \\
+		\textsl{Model} \\
+		\textsl{XMLReader}
+\end{itemize}
+\underline{Other} \\
+Our krak-data to XML converter from a previous assignment has been remade to include a "type" element
+
+The XMLReader works on small XML files
+
+At all points there is a general agreement.
+We have decided to start by making a simple visualization, then improving the functionality step by step, making sure the basic implementations work as they should.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item The XMLReader is currently exceeding heap space \hfill \\
+		\textsl{Niels will try to fix this}
+	\item Read about k-d trees \hfill \\
+		\textsl{Think about the possibility of using it as our main data structure}
+\end{itemize}
+
+\subsubsection*{Next meeting}
+Wednesday, 19/3-2012, 18:30

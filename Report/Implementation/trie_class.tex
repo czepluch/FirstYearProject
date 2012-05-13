@@ -1,0 +1,11 @@
+The search trie uses an internal node representation of characters to build a ternary tree, where each branch represents a street or city.
+The tree structure makes it possible to search for a given string in time that is $\sim\ln(N)$ for a search miss and  $\sim K+1$ for a search hit, where K is the length of the string to search for.
+In practise, on a 5 year old computer with a 2.4 Ghz intel dual-core processor, we have measured the prefix searches to take about one hundredth of a second on our trie data set.
+
+The trie  provides a simple API for searches:
+\begin{itemize}
+	\item String get(String) returns the node id associated with the location denoted by ta given String, or null if the search is a miss
+	\item Iterable<String> startsWith(String) returns all Strings that are prefixed with the given String, or null if no such Strings are found.
+\end{itemize}
+
+The code for the search trie bears the mark of being an ad-hoc solution. In order for the class to honour the OOP principle of reusability, the search key and return value should be parameterized at runtime, and the constructors for building the trie from a file should have taken a field separator as parameter rather than using the hardcoded ';' character.
