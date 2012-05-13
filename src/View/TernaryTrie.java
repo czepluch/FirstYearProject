@@ -1,3 +1,4 @@
+//The code in this file is based on the code from http://algs4.cs.princeton.edu/52trie/TST.java.html
 package View;
 
 import java.util.Queue;
@@ -113,7 +114,7 @@ public class TernaryTrie {
 	 * Prints a 60 character wide chart of characters from ascii code 0 through 600
 	 */
 	public void testChars() {
-		for (int i=0; i<600; i++){
+		for (int i=0; i<=600; i++){
 			if(i%60==0) System.out.println();
 			System.out.print((char)i + " ");
 		}		
