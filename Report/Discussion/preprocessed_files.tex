@@ -1,0 +1,12 @@
+
+There are a few downsides to the preprocessed files:
+\begin{itemize}
+	\item Several files may contain what is essentially the same data.
+	\item Many files may be more confusing than just a few files
+\end{itemize}
+
+The first issue is easily disqualified, as our data set allows for building our data structures much faster than the original, at the cost of a few dozen MiB extra space consumption
+
+The second issue is simply not an issue, we have no more than five extra files, and the advantages of the extra files are enormous compared to the trouble of creating and maintaining a few extra files:
+
+As mentioned it speeds up the start process of the application, furthermore it would allow for parallelising the processes of reading the files and building the data structures associated with them, should we wish to do so in the future.
