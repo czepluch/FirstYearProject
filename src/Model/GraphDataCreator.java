@@ -9,14 +9,14 @@ import java.io.InputStreamReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
-public class GraphInput
+public class GraphDataCreator
 {
 	private ArrayList<Vertex> vertices;
 	private ArrayList<GEdge> edges;
 	private ArrayList<Vertex>[] adj;
 	
 	@SuppressWarnings("unchecked")
-	public GraphInput(String vertex_path, String edge_path)
+	public GraphDataCreator(String vertex_path, String edge_path)
 	{
 		vertices = new ArrayList<Vertex>();
 		edges = new ArrayList<GEdge>();
@@ -124,6 +124,6 @@ public class GraphInput
 	}
 	
 	public static void main(String[] args) {
-		new GraphInput("kdv_node_unload.txt", "kdv_unload.txt");
+		new GraphDataCreator("kdv_node_unload.txt", "kdv_unload.txt");
 	}
 }
