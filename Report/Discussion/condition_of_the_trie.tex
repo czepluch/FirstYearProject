@@ -1,7 +1,7 @@
 Apart from the typical improvements to the trie structure, there are a few issues and possible improvements that are specific to this project. These will be discussed here.
 
 Firstly, a prefix search returns \underline{all} Strings in the trie with a matching prefix.
-This is standard behaviour for a trie, but the \texttt{View} class discards all but five first matches. If the trie had done this itself, it would have improved the performance of prefix searches, as a search could end its descending through the tree after five hits, instead of exhausting the sub trees of matching nodes. As mentioned in the Discussion (\ref{trie.class} page \pageref{trie.class}),
+This is standard behaviour for a trie, but the \texttt{View} class discards all but five first matches. If the trie had done this itself, it would have improved the performance of prefix searches, as a search could end its descending through the tree after five hits, instead of exhausting the sub trees of matching nodes. As mentioned in the Discussion (\ref{sec:Trie.class} page \pageref{sec:Trie.class}),
 we have largely disregarded optimizing the trie, because it is effective enough for our purpose.
 
 The second issue is perhaps a bit more grave; the city locations are quite arbitrary.

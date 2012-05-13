@@ -541,16 +541,34 @@ The \textit{Binary Input} easter egg has not, like the \textit{Rainbow Road}, be
 \begin{itemize}
 	\item Platform - Must be expanded to include slow search etc. \\
 		\textsl{Jacob}
+
+                *****I do not understand what is meant with this one?****
+
+                
+
 	\item Quadtree or k-D tree \\
 		\textsl{Done}
 	\item Optimizing the quadtree \\
 		\textsl{Niels}
 	\item Disappearing roads \\
 		\textsl{Jacob}
+
+                We have been experiencing some disappearing roads while viewing the map at a zoom level where we see all road types. This is due to the way our data structure is made, and we did not discover this problem in time to change the data structure and fix the problem entirely. Fortunately it is only very long edges that disappear at certain zoom levels. The only edges that we have really experienced this problem with, are the fairy roads. When a road disappears it happens because none of the nodes of the edge is in the "viewbox" of the program. When we zoom in we need to know which roads to draw in the frame. This is done my checking if the coordinates of an edge's nodes is within the "viewbox" or its buffer zone. If neither of the nodes are withing the zone, the edge is not drawn. So naturally when a very long edge should be drawn in the "viewbox", but does not have any of its nodes in the zone it is not drawn. 
+
 	\item Running path-finding in a separate thread \\
 		\textsl{Jacob}
+		
+		For quite a long period we had some great troubles making the path-finding searches using Dijksta's algorithm. A single search could easily take more than 30 seconds to finish. We had very big troubles figuring out what caused this slow search. We tried implementing the A* algorithm instead, but without any luck. Due to this slow search we started looking at the opportunity to make the path-finding run in a separate thread, giving the user the possibility to still navigate and explore the map. 
+
+		This was, however, after a meeting with Rasmus Pagh, not a problem anymore, since we found out that the priority queue that our Dijkstra implementation used was very slow and actually running in linear time when removing things. By deleting the part of the implementation where the non-fastest roads are removed from the priority queue, our path-finding search was now done in less than 0.5 seconds, and we did no longer see any reason to run the path-finding in a separate thread.
+
 	\item Landscape drawing \\
 		\textsl{Jacob}
+
+		To make the map look a lot better and give a better idea of what part of the map the user is looking at, we would have liked to add some landscape and coastlines to the map. This did however not have a very high priority. 
+
+		To retrieve some data that we could possibly use to draw some landscape and coastlines, we wrote an email to krak.dk/eniro.dk and asked whether we could have the data files that they use for their own map. After a couple of emails back and forth, we were given the address to an ftp server from where we could download all the data that Krak themselves use for their map service. Unfortunately the data types were not of the same type that the types we use, and we did not have the time to make the new data type work with our own. Since it is not vital for our program, and the program still serves its purpose we did not add landscape.
+
 	\item Alternatives to our path-finding algorithm \\
 		\textsl{Niels}
 	\item Incorrect paths found \\
