@@ -1,0 +1,33 @@
+The connection between the graphical user interface and the \texttt{TernaryTrie} makes use of the \texttt{Observer} design pattern. The \texttt{View} class implements the \texttt{SearchListener} interface, which contain methods to be invoked when the user interacts with the graphical user interface in a way, creating a need for classes other than the \texttt{SearchPanel} being active. The instance of the \texttt{View} class is stored in both the \texttt{SearchPanel} and the \texttt{MainFrame} classes.
+
+Whenever the user types something in one of the text fields for inputting addresses (in the \texttt{SearchPanel} class), the following happens (as also illustrated in figure \ref{fig:autocompletion} on page \pageref{fig:autocompletion}):
+\begin{itemize}
+	\item A method \texttt{findOptions>>Number<<List()} (where \texttt{>>Number<<} is either \texttt{"First"} or \texttt{"Second"} depending on the text field being edited) in the \texttt{SearchListener} / \texttt{View} class is invoked.
+	\item The input is parsed by the \texttt{AddressParser} class.
+	\item The parsed string is passed to the instance of the \texttt{TernaryTrie} class stored in which a prefix search is done, finding all addresses having the parsed string as a prefix.
+	\item The up to five first matches from the \texttt{TernaryTrie} are "cleaned" and stored in a \texttt{String[]} (this is done in the \texttt{cleanString} method which makes sure all letters start with a capitalized letter and that all words are comma and space separated (\texttt{", "})).
+	\item The \texttt{String[]} is passed first to the \texttt{MainFrame} class, then to the \texttt{SearchPanel} class, which updates the content of the correct \texttt{JList} to display the \texttt{String[]}.
+\end{itemize}
+There is a special case, where the text field is empty (the user just deleted the only character(s)). In that case, the corresponding list below the text field is emptied, and nothing else happens.
+
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+	\node [place, minimum size=2cm]	(SearchPanel)	at (0, 0) {SearchPanel}
+		edge [in=-100, out=-80, loop] node[auto] {1. first validation} (SearchPanel);
+	\node [place, minimum size=2cm]	(MainFrame)		at (0, 3) {MainFrame}
+		edge [post] node [auto, swap] {7. update list} (SearchPanel);
+	\node [place, minimum size=2cm]	(View)			at (5, 3) {View}
+		edge [pre]	node [auto]	{2. input} (SearchPanel)
+		edge [post] node [auto, swap] {6. if valid id} (MainFrame);
+	\node [place, minimum size=2cm]	(AddressParser)	at (10, 3) {AddressParser}
+		edge [pre] node [auto, swap] {3. parse input} (View);
+	\node [place, minimum size=2cm]	(TernaryTrie)	at (10, -1) {TernaryTrie}
+		edge [post, bend left=12] node [auto] {5. vertex id} (View)
+		edge [pre, bend right=12] node [auto, swap] {4. if valid} (View);
+\end{tikzpicture}
+\caption{An illustration of the automatic input completion. It is simplified in the way that in some cases, two method calls a actually made by the \texttt{View} to the \texttt{TernaryTrie}.}
+\label{fig:autocompletion}
+\end{figure}
+
+This process completely relies on the speed of the \texttt{TernaryTrie}, as the user would otherwise have to wait for all this to happen each time a character is type or removed.

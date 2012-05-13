@@ -1,0 +1,48 @@
+\subsubsection*{Agenda}
+\begin{enumerate}
+	\item Analyze the current problems
+	\item Who does what
+	\item Testing
+\end{enumerate}
+\underline{1. Analyze the current problems} \\
+Our first step will be reading in the entire map-data and drawing it according to the class diagram \\ \\
+\underline{2. Who does what} \\
+According to the "work sheets" \\ \\
+\underline{3. Testing} \\
+When a class is created/implemented for which it is obvious that a JUnit test is suitable, this will as far as possible be created alongside with the class/implementation
+
+\subsubsection*{Reflection}
+We are currently in the need of a good overview allowing us to hand out assignments properly. The result is that we have a hard time all working at the same time.
+
+We will try making a proper interface / maybe an UML-diagram showing the result of our current analysis and discussions.
+
+\subsubsection*{Work sheets}
+\begin{itemize}
+	\item XMLReader modified \hfill \\
+		\textsl{Niels will do this}
+	\item Build the base structure of the Model class \hfill \\
+		\textsl{Mikkel will do this (difficult to be more than one person doing it)}
+	\item Establish the communication between the Model/View/Controller \hfill \\
+		\textsl{Mikkel will do this (same as last)}
+	\item Create class in the Controller package with a static method to convert an ArrayList<Edge> into a proper int[][][] for the MapPanel class. \hfill \\
+		\textsl{Sigurt and Jacob got this one!}
+\end{itemize}
+\underline{Implementations waiting to be done:} \\
+\begin{tabular}{| p{3cm} | p{4cm} | p{5cm} |}
+	\hline
+	DataFilter & FilterData(edges, minX, maxX, minY, maxY) & Filters the given data according to the given parameters \\
+	\hline
+	FormatConverter & convertData(Array-List<Data> edges) & Converts the ArrayList<Edge> into a proper int[ ][ ][ ] for the MapPanel \\
+	\hline
+	View and MapPanel & viewboxUpdated(???) & Tells the view that a new ?viewbox? is set.
+We need to figure out the right parameters \\
+	\hline
+	XMLReader & readXML() & Needs to be implemented to work with the Model class \\
+	\hline
+	MapPanel & Something allowing to update the viewbox and call the viewboxUpdated-method & Next step. First, we need to visualize the entire map \\
+	\hline
+	
+\end{tabular}
+
+\subsubsection*{Next meeting}
+Monday, 26/3-2012

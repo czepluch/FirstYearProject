@@ -1,0 +1,37 @@
+\begin{itemize}
+	\item Design Pattern \\
+		\textsl{Done}
+	\item Data structures
+	\begin{itemize}
+		\item Preprocessed files \\
+		We have decided on using preprocessed files containing the edge and vertex data needed to create graphs for pathfinding. This speeds up the graph creation process since the files we have to read through contain only the information that is strictly necessary to create the graphs. Also, since the files only need to be created once (ever), this can be done outside of the application, not adding to the start-up time, and in contrast to having the krak files lying around in the application, these files serve the same purpose but without taking up nearly as much memory.
+		\item Storing the edges (quadtrees, in the app and in the file) \\
+		\textsl{Niels}
+		\item The graph data structures (in the app and the files) \\
+		\textsl{Niels}
+		\item The Trie data structure (in the app and the files) \\
+		\textsl{Sigurt}
+	\end{itemize}
+	\item Visualisation \\
+		\textsl{Mikkel}
+	\begin{itemize}
+		\item Platform
+		\item How the roads are drawn
+		\item Finding location
+		\item Finding trips
+		\item Auto completion
+		\item User interaction on the map
+	\end{itemize}
+	\item Limitations \\
+		\textsl{Jacob}
+	\begin{itemize}
+		\item Not more precise than road names
+		    
+		    Since it is not required that the program is able to search for road numbers, we decided not to implement them. Another reason to not implement road numbers is that it is not very well defined in the dataset, where a given road number is located on an edge. We would have liked to implement road numbers, but we could not figure out a decent way to do this with the data given from Krak. The biggest and most important consequence of this decision is that on very long roads, it can be very difficult to find a desired exact address, since you will not know in which end or side of the road that the address is located.   
+
+		\item Route description
+
+		    It was part of our plan to make a route description located under the distance and time in the left side of the window. The description should describe when and where to turn and to what side to turn. It was however a bigger implementation than first assumed and we down prioritized the implementation to make sure that more important implementations were made. ****Skriv noget mere om hvorfor vi ikke lavede implementationen**** 
+		\item One user, one system
+	\end{itemize}
+\end{itemize}

@@ -10,6 +10,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri}
 \usepackage{enumitem}
+\usepackage{newclude}
 \newcommand{\field} [1] {\mathbb{#1}}
 \newcommand{\hiddensubsubsection}[1]{
 	\stepcounter{subsubsection}
@@ -61,6 +62,17 @@ This section does not contain any information about the implementation of the ap
 \label{sub:Design Pattern}
 For our overall architectural pattern, we have chosen to use the Model, View, Controller (MVC) pattern. We chose to do so, to make sure that we have a very modular and easy-to-maintain class structure. Using the MVC pattern results in separation of the different aspects of our application, while still providing a loose coupling between these elements. During the making of the application it has proven very useful to us since we have been chancing our classes and data structures quite a few times. 
 
+\subsection{Data structures}
+
+\subsubsection{Preprocessed files}
+We decided on using preprocessed files containing the edge and vertex data needed to create graphs for path finding, as well as a file for creating our ternary trie and a file containing krak data for each edge (used when drawing roads). Use of the these files speeds up several parts of our application since the files we have to read through contain only the information that is strictly necessary to serve their purposes. Also, since the files only need to be created once (ever), this can be done outside of the application, not adding to the start-up time, and in contrast to having the krak files lying around in the application, these files serve the same purpose but without taking up nearly as much memory.
+
+\subsubsection{The graph}
+Our application uses two graphs; one containing edges weighted by time and one containing edges weighted simply by their length. The first of the two is used to compute the fastest path from one given point to another, and the latter of the two is used to compute the shortest path between any two point. 
+
+Each of these graphs consists of an array of vertices, each of which knows its neighbour vertices and edges.		
+
+The shortest path graph could be expanded to allow the choice between different types of transportation (such as walking or cycling) where one is assumed to maintain roughly the same speed throughout the entire trip.
 
 \subsection{Visualisation and user interaction}
 
@@ -260,8 +272,15 @@ The \texttt{FormatConverter} has static methods only, and only one public method
 
 The FormatConverter uses an instance of the Coordinates class to convert the given UTM32 coordinates to pixels as shown in the GUI.
 
-\subsubsection{KrakToXMLConverter class} % Not directly part of the implementation, but the class used for converting the data from Krak to the krax XML format
-The KrakToXMLConverter is not, strictly speaking, a part of the application (it is not used at runtime). It is a utility class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
+\subsubsection{RoadDataCreator class} % Not directly part of the implementation, but the class used for converting the data from Krak to the krax XML format
+The RoadDataCreator is not, strictly speaking, a part of the application (it is not used at runtime). It is a utility class, reading in the data supplied by Krak, writing it to an XML file of the KRAX format (once again using the external \href{www.xom.nu}{\texttt{xom}} library).
+
+\subsubsection{The Graph}
+Upon launching the application, the \texttt{Graph} class creates the two path finding graphs to be used by our path finding algorithm to find the fastest or the shortest path, respectively, between two given nodes.
+	
+The static \texttt{Graph} object itself contains \texttt{ArrayList} representations of each of these graphs. These will be referred to as graphs from now on. These graphs contain \texttt{Vertex} objects which have a position, some neighbouring vertices, and some adjacent edges (of the type \texttt{GEdge}). A \texttt{HashMap} for each of these two graphs is used to quickly access a vertex, given its id. Two \texttt{HashMaps} are used since each graph has its representation of each edge (the edges have different weights across the graphs). When searching for a path, the correct \texttt{ArrayList} and \texttt{HashMap} are returned, depending on whether the user requests the fastest path of the shortest path.
+
+Furthermore, a third \texttt{HashMap} is used to keep track of each \texttt{Vertex's} adjacent \texttt{GEdges}.
 
 \subsection{View package} % Consists of all the classes handling the graphical user interface
 %The \texttt{View} package contains all the classes managing the graphical user interface.
@@ -312,11 +331,11 @@ The \texttt{ParseAddress} method is the basis of the \texttt{AddressParser} clas
 The input \texttt{String} is matched with up to three different patterns (i will use the $\sharp$ as a separator. The words \underline{underlined} must be present, the rest are optional):
 \begin{itemize}
 	\item Pattern with the zip code last: \\
-		\textit{other$\sharp$\underline{name}$\sharp$other$\sharp$name$\sharp$other$\sharp$zip}
+		\textit{other$\sharp$\underline{name}$\sharp$other$\sharp$name$\sharp$other$\sharp$zip$\sharp$other}
 	\item Pattern with the zip code first \\
-	\textit{other$\sharp$\underline{zip}$\sharp$other$\sharp$name$\sharp$other$\sharp$name}
+	\textit{other$\sharp$\underline{zip}$\sharp$other$\sharp$name$\sharp$other$\sharp$name$\sharp$other}
 	\item Pattern with the zip code in the middle \\
-	\textit{other$\sharp$\underline{name$\sharp$other$\sharp$zip}$\sharp$other$\sharp$name}
+	\textit{other$\sharp$\underline{name$\sharp$other$\sharp$zip}$\sharp$other$\sharp$name$\sharp$other}
 \end{itemize}
 If the first pattern matches, the city name, street name and zip code (or at least the parts found) are parsed to the format \textit{city name$\sharp$zip code$\sharp$street name}. If it doesn't match, the parser tries matching the input with the next pattern, parsing to the same format, and so on. If none of the patterns match, \texttt{null} is returned.
 
@@ -476,6 +495,14 @@ We have decided on a quadtree for our data structure. We believe that we could h
 
 \subsection{Our use of four quadtrees}
 Our current data structure consists of four quadtrees, one per type of edge stored. This means the application has to search through several quadtrees, if several types are to be drawn. It would be preferable having everything in the same tree, allowing the overall tree height (the sum of all our tree heights) to be smaller. But since we only have four quadtrees, we believe that the performance difference would be un-noticeable.
+
+\subsection{Optimizing the Quadtree}
+We thought about optimizing our QuadTrees such that when a sub tree is sufficiently small (say, contained a hundred elements) we would seize to further divide that sub tree and simply let store all these elements in an \texttt{Array} or some similar data type that would do the job. The reason for this is that recursion is not all that fast in \texttt{Java} and we might be able to achieve a faster data structure this way.
+
+\subsection{Alternatives to the path finding algorithm}
+Dijkstra's algorithm is not the fastest path finding algorithm and this does show when the paths get sufficiently long. Although it only takes about two seconds to find paths from one end of the map to another, this could very likely be improved by using another path finding algorithm such as the A* algorithm, which relies on heuristics to guess which direction to go in order to find a shortest path. We had some trouble implementing it, though, and working out a good heuristic for guessing the fastest path is not trivial as it cannot simply use the Manhattan distance (as would be the case when searching for the shortest path).
+
+The graph still has a few flaws. For example, some paths between two arbitrary points A and B will look just fine when going from A to B, but when going from B to A, the algorithm will a completely useless path. We have not been able to figure out what the cause of this is.
 
 \subsection{Memory usage}
 The application stores a lot of information, which is read from several large text files at start-up. The information stored is for example information about each road segment in the quadtree data structure, each searchable address in different formats allowing the user to search efficiently with corresponding vertex ids, and a graph structure representing all the locations from the data from Krak and connections between them. The result is that the application already before any user interaction has been performed uses close to ??? of memory.
