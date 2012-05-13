@@ -6,8 +6,8 @@ In this section we will account for the choices we have made, in regard to the d
 We decided on using preprocessed files containing the edge and vertex data needed to create graphs for path finding, as well as a file for creating our ternary trie and a file containing krak data for each edge (used when drawing roads). Use of the these files speeds up several parts of our application since the files we have to read through contain only the information that is strictly necessary to serve their purposes. Also, since the files only need to be created once (ever), this can be done outside of the application, not adding to the start-up time, and in contrast to having the krak files lying around in the application, these files serve the same purpose but without taking up nearly as much memory.
 
 \subsubsection{The graph}
-Our application uses two graphs; one containing edges weighted by time and one containing edges weighted simply by their length. The first of the two is used to compute the fastest path from one given point to another, and the latter of the two is used to compute the shortest path between any two point. 
+We have decided to use two graphs for path finding; one containing edges weighted by time and one containing edges weighted simply by their length. The first of the two is used to compute the fastest path from one given point to another, and the latter of the two is used to compute the shortest path between any two point.
 
-Each of these graphs consists of an array of vertices, each of which knows its neighbour vertices and edges.		
+This decision has both its pros and its cons. On the up-side, it adds additional function which is the choice between fastest or shortest path. On the down-side, however, having two graphs lying around takes up more memory.
 
 The shortest path graph could be expanded to allow the choice between different types of transportation (such as walking or cycling) where one is assumed to maintain roughly the same speed throughout the entire trip.
