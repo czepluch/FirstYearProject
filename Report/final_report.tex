@@ -810,37 +810,37 @@ In the input property, we will use the letter \textit{c} to refer to a series of
 \begin{tabular}{ p{1cm} | p{4cm} | p{3cm} | p{2.5cm} }
 	Input data set & Input & Expected output & Actual output \\
 	\hline
-	A1 & Odense & odense\#\# & ? \\
-	A2 & ! Odense & odense\#\# & ? \\
-	A3 & +Odense 9/? & odense\#\# & ? \\
-	A4 & �dense �� by ��� & �dense �� by ���\#\# & ? \\
-	A5 & Odense-By & odense-by\#\# & ? \\
-	A6 & Odense' den fine by & odense' den fine by\#\# & ? \\
-	B1 & 1234 & \#1234\# & ? \\
-	B2 & ,!1234 & \#1234\# & ? \\
-	B3 & ??1234  ) & \#1234\# & ? \\
-	B4 & -1234 & -\#1234\# & ? \\
-	B5 & 12 & null & ? \\
-	B6 & 123456 & null & ? \\
-	C1 & 8765 k�Ge & k�ge\#8765\# & ? \\
-	C2 & =?8765 k�Ge & k�ge\#8765\# & ? \\
-	C3 & 8765 k�Ge=? & k�ge\#8765\# & ? \\
-	C4 & k�ge 8765 & k�ge\#8765\# & ? \\
-	C5 & k�ge,?=!8765 & k�ge\#8765\# & ? \\
-	D1 & Skive, vejen, 4567 & skive\#4567\#vejen & ? \\
-	D2 & Skive, vejen4567 & skive\#4567\#vejen & ? \\
-	D3 & Skive,vejen 4567 & skive\#4567\#vejen & ? \\
-	E1 & R�dby9876allegade & r�dby\#9876\#allegade & ? \\
-	E2 & R�dby 9876 allegade & r�dby\#9876\#allegade & ? \\
-	E3 & R�dby?=+" +?3?9876 allegade & r�dby\#9876\#allegade & ? \\
-	F1 & malm� Vegen 95667 & malm� vegen\#95667\# & ? \\
-	F2 & malm�,Vegen,95667 & malm�\#95667\#vegen & ? \\
-	G1 & k�benhavn, roskilde, �lb�k & null & ? \\
-	H1 & br�ndby-�ster +12+3 03+1 9,!?Nygade & br�ndby-�ster\#\#nygade & ? \\
-	I1 & 1234 56789 & null & ? \\
-	I2 & 1234,56789 & null & ? \\
-	J1 & !?23++ & null & ? \\
-	J2 & "\textit{empty}" & null & ?
+	A1 & Odense & odense\#\# & $\surd$ \\
+	A2 & ! Odense & odense\#\# & $\surd$ \\
+	A3 & +Odense 9/? & odense\#\# & $\surd$ \\
+	A4 & �dense �� by ��� & �dense �� by ���\#\# & $\surd$ \\
+	A5 & Odense-By & odense-by\#\# & $\surd$ \\
+	A6 & Odense' den fine by & odense' den fine by\#\# & $\surd$ \\
+	B1 & 1234 & \#1234\# & $\surd$ \\
+	B2 & ,!1234 & \#1234\# & $\surd$ \\
+	B3 & ??1234  ) & \#1234\# & $\surd$ \\
+	B4 & -1234 & -\#1234\# & $\surd$ \\
+	B5 & 12 & null & $\surd$ \\
+	B6 & 123456 & null & $\surd$ \\
+	C1 & 8765 k�Ge & k�ge\#8765\# & $\surd$ \\
+	C2 & =?8765 k�Ge & k�ge\#8765\# & $\surd$ \\
+	C3 & 8765 k�Ge=? & k�ge\#8765\# & $\surd$ \\
+	C4 & k�ge 8765 & k�ge\#8765\# & $\surd$ \\
+	C5 & k�ge,?=!8765 & k�ge\#8765\# & $\surd$ \\
+	D1 & Skive, vejen, 4567 & skive\#4567\#vejen & $\surd$ \\
+	D2 & Skive, vejen4567 & skive\#4567\#vejen & $\surd$ \\
+	D3 & Skive,vejen 4567 & skive\#4567\#vejen & $\surd$ \\
+	E1 & R�dby9876allegade & r�dby\#9876\#allegade & $\surd$ \\
+	E2 & R�dby 9876 allegade & r�dby\#9876\#allegade & $\surd$ \\
+	E3 & R�dby?=+" +?3?9876 allegade & r�dby\#9876\#allegade & $\surd$ \\
+	F1 & malm� Vegen 95667 & malm� vegen\#95667\# & $\surd$ \\
+	F2 & malm�,Vegen,95667 & malm�\#95667\#vegen & $\surd$ \\
+	G1 & k�benhavn, roskilde, �lb�k & null & $\surd$ \\
+	H1 & br�ndby-�ster +12+3 03+1 9,!?Nygade & br�ndby-�ster\#\#nygade & $\surd$ \\
+	I1 & 1234 56789 & null & $\surd$ \\
+	I2 & 1234,56789 & null & $\surd$ \\
+	J1 & !?23++ & null & $\surd$ \\
+	J2 & "\textit{empty}" & null & $\surd$
 \end{tabular}
 
 \pagebreak
@@ -860,11 +860,11 @@ The \texttt{convertXToPixels} methods has been tested according to the following
 \begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
 	Input property & Input & Expected output & Actual output \\
 	\hline
-	Ordinary number & 50 & 3 & 3 \\
-	Minimum value & 20 & 0 & 0 \\
-	Maximum value & 120 & 10 & 10 \\
-	Lower than minimum & 10 & -1 & -1 \\
-	Higher than maximum & 130 & 11 & 11
+	Ordinary number & 50 & 3 & $\surd$ \\
+	Minimum value & 20 & 0 & $\surd$ \\
+	Maximum value & 120 & 10 & $\surd$ \\
+	Lower than minimum & 10 & -1 & $\surd$ \\
+	Higher than maximum & 130 & 11 & $\surd$
 \end{tabular}
 
 \subsubsection{Blackbox test of the \texttt{convertXToPixels method}}
@@ -872,11 +872,11 @@ The \texttt{convertYToPixels} methods has been tested according to the following
 \begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
 	Input property & Input & Expected output & Actual output \\
 	\hline
-	Ordinary number & 60 & 7 & 7 \\
-	Minimum value & 30 & 10 & 10 \\
-	Maximum value & 130 & 0 & 0 \\
-	Lower than minimum & 20 & 11 & 11 \\
-	Higher than maximum & 140 & -1 & -1
+	Ordinary number & 60 & 7 & $\surd$ \\
+	Minimum value & 30 & 10 & $\surd$ \\
+	Maximum value & 130 & 0 & $\surd$ \\
+	Lower than minimum & 20 & 11 & $\surd$ \\
+	Higher than maximum & 140 & -1 & $\surd$
 \end{tabular}
 
 \pagebreak
@@ -885,26 +885,25 @@ The \texttt{convertYToPixels} methods has been tested according to the following
 \pagebreak
 \subsection{GVertex and Vertex classes}
 Both the \texttt{GVertex} and \texttt{Vertex} classes share the \texttt{distance} method, only taking different parameters. Both methods have been blackbox tested according to the following expectancy table: \\ \\
-\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+\begin{tabular}{ p{3.5cm} | p{4cm} | p{2.5cm} | p{1cm} }
 	Input property & Input & Expected output & Actual output \\
 	\hline
-	Positive numbers, increasing & $(8,4$), $(16,12)$ & $11.3137$ & ??? \\
-	Positive numbers, decreasing & $(20,15)$, $(13,12)$ & $7.6158$ & ??? \\
-	Positive numbers, one coordinate increasing, one decreasing & $(10, 5)$, $(5, 10)$ & $7.0711$ & ??? \\
-	Negative numbers & $(-10, -3)$, $(-3, -1)$ & $7.2801$ & ??? \\
-	Negative and positive numbers & $(7, 5)$, $(-7, -5)$ & $17.2047$ & ??? \\
-	Positive and negative numbers mixed & $(1, -3)$, $(17, 2)$ & $16.7631$ & ??? \\
-	All numbers zero & (0, 0), (0, 0) & 0.0000 & ??? \\
-	One number zero & (0, 0), (-3, 7) & $7.6158$ & ??? \\
-	Decimal numbers & $(3.7, 5.9)$, $(-3.3, 2.3)$ & $7.8715$ & ??? \\
-	Large numbers (UTM) & $(892250.58771$, $6147885.93632)$, $(892297.17852$, $6147868.40019)$ & $49.7817$ & ??? \\
-	Low numbers & $(0.58171$, $0.93432)$, $(-0.18852$, $0.43019)$ & $0.9205$ & ??? \\
-	Large and low numbers & $(2, 5)$, $(892250.58771$, $6147885.93632)$ & $6212290.0407$ & ???
+	Positive numbers, increasing & $(8,4$), $(16,12)$ & $11.3137$ & $\surd$ \\
+	Positive numbers, decreasing & $(20,15)$, $(13,12)$ & $7.6158$ & $\surd$ \\
+	Positive numbers, one coordinate increasing, one decreasing & $(10, 5)$, $(5, 10)$ & $7.0711$ & $\surd$ \\
+	Negative numbers & $(-10, -3)$, $(-3, -1)$ & $7.2801$ & $\surd$ \\
+	Negative and positive numbers & $(7, 5)$, $(-7, -5)$ & $17.2047$ & $\surd$ \\
+	Positive and negative numbers mixed & $(1, -3)$, $(17, 2)$ & $16.7631$ & $\surd$ \\
+	All numbers zero & (0, 0), (0, 0) & 0.0000 & $\surd$ \\
+	One number zero & (0, 0), (-3, 7) & $7.6158$ & $\surd$ \\
+	Decimal numbers & $(3.7, 5.9)$, $(-3.3, 2.3)$ & $7.8715$ & $\surd$ \\
+	Large numbers (UTM) & $(892250.58771$, $6147885.93632)$, $(892297.17852$, $6147868.40019)$ & $49.7817$ & $\surd$ \\
+	Low numbers & $(0.58171$, $0.93432)$, $(-0.18852$, $0.43019)$ & $0.9205$ & $\surd$ \\
+	Large and low numbers & $(2, 5)$, $(892250.58771$, $6147885.93632)$ & $6212290.0407$ & $\surd$
 \end{tabular}
 \\ \\ \\
-Each of the results have been rounded to the nearest $1/10000$
-0.37704
-0.2541470569
+Each of the results have been rounded to the nearest $1/10000$.
+
 \pagebreak
 \subsection{KrakToXMLConverter class}
 
@@ -917,16 +916,16 @@ The \texttt{TripEdge} class includes the \texttt{computeTime} method for computi
 \begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
 	Input property & Input (speed, distance) & Expected output & Actual output \\
 	\hline
-	Ordinary numbers, large distance & 120, 60000 & 30 & ??? \\
-	Ordinary numbers, large speed & 6000, 200 & 0.002 \\
-	Ordinary numbers, small distance & 80, 120 & 0.09 & ??? \\
-	Ordinary numbers, distance smaller than speed & 30, 3 & 0.006 & ??? \\
-	Negative speed & -30, 120 & Exception & ??? \\
-	Negative distance & 120, -30 & Exception & ??? \\
-	Negative both & -60, -120 & Exception & ??? \\
-	Zero speed & 0, 2000 & Exception & ??? \\
-	Zero distance & 80, 0 & 0 & ??? \\
-	Zero both & 0, 0 & 0 & ???
+	Ordinary numbers, large distance & 120, 60000 & 30 & $\surd$ \\
+	Ordinary numbers, large speed & 6000, 200 & 0.002 & $\surd$ \\
+	Ordinary numbers, small distance & 80, 120 & 0.09 & $\surd$ \\
+	Ordinary numbers, distance smaller than speed & 30, 3 & 0.006 & $\surd$ \\
+	Negative speed & -30, 120 & Exception & $\surd$ \\
+	Negative distance & 120, -30 & Exception & $\surd$ \\
+	Negative both & -60, -120 & Exception & $\surd$ \\
+	Zero speed & 0, 2000 & Exception & $\surd$ \\
+	Zero distance & 80, 0 & 0 & $\surd$ \\
+	Zero both & 0, 0 & 0 & $\surd$
 \end{tabular}
 
 \pagebreak
