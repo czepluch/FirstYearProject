@@ -422,7 +422,7 @@ Monday 23/4-2012, 10:00 at ITU
 	\end{enumerate}
 	\item File containing the trie info
 	\begin{enumerate}
-		\item Format: \textsl{Something$\sharp$Something else$\sharp$Something else;nodeId}
+		\item Format: \textsl{Something\#Something else\#Something else;nodeId}
 	\end{enumerate}
 \end{enumerate}
 
@@ -702,16 +702,86 @@ The testing of the \texttt{parseAddress} method of the \texttt{AddressParser} cl
 \begin{tabular}{ p{7cm} | p{4cm}}
 	\textbf{Input property} & \textbf{Input data set} \\
 	\hline
-	Zip code last match & ??? \\
-	Zip code middle match & ??? \\
-	Zip code first match & ??? \\
-	No match & ???
+	Zip code last match & D1 \\
+	Zip code middle match & E1 \\
+	Zip code first match & F1 \\
+	No match & G1
 \end{tabular}
 
 \subsubsection{Blackbox test of the parseAddress method}
-
+In the input property, we will use the letter \textit{c} to refer to a series of characters not matching the city name / street name pattern nor the zip code pattern.
+\begin{tabular}{ p{9cm} | p{2cm}}
+	\textbf{Input property} & \textbf{Input data set} \\
+	\hline
+	City only & A1 \\
+	City only, c first & A2 \\
+	City only, c first and last & A3 \\
+	City only, Nordic characters & A4 \\
+	City name with "-" & A5 \\
+	City name with "'" & A6 \\
+	Zip only & B1 \\
+	Zip only, c first & B2 \\
+	Zip only, c first and last & B3 \\
+	"Negative" zip code & B4 \\
+	Zip code of length 2 & B5 \\
+	Zip code of length 6 & B6 \\
+	City/street and zip, zip first & C1 \\
+	City/street and zip, zip first, c first & C2 \\
+	City/street and zip, zip first, c last & C3 \\
+	City/street and zip, zip last & C4 \\
+	City/street and zip, zip last, c in between & C5 \\
+	City, street and zip, comma separation & D1 \\
+	City, street and zip, comma separation between city and street & D2 \\
+	City, street and zip, space separation & D3 \\
+	City, zip, street, no separation & E1 \\
+	City, zip, street, space separation & E2 \\
+	City, zip, street, c separation between city and zip & E3 \\
+	Zip, city, street, space separation & F1 \\
+	Zip, city, street, comma separation & F2 \\
+	Three times city/street, comma separated & G1 \\
+	City and street, long separation with different symbols & H1 \\
+	Two zip codes, space separated & I1 \\
+	Two zip codes, comma separated & I2 \\
+	c only & J1 \\
+	Empty input & J2
+\end{tabular}
 
 \subsubsection{Shared expectancy table}
+\begin{tabular}{ p{1cm} | p{4cm} | p{3cm} | p{2.5cm} }
+	Input data set & Input & Expected output & Actual output \\
+	\hline
+	A1 & Odense & odense\#\# & ? \\
+	A2 & ! Odense & odense\#\# & ? \\
+	A3 & +Odense 9/? & odense\#\# & ? \\
+	A4 & Ødense æå by üäÖ & ødense æå by üäö\#\# & ? \\
+	A5 & Odense-By & odense-by\#\# & ? \\
+	A6 & Odense' den fine by & odense' den fine by\#\# & ? \\
+	B1 & 1234 & \#1234\# & ? \\
+	B2 & ,!1234 & \#1234\# & ? \\
+	B3 & ??1234  ) & \#1234\# & ? \\
+	B4 & -1234 & -\#1234\# & ? \\
+	B5 & 12 & null & ? \\
+	B6 & 123456 & null & ? \\
+	C1 & 8765 kØGe & køge\#8765\# & ? \\
+	C2 & =?8765 kØGe & køge\#8765\# & ? \\
+	C3 & 8765 kØGe=? & køge\#8765\# & ? \\
+	C4 & køge 8765 & køge\#8765\# & ? \\
+	C5 & køge,?=!8765 & køge\#8765\# & ? \\
+	D1 & Skive, vejen, 4567 & skive\#4567\#vejen & ? \\
+	D2 & Skive, vejen4567 & skive\#4567\#vejen & ? \\
+	D3 & Skive,vejen 4567 & skive\#4567\#vejen & ? \\
+	E1 & Rådby9876allegade & rådby\#9876\#allegade & ? \\
+	E2 & Rådby 9876 allegade & rådby\#9876\#allegade & ? \\
+	E3 & Rådby?=+" +?3?9876 allegade & rådby\#9876\#allegade & ? \\
+	F1 & malmö Vegen 95667 & malmö vegen\#95667\# & ? \\
+	F2 & malmö,Vegen,95667 & malmö\#95667\#vegen & ? \\
+	G1 & københavn, roskilde, ålbæk & null & ? \\
+	H1 & brøndby-øster +12+3 03+1 9,!?Nygade & brøndby-øster\#\#nygade & ? \\
+	I1 & 1234 56789 & null & ? \\
+	I2 & 1234,56789 & null & ? \\
+	J1 & !?23++ & null & ? \\
+	J2 & "\textit{empty}" & null & ?
+\end{tabular}
 
 \pagebreak
 \subsection{Coordinates class}

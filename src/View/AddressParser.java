@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AddressParser {
-	private final static String CITY_STREET_REGEX_PART = 	"[-a-zæøåA-ZÆØÅ.\\s\']";
-	private final static String CRAP_REGEX_PART = 			"[^a-zæøåA-ZÆØÅ0-9]";
+	private final static String CITY_STREET_REGEX_PART = 	"[-a-zæøåäöüA-ZÆØÅÄÖÜ.\\s\']";
+	private final static String CRAP_REGEX_PART = 			"[^a-zæøåäöüA-ZÆØÅÄÖÜ0-9]";
 	private final static String ZIP_REGEX_PART = 			"[0-9]{3,5}";
 	private final static String END_REGEX =					CRAP_REGEX_PART + "*[.]*";
 	
@@ -27,7 +27,7 @@ public class AddressParser {
 	
 	private final static String ZIP_MIDDLE_REGEX = CRAP_REGEX_PART + "*" +
 														"(" + CITY_STREET_REGEX_PART + "+)" +
-												   CRAP_REGEX_PART + "+" + 
+												   CRAP_REGEX_PART + "*" + 
 												   		"(" + ZIP_REGEX_PART + ")" +
 												   CRAP_REGEX_PART + "*" +
 												   		"(" + CITY_STREET_REGEX_PART + "*)" +
@@ -42,6 +42,11 @@ public class AddressParser {
 		String city = "";
 		String street = "";
 		String zip = "";
+		
+		// Clean the input for numbers that do not represent a zip code
+		s = s.replaceAll("[0-9]{6,}", "");
+		s = s.replaceAll("(?<!([0-9]))[0-9]{2}(?!([0-9]))", "");
+		s = s.replaceAll("(?<!([0-9]))[0-9]{1}(?!([0-9]))", "");
 		
 		Matcher zipLastMatcher = ZIP_LAST_PATTERN.matcher(s);
 		Matcher zipMiddleMatcher = ZIP_MIDDLE_PATTERN.matcher(s);
