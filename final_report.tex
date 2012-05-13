@@ -77,8 +77,11 @@ Rasmus Pagh\\
 
 		\item Route description
 
-		    It was part of our plan to make a route description located under the distance and time in the left side of the window. The description should describe when and where to turn and to what side to turn. It was however a bigger implementation than first assumed and we down prioritized the implementation to make sure that more important implementations were made. ****Skriv noget mere om hvorfor vi ikke lavede implementationen**** 
+		    It was part of our plan to make a route description located under the distance and time in the left side of the window. The description should describe when and where to turn and to what side to turn during a trip. It was however a more time consuming implementation than first assumed and we down prioritized the implementation to make sure that we had time to make some of the more important implementations on out list. 
+
 		\item One user, one system
+
+		    Our program is limited to only have one user for each instance of the program. This is due to a couple of things. The main reason is that it never was part of out plan or design decisions to make a multiuser program. Further more would we have to make some quite big changes to out program to make it work with multiple users. Our pathfinding algorithm, is for example, very suitable and acceptable for a singleuser version of the program, but it would be too slow if we had around 100 or more users, because one search using Dijkstra's algorithm takes around 50 or 100 times longer than using the A* algorithm, which we would have to use instead if we were going to make a multiuser version of our program.
 	\end{itemize}
 \end{itemize}
 
