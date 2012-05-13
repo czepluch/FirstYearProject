@@ -7,3 +7,5 @@ we have largely disregarded optimizing the trie, because it is effective enough 
 The second issue is perhaps a bit more grave; the city locations are quite arbitrary.
 The id for city entries in the trie are guaranteed to point to a node that is within the zip code of the city, nothing more. It is trivial, though cumbersome, to improve the choices for these location, so we have down prioritized it to a point were we have not gotten around to it.
 If the program were to be used in real life application, it would probably have been a significant issue, but for the purpose of this project we have deemed it to be of small importance.
+
+The code for the search trie bears the mark of being an ad-hoc solution. In order for the class to honour the OOP principle of reusability, the search key and return value should be parameterized at runtime, and the constructors for building the trie from a file should have taken a field separator as parameter rather than using the hardcoded ';' character.

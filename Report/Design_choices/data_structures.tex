@@ -3,7 +3,8 @@
 In this section we will account for the choices we have made, in regard to the data structures we have used to support our application.
 
 \subsubsection{Preprocessed files}
-We decided on using preprocessed files containing the edge and vertex data needed to create graphs for path finding, as well as a file for creating our ternary trie and a file containing krak data for each edge (used when drawing roads). Use of the these files speeds up several parts of our application since the files we have to read through contain only the information that is strictly necessary to serve their purposes. Also, since the files only need to be created once (ever), this can be done outside of the application, not adding to the start-up time, and in contrast to having the krak files lying around in the application, these files serve the same purpose but without taking up nearly as much memory.
+
+We decided on using preprocessed files containing the edge and vertex data needed to create graphs for path finding, as well as a file for creating our ternary trie and a file containing krak data for each edge (used when drawing roads). Use of the these files speeds up several parts of our application since the files we have to read through contain only the information that is strictly necessary to serve their purposes. Also, since the files only need to be created once (ever), this can be done outside of the application, not adding to the start-up time, and in contrast to having the krak files lying around in the application, these files serve the same purpose but without taking up nearly as much space.
 
 \subsubsection{The graph}
 We have decided to use two graphs for path finding; one containing edges weighted by time and one containing edges weighted simply by their length. The first of the two is used to compute the fastest path from one given point to another, and the latter of the two is used to compute the shortest path between any two point.
