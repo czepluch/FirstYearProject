@@ -124,7 +124,7 @@ Rasmus Pagh\\
 \include*{Discussion/alternatives_to_the_path_finding_algorithm}
 
 \subsection{The Condition of the Trie}
-\include*{Implementation/condition_of_the_trie}
+\include*{Discussion/condition_of_the_trie}
 
 \subsection{Memory usage}
 \include*{Discussion/memory_usage}
@@ -769,7 +769,7 @@ In the input property, we will use the letter \textit{c} to refer to a series of
 	A1 & Odense & odense\#\# & ? \\
 	A2 & ! Odense & odense\#\# & ? \\
 	A3 & +Odense 9/? & odense\#\# & ? \\
-	A4 & Ødense æå by üäÖ & ødense æå by üäö\#\# & ? \\
+	A4 & ï¿½dense ï¿½ï¿½ by ï¿½ï¿½ï¿½ & ï¿½dense ï¿½ï¿½ by ï¿½ï¿½ï¿½\#\# & ? \\
 	A5 & Odense-By & odense-by\#\# & ? \\
 	A6 & Odense' den fine by & odense' den fine by\#\# & ? \\
 	B1 & 1234 & \#1234\# & ? \\
@@ -778,21 +778,21 @@ In the input property, we will use the letter \textit{c} to refer to a series of
 	B4 & -1234 & -\#1234\# & ? \\
 	B5 & 12 & null & ? \\
 	B6 & 123456 & null & ? \\
-	C1 & 8765 kØGe & køge\#8765\# & ? \\
-	C2 & =?8765 kØGe & køge\#8765\# & ? \\
-	C3 & 8765 kØGe=? & køge\#8765\# & ? \\
-	C4 & køge 8765 & køge\#8765\# & ? \\
-	C5 & køge,?=!8765 & køge\#8765\# & ? \\
+	C1 & 8765 kï¿½Ge & kï¿½ge\#8765\# & ? \\
+	C2 & =?8765 kï¿½Ge & kï¿½ge\#8765\# & ? \\
+	C3 & 8765 kï¿½Ge=? & kï¿½ge\#8765\# & ? \\
+	C4 & kï¿½ge 8765 & kï¿½ge\#8765\# & ? \\
+	C5 & kï¿½ge,?=!8765 & kï¿½ge\#8765\# & ? \\
 	D1 & Skive, vejen, 4567 & skive\#4567\#vejen & ? \\
 	D2 & Skive, vejen4567 & skive\#4567\#vejen & ? \\
 	D3 & Skive,vejen 4567 & skive\#4567\#vejen & ? \\
-	E1 & Rådby9876allegade & rådby\#9876\#allegade & ? \\
-	E2 & Rådby 9876 allegade & rådby\#9876\#allegade & ? \\
-	E3 & Rådby?=+" +?3?9876 allegade & rådby\#9876\#allegade & ? \\
-	F1 & malmö Vegen 95667 & malmö vegen\#95667\# & ? \\
-	F2 & malmö,Vegen,95667 & malmö\#95667\#vegen & ? \\
-	G1 & københavn, roskilde, ålbæk & null & ? \\
-	H1 & brøndby-øster +12+3 03+1 9,!?Nygade & brøndby-øster\#\#nygade & ? \\
+	E1 & Rï¿½dby9876allegade & rï¿½dby\#9876\#allegade & ? \\
+	E2 & Rï¿½dby 9876 allegade & rï¿½dby\#9876\#allegade & ? \\
+	E3 & Rï¿½dby?=+" +?3?9876 allegade & rï¿½dby\#9876\#allegade & ? \\
+	F1 & malmï¿½ Vegen 95667 & malmï¿½ vegen\#95667\# & ? \\
+	F2 & malmï¿½,Vegen,95667 & malmï¿½\#95667\#vegen & ? \\
+	G1 & kï¿½benhavn, roskilde, ï¿½lbï¿½k & null & ? \\
+	H1 & brï¿½ndby-ï¿½ster +12+3 03+1 9,!?Nygade & brï¿½ndby-ï¿½ster\#\#nygade & ? \\
 	I1 & 1234 56789 & null & ? \\
 	I2 & 1234,56789 & null & ? \\
 	J1 & !?23++ & null & ? \\
