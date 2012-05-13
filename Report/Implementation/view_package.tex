@@ -61,6 +61,7 @@ If the first pattern matches, the city name, street name and zip code (or at lea
 The \texttt{ParseAddressLive} method makes use of the \texttt{ParseAddress} method, but it cleans up the result for it to be optimal for doing a prefix search in the \texttt{TernaryTrie}. It removes any "empty" parts of the address which are in either the beginning or the end of the parse address. An example is the parsed address \textit{$\sharp$1234$\sharp$}, which will be cleaned to being simply \textit{1234}.
 
 \subsubsection{TernaryTrie class}
+\label{sec:TernaryTrie class}
 The search trie uses an internal node representation of characters to build a ternary tree, where each branch represents a street or city.
 The tree structure makes it possible to search for a given string in time that is $\sim\ln(N)$ for a search miss and  $\sim K+1$ for a search hit, where K is the length of the string to search for.
 In practise, on a 5 year old computer with a 2.4 Ghz intel dual-core processor, we have measured the prefix searches to take about one hundredth of a second on our trie data set.
