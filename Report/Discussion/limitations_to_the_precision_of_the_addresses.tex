@@ -1,0 +1,7 @@
+The search for addresses is in the application, as mentioned in section \ref{sec:What is a valid address} on page \pageref{sec:What is a valid address}, are limited in precision to the search for road names. This has both advantages and disadvantages.
+
+When searching for an address, it is possible to make a much more stable parsing of the input from what the user types to a usable address, when the address contains few parameters, because it is then limited in how many ways the user of the application can type a given address.
+
+The automatic text completion is also of smaller size, given less parameters are contained in the address, since we in the trie store they same address in multiple formats. If more parameters were present, more formats would be needed. In fact, adding simply one parameter could cause the number of addresses to be stored in the trie to increase significantly.
+
+On the other hand, what the user can find on the map is, unless the user zooms and drags to the specific location and does not search for it, limited to the precision of the search. We do, however, believe that most of the roads in Denmark are not to long, and finding a road would in most cases bring the user very close to the correct address. But in some cases where for example the user needs to find a location very exactly, most likely if the user is also unknown with the area, finding the road would be of limited help in the task of finding the address.
