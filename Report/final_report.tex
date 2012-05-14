@@ -790,40 +790,40 @@ In the input property, we will use the letter \textit{c} to refer to a series of
 \end{tabular}
 
 \subsubsection{Shared expectancy table}
-\begin{tabular}{ p{1cm} | p{4cm} | p{3cm} | p{2.5cm} }
+\begin{tabular}{ p{1cm} | p{5cm} | p{5cm} | p{1cm} }
 	Input data set & Input & Expected output & Actual output \\
 	\hline
-	A1 & Odense & odense\#\# & $\surd$ \\
-	A2 & ! Odense & odense\#\# & $\surd$ \\
-	A3 & +Odense 9/? & odense\#\# & $\surd$ \\
-	A4 & �dense �� by ��� & �dense �� by ���\#\# & $\surd$ \\
-	A5 & Odense-By & odense-by\#\# & $\surd$ \\
-	A6 & Odense' den fine by & odense' den fine by\#\# & $\surd$ \\
-	B1 & 1234 & \#1234\# & $\surd$ \\
-	B2 & ,!1234 & \#1234\# & $\surd$ \\
-	B3 & ??1234  ) & \#1234\# & $\surd$ \\
-	B4 & -1234 & -\#1234\# & $\surd$ \\
-	B5 & 12 & null & $\surd$ \\
-	B6 & 123456 & null & $\surd$ \\
-	C1 & 8765 k�Ge & k�ge\#8765\# & $\surd$ \\
-	C2 & =?8765 k�Ge & k�ge\#8765\# & $\surd$ \\
-	C3 & 8765 k�Ge=? & k�ge\#8765\# & $\surd$ \\
-	C4 & k�ge 8765 & k�ge\#8765\# & $\surd$ \\
-	C5 & k�ge,?=!8765 & k�ge\#8765\# & $\surd$ \\
-	D1 & Skive, vejen, 4567 & skive\#4567\#vejen & $\surd$ \\
-	D2 & Skive, vejen4567 & skive\#4567\#vejen & $\surd$ \\
-	D3 & Skive,vejen 4567 & skive\#4567\#vejen & $\surd$ \\
-	E1 & R�dby9876allegade & r�dby\#9876\#allegade & $\surd$ \\
-	E2 & R�dby 9876 allegade & r�dby\#9876\#allegade & $\surd$ \\
-	E3 & R�dby?=+" +?3?9876 allegade & r�dby\#9876\#allegade & $\surd$ \\
-	F1 & malm� Vegen 95667 & malm� vegen\#95667\# & $\surd$ \\
-	F2 & malm�,Vegen,95667 & malm�\#95667\#vegen & $\surd$ \\
-	G1 & k�benhavn, roskilde, �lb�k & null & $\surd$ \\
-	H1 & br�ndby-�ster +12+3 03+1 9,!?Nygade & br�ndby-�ster\#\#nygade & $\surd$ \\
-	I1 & 1234 56789 & null & $\surd$ \\
-	I2 & 1234,56789 & null & $\surd$ \\
-	J1 & !?23++ & null & $\surd$ \\
-	J2 & "\textit{empty}" & null & $\surd$
+	A1 & $Odense$ & $odense\#\#$ & $\surd$ \\
+	A2 & $! Odense$ & $odense\#\#$ & $\surd$ \\
+	A3 & $+Odense 9/?$ & $odense\#\#$ & $\surd$ \\
+	A4 & $�dense �� by ���$ & $�dense �� by ���\#\#$ & $\surd$ \\
+	A5 & $Odense-By$ & $odense-by\#\#$ & $\surd$ \\
+	A6 & $Odense' den fine by$ & $odense' den fine by\#\#$ & $\surd$ \\
+	B1 & $1234$ & $\#1234\#$ & $\surd$ \\
+	B2 & $,!1234$ & $\#1234\#$ & $\surd$ \\
+	B3 & $??1234  )$ & $\#1234\#$ & $\surd$ \\
+	B4 & $-1234$ & $-\#1234\#$ & $\surd$ \\
+	B5 & $12$ & $null$ & $\surd$ \\
+	B6 & $123456$ & $null$ & $\surd$ \\
+	C1 & $8765 k�Ge$ & $k�ge\#8765\#$ & $\surd$ \\
+	C2 & $=?8765 k�Ge$ & $k�ge\#8765\#$ & $\surd$ \\
+	C3 & $8765 k�Ge=?$ & $k�ge\#8765\#$ & $\surd$ \\
+	C4 & $k�ge 8765$ & $k�ge\#8765\#$ & $\surd$ \\
+	C5 & $k�ge,?=!8765$ & $k�ge\#8765\#$ & $\surd$ \\
+	D1 & $Skive, vejen, 4567$ & $skive\#4567\#vejen$ & $\surd$ \\
+	D2 & $Skive, vejen4567$ & $skive\#4567\#vejen$ & $\surd$ \\
+	D3 & $Skive,vejen 4567$ & $skive\#4567\#vejen$ & $\surd$ \\
+	E1 & $R�dby9876allegade$ & $r�dby\#9876\#allegade$ & $\surd$ \\
+	E2 & $R�dby 9876 allegade$ & $r�dby\#9876\#allegade$ & $\surd$ \\
+	E3 & $R�dby?=+" +?3?9876 allegade$ & $r�dby\#9876\#allegade$ & $\surd$ \\
+	F1 & $malm� Vegen 95667$ & $malm� vegen\#95667\#$ & $\surd$ \\
+	F2 & $malm�,Vegen,95667$ & $malm�\#95667\#vegen$ & $\surd$ \\
+	G1 & $k�benhavn, roskilde, �lb�k$ & $null$ & $\surd$ \\
+	H1 & $br�ndby-�ster +12+3 03+1 9,!?Nygade$ & $br�ndby-�ster\#\#nygade$ & $\surd$ \\
+	I1 & $1234 56789$ & $null$ & $\surd$ \\
+	I2 & $1234,56789$ & $null$ & $\surd$ \\
+	J1 & $!?23++$ & $null$ & $\surd$ \\
+	J2 & $"empty"$ & $null$ & $\surd$
 \end{tabular}
 
 \pagebreak
