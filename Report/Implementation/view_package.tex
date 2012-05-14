@@ -68,7 +68,7 @@ In practise, on a 5 year old computer with a 2.4 Ghz intel dual-core processor, 
 
 The trie  provides a simple API for searches:
 \begin{itemize}
-	\item \texttt{String} get(\texttt{String}) returns the entry associated with the search \texttt{String}, formatted as '\texttt{String};node id', or \texttt{null} if the search is a miss
+	\item \texttt{String} get(\texttt{String}) returns the node id associated with the search \texttt{String}, or \texttt{null} if the search is a miss
 	\item \texttt{Iterable<String>} startsWith(\texttt{String}) returns all \texttt{String}s that are prefixed with the given \texttt{String}, or null if no such \texttt{String}s are found.
 \end{itemize}
 
