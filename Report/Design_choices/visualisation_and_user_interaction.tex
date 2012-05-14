@@ -1,25 +1,25 @@
 \subsubsection{Platform}
-To start with we had to decide whether we wanted to use \texttt{Java} and \texttt{Swing}, or \texttt{Java}, \texttt{JavaScript}, \texttt{SVG}, and \texttt{HTML} for the visualisation part. There are strengths and weaknesses to both solutions: The good thing about \texttt{Swing} is that we all have previous experience with it, and so we were certain that, using \texttt{Swing}, we would be able to do what we wanted. 
-The fact that none of us have had any notable experience with \texttt{JavaScript} and \texttt{SVG} made it easy for us to decide on a platform for this project. By using \texttt{Java} and \texttt{Swing}, we would be able to spend our time making a well working program with a nice data structure. We would, of course, have liked looking into a new language like \texttt{JavaScript}, but we have chosen to prioritize a well working program over the learning experience of working with a new programming language.
+To start with we had to decide whether we wanted to use \texttt{Java} and \texttt{Swing}, or \texttt{Java}, \texttt{JavaScript}, \texttt{SVG}, and \texttt{HTML} for the visualisation part. There are strengths and weaknesses to both solutions: the good thing about \texttt{Swing} is that we all have previous experience with it, and so we were certain that, using \texttt{Swing}, we would be able to do what we wanted. 
+The fact that none of us have had any notable experience with \texttt{JavaScript} and \texttt{SVG} made it easy for us to decide on a platform for this project. By using \texttt{Java} and \texttt{Swing}, we would be able to spend our time making a well working program with a nice data structure. We would, of course, have liked looking into a new language like \texttt{JavaScript}, but we have chosen to prioritize a well-working program over the learning experience of working with a new programming language.
 
 \subsubsection{How the roads are drawn}
 As mentioned above we chose to use \texttt{Swing} and the \texttt{BasicStroke API} to do the drawing of the map. 
 
-Technically, the map first draws all of Denmark. It is however only the largest of the road types that is drawn when the whole of Denmark is shown. We decided to only do so because it is both unnecessary to draw all roads when you are very far away from the map, but also to make the program run smoother. The program is designed to show more and more road types the more you zoom in towards the map. Only the roads that are inside the given view are drawn.
+Technically, the map first draws all of Denmark. It is, however, only the largest of the road types that are drawn when the entire map is shown. We decided to only do so both because it is unnecessary to draw all roads when you are very far away from the map, but also to make the program run smoother. The program is designed to show more and more road types the more you zoom in towards the map. Only the roads that are inside the given view are drawn.
 
-We decided to make the thickness of the roads relative (so for example highways are displayed as being wider than smaller roads). The different types of roads are displayed using different colors, making is possible for the user to distinct between them.
+We decided to make the thickness of the roads relative (so for example highways are displayed as being wider than smaller roads). The different types of roads are displayed using different colors, making it possible for the user to distinct between them.
 
 \subsubsection{User interaction with the map}
-We wanted to make a simple, yet featureful, user interaction with the map. This resulted in a user interface with no physical buttons. All you need to navigate the map is pointing device (i.e., a mouse). To zoom in and out you scroll up and down, respectively. The mouse pointer decides what the zooming point is. It is also very easy to pan up or down, or to the sides. This is done by simply dragging and dropping the map with the mouse pointer. The window is also easily resized by dragging in one corner of the window. There are, however, some differences in the way that the resizing behaves according to the OS the program is running under.
+We wanted to make a simple, yet advanced, user interaction with the map. This resulted in a user interface with no physical buttons. All you need to navigate the map is pointing device (i.e., a mouse). To zoom in and out you scroll up and down, respectively. The mouse pointer decides what the zooming point is. It is also very easy to pan up or down, or to the sides. This is done by simply dragging and dropping the map with the mouse pointer. The window is also easily resized by dragging in one corner of the window. There are, however, some differences in the way that the resizing behaves according to the OS the program is running under.
 
-There must be a limit of how far in and out the user can zoom on the map. The limit on zooming out is to avoid the user at some point being zoomed out so far that it is no longer possible to navigate back to display a wished part of the map (and since only the roads of Denmark are to be drawn, nothing will be visible other than maybe a very small amount of pixels representing Denmark). The limit of zooming in must prevent the user from being zoomed in so far the map is no longer recognizable as a map. If no boundaries for zooming were to be made, it is imaginable that the user by accident zooms either too far in or out, no longer recognizing what is displayed. The result is very likely to look similar to no roads being draw at all, which might again cause it to seem as if an error has occurred, forcing the user to restart the application.
+There must be a limit to how far in and out the user can zoom on the map. The limit on zooming out is there to avoid the user at some point being zoomed out so far that it is no longer possible to navigate back to display a desired part of the map (and since only the roads of Denmark are to be drawn, nothing will be visible other than maybe a very small amount of pixels representing Denmark). The limit of zooming in must prevent the user from being zoomed in so far that the map is no longer recognizable as a map. If no boundaries for zooming were to be made, the user might accidentally zoom either too far in or out, no longer recognizing what is displayed. The result is very likely to look similar to no roads being draw at all, which might again cause it to seem as if an error has occurred, forcing the user to restart the application.
 
-Limits must also be present when dragging the current view for similar reasons (Ex. dragging to some places away from the roads drawn, making it look as if no roads are displayed).
+For similar reasons, limits must also be present when dragging the current view (Ex. dragging to some places away from the roads drawn, making it look as if no roads are displayed).
 
-We want a user interface design with a minimal number of buttons and other components on the graphical user interface because it, in our strongest conviction, is the most intuitive way for people to navigate and interact with maps. It seems that this has become the \textit{de facto} standard, probably due to the increasing number of tablets and smartphones on the market.
+We want a user interface design with a minimal number of buttons and other components on the graphical user interface because it, in our strongest conviction, is the most intuitive way for people to navigate and interact with maps. It seems that this has become the \textit{de facto} standard, probably due to the increasing number of tablets and smart phones on the market.
 
 \subsubsection{Finding locations and trips}
-As with the user interaction with the map, we decided to make the graphical user interface for finding either a location or a trips as simple as possible (and with that having as few as possible buttons to push and places to type text). The result was having two fields in which addresses can be typed in by the user and a button for executing the search for either location or trip. When the button is pressed, the content of the input fields decides what is to be executed. The possibilities are the following:
+As with the user interaction with the map, we decided to make the graphical user interface for finding either a location or a trip as simple as possible (and with that having as few buttons to push as possible and as few places to type text as possible). The result was to have two fields in which addresses can be typed in by the user and a button for executing the search for either location or trip. When the button is pressed, the content of the input fields decides what is to be executed. The possibilities are the following:
 \begin{itemize}
 	\item \textbf{Only one address is typed in} \\
 		A search for the location according to the given address is executed, giving that the address is understood by the application as a valid address.
@@ -33,22 +33,22 @@ In addition to that, when a search for a trip is executed, the search can actual
 \end{itemize}
 This second search criteria is also to be selected by the user. This is to be done with radio buttons allowing the user to toggle between the two.
 
-All input fields, button(s) and radio buttons are to be labeled with either names which in themselves describe the purpose of the component to a satisfactory level, or with a short description of the purpose.
+All input fields, button(s) and radio buttons are to be labelled either with names which, in themselves, describe the purpose of the component to a satisfactory level, or with a short description of the purpose.
 
-When a trip is found, all of the roads segments of which is consists are drawn on the \texttt{MapPanel} using a purple color. They are drawn on top of the roads already visualised. In addition to that, below that radio buttons for toggling the search criteria, the following information is displayed to the user:
+When a trip is found, all of the road's segments are drawn on the \texttt{MapPanel} using a purple color. They are drawn on top of the roads already visualised. In addition to that, the following information is displayed to the user below the radio buttons for toggling the search criteria:
 \begin{itemize}
-	\item The length of the road in kilometers
+	\item The length of the road in kilometres
 	\item The time it takes to follow the trip in minutes
 \end{itemize}
-When finding the fastest path, the time displayed is according the the speed limit of the road segments (you move as fast as your allowed to). When finding the shortest path, the time displayed is 5 kilometers per hour (about the average walking speed of a human being).
+When finding the fastest path, the time displayed is according to the speed limit of the road segments (you move as fast as you are allowed to). When finding the shortest path, the time displayed is the time it would take with a speed of five kilometres per hour (about the average walking speed of a human).
 
-When a location is found, the locations is drawn as a purple, filled out circle on the map.
+When a location is found, the location is drawn as a purple filled circle on the map.
 
-When either a trip or location is found, the current view is changed so the trip / location is in the center of the map, and the map is zoomed to a fitting level.
+When either a trip or a location is found, the current view is changed so the trip / location is in the center of the map, and the map is zoomed to an appropriate level.
 
 \subsubsection{What is a valid address}
 \label{sec:What is a valid address}
-The validity of a typed in address is dependent upon two different things; the \textit{content} of the address and the \textit{format} in which the address is written.
+The validity of a typed-in address is dependent on two different things; the \textit{content} of the address and the \textit{format} in which the address is written.
 
 The \textit{content} can be different combinations of the following three:
 \begin{itemize}
@@ -66,25 +66,25 @@ It must be possible to search for:
 	\item City name and zip code
 	\item Street name with city name and/or zip code
 \end{itemize}
-This means that in order to find a road, you must include include either the corresponding zip code or city name in the given address.
+This means that in order to find a road, you must include either the corresponding zip code or city name in the given address.
 
-The search is limited to not being me precise than finding road names.
+The search is limited to not being more precise than finding road names.
 
 The \textit{format} must be easy to get used to / similar to the way we write addresses in letters, mails etc.
 
-When writing city name and street name next to each other, they must be separated with one or more characters not "legally" part of either of them. An obvious option is separating the city name and street name with a comma (\texttt{","}) or with a comma followed by a white space (\texttt{", "}), but other characters must be accepted as well.
+When writing city name and street name next to each other, they must be separated with one or more characters not "legally" part of either of the two. An obvious option is separating the city name and street name with a comma (\texttt{","}) or with a comma followed by a white space (\texttt{", "}), but other characters must be accepted as well.
 
 When writing either city name or street name next to the zip code, it should not be necessary to use any special characters to separate them. For example, it should be possible to write an entire address containing both street name, zip code, and city name without using any special characters to separate them, having the zip code in the middle of the others (Ex. \texttt{"Street name 1234 city"}).
 
-Extra spaces within in in either the beginning or end of a city name or street name should be ignored and not cause the application to not accept the address as being valid (Ex. \texttt{"City    name"}).
+Extra spaces within either the beginning or the end of a city name or street name should be ignored and not cause the application to not accept the address as being valid (Ex. \texttt{"City    name"}).
 
-It should not matter whether capitalized letters are used or not. Capitalized and non-capitalized letters should be understood as being the same. For example should \texttt{"CiTy NAMe"} and \texttt{"city name"} result in the same address search.
+It should not matter whether capitalised letters are used or not. Capitalised and non-capitalised letters should be understood as being the same. For example, \texttt{"CiTy NAMe"} and \texttt{"city name"} should result in the same address search.
 
-If an address is not accepted as being valid, the user must be alerted, telling which of the addresses which are not valid. A similar such warning must be provided given the user executes a search without having entered any address at all. The user must not be left in a situation where he/she might thinks a search has been executed, though that is not the case.
+If an address is not accepted as being valid, the user must be alerted, being told which of the addresses are not valid. A similar warning must be provided if the user executes a search without having entered any address at all. The user must not be left in a situation where he/she might thinks a search has been executed if it has not.
 
 \subsubsection{Automatic text completion}
-In order to aid the user in finding the wanted address with a minimum of clutter and issues with the content and format of the address to be typed in, we want the application to provide the user with a list of the addresses which best match what is currently typed in. The list will be empty when nothing is written, but the content of the list must appear as soon as a characters is typed in, and the list must update for each additional character typed / for each character removed. The list has to contain between zero and five possible addresses.
+In order to aid the user in finding the desired address with a minimum of clutter and issues with the content and format of the address to be typed in, we want the application to provide the user with a list of the addresses which best match what is currently typed in. The list will be empty when nothing is written, but the content of the list must appear as soon as a characters is typed in, and the list must update for each additional character typed / for each character removed. The list has to contain between zero and five possible addresses.
 
 Why we have decided to display up to five addresses is a matter of taste. We find that it is a reasonable amount of addresses, having enough for the user to have several options to choose between, but not having so many that the list dominates the rest of the graphical user interface.
 
-It has to be possible for the user to select the addresses on the list, copying the selected address to the input field and hiding the list from the view, avoiding that the list is in the way of other operation the user might want to perform.
+It has to be possible for the user to select the addresses on the list, copying the selected address to the input field and hiding the list from the view, avoiding that the list is in the way of other operations the user might want to perform.

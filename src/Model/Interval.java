@@ -6,7 +6,7 @@ package Model;
  * A one-dimensional interval.
  * Can represent an interval on any given axis, i.e. the x-axis.
  */
-class Interval { 
+public class Interval { 
     public final double low;      // left endpoint
     public final double high;     // right endpoint
     
