@@ -68,8 +68,8 @@ In practise, on a 5 year old computer with a 2.4 Ghz intel dual-core processor, 
 
 The trie  provides a simple API for searches:
 \begin{itemize}
-	\item String get(String) returns the node id associated with the location denoted by ta given String, or null if the search is a miss
-	\item Iterable<String> startsWith(String) returns all Strings that are prefixed with the given String, or null if no such Strings are found.
+	\item \texttt{String} get(\texttt{String}) returns the node id associated with the search \texttt{String}, or \texttt{null} if the search is a miss
+	\item \texttt{Iterable<String>} startsWith(\texttt{String}) returns all \texttt{String}s that are prefixed with the given \texttt{String}, or null if no such \texttt{String}s are found.
 \end{itemize}
 
 The code for the search trie bears the mark of being an ad-hoc solution. In order for the class to honour the OOP principle of reusability, the search key and return value should be parameterized at runtime, and the constructors for building the trie from a file should have taken a field separator as parameter rather than using the hardcoded ';' character.
