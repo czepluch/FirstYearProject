@@ -61,7 +61,7 @@ public class Model {
 	 */
 	public void updateTrip(int fromId, int toId) {
 		// Update the trip
-		trip = pathFinder.run(fromId + "", toId + "", fastOrShort);
+		trip = pathFinder.run(fromId + "", toId + "", fastOrShort, G);
 		// Set the location to null
 		location = null;
 	}
