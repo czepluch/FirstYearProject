@@ -16,17 +16,26 @@ import static Model.TripCriteria.*;
 public class Graph
 {
 	public static Graph G;
-	private static final ArrayList<Vertex> fastVertices = new ArrayList<Vertex>();
-	private static final ArrayList<Vertex> shortVertices = new ArrayList<Vertex>();
-	private static final ArrayList<GEdge> edges = new ArrayList<GEdge>();
-	private static final HashMap<String,Vertex> fastMap = new HashMap<String,Vertex>();
-	private static final HashMap<String,Vertex> shortMap = new HashMap<String,Vertex>();
-	private static final HashMap<String,ArrayList<GEdge>> emap = new HashMap<String,ArrayList<GEdge>>();
+	private final ArrayList<Vertex> fastVertices = new ArrayList<Vertex>();
+	private final ArrayList<Vertex> shortVertices = new ArrayList<Vertex>();
+	private final ArrayList<GEdge> edges = new ArrayList<GEdge>();
+	private final HashMap<String,Vertex> fastMap = new HashMap<String,Vertex>();
+	private final HashMap<String,Vertex> shortMap = new HashMap<String,Vertex>();
+	private final HashMap<String,ArrayList<GEdge>> emap = new HashMap<String,ArrayList<GEdge>>();
 	private static int awake = -1;
 	
 	public static void wakeUp() { 
 		awake++;
 		if (awake < 1) G = new Graph("vertex.txt", "edges.txt");
+	}
+	
+	/*
+	 * This is method is stricly for testing purposes
+	 * and should only be called in the DijkstraTest class.
+	 */
+	public static Graph testGraph(String vpath, String epath)
+	{
+		return new Graph(vpath, epath);
 	}
 	
 	/**
@@ -35,6 +44,7 @@ public class Graph
 	 */
 	private Graph(String vpath, String epath)
 	{
+		long nano = System.nanoTime();
 		BufferedReader in = null;
 		try {
 			// parse vertex input
@@ -124,6 +134,7 @@ public class Graph
 				v.adjacencies.add(new Edge(w, dist, 5));
 			}
 		}
+		System.out.printf("Created Graph in %d nanoseconds\n", System.nanoTime() - nano);
 	}
 	
 	public double distance(Vertex v, Vertex w)
