@@ -95,6 +95,29 @@ Rasmus Pagh\\
 \pagebreak
 \section{Testing}
 \label{sec:Testing}
+
+\subsection{AddressParser class test}
+
+\subsection{Coordinates class test}
+
+\subsection{Dijkstra class test}
+\include*{Testing/dijkstra_test_class}
+
+\subsection{GVertex and Vertex classes test}
+
+\subsection{QuadTree class test}
+\include*{Testing/quadtree_test_class}
+
+\subsection{TripEdge class test}
+
+\subsection{TernaryTrie class test}
+
+\subsection{RoadDataCreator class test}
+\include*{Testing/roaddatacreator_test_class}
+
+\subsection{Testing the graphical user interface}
+
+\subsection{Outline}
 \include*{Testing/outline}
 
 \pagebreak
@@ -438,7 +461,7 @@ Monday 23/4-2012, 10:00 at ITU
 	\end{enumerate}
 	\item File containing the trie info
 	\begin{enumerate}
-		\item Format: \textsl{Something\#Something else\#Something else;nodeId}
+		\item Format: \textsl{Something$\#$Something else$\#$Something else;nodeId}
 	\end{enumerate}
 \end{enumerate}
 
@@ -793,49 +816,49 @@ In the input property, we will use the letter \textit{c} to refer to a series of
 \begin{tabular}{ p{1cm} | p{5cm} | p{5cm} | p{1cm} }
 	Input data set & Input & Expected output & Actual output \\
 	\hline
-	A1 & $Odense$ & $odense\#\#$ & $\surd$ \\
-	A2 & $! Odense$ & $odense\#\#$ & $\surd$ \\
-	A3 & $+Odense 9/?$ & $odense\#\#$ & $\surd$ \\
-	A4 & $�dense �� by ���$ & $�dense �� by ���\#\#$ & $\surd$ \\
-	A5 & $Odense-By$ & $odense-by\#\#$ & $\surd$ \\
-	A6 & $Odense' den fine by$ & $odense' den fine by\#\#$ & $\surd$ \\
-	B1 & $1234$ & $\#1234\#$ & $\surd$ \\
-	B2 & $,!1234$ & $\#1234\#$ & $\surd$ \\
-	B3 & $??1234  )$ & $\#1234\#$ & $\surd$ \\
-	B4 & $-1234$ & $-\#1234\#$ & $\surd$ \\
-	B5 & $12$ & $null$ & $\surd$ \\
-	B6 & $123456$ & $null$ & $\surd$ \\
-	C1 & $8765 k�Ge$ & $k�ge\#8765\#$ & $\surd$ \\
-	C2 & $=?8765 k�Ge$ & $k�ge\#8765\#$ & $\surd$ \\
-	C3 & $8765 k�Ge=?$ & $k�ge\#8765\#$ & $\surd$ \\
-	C4 & $k�ge 8765$ & $k�ge\#8765\#$ & $\surd$ \\
-	C5 & $k�ge,?=!8765$ & $k�ge\#8765\#$ & $\surd$ \\
-	D1 & $Skive, vejen, 4567$ & $skive\#4567\#vejen$ & $\surd$ \\
-	D2 & $Skive, vejen4567$ & $skive\#4567\#vejen$ & $\surd$ \\
-	D3 & $Skive,vejen 4567$ & $skive\#4567\#vejen$ & $\surd$ \\
-	E1 & $R�dby9876allegade$ & $r�dby\#9876\#allegade$ & $\surd$ \\
-	E2 & $R�dby 9876 allegade$ & $r�dby\#9876\#allegade$ & $\surd$ \\
-	E3 & $R�dby?=+" +?3?9876 allegade$ & $r�dby\#9876\#allegade$ & $\surd$ \\
-	F1 & $malm� Vegen 95667$ & $malm� vegen\#95667\#$ & $\surd$ \\
-	F2 & $malm�,Vegen,95667$ & $malm�\#95667\#vegen$ & $\surd$ \\
-	G1 & $k�benhavn, roskilde, �lb�k$ & $null$ & $\surd$ \\
-	H1 & $br�ndby-�ster +12+3 03+1 9,!?Nygade$ & $br�ndby-�ster\#\#nygade$ & $\surd$ \\
-	I1 & $1234 56789$ & $null$ & $\surd$ \\
-	I2 & $1234,56789$ & $null$ & $\surd$ \\
-	J1 & $!?23++$ & $null$ & $\surd$ \\
-	J2 & $"empty"$ & $null$ & $\surd$
+	A1 & Odense & odense\#\# & $\surd$ \\
+	A2 & ! Odense & odense\#\# & $\surd$ \\
+	A3 & +Odense 9/? & odense\#\# & $\surd$ \\
+	A4 & \O dense \ae \aa \hspace{2pt} by \"{a}\"{u}\"{O} & \O dense \ae \aa \hspace{2pt} by\#\# & $\surd$ \\
+	A5 & Odense-By & odense-by\#\# & $\surd$ \\
+	A6 & Odense' den fine by & odense' den fine by\#\# & $\surd$ \\
+	B1 & 1234 & $\#$1234$\#$ & $\surd$ \\
+	B2 & ,!1234 & $\#$1234$\#$ & $\surd$ \\
+	B3 & ??1234  ) & $\#$1234$\#$ & $\surd$ \\
+	B4 & -1234 & -$\#$1234$\#$ & $\surd$ \\
+	B5 & 12 & null & $\surd$ \\
+	B6 & 123456 & null & $\surd$ \\
+	C1 & 8765 k\O Ge & k\o ge$\#$8765$\#$ & $\surd$ \\
+	C2 & =?8765 k\O Ge & k\o ge$\#$8765$\#$ & $\surd$ \\
+	C3 & 8765 k\O Ge=? & k\o ge$\#$8765$\#$ & $\surd$ \\
+	C4 & k\o ge 8765 & k\o ge$\#$8765$\#$ & $\surd$ \\
+	C5 & k\o ge,?=!8765 & k\o ge$\#$8765$\#$ & $\surd$ \\
+	D1 & Skive, vejen, 4567 & skive$\#$4567$\#$vejen & $\surd$ \\
+	D2 & Skive, vejen4567 & skive$\#$4567$\#$vejen & $\surd$ \\
+	D3 & Skive,vejen 4567 & skive$\#$4567$\#$vejen & $\surd$ \\
+	E1 & R\o dby9876allegade & r\o dby$\#$9876$\#$allegade & $\surd$ \\
+	E2 & R\o dby 9876 allegade & r\o dby$\#$9876$\#$allegade & $\surd$ \\
+	E3 & R\o dby?=+" +?3?9876 allegade & r\o dby$\#$9876$\#$allegade & $\surd$ \\
+	F1 & malm\"{o} Vegen 95667 & malm\"{o} vegen$\#$95667$\#$ & $\surd$ \\
+	F2 & malm\"{o},Vegen,95667 & malm\"{o}$\#$95667$\#$vegen & $\surd$ \\
+	G1 & k\o benhavn, roskilde, \AA lb\ae k & null & $\surd$ \\
+	H1 & br\o ndby-\o ster +12+3 03+1 9,!?Nygade & br\o ndby-\o ster$\#\#$nygade & $\surd$ \\
+	I1 & 1234 56789 & null & $\surd$ \\
+	I2 & 1234,56789 & null & $\surd$ \\
+	J1 & !?23++ & null & $\surd$ \\
+	J2 & \textsl{"empty"} & null & $\surd$
 \end{tabular}
 
 \pagebreak
 \subsection{Coordinates class}
 For the testing of both of the following methods, the values of the \texttt{MinAndMaxValues} class, which are used are set to the following:
 \begin{itemize}
-	\item $minX = 20$
-	\item $maxX = 120$
-	\item $minY = 30$
-	\item $maxY = 130$
-	\item $width = 10$
-	\item $height = 10$
+	\item minX = 20
+	\item maxX = 120
+	\item minY = 30
+	\item maxY = 130
+	\item width = 10
+	\item height = 10
 \end{itemize}
 
 \subsubsection{Blackbox test of the \texttt{convertXToPixels method}}
@@ -872,21 +895,21 @@ Both the \texttt{GVertex} and \texttt{Vertex} classes share the \texttt{distance
 \begin{tabular}{ p{3.5cm} | p{4cm} | p{2.5cm} | p{1cm} }
 	Input property & Input & Expected output & Actual output \\
 	\hline
-	Positive numbers, increasing & $(8,4$), $(16,12)$ & $11.3137$ & $\surd$ \\
-	Positive numbers, decreasing & $(20,15)$, $(13,12)$ & $7.6158$ & $\surd$ \\
-	Positive numbers, one coordinate increasing, one decreasing & $(10, 5)$, $(5, 10)$ & $7.0711$ & $\surd$ \\
-	Negative numbers & $(-10, -3)$, $(-3, -1)$ & $7.2801$ & $\surd$ \\
-	Negative and positive numbers & $(7, 5)$, $(-7, -5)$ & $17.2047$ & $\surd$ \\
-	Positive and negative numbers mixed & $(1, -3)$, $(17, 2)$ & $16.7631$ & $\surd$ \\
+	Positive numbers, increasing & (8,4), (16,12) & 11.3137 & $\surd$ \\
+	Positive numbers, decreasing & (20,15), (13,12) & 7.6158 & $\surd$ \\
+	Positive numbers, one coordinate increasing, one decreasing & (10, 5), (5, 10) & 7.0711 & $\surd$ \\
+	Negative numbers & (-10, -3), (-3, -1) & 7.2801 & $\surd$ \\
+	Negative and positive numbers & (7, 5), (-7, -5) & 17.2047 & $\surd$ \\
+	Positive and negative numbers mixed & (1, -3), (17, 2) & 16.7631 & $\surd$ \\
 	All numbers zero & (0, 0), (0, 0) & 0.0000 & $\surd$ \\
-	One number zero & (0, 0), (-3, 7) & $7.6158$ & $\surd$ \\
-	Decimal numbers & $(3.7, 5.9)$, $(-3.3, 2.3)$ & $7.8715$ & $\surd$ \\
-	Large numbers (UTM) & $(892250.58771$, $6147885.93632)$, $(892297.17852$, $6147868.40019)$ & $49.7817$ & $\surd$ \\
-	Low numbers & $(0.58171$, $0.93432)$, $(-0.18852$, $0.43019)$ & $0.9205$ & $\surd$ \\
-	Large and low numbers & $(2, 5)$, $(892250.58771$, $6147885.93632)$ & $6212290.0407$ & $\surd$
+	One number zero & (0, 0), (-3, 7) & 7.6158 & $\surd$ \\
+	Decimal numbers & (3.7, 5.9), (-3.3, 2.3) & 7.8715 & $\surd$ \\
+	Large numbers (UTM) & (892250.58771, 6147885.93632), (892297.17852, 6147868.40019) & 49.7817 & $\surd$ \\
+	Low numbers & (0.58171, 0.93432), (-0.18852, 0.43019) & 0.9205 & $\surd$ \\
+	Large and low numbers & (2, 5), (892250.58771, 6147885.93632) & 6212290.0407 & $\surd$
 \end{tabular}
 \\ \\ \\
-Each of the results have been rounded to the nearest $1/10000$.
+Each of the results have been rounded to the nearest 1/10000.
 
 \pagebreak
 \subsection{Quadtree class}
