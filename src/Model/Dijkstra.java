@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import static Model.Graph.G;
 import static Model.TripCriteria.*;
-import static View.MinAndMaxValues.maxSpeed;
 
 /**
  * Class used to compute the shortest path between two given vertices
@@ -67,13 +66,13 @@ public class Dijkstra implements PathFinder
 	 * @param target The end point of the path
 	 * @param type Determines whether to compute the fastest or shortest path.
      */
-	public Trip<Double> run(String source, String target, TripCriteria type)
+	public Trip<Double> run(String source, String target, TripCriteria type, Graph g)
 	{
 		// run the algorithm from j'th to k'th vertex
 		ArrayList<Vertex> vs;
-		if (type == FAST) vs = G.getFastVertices();
-		else vs = G.getShortVertices();
-		HashMap<String,Vertex> map = G.getMap(type);
+		if (type == FAST) vs = g.getFastVertices();
+		else 			  vs = g.getShortVertices();
+		HashMap<String,Vertex> map = g.getMap(type);
 		Vertex u = map.get(source);
 		computePaths(u, map.get(target), vs);
 		Trip<Double> trip = new Trip<Double>();
