@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import static Model.Graph.G;
 import static Model.TripCriteria.*;
 
 /**
@@ -14,7 +13,7 @@ import static Model.TripCriteria.*;
 public class Dijkstra implements PathFinder
 {
 	/**
-	 * Compute the shortest path from one vertex to another.
+	 * Compute the shortest and fastest path from one vertex to another.
 	 * Should not be called directly. Instead, call the run()-method
 	 * @param source The starting point of the path
 	 * @param target The end point of the path
@@ -61,14 +60,13 @@ public class Dijkstra implements PathFinder
     }
 
     /**
-     * Call this method to compute the shortest path between two vertices
+     * Call this method to get the shortest or fastest path between two vertices
 	 * @param source The starting point of the path
 	 * @param target The end point of the path
 	 * @param type Determines whether to compute the fastest or shortest path.
      */
 	public Trip<Double> run(String source, String target, TripCriteria type, Graph g)
 	{
-		// run the algorithm from j'th to k'th vertex
 		ArrayList<Vertex> vs;
 		if (type == FAST) vs = g.getFastVertices();
 		else 			  vs = g.getShortVertices();
@@ -85,6 +83,7 @@ public class Dijkstra implements PathFinder
        			Vertex firstPoint = path.get(0);
        			Edge firstEdge = null;
        			// get first edge in path
+       			// used for calculating travel time
        			for (Edge e : firstPoint.adjacencies)
        				if (e.target.id.equals(path.get(1).id)) firstEdge = e;
        			double fromX = firstPoint.getX();

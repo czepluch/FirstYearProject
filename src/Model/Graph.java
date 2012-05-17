@@ -10,8 +10,8 @@ import java.io.InputStreamReader;
 import static Model.TripCriteria.*;
 
 /**
- * Class used to build the graph from a file containing graph information.
- * The graph is (intended to be) made upon launching the application.
+ * Class used to build the graph from files containing graph information.
+ * The graph is made upon launching the application.
  */
 public class Graph
 {
@@ -24,6 +24,9 @@ public class Graph
 	private final HashMap<String,ArrayList<GEdge>> emap = new HashMap<String,ArrayList<GEdge>>();
 	private static int awake = -1;
 	
+	/**
+	 * Is called at start-up to create the graph.
+	 */
 	public static void wakeUp() { 
 		awake++;
 		if (awake < 1) G = new Graph("vertex.txt", "edges.txt");
@@ -39,12 +42,11 @@ public class Graph
 	}
 	
 	/**
-	 * Constructor
+	 * Constructor. Creates the Graph.
 	 * @param path File path to the file containing graph information
 	 */
 	private Graph(String vpath, String epath)
 	{
-		long nano = System.nanoTime();
 		BufferedReader in = null;
 		try {
 			// parse vertex input
@@ -81,6 +83,7 @@ public class Graph
 				GEdge e = new GEdge(id1, id2, weight, speed);
 				edges.add(e);
 				
+				// update adjacencies for each endpoint of the edge
 				ArrayList<GEdge> adj1, adj2;
 				if (emap.containsKey(id1))
 					adj1 = emap.get(id1);
@@ -134,41 +137,48 @@ public class Graph
 				v.adjacencies.add(new Edge(w, dist, 5));
 			}
 		}
-		System.out.printf("Created Graph in %d nanoseconds\n", System.nanoTime() - nano);
 	}
 	
-	public double distance(Vertex v, Vertex w)
-	{
-		return Math.sqrt(Math.pow(w.x - v.x, 2) + Math.pow(w.y - v.y, 2));
-	}
-	
+	/**
+	 * Return the ArrayList of vertices in the graph used to find fastest path.
+	 * @return The ArrayList of vertices in the graph used to find fastest path.
+	 */
 	public ArrayList<Vertex> getFastVertices()
 	{
 		return fastVertices;
 	}
 	
+	/**
+	 * Return the ArrayList of vertices in the graph used to find shortest path.
+	 * @return The ArrayList of vertices in the graph used to find shortest path.
+	 */
 	public ArrayList<Vertex> getShortVertices()
 	{
 		return shortVertices;
 	}
 	
-	public ArrayList<GEdge> getEdges()
-	{
-		return edges;
-	}
-	
+	/**
+	 * Return the map of all vertices for the given type of path.
+	 * @param type Determines which path is to be drawn. Can be FAST or SHORT.
+	 * @return The map of all vertices for the given type of path.
+	 */
 	public HashMap<String,Vertex> getMap(TripCriteria type)
 	{
 		if (type == FAST) return fastMap;
 		else return shortMap;
 	}
 	
+	/**
+	 * Return the coordinates of a node.
+	 * @param nodeId The id of the node.
+	 * @return The coordinates of a node as a double Array.
+	 */
 	public double[] getNodeCoordinates(int nodeId) {
 		Vertex v = fastMap.get(nodeId + "");
 		double[] coords = { v.getX(), v.getY() };
 		return coords;
 	}
-	
+
 	public static void main(String[] args) {
 		wakeUp();
 	}

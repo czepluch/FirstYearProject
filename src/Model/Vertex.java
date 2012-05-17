@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 
-//Class used to represent a vertex in the shortest path clases: Dijkstra, Graph, and GraphInput
+// Class used to represent a vertex in the shortest path clases: Dijkstra, Graph, and GraphInput
 public class Vertex implements Comparable<Vertex>
 {
 	public final double x, y;
@@ -13,13 +13,13 @@ public class Vertex implements Comparable<Vertex>
 	public Vertex previous = null;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * @param id Vertex id
 	 * @param x x-coordinate
 	 * @param y y-coordinate
 	 * @param neighbours String array of neighbour id's
 	 */
- public Vertex(String id, double x, double y, String[] neighbours) 
+	public Vertex(String id, double x, double y, String[] neighbours) 
 	{ 
 		this.id = id;
 		this.x = x;
@@ -27,28 +27,28 @@ public class Vertex implements Comparable<Vertex>
 		this.neighbours = neighbours;
 		adjacencies = new ArrayList<Edge>();
 	}
- 
- public String toString()
- {
- 	return id;
- }
- 
- public int compareTo(Vertex other)
- {
-     return Double.compare(minDistance, other.minDistance);
- }
- 
- public double getX() { return x; }
- public double getY() { return y; }
 
-/**
- * Compute the distance between two vertices
- * @param v1 The first vertex
- * @param v2 The second vertex
- * @return The distance between two vertices
- */
-public static double distance(Vertex v1, Vertex v2)
-{
-	return Math.sqrt(Math.pow((v2.x - v1.x), 2) + Math.pow((v2.y - v1.y), 2));
-}
+	public String toString()
+	{
+		return id;
+	}
+
+	public int compareTo(Vertex other)
+	{
+		return Double.compare(minDistance, other.minDistance);
+	}
+
+	public double getX() { return x; }
+	public double getY() { return y; }
+
+	/**
+	 * Compute the distance between two vertices
+	 * @param v1 The first vertex
+	 * @param v2 The second vertex
+	 * @return The distance between two vertices
+	 */
+	public static double distance(Vertex v1, Vertex v2)
+	{
+		return Math.sqrt(Math.pow((v2.x - v1.x), 2) + Math.pow((v2.y - v1.y), 2));
+	}
 }

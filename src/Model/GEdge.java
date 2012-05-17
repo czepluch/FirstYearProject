@@ -1,5 +1,6 @@
 package Model;
 
+// Class used when creating the graph
 public class GEdge
 {
 	String id1, id2;

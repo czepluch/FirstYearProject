@@ -1,6 +1,6 @@
 package Model;
 
-//Class used to represent an edge in the shortest path classes: Dijkstra, Graph, and GraphInput
+//Class used to represent an edge in the shortest path classes: Dijkstra, Graph, and GraphDataCreator
 class Edge
 {
   public final Vertex target;

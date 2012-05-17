@@ -9,6 +9,9 @@ import java.io.InputStreamReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
+/**
+ * Class used to create the files that are used to create the graph.
+ */
 public class GraphDataCreator
 {
 	private ArrayList<Vertex> vertices;
@@ -36,7 +39,7 @@ public class GraphDataCreator
 				vertices.add(new Vertex(id, x, y));
 				line = in.readLine();
 			}
-			adj = (ArrayList<Vertex>[]) new ArrayList[vertices.size()];
+			adj = (ArrayList<Vertex>[]) new ArrayList[vertices.size()]; // warning supressed
 			
 			// read edges
 			in = new BufferedReader(new InputStreamReader(new FileInputStream(edge_path), "UTF-8"));
@@ -53,7 +56,7 @@ public class GraphDataCreator
 				ArrayList<Vertex> adj1, adj2;									// adjacencies for each of the two vertices
 				
 				double dist = Math.sqrt(Math.pow(v2.x - v1.x, 2) + Math.pow(v2.y - v1.y, 2));
-				if (speed <= 0) speed = 5;		// value must be revised
+				if (speed <= 0) speed = 5;		// speed is set to 5 if undefined
 				edges.add(new GEdge(tokens[0], tokens[1], (100 * dist) / speed, (int)speed));
 				
 				// add v2 as adjacent to v1

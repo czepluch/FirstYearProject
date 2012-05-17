@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 
 import org.junit.Test;
 
-import Model.KEdge;
 import Model.RoadsDataCreator;
 
 /*
