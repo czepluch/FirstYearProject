@@ -2,7 +2,7 @@ package View;
 
 import javax.swing.*;
 
-import static View.MinAndMaxValues.*;
+import static View.ViewValues.*;
 import Model.Trip;
 import Model.TripEdge;
 import Model.Turn;
@@ -16,10 +16,14 @@ import java.awt.event.ComponentListener;
  * The main GUI containing the MapPanel and the rest of the GUI
  */
 public class MainFrame {
+	// Store a reference to the instance of the MinAndMaxValues class
+	private ViewValues v = ViewValues.getInstance();
+	// Components for the GUI
 	private JFrame frame;
 	private JPanel cp;
 	private MapPanel map;
 	private SearchPanel sp;
+	// Other
 	private MapListener listener; // Used when window is resized
 	private Trip trip;
 	
@@ -30,7 +34,7 @@ public class MainFrame {
 	 */
 	public MainFrame(int[][][] lines, MapListener mapListener, SearchListener searchListener) {
 		frame = new JFrame("Krax");
-		frame.setSize(new Dimension(width + SEARCH_PANEL_WIDTH + EXTRA_LAYOUT_WIDTH, height));
+		frame.setSize(new Dimension(v.getWidth() + v.getSEARCH_PANEL_WIDTH() + v.getEXTRA_LAYOUT_WIDTH(), v.getHeight()));
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -38,11 +42,11 @@ public class MainFrame {
 		cp.setLayout(new BorderLayout(6, 6));
 		
 		map = new MapPanel(lines, mapListener);
-		map.setSize(new Dimension(width, 1));
+		map.setSize(new Dimension(v.getWidth(), 1));
 		cp.add(map, BorderLayout.CENTER);
 		
 		sp = new SearchPanel(searchListener);
-		sp.setSize(new Dimension(SEARCH_PANEL_WIDTH, 10));
+		sp.setSize(new Dimension(v.getSEARCH_PANEL_WIDTH(), 10));
 		sp.setBorder(BorderFactory.createRaisedBevelBorder());
 		cp.add(sp, BorderLayout.WEST);
 		
@@ -115,11 +119,11 @@ public class MainFrame {
 			
 			@Override public void componentResized(ComponentEvent e) {
 				Dimension newSize = e.getComponent().getSize();
-				height = (int) newSize.getHeight();
-				width = (int) newSize.getWidth() - (SEARCH_PANEL_WIDTH + EXTRA_LAYOUT_WIDTH);
+				v.setHeight((int) newSize.getHeight());
+				v.setWidth((int) newSize.getWidth() - (v.getSEARCH_PANEL_WIDTH() + v.getEXTRA_LAYOUT_WIDTH()));
 				map.setSize(newSize);
 				
-				repaint = false;
+				v.setRepaint(false);
 				listener.viewboxUpdated();
 			}
 		});
