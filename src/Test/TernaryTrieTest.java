@@ -2,8 +2,8 @@ package Test;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -42,17 +42,30 @@ public class TernaryTrieTest {
 		assertEquals(null, trie.get("lars")); //invalid string
 	}
 	
+//	@Test
+//	//Check if the strings returned by the startsWith(String) method are compliant with the strings recognized by the get(String) method  	
+//	public void testPrefix_GetCompliance() {
+//		//check that each string returned by prefix searches are valid as parameters for the get method.
+//		for (String s : ids.keySet()) {
+//			String pre = s.substring(0, 1).toLowerCase();
+//			for (String k : trie.startsWith(pre)) {
+//				System.out.println("\t" + pre + "\t" + k + "\t" + trie.get(k));
+//				assertEquals(ids.get(k), trie.get(k));
+//				
+//			}
+//		}
+//	}
+	
 	@Test
 	//Check if the strings returned by the startsWith(String) method are compliant with the strings recognized by the get(String) method  	
-	public void testPrefix_GetComnpliance() {
-		Map<String, String> pre = new HashMap<String, String>();
-		//Fill the map with entries like this: [first char in location] -> [node id]
-		for (String s : keys) pre.put(s.substring(0, 1), s.split(";")[1]);
-		
-		//check that each string returned by prefix searches are valid as parameters for the get method, and check that the  
-		for (String s : pre.keySet()) {
+	public void testPrefix_GetCompliance() {
+		Set<String> prefixes = new HashSet<String>();
+		for (String p : keys) prefixes.add(p.substring(0, 1).toLowerCase());
+		//check that each string returned by prefix searches are "valid" as parameters for the get method.
+		for (String s : prefixes) {
 			for (String k : trie.startsWith(s)) {
-				assertEquals(pre.get(s), trie.get(s));
+				System.out.println("\t" + s + " & " + k + " & $\\surd$");
+				assertNotNull(trie.get(k));
 			}
 		}
 	}
@@ -63,7 +76,7 @@ public class TernaryTrieTest {
 		for (String s : trie.startsWith("k")){
 			i++;
 		}
-		assertEquals(6, i);
+		assertEquals(6, i); //hardcoded :(
 	}
 	
 	@Test
