@@ -2,7 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import Model.Point;
-import static View.MinAndMaxValues.*;
+import View.ViewValues;
 
 /**
  * Used to create the Quad Tree.
@@ -12,10 +12,12 @@ public class QuadTreeDS implements DataStructure {
 	private ArrayList<KEdge> filteredEdges;
 	private QuadTree[] trees;
 	private ArrayList<KEdge> feries;
+	// Store a reference to the instance of the MinAndMaxValues class
+	private ViewValues v = ViewValues.getInstance();
 	
 	public QuadTreeDS() {
-		trees = new QuadTree[NUMBER_OF_TYPES];
-		for (int i = 0; i < NUMBER_OF_TYPES; i++) {
+		trees = new QuadTree[v.getNUMBER_OF_TYPES()];
+		for (int i = 0; i < v.getNUMBER_OF_TYPES(); i++) {
 			trees[i] = new QuadTree();
 		}
 		feries = new ArrayList<KEdge>();
@@ -23,9 +25,9 @@ public class QuadTreeDS implements DataStructure {
 
 	@Override
 	public ArrayList<KEdge> getFilteredEdges() {
-		if (repaint) {
+		if (v.isRepaint()) {
 			filteredEdges = new ArrayList<KEdge>();
-			for (int i = 0; i < types; i++) {
+			for (int i = 0; i < v.getTypes(); i++) {
 				filteredEdges.addAll(trees[i].getFilteredEdges());
 			}
 		}
