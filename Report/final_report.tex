@@ -95,25 +95,21 @@ Rasmus Pagh\\
 \pagebreak
 \section{Testing}
 \label{sec:Testing}
-\include*{Testing/main}
 
 \subsection{AddressParser class test}
 \include*{Testing/addressparser_class_test}
 
 \subsection{Coordinates class test}
-\include*{Testing/coordinates_class_test}
 
 \subsection{Dijkstra class test}
 \include*{Testing/dijkstra_test_class}
 
 \subsection{GVertex and Vertex classes test}
-\include*{Testing/gvertex_and_vertex_classes_test}
 
 \subsection{QuadTree class test}
 \include*{Testing/quadtree_test_class}
 
 \subsection{TripEdge class test}
-\include*{Testing/tripedge_class_test}
 
 \subsection{TernaryTrie class test}
 
@@ -121,7 +117,6 @@ Rasmus Pagh\\
 \include*{Testing/roaddatacreator_test_class}
 
 \subsection{Testing the graphical user interface}
-\include*{Testing/testing_the_graphical_user_interface}
 
 \subsection{Outline}
 \include*{Testing/outline}
@@ -766,7 +761,6 @@ Sunday 13/5-2012, 10:00 at ITU
 
 \pagebreak
 \section{Testing}
-\label{sec:Testing appendix}
 
 \subsection{AddressParser class}
 \label{sec:AddressParser test appendix}
@@ -899,7 +893,6 @@ The \texttt{convertYToPixels} methods has been tested according to the following
 
 \pagebreak
 \subsection{GVertex and Vertex classes}
-\label{sec:GVertex and Vertex classes}
 Both the \texttt{GVertex} and \texttt{Vertex} classes share the \texttt{distance} method, only taking different parameters. Both methods have been blackbox tested according to the following expectancy table: \\ \\
 \begin{tabular}{ p{3.5cm} | p{4cm} | p{2.5cm} | p{1cm} }
 	Input property & Input & Expected output & Actual output \\
@@ -926,7 +919,6 @@ Each of the results have been rounded to the nearest 1/10000.
 
 \pagebreak
 \subsection{TripEdge class}
-\label{sec:TripEdge class}
 The \texttt{TripEdge} class includes the \texttt{computeTime} method for computing time. The method has been tested according to the following expectancy table: \\ \\
 \begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
 	Input property & Input (speed, distance) & Expected output & Actual output \\
@@ -945,15 +937,15 @@ The \texttt{TripEdge} class includes the \texttt{computeTime} method for computi
 
 \pagebreak
 \subsection{TernaryTrie class}
-\include*{Appendices/Testing/ternary_trie}
+%\include*{Appendices/Testing/ternary_trie}
 
-\pagebreak
-\subsection{Blackbox test template}
-\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
-	Input property & Input & Expected output & Actual output \\
-	\hline
-	??? & ??? & ??? & ???
-\end{tabular}
+%\pagebreak
+%\subsection{Blackbox test template}
+%\begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
+%	Input property & Input & Expected output & Actual output \\
+%	\hline
+%	??? & ??? & ??? & ???
+%\end{tabular}
 
 
 \pagebreak

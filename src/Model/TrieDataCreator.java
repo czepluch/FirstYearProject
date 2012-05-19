@@ -3,7 +3,7 @@
 //
 //The output of this parser is NOT guaranteed to have any degree of arbritraryness in its order.
 //I use the UNIX sort method to randomize it (sort -R TrieData.txt > newFile.txt)
-
+package Model;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileOutputStream;

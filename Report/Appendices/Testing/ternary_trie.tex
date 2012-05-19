@@ -1,4 +1,4 @@
-The \texttt{TernaryTrie} class is tested by running it methods on a small data set (\texttt{data.trie.test}). The following are the data sets and expectancy tables for the different tests:
+The \texttt{TernaryTrie} class has been tested by running its relevant methods on a small data set (\texttt{data.trie.test}). The following are the data sets and expectancy tables for the different tests:
 
 \subsubsection{The data}
 \begin{tabular}{ p{8cm} | p{2cm} }
@@ -9,10 +9,12 @@ The \texttt{TernaryTrie} class is tested by running it methods on a small data s
 	City$\#$Zip$\#$Street;id & B1 \\
 	City$\#$Street;id &  B2 \\
 	City$\#\#$;id & C \\
+	Invalid (Not in set) & D \\
+	Prefix & E \\
 \end{tabular}
 \\
 \\
-\\
+\\testNumberOfPrefixMatches
 \begin{tabular}{ p{8cm} | p{2cm} }
 \textbf{Input data} & \textbf{Input data set} \\
 	\hline
@@ -34,4 +36,98 @@ The \texttt{TernaryTrie} class is tested by running it methods on a small data s
 	Kib\ae k$\#\#$Troldhedevej;13 \\
 	\\
 	K\o ge$\#\#$;14 & C \\
+	lars & D \\
+	f & E \\
+	v &   \\
+	r &   \\
+	n &   \\
+	o &   \\
+	l &   \\
+	m &   \\
+	k &   \\
+\end{tabular}
+
+\pagebreak
+\subsection{Expectancies}
+The expectancy tables for the \texttt{TernaryTrieTest} are denoted by their method names.
+\\
+\texttt{testGet:}
+\\
+\\
+\begin{tabular}{ p{1.5cm} | p{8cm} | p{2cm} | p{1cm} }
+	\textbf{Data set} & \textbf{Input} & \textbf{Expected output} & \textbf{Actual output} \\	
+	\hline
+	A1 & Fuglevej$\#\#$Lille Skensved & 1 & $\surd$ \\
+	& Lindingvadvej$\#\#$Tj\ae reborg & 2 & $\surd$ \\
+	& Kirkevang$\#\#$Stenl\o se & 3 & $\surd$ \\
+	& Kindertofte Skolevej$\#\#$Slagelse & 4 & $\surd$ \\
+	&&&\\	
+	A2 & M\aa gevej$\#6950\#$Ringk\o bing & 5 & $\surd$ \\
+	& Kalkbr\ae nderil\o bskaj$\#2100\#$K\o benhavn \O  & 6 & $\surd$ \\
+	& Over Isen Vej$\#7430\#$Ikast & 7 & $\surd$ \\
+	&&&\\
+	B1 & N\ae stved$\#4700\#$Ahornvej & 8 & $\surd$ \\
+	& Randers C$\#8900\#$Lindholtsvej & 9 & $\surd$ \\
+	& Vedb\ae k$\#2950\#$Ved Vejen & 10 & $\surd$ \\
+	&&&\\
+	B2 & Otterup$\#\#$Franketoftegyden & 11 & $\surd$ \\
+	& Kongens Lyngby$\#\#$Om K\ae ret & 12 & $\surd$ \\
+	& Kib\ae k$\#\#$Troldhedevej & 13 & $\surd$ \\
+	&&&\\
+	C & K\o ge$\#\#$ & 14 & $\surd$ \\
+\end{tabular}
+\\
+\\
+\\
+\texttt{testFalseGet:}
+\\
+\\
+\begin{tabular}{ p{1.5cm} | p{8cm} | p{2cm} | p{1cm} }
+	\textbf{Data set} & \textbf{Input} & \textbf{Expected output} & \textbf{Actual output} \\	
+	\hline
+	D & lars & null & $\surd$
+\end{tabular}
+\pagebreak
+\texttt{testPrefix_GetCompliance:}
+\\
+\\
+\begin{tabular}{ p{1cm} | p{1cm} | p{8cm} | {1cm} }
+	\textbf{Prefix} & \textbf{Search result} & textbf{Compliance}
+	\hline
+	f & fuglevej$\#\#$lille skensved & $\surd$ \\
+	v & vedb\ae k$\#2950\#$ved vejen & $\surd$ \\
+	r & randers c$\#8900\#$lindholtsvej & $\surd$ \\
+	n & n\ae stved$\#$4700$\#$ahornvej & $\surd$ \\
+	o & otterup$\#\#$franketoftegyden & $\surd$ \\
+	  & over isen vej$\#$7430$\#$ikast & $\surd$ \\
+	l & lindingvadvej$\#\#$tj\ae reborg & $\surd$ \\
+	m & m\aa gevej$\#$6950$\#$ringk\o bing & $\surd$ \\
+	k & kalkbr\ae nderil\o bskaj$\#$2100$\#$k\o benhavn \O & $\surd$ \\
+	  & kib\ae k$\#\#$troldhedevej & $\surd$ \\
+	  & kindertofte skolevej$\#\#$slagelse & $\surd$ \\
+	  & kirkevang$\#\#$stenl\o se & $\surd$ \\
+	  & kongens lyngby$\#\#$om k\ae ret & $\surd$ \\
+	  & k\o ge$\#\#$ & $\surd$ \\
+\end{tabular}
+\\
+\\
+\\
+\texttt{testNumberOfPrefixMatches:}
+\\
+\\
+\begin{tabular}{ p{1cm} | p{1cm} | p{1cm} }
+	\textbf{Prefix} & \textbf{Expected # of returned strings} & <textbf{Actual # of returned strings}
+	\hline
+	k & 6 & $\surd$ \\
+\end{tabular}
+\\
+\\
+\\
+\texttt{testFalsePrefix:}
+\\
+\\
+\begin{tabular}{ p{1.5cm} | p{8cm} | p{2cm} | p{1cm} }
+	\textbf{Data set} & \textbf{Input} & \textbf{Expected # of returned strings} & \textbf{Actual # of returned strings} \\	
+	\hline
+	D & lars & 0 & $\surd$
 \end{tabular}
