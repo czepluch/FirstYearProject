@@ -42,20 +42,6 @@ public class TernaryTrieTest {
 		assertEquals(null, trie.get("lars")); //invalid string
 	}
 	
-//	@Test
-//	//Check if the strings returned by the startsWith(String) method are compliant with the strings recognized by the get(String) method  	
-//	public void testPrefix_GetCompliance() {
-//		//check that each string returned by prefix searches are valid as parameters for the get method.
-//		for (String s : ids.keySet()) {
-//			String pre = s.substring(0, 1).toLowerCase();
-//			for (String k : trie.startsWith(pre)) {
-//				System.out.println("\t" + pre + "\t" + k + "\t" + trie.get(k));
-//				assertEquals(ids.get(k), trie.get(k));
-//				
-//			}
-//		}
-//	}
-	
 	@Test
 	//Check if the strings returned by the startsWith(String) method are compliant with the strings recognized by the get(String) method  	
 	public void testPrefix_GetCompliance() {
@@ -64,19 +50,81 @@ public class TernaryTrieTest {
 		//check that each string returned by prefix searches are "valid" as parameters for the get method.
 		for (String s : prefixes) {
 			for (String k : trie.startsWith(s)) {
-				System.out.println("\t" + s + " & " + k + " & $\\surd$");
 				assertNotNull(trie.get(k));
 			}
 		}
 	}
 	
 	@Test
-	public void testNumberOfPrefixMatches(){
+	public void testNumberOfPrefixMatchesK(){
 		int i=0;
 		for (String s : trie.startsWith("k")){
 			i++;
 		}
 		assertEquals(6, i); //hardcoded :(
+	}
+	
+	@Test
+	public void testNumberOfPrefixMatchesF(){
+		int i=0;
+		for (String s : trie.startsWith("f")){
+			i++;
+		}
+		assertEquals(1, i); //hardcoded :(
+	}
+	
+	@Test
+	public void testNumberOfPrefixMatchesV(){
+		int i=0;
+		for (String s : trie.startsWith("v")){
+			i++;
+		}
+		assertEquals(1, i); //hardcoded :(
+	}
+	
+	@Test
+	public void testNumberOfPrefixMatchesR(){
+		int i=0;
+		for (String s : trie.startsWith("r")){
+			i++;
+		}
+		assertEquals(1, i); //hardcoded :(
+	}
+	
+	@Test
+	public void testNumberOfPrefixMatchesN(){
+		int i=0;
+		for (String s : trie.startsWith("n")){
+			i++;
+		}
+		assertEquals(1, i); //hardcoded :(
+	}
+	
+	@Test
+	public void testNumberOfPrefixMatchesO(){
+		int i=0;
+		for (String s : trie.startsWith("o")){
+			i++;
+		}
+		assertEquals(2, i); //hardcoded :(
+	}
+	
+	@Test
+	public void testNumberOfPrefixMatchesL(){
+		int i=0;
+		for (String s : trie.startsWith("l")){
+			i++;
+		}
+		assertEquals(1, i); //hardcoded :(
+	}
+	
+	@Test
+	public void testNumberOfPrefixMatchesM(){
+		int i=0;
+		for (String s : trie.startsWith("m")){
+			i++;
+		}
+		assertEquals(1, i); //hardcoded :(
 	}
 	
 	@Test
