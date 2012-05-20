@@ -57,28 +57,28 @@ public class MapPanel extends JPanel {
 			switch(i) {
 				// Feries
 				case 0:	g2.setColor(Color.pink);
-				g2.setStroke(new BasicStroke((3 * MinAndMaxValues.lineWidth),
+				g2.setStroke(new BasicStroke((3),
 										 			BasicStroke.CAP_ROUND,
 										 			BasicStroke.JOIN_ROUND)); break;
 			
 				// Other roads
 				case 1:	g2.setColor(Color.green);
-						g2.setStroke(new BasicStroke((1 * MinAndMaxValues.lineWidth),
+						g2.setStroke(new BasicStroke((1),
 													 BasicStroke.CAP_ROUND,
 													 BasicStroke.JOIN_ROUND)); break;
 				// Secondary roads
 				case 2: g2.setColor(Color.black);
-						g2.setStroke(new BasicStroke((2 * MinAndMaxValues.lineWidth),
+						g2.setStroke(new BasicStroke((2),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;
 				// Primary roads
 				case 3: g2.setColor(Color.blue);
-						g2.setStroke(new BasicStroke((3 * MinAndMaxValues.lineWidth),
+						g2.setStroke(new BasicStroke((3),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;
 				// Highways
 				case 4: g2.setColor(Color.red);
-						g2.setStroke(new BasicStroke((5 * MinAndMaxValues.lineWidth),
+						g2.setStroke(new BasicStroke((5),
 								 					 BasicStroke.CAP_ROUND,
 								 					 BasicStroke.JOIN_ROUND)); break;
 				// Unknown types are not drawn
@@ -89,7 +89,7 @@ public class MapPanel extends JPanel {
 			}
 		}
 		if (trip != null) {
-			g2.setStroke(new BasicStroke((4 * MinAndMaxValues.lineWidth),
+			g2.setStroke(new BasicStroke((4),
 					 					 BasicStroke.CAP_ROUND,
 					 					 BasicStroke.JOIN_ROUND));
 			List<TripEdge<Integer>> edges = trip.getEdges();

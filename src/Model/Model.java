@@ -2,7 +2,8 @@ package Model;
 
 import static Model.Graph.G;
 import static Model.TripCriteria.*;
-import static View.MinAndMaxValues.*;
+import static View.ViewValues.*;
+import View.ViewValues;
 
 /**
  * The part of the application taking care of data handling
@@ -14,7 +15,9 @@ public class Model {
 	private Trip<Double> trip;
 	private MapLocation<Double> location;
 	private TripCriteria fastOrShort = FAST;
-	
+	// Store a reference to the instance of the MinAndMaxValues class
+	private ViewValues v = ViewValues.getInstance();
+		
 	/**
 	 * Constructor of the model class
 	 * Uses the readXML-method of the XMLReader class
@@ -43,7 +46,7 @@ public class Model {
 	 * @return the current trip
 	 */
 	public Trip<Integer> getTrip() {
-		if (trip != null) return FormatConverter.createTrip(trip, maxSpeed);
+		if (trip != null) return FormatConverter.createTrip(trip, v.getMaxSpeed());
 		return null;
 	}
 	

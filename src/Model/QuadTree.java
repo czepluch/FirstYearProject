@@ -2,7 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 import Model.Point;
-import static View.MinAndMaxValues.*;
+import View.ViewValues;
+import static View.ViewValues.*;
 
 /*
  * This implementation is taken from http://algs4.cs.princeton.edu/92search/QuadTree.java.html
@@ -17,6 +18,8 @@ import static View.MinAndMaxValues.*;
  */
 public class QuadTree {
     private Node root;
+    // Store a reference to the instance of the MinAndMaxValues class
+ 	private ViewValues v = ViewValues.getInstance();
 
     // helper node data type
     private class Node {
@@ -99,14 +102,14 @@ public class QuadTree {
 		double x2 = 0;
 		double y1 = 0;
 		double y2 = 0;
-		if (minX < MIN_X) 	x1 = MIN_X;
-		else 				x1 = minX;
-		if (maxX > MAX_X) 	x2 = MAX_X;
-		else 				x2 = maxX;
-		if (minY < MIN_Y) 	y1 = MIN_Y;
-		else 				y1 = minY;
-		if (maxY < MAX_Y) 	y2 = MAX_Y;
-		else 				y2 = maxY;
+		if (v.getMinX() < v.getMIN_X()) 	x1 = v.getMIN_X();
+		else 								x1 = v.getMinX();
+		if (v.getMaxX() > v.getMAX_X()) 	x2 = v.getMAX_X();
+		else 								x2 = v.getMaxX();
+		if (v.getMinY() < v.getMIN_Y()) 	y1 = v.getMIN_Y();
+		else 								y1 = v.getMinY();
+		if (v.getMaxY() < v.getMAX_Y()) 	y2 = v.getMAX_Y();
+		else 								y2 = v.getMaxY();
 		Interval xInterval = new Interval(x1, x2);
 		Interval yInterval = new Interval(y1, y2);
 		Interval2D xyInterval = new Interval2D(xInterval, yInterval);

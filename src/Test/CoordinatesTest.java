@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import Model.Coordinates;
-import View.MinAndMaxValues;
+import View.ViewValues;
 
 public class CoordinatesTest {
 	
@@ -117,11 +117,11 @@ public class CoordinatesTest {
 	}
 	
 	public void initMinAndMaxValues() {
-		MinAndMaxValues.minX = 20;
-		MinAndMaxValues.maxX = 120;
-		MinAndMaxValues.minY = 30;
-		MinAndMaxValues.maxY = 130;
-		MinAndMaxValues.width = 10;
-		MinAndMaxValues.height = 10;
+		ViewValues.minX = 20;
+		ViewValues.maxX = 120;
+		ViewValues.minY = 30;
+		ViewValues.maxY = 130;
+		ViewValues.width = 10;
+		ViewValues.height = 10;
 	}
 }

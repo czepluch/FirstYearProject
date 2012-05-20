@@ -1,7 +1,5 @@
 package View;
 
-import static View.MinAndMaxValues.*;
-
 import java.util.ArrayList;
 
 import java.util.List;
@@ -11,16 +9,18 @@ import Model.Trip;
 import Model.TripEdge;
 
 public class ZoomHandler {
+	// Store a reference to the instance of the MinAndMaxValues class
+	private static ViewValues v = ViewValues.getInstance();
 	// Zoom constant
 	private static final double ZOOM_CONSTANT = 0.0017;
-	private static double zoomRateX = (maxX - minX) * ZOOM_CONSTANT;
-	private static double zoomRateY = ((maxY - minY) / (maxX - minX)) * zoomRateX;
+	private static double zoomRateX = (v.getMaxX() - v.getMinX()) * ZOOM_CONSTANT;
+	private static double zoomRateY = ((v.getMaxY() - v.getMinY()) / (v.getMaxX() - v.getMinX())) * zoomRateX;
 	private static final int ZOOM_LIMIT = 1000;
 	private static final int DRAG_WHEN_ZOOM_IN = 2;
 	private static final double ZOOM_TO_TRIP_PADDING_CONSTANT = 0.1;
 	// Values needed only be computed once
-	private static final double START_X_DIF = MAX_X - MIN_X;
-	private static final double START_Y_DIF = MAX_Y - MIN_Y;
+	private static final double START_X_DIF = v.getMAX_X() - v.getMIN_X();
+	private static final double START_Y_DIF = v.getMAX_Y() - v.getMIN_Y();
 	
 	/**
 	 * This method does what needs to be done when the user tries to zoom in or out
@@ -34,33 +34,33 @@ public class ZoomHandler {
 			// Zoom in
 			
 			// First compute the x and y parameters to UTM coordinates
-			double c = (maxX - minX) / width;
-			double xUTM = (x * c) + minX;
-			double yUTM = (y * c) + minY;
+			double c = (v.getMaxX() - v.getMinX()) / v.getWidth();
+			double xUTM = (x * c) + v.getMinX();
+			double yUTM = (y * c) + v.getMinY();
 			
 			// Compute the x-values
-			double xDif = maxX - minX;
-			double xMinToX = xUTM - minX;
-			double xMaxToX = maxX - xUTM;
+			double xDif = v.getMaxX() - v.getMinX();
+			double xMinToX = xUTM - v.getMinX();
+			double xMaxToX = v.getMaxX() - xUTM;
 			
 			double xMinZoomFactor = xMinToX / xDif;
 			double xMaxZoomFactor = xMaxToX / xDif;
 			double computedXZoom = 2 * (absZoom * zoomRateX);
 			// Update the min and max x-values
-			minX += xMinZoomFactor * computedXZoom;
-			maxX -= xMaxZoomFactor * computedXZoom;
+			v.setMinX(v.getMinX() + xMinZoomFactor * computedXZoom);
+			v.setMaxX(v.getMaxX() - xMaxZoomFactor * computedXZoom);
 			
 			// Compute the y-values
-			double yDif = maxY - minY;
-			double yMinToY = yUTM - minY;
-			double yMaxToY = maxY - yUTM;
+			double yDif = v.getMaxY() - v.getMinY();
+			double yMinToY = yUTM - v.getMinY();
+			double yMaxToY = v.getMaxY() - yUTM;
 			
 			double yMinZoomFactor = yMinToY / yDif;
 			double yMaxZoomFactor = yMaxToY / yDif;
 			double computedYZoom = 2 * (absZoom * zoomRateY);
 			// Update the min and max y-values
-			minY += yMaxZoomFactor * computedYZoom;
-			maxY -= yMinZoomFactor * computedYZoom;
+			v.setMinY(v.getMinY() + yMaxZoomFactor * computedYZoom);
+			v.setMaxY(v.getMaxY() - yMinZoomFactor * computedYZoom);
 			
 			// Call the drag-handler, making the view move according to the zoom
 			int xDrag = 0;
@@ -75,28 +75,27 @@ public class ZoomHandler {
 			DragHandler.valuesChanged(xDrag, yDrag);
 			
 			// Compute shown types
-			int currentTypes = types; // Needed for computing the need for repaint
-			updateTypesToBeDisplayed();
+			int currentTypes = v.getTypes(); // Needed for computing the need for repaint
+			v.updateTypesToBeDisplayed();
 			
-			// Compute line widths and drag increments and zoom rate
-			updateLineWidths();
+			// Compute drag increments and zoom rate
 			DragHandler.updateDrag();
 			updateZoomRate();
 			
 			// Compute whether or not repaint is needed
-			needsRepaint();
-			if (types != currentTypes) updateDrawn();
+			v.needsRepaint();
+			if (v.getTypes() != currentTypes) v.updateDrawn();
 			
 		} else if (canZoomOut(absZoom)) { // Set a limit for how far out to zoom
 			// Zoom out
 			
 			// Change the min and max values
-			minX -= absZoom * zoomRateX;
-			maxX += absZoom * zoomRateX;
-			minY -= absZoom * zoomRateY;
-			maxY += absZoom * zoomRateY;
+			v.setMinX(v.getMinX() - absZoom * zoomRateX);
+			v.setMaxX(v.getMaxX() + absZoom * zoomRateX);
+			v.setMinY(v.getMinY() - absZoom * zoomRateY);
+			v.setMaxY(v.getMaxY() + absZoom * zoomRateY);
 			
-			updateTypesLineWidthDragAndRepaint();
+			updateTypesDragAndRepaint();
 			
 			
 			// Additional cases for zooming out:
@@ -110,32 +109,32 @@ public class ZoomHandler {
 			// 8. Too close to right and bottom
 		} else if (canZoomOutDif(absZoom)) {
 			// First compute the x-values
-			double xDif = maxX - minX;
-			if ((minX - (zoomRateX * absZoom)) < MIN_X) { // minX too close to the left
-				minX = MIN_X;
-				maxX = minX + (xDif + (2 * (zoomRateX * absZoom)));
-			} else if ((maxX + (zoomRateX * absZoom)) > MAX_X) { // Then maxX is too close to the right
-				maxX = MAX_X;
-				minX = maxX - (xDif + (2 * (zoomRateX * absZoom)));
+			double xDif = v.getMaxX() - v.getMinX();
+			if ((v.getMinX() - (zoomRateX * absZoom)) < v.getMIN_X()) { // minX too close to the left
+				v.setMinX(v.getMIN_X());
+				v.setMaxX(v.getMinX() + (xDif + (2 * (zoomRateX * absZoom))));
+			} else if ((v.getMaxX() + (zoomRateX * absZoom)) > v.getMAX_X()) { // Then maxX is too close to the right
+				v.setMaxX(v.getMAX_X());
+				v.setMinX(v.getMaxX() - (xDif + (2 * (zoomRateX * absZoom))));
 			} else { // then y was the problem, x is handled normally
-				minX -= absZoom * zoomRateX;
-				maxX += absZoom * zoomRateX;
+				v.setMinX(v.getMinX() - absZoom * zoomRateX);
+				v.setMaxX(v.getMaxX() + absZoom * zoomRateX);
 			}
 			
 			// Then compute the y-values
-			double yDif = maxY - minY;
-			if ((minY - (zoomRateY * absZoom)) < MIN_Y) { // minY too close to the left
-				minY = MIN_Y;
-				maxY = minY + (yDif + (2 * (zoomRateY * absZoom)));
-			} else if ((maxY + (zoomRateY * absZoom)) > MAX_Y) { // maxX is too close to the right
-				maxY = MAX_Y;
-				minY = maxY - (yDif + (2 * (zoomRateY * absZoom)));
+			double yDif = v.getMaxY() - v.getMinY();
+			if ((v.getMinY() - (zoomRateY * absZoom)) < v.getMIN_Y()) { // minY too close to the left
+				v.setMinY(v.getMIN_Y());
+				v.setMaxY(v.getMinY() + (yDif + (2 * (zoomRateY * absZoom))));
+			} else if ((v.getMaxY() + (zoomRateY * absZoom)) > v.getMAX_Y()) { // maxX is too close to the right
+				v.setMaxY(v.getMAX_Y());
+				v.setMinY(v.getMaxY() - (yDif + (2 * (zoomRateY * absZoom))));
 			} else { // then x was the problem, y is handled normally
-				minY -= absZoom * zoomRateY;
-				maxY += absZoom * zoomRateY;
+				v.setMinY(v.getMinY() - absZoom * zoomRateY);
+				v.setMaxY(v.getMaxY() + absZoom * zoomRateY);
 			}
 			
-			updateTypesLineWidthDragAndRepaint();
+			updateTypesDragAndRepaint();
 		}
 	}
 	
@@ -145,16 +144,16 @@ public class ZoomHandler {
 		double x = location.getX();
 		double y = location.getY();
 		// Set the min and max values
-		maxX = x + coordConstant;
-		minX = x - coordConstant;
+		v.setMaxX(x + coordConstant);
+		v.setMinX(x - coordConstant);
 		
-		double yDif = (maxX - minX) * X_TO_Y_RATIO;
+		double yDif = (v.getMaxX() - v.getMinX()) * v.getX_TO_Y_RATIO();
 		double yDifConstant = yDif / 2;
 		
-		maxY = y + yDifConstant;
-		minY = y - yDifConstant;
+		v.setMaxY(y + yDifConstant);
+		v.setMinY(y - yDifConstant);
 		// Update what needs to be updated
-		updateTypesLineWidthDragAndRepaint();
+		updateTypesDragAndRepaint();
 		// Notify the MapListener
 		listener.viewboxUpdated();
 	}
@@ -194,21 +193,21 @@ public class ZoomHandler {
 			
 			// Check whether the width or height is "dominant"
 			double localXToYRatio = (localMaxY - localMinY) / (localMaxX - localMinX);
-			if (localXToYRatio > X_TO_Y_RATIO) {
+			if (localXToYRatio > v.getX_TO_Y_RATIO()) {
 				// The height is dominant
 				double yDif = localMaxY - localMinY;
 				double padding = yDif * ZOOM_TO_TRIP_PADDING_CONSTANT;
 				// Set the min and max values
-				maxY = localMaxY + padding;
-				minY = localMinY - padding;
+				v.setMaxY(localMaxY + padding);
+				v.setMinY(localMinY - padding);
 				
-				double xDif = (maxY - minY) * Y_TO_X_RATIO;
+				double xDif = (v.getMaxY() - v.getMinY()) * v.getY_TO_X_RATIO();
 				double xDifConstant = xDif / 2;
 				
 				double centerX = localMinX + ((localMaxX - localMinX) / 2);
 				
-				maxX = centerX + xDifConstant;
-				minX = centerX - xDifConstant;
+				v.setMaxX(centerX + xDifConstant);
+				v.setMinX(centerX - xDifConstant);
 				
 			} else {
 				// The width is dominant
@@ -216,20 +215,20 @@ public class ZoomHandler {
 				double padding = xDif * ZOOM_TO_TRIP_PADDING_CONSTANT;
 				
 				// Set the min and max values
-				maxX = localMaxX + padding;
-				minX = localMinX - padding;
+				v.setMaxX(localMaxX + padding);
+				v.setMinX(localMinX - padding);
 				
-				double yDif = (maxX - minX) * X_TO_Y_RATIO;
+				double yDif = (v.getMaxX() - v.getMinX()) * v.getX_TO_Y_RATIO();
 				double yDifConstant = yDif / 2;
 				
 				double centerY = localMinY + ((localMaxY - localMinY) / 2);
 				
-				maxY = centerY + yDifConstant;
-				minY = centerY - yDifConstant;
+				v.setMaxY(centerY + yDifConstant);
+				v.setMinY(centerY - yDifConstant);
 			}
 			
 			// Update what needs to be updated
-			updateTypesLineWidthDragAndRepaint();
+			updateTypesDragAndRepaint();
 			// Notify the MapListener
 			listener.viewboxUpdated();
 		}
@@ -237,12 +236,12 @@ public class ZoomHandler {
 	
 	public static void zoomOut(MapListener listener) {
 		// Set the min and max values
-		maxX = MAX_X;
-		minX = MIN_X;
-		maxY = MAX_Y;
-		minY = MIN_Y;
+		v.setMaxX(v.getMAX_X());
+		v.setMinX(v.getMIN_X());
+		v.setMaxY(v.getMAX_Y());
+		v.setMinY(v.getMIN_Y());
 		// Update what needs to be updated
-		updateTypesLineWidthDragAndRepaint();
+		updateTypesDragAndRepaint();
 		// Notify the MapListener
 		listener.viewboxUpdated();
 	}
@@ -251,40 +250,32 @@ public class ZoomHandler {
 	 * Helper method for updating the zoom rate
 	 */
 	private static void updateZoomRate() {
-		zoomRateX = (maxX - minX) * ZOOM_CONSTANT;
-		zoomRateY = ((maxY - minY) / (maxX - minX)) * zoomRateX;
-	}
-	
-	/*
-	 * Helper method for updating the line widths
-	 */
-	private static void updateLineWidths() {
-		lineWidth = (float) 1;
+		zoomRateX = (v.getMaxX() - v.getMinX()) * ZOOM_CONSTANT;
+		zoomRateY = ((v.getMaxY() - v.getMinY()) / (v.getMaxX() - v.getMinX())) * zoomRateX;
 	}
 	
 	/*
 	 * Helper method called for each zoom-out
 	 */
-	private static void updateTypesLineWidthDragAndRepaint() {
+	private static void updateTypesDragAndRepaint() {
 		// Compute shown types
-		int currentTypes = types; // Needed for computing the need for repaint
-		updateTypesToBeDisplayed();
+		int currentTypes = v.getTypes(); // Needed for computing the need for repaint
+		v.updateTypesToBeDisplayed();
 				
-		// Compute line widths and drag increment and zoom rate
-		updateLineWidths();
+		// Compute drag increment and zoom rate
 		DragHandler.updateDrag();
 		updateZoomRate();
 			
 		// Compute whether or not repaint is needed
-		needsRepaint();
-		if (types != currentTypes) updateDrawn();
+		v.needsRepaint();
+		if (v.getTypes() != currentTypes) v.updateDrawn();
 	}
 	
 	/*
 	 * Helper method for checking whether or not it should be allowed to zoom out
 	 */
 	private static boolean canZoomIn(int zoom) {
-		if (((maxX - minX) - (2 * (zoomRateX * zoom))) < ZOOM_LIMIT) return false;
+		if (((v.getMaxX() - v.getMinX()) - (2 * (zoomRateX * zoom))) < ZOOM_LIMIT) return false;
 		return true;
 	}
 	
@@ -292,10 +283,10 @@ public class ZoomHandler {
 	 * Helper method for checking whether or not it should be allowed to zoom out
 	 */
 	private static boolean canZoomOut(int zoom) {
-		if (((minX - (zoomRateX * zoom)) >= MIN_X) &&
-			((maxX + (zoomRateX * zoom)) <= MAX_X) &&
-			((minY - (zoomRateY * zoom)) >= MIN_Y) &&
-			((maxY + (zoomRateY * zoom)) <= MAX_Y)) return true;
+		if (((v.getMinX() - (zoomRateX * zoom)) >= v.getMIN_X()) &&
+			((v.getMaxX() + (zoomRateX * zoom)) <= v.getMAX_X()) &&
+			((v.getMinY() - (zoomRateY * zoom)) >= v.getMIN_Y()) &&
+			((v.getMaxY() + (zoomRateY * zoom)) <= v.getMAX_Y())) return true;
 		return false;
 	}
 	
@@ -304,8 +295,8 @@ public class ZoomHandler {
 	 * This one checks if the coordinates dif (max - min) is too big
 	 */
 	private static boolean canZoomOutDif(int zoom) {
-		if ((((maxX - minX) + (2 * (zoomRateX * zoom))) < START_X_DIF) &&
-				(((maxY - minY) + (2 * (zoomRateY * zoom))) < START_Y_DIF)) return true;
+		if ((((v.getMaxX() - v.getMinX()) + (2 * (zoomRateX * zoom))) < START_X_DIF) &&
+				(((v.getMaxY() - v.getMinY()) + (2 * (zoomRateY * zoom))) < START_Y_DIF)) return true;
 		return false;
 	}
 }
