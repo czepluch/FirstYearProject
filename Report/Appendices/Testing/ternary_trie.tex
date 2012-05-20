@@ -13,6 +13,7 @@ The \texttt{TernaryTrie} class has been tested by running its relevant methods o
 	Prefix & E \\
 \end{tabular}
 \\
+\\
 \begin{tabular}{ p{8cm} | p{2cm} }
 \textbf{Input data} & \textbf{Input data set} \\
 	\hline
@@ -34,7 +35,9 @@ The \texttt{TernaryTrie} class has been tested by running its relevant methods o
 	Kib\ae k$\#\#$Troldhedevej;13 \\
 	\\
 	K\o ge$\#\#$;14 & C \\
+	\\
 	lars & D \\
+	\\
 	f & E \\
 	v &   \\
 	r &   \\
@@ -48,10 +51,8 @@ The \texttt{TernaryTrie} class has been tested by running its relevant methods o
 \pagebreak
 \subsection{Expectancies}
 The expectancy tables for the \texttt{TernaryTrieTest} are denoted by their method names.
-\\
-\texttt{testGet:}
-\\
-\\
+
+\subsubsection*{testGet}
 \begin{tabular}{ p{1.5cm} | p{8cm} | p{2cm} | p{1cm} }
 	\textbf{Data set} & \textbf{Input} & \textbf{Expected output} & \textbf{Actual output} \\	
 	\hline
@@ -74,23 +75,18 @@ The expectancy tables for the \texttt{TernaryTrieTest} are denoted by their meth
 	&&&\\
 	C & K\o ge$\#\#$ & 14 & $\surd$ \\
 \end{tabular}
-\\
-\\
-\\
-\texttt{testFalseGet:}
-\\
-\\
+
+\subsubsection*{testFalseGet}
 \begin{tabular}{ p{1.5cm} | p{8cm} | p{2cm} | p{1cm} }
 	\textbf{Data set} & \textbf{Input} & \textbf{Expected output} & \textbf{Actual output} \\	
 	\hline
 	D & lars & null & $\surd$
 \end{tabular}
 \pagebreak
-\texttt{testPrefix_GetCompliance:}
-\\
-\\
-\begin{tabular}{ p{1cm} | p{1cm} | p{8cm} | {1cm} }
-	\textbf{Prefix} & \textbf{Search result} & textbf{Compliance}
+
+\subsubsection*{testPrefix\_GetCompliance:}
+\begin{tabular}{ p{1cm} | p{8cm} | p{1cm} }
+	\textbf{Prefix} & \textbf{Search result} & \textbf{\textbf{Compliance}} \\
 	\hline
 	f & fuglevej$\#\#$lille skensved & $\surd$ \\
 	v & vedb\ae k$\#2950\#$ved vejen & $\surd$ \\
@@ -107,25 +103,24 @@ The expectancy tables for the \texttt{TernaryTrieTest} are denoted by their meth
 	  & kongens lyngby$\#\#$om k\ae ret & $\surd$ \\
 	  & k\o ge$\#\#$ & $\surd$ \\
 \end{tabular}
-\\
-\\
-\\
-\texttt{testNumberOfPrefixMatches:}
-\\
-\\
-\begin{tabular}{ p{1cm} | p{1cm} | p{1cm} }
-	\textbf{Prefix} & \textbf{Expected # of returned strings} & <textbf{Actual # of returned strings}
+
+\subsubsection*{testNumberOfPrefixMatches}
+\begin{tabular}{ p{1cm} | p{2cm} | p{2cm} }
+	\textbf{Prefix} & \textbf{Expected \# of returned strings} & textbf{Actual \# of returned strings} \\
 	\hline
-	k & 6 & $\surd$ \\
+	f & 1 & $\surd$ \\
+	v & 1 & $\surd$ \\
+	r & 1 & $\surd$ \\
+	n & 1 & $\surd$ \\
+	o & 2 & $\surd$ \\
+    l & 1 & $\surd$ \\
+    m & 1 & $\surd$ \\
+    k & 6 & $\surd$ \\
 \end{tabular}
-\\
-\\
-\\
-\texttt{testFalsePrefix:}
-\\
-\\
+
+\subsubsection*{testFalsePrefix:}
 \begin{tabular}{ p{1.5cm} | p{8cm} | p{2cm} | p{1cm} }
-	\textbf{Data set} & \textbf{Input} & \textbf{Expected # of returned strings} & \textbf{Actual # of returned strings} \\	
+	\textbf{Data set} & \textbf{Input} & \textbf{Expected  \# of returned strings} & \textbf{Actual \# of returned strings} \\	
 	\hline
 	D & lars & 0 & $\surd$
 \end{tabular}
