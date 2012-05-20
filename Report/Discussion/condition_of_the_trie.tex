@@ -1,8 +1,7 @@
 Apart from the typical improvements to the trie structure, there are a few issues and possible improvements that are specific to this part of the project. These will be discussed here.
 
 Firstly, a prefix search returns \underline{all} \texttt{Strings} in the trie with a matching prefix.
-This is standard behaviour for a trie, but the \texttt{View} class discards all but the five first matches. If the trie had done this itself, it would have improved the performance of prefix searches, as a search could end its descending through the tree after five hits, instead of exhausting the sub trees of matching nodes. As mentioned in the Discussion (\ref{sec:TernaryTrie class} page \pageref{sec:TernaryTrie class}),
-we have largely disregarded optimizing the trie, because it has efficient performance for our purpose, allowing us to spend the time on other parts of the project.
+This is standard behaviour for a trie, but the \texttt{View} class discards all but the five first matches. If the trie had done this itself, it would have improved the performance of prefix searches, as a search could end its descending through the tree after five hits, instead of exhausting the sub trees of matching nodes. We have largely disregarded optimizing the trie because, as mentioned in the Implementation (\ref{sec:TernaryTrie class} page \pageref{sec:TernaryTrie class}) it has efficient performance for our purpose. This decision has allowed us to spend more time on other parts of the project.
 
 The second issue is perhaps a bit more grave; the city locations are quite arbitrary.
 The id for city entries in the trie are guaranteed to point to a node that is within the zip code of the city, nothing more. It is trivial, though cumbersome, to improve the choices for these location, so we have down prioritized it to a point where we have not got around to it.
