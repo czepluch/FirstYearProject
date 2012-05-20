@@ -2,7 +2,7 @@ Whenever the user presses the \texttt{"Find"} button (for executing a search), t
 
 We will describe the process of searching for a location. The process of searching for a trip is the same, only it includes validating the contents of both input text fields and invoking a different method in the \texttt{Model} package.
 
-The validity checking is a follows (as also illustrated on figure \ref{fig:ControlFlow} on page \pageref{fig:ControlFlow}):
+The validity checking is as follows (as also illustrated on figure \ref{fig:ControlFlow} on page \pageref{fig:ControlFlow}):
 \begin{itemize}
 	\item The first address validation is done withing the \texttt{SearchPanel} class, checking that both of the input text fields are not empty, and if only the first is empty, the content of the second text field is moved to the first text field.
 	\item The contents of the text field is sent to the \texttt{View}, where the vertex id corresponding to the given address is found.
