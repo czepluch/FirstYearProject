@@ -2,7 +2,6 @@ package View;
 import javax.swing.*;
 import Model.Trip;
 import Model.TripEdge;
-import Model.Turn;
 import Model.MapLocation;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.awt.event.MouseWheelListener;
 
 /**
  * The panel on which the map or sections of the map is drawn.
- * Extends the JPanel
+ * Extends the JPanel class
  */
 public class MapPanel extends JPanel {
 	private int[][][] lines;
@@ -144,7 +143,9 @@ public class MapPanel extends JPanel {
 		rainbow = rainbowOn;
 	}
 	
-	//Circumstantial methods:
+	/**
+	 * Add the listeners to the components
+	 */
 	private void addListeners(){
 		addMouseWheelListener(new MouseWheelListener(){
 			

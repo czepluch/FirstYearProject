@@ -1,16 +1,16 @@
 package View;
 
-import static View.ViewValues.*;
-import Model.MapLocation;
-
+/**
+ * Classes responsible for making the changes the the
+ * "viewbox" according user interaction / input from
+ * the MapPanel class
+ */
 public class DragHandler {
 	// Store a reference to the instance of the MinAndMaxValues class
 	private static ViewValues v = ViewValues.getInstance();
 	// Drag constants
 	private static final double DRAG_CONSTANT = 0.00125; // This constant keeps the map following the cursor when dragging
 	private static double drag = (v.getMaxX() - v.getMinX()) * DRAG_CONSTANT;
-	private static final int MIN_DRAG = 100;
-	private static final int MAX_DRAG = 2000;
 	
 	/**
 	 * This method does what needs to be done when the user tries to drag the map
@@ -50,6 +50,10 @@ public class DragHandler {
 		v.needsRepaint();
 	}
 	
+	/**
+	 * Updates the amount to drag next according to the
+	 * current "viewbox" dimensions
+	 */
 	public static void updateDrag() {
 		drag = (v.getMaxX() - v.getMinX()) * DRAG_CONSTANT;
 	}

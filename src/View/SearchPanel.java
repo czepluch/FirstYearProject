@@ -5,18 +5,13 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static View.ViewValues.*;
 import Model.Trip;
-import Model.TripEdge;
-import Model.Turn;
-import java.util.List;
 
 /*
  * Panel containing components for user interaction other than the map
@@ -45,14 +40,10 @@ public class SearchPanel extends JPanel {
 	private JLabel tripLengthLabVar;
 	private JLabel tripTimeLab;
 	private JLabel tripTimeLabVar;
-
-//	private JPanel tablePanel;
-//	private JScrollPane tableSP;
-//	private DefaultTableModel tm;
-//	private JTable table;
 	
-	/*
-	 * Constructor
+	/**
+	 * Constructor of the SearchPanel class
+	 * @param listener the SearchListener to be stored
 	 */
 	public SearchPanel(SearchListener listener) {
 		super();
@@ -62,14 +53,16 @@ public class SearchPanel extends JPanel {
 		this.setLayout(new BorderLayout(6, 6));
 		
 		createInputPanel();
-//		createTablePanel();
 		setButtonListeners();
-//		setTableListeners();
 		setTextFieldListeners();
 		setListListeners();
 		setRBListeners();
 	}
 	
+	/**
+	 * Updates the stored trip according to the given Trip object
+	 * @param trip	the Trip object to be stored
+	 */
 	public void updateTrip(Trip<Integer> trip) {
 		this.trip = trip;
 		
@@ -82,18 +75,6 @@ public class SearchPanel extends JPanel {
 			tripLengthLabVar.setText(distance + "  km");
 			tripTimeLabVar.setText(time + " min");
 		}
-		
-		
-//		tm.setRowCount(0); // Clear the table model
-//		
-//		if (trip != null) {
-//			List<TripEdge<Integer>> edges = trip.getEdges();
-//			String[] tableRows = new String[edges.size()];
-//			
-//			for (int i = 0; i < edges.size(); i++) { // Add new data to the table model
-//				tm.addRow(new String[] { edges.get(i).toString() });
-//			}
-//		}
 	}
 	
 	/**
@@ -203,25 +184,6 @@ public class SearchPanel extends JPanel {
 		inputPanel.add(tripTimeLabVar, "gapleft push");
 	}
 	
-//	/*
-//	 * Creates the panel containing the table showing trip info
-//	 */
-//	private void createTablePanel() {
-//		tablePanel = new JPanel();
-//		this.add(tablePanel, BorderLayout.CENTER);
-//		
-//		tm = new DefaultTableModel() {
-//			@Override
-//			public boolean isCellEditable(int row, int column) { return false; }
-//		};
-//		tm.addColumn("Directions");
-//		table = new JTable(tm);
-//		// table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		tableSP = new JScrollPane(table);
-//		tableSP.setPreferredSize(new Dimension(250, 400));
-//		tablePanel.add(tableSP);
-//	}
-	
 	/**
 	 * Sets the button listeners
 	 */
@@ -260,23 +222,6 @@ public class SearchPanel extends JPanel {
 									});
 	}
 	
-//	/**
-//	 * Sets the table listeners
-//	 */
-//	private void setTableListeners() {
-//		ListSelectionModel sm = table.getSelectionModel();
-//		sm.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		sm.addListSelectionListener(new ListSelectionListener() {
-//			
-//			@Override
-//			public void valueChanged(ListSelectionEvent arg0) {
-//				int row = table.getSelectedRow();					// Get the selected row
-//				TripEdge<Integer> e = trip.getEdges().get(row);		// Find the corresponding edge
-//				DragHandler.moveTo(e.getToX(), e.getToY());			// Move the view to the end point
-//			}
-//		});
-//	}
-	
 	/*
 	 * Sets the text field listeners
 	 */
@@ -308,6 +253,9 @@ public class SearchPanel extends JPanel {
 		});
 	}
 	
+	/**
+	 * Sets the list listeners
+	 */
 	private void setListListeners() {
 		firstList.addListSelectionListener(new ListSelectionListener() {
 			
@@ -338,6 +286,9 @@ public class SearchPanel extends JPanel {
 		});
 	}
 	
+	/**
+	 * Sets the RadioButton listeners
+	 */
 	private void setRBListeners() {
 		fastRB.addActionListener(new ActionListener() {
 			
@@ -396,7 +347,7 @@ public class SearchPanel extends JPanel {
 	 * Main method for testing the SearchPanel
 	 * This is only for displaying the layout
 	 * No actions will work
-	 * @param args
+	 * @param args - Unused
 	 */
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();

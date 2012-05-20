@@ -37,7 +37,11 @@ public class AddressParser {
 	private static final Pattern ZIP_MIDDLE_PATTERN = Pattern.compile(ZIP_MIDDLE_REGEX);
 	private static final Pattern ZIP_FIRST_PATTERN = Pattern.compile(ZIP_FIRST_REGEX);
 	
-
+	/**
+	 * Parses the given input String to an address
+	 * @param s the input String
+	 * @return	the parse address
+	 */
 	public static String parseAddress(String s) {
 		String city = "";
 		String street = "";
@@ -148,8 +152,8 @@ public class AddressParser {
 	}
 	
 	/**
-	 * Test client
-	 * @param args
+	 * Simple test client
+	 * @param args - Unused
 	 */
 	public static void main(String[] args) {
 		String s = "Køge 5123 la";

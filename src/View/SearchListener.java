@@ -1,5 +1,9 @@
 package View;
 
+/**
+ * Interface allowing the View class to be listening
+ * to the SearchPanel class
+ */
 public interface SearchListener {
 
 	/**

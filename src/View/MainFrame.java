@@ -1,13 +1,8 @@
 package View;
 
 import javax.swing.*;
-
-import static View.ViewValues.*;
 import Model.Trip;
-import Model.TripEdge;
-import Model.Turn;
 import Model.MapLocation;
-
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -25,7 +20,6 @@ public class MainFrame {
 	private SearchPanel sp;
 	// Other
 	private MapListener listener; // Used when window is resized
-	private Trip trip;
 	
 	/**
 	 * Constructor for the MainFrame class

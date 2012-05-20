@@ -1,7 +1,5 @@
 package View;
 
-import java.util.ArrayList;
-
 import java.util.List;
 
 import Model.MapLocation;
@@ -138,6 +136,11 @@ public class ZoomHandler {
 		}
 	}
 	
+	/**
+	 * Zoom to the given location
+	 * @param location	The MapLocation to be moved to
+	 * @param listener	The MapListener to be notified of the changes made
+	 */
 	public static void zoomTo(MapLocation<Double> location, MapListener listener) {
 		// Compute the constant to be added / subtracted from the coordinates
 		double coordConstant = ZOOM_LIMIT / 2;
@@ -158,6 +161,11 @@ public class ZoomHandler {
 		listener.viewboxUpdated();
 	}
 	
+	/**
+	 * Zoom to the given location
+	 * @param trip		The Trip to be moved to
+	 * @param listener	The MapListener to be notified of the changes made
+	 */
 	public static void zoomTo(Trip<Double> trip, MapListener listener) {
 		// Find the smallest and highest x- and y-values
 		double localMinX = 999999999;
@@ -234,6 +242,10 @@ public class ZoomHandler {
 		}
 	}
 	
+	/**
+	 * Zoom out to the limit
+	 * @param listener	The MapListener to be notified about the changes made
+	 */
 	public static void zoomOut(MapListener listener) {
 		// Set the min and max values
 		v.setMaxX(v.getMAX_X());

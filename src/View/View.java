@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import Model.MapLocation;
 import Model.Trip;
-import Model.TripEdge;
-import Model.Turn;
 import Controller.ErrorHandler;
 
 /**
@@ -67,10 +65,18 @@ public class View implements MapListener, SearchListener {
 		}
 	}
 	
+	/**
+	 * Makes the current "viewbox" move to the given MapLocation
+	 * @param location	The MapLocation to which the "viewbox" must move
+	 */
 	public void moveTo(MapLocation<Double> location) {
 		ZoomHandler.zoomTo(location, this);
 	}
 	
+	/**
+	 * Makes the current "viewbox" move to the given Trip
+	 * @param location	The Trip to which the "viewbox" must move
+	 */
 	public void moveTo(Trip<Double> trip) {
 		ZoomHandler.zoomTo(trip, this);
 	}

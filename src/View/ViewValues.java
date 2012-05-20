@@ -83,6 +83,9 @@ public class ViewValues {
 		else types = 1;
 	}
 
+	// Getter and setter methods
+	// __________________________________________________________________________
+	
 	public double getMinX() {
 		return minX;
 	}
