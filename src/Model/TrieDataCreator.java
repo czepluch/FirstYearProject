@@ -21,6 +21,10 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.HashSet;
 
+/**
+ * Class with the responsibility of creating the input
+ * file needed by the TernaryTrie class
+ */
 public class TrieDataCreator{
 	private static final String outFile="TrieData.txt";
 	private Map<Short, String> zipMap = new HashMap<Short, String>(); //map from zipcode to cityname

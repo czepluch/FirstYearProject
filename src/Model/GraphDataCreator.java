@@ -113,6 +113,10 @@ public class GraphDataCreator
 		}
 	}
 	
+	/**
+	 * Inner class for temprarily storing the vertex
+	 * data read from the input file
+	 */
 	private class Vertex
 	{
 	 	int id;
@@ -126,6 +130,11 @@ public class GraphDataCreator
 		}
 	}
 	
+	/**
+	 * Main method
+	 * Runs the methods of the class using files obtained from Krak
+	 * @param args - Unused
+	 */
 	public static void main(String[] args) {
 		new GraphDataCreator("kdv_node_unload.txt", "kdv_unload.txt");
 	}

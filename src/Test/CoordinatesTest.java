@@ -117,11 +117,12 @@ public class CoordinatesTest {
 	}
 	
 	public void initMinAndMaxValues() {
-		ViewValues.minX = 20;
-		ViewValues.maxX = 120;
-		ViewValues.minY = 30;
-		ViewValues.maxY = 130;
-		ViewValues.width = 10;
-		ViewValues.height = 10;
+		ViewValues v = ViewValues.getInstance();
+		v.setMinX(20);
+		v.setMaxX(120);
+		v.setMinY(30);
+		v.setMaxY(130);
+		v.setWidth(10);
+		v.setHeight(10);
 	}
 }

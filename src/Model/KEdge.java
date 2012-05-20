@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * This class represents an edge in our roadmap.
+ * This class represents an edge in our roadmap
  * An edge is represented by two points, a length (or distance), a speed limit, and a type.
  */
 public class KEdge {

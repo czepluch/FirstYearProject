@@ -51,7 +51,14 @@ public class Interval {
     }
 
 
-    // comparison helper functions
+    /**
+     * Comparison helper functions
+     * Compares the two given input numbers
+     * @param x the first input
+     * @param y the second input
+     * @return 	true, if the first input is smaller than the second
+     * 			else false
+     */
     private boolean less(double x, double y) {
         return x < y;
     }

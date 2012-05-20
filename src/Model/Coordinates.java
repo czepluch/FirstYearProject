@@ -1,6 +1,5 @@
 package Model;
 
-import static View.ViewValues.*;
 import View.ViewValues;
 
 /**
@@ -14,7 +13,7 @@ public class Coordinates {
 	private double xTranslate;
 	private double yTranslate;
 	private double translatedMaxY;
-	// Static information that needs to be either computed every time or stored once computed
+	// Information that needs to be either computed every time or stored once computed
 	private final double START_X_TO_Y_FACTOR = (v.getMAX_Y() - v.getMIN_Y()) / (v.getMAX_X() - v.getMIN_X());
 
 	/**

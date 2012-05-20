@@ -19,7 +19,7 @@ public class RoadsDataCreator
 	private final int eType = 5;
 	
 	/**
-	 * Constructor the the KrakToXMLConverter-class
+	 * Constructor of the RoadsDataCreator class
 	 */
 	public RoadsDataCreator()
 	{	
@@ -205,10 +205,13 @@ public class RoadsDataCreator
 		}
 	}
 	/**
-	 * Main class of the KrakToXMLConverter-class
+	 * Main class of the RoadDataCreator-class
 	 * Checks if the correct amount of arguments has been passes,
-	 * then creates a new instance of the KrakToXMLConverter class, callings its
+	 * then creates a new instance of the RoadDataCreator class, calling its
 	 * readAndProcessData-method passing the given arguments as parameters
+	 * @param args [0]: The path the to file containing the edge data
+	 * 			   [1]: The path to the file containing the node data
+	 * 			   [2]: The name of the output file
 	 */
 	public static void main(String[] args) {
 		if (args.length != 3) {

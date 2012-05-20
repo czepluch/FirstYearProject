@@ -20,12 +20,12 @@ public class Model {
 		
 	/**
 	 * Constructor of the model class
-	 * Uses the readXML-method of the XMLReader class
+	 * Uses the readRoadData-method of the RoadDataReader class
 	 */
 	public Model() throws RuntimeException {
 		try {
 		edges = new QuadTreeDS();
-		RoadsDataReader.readXML("data.roads", edges);
+		RoadsDataReader.readRoadData("data.roads", edges);
 		Graph.wakeUp();
 		} catch (RuntimeException e) {
 			// TODO Auto-generated catch block
@@ -59,8 +59,10 @@ public class Model {
 		return null;
 	}
 	
-	/*
+	/**
 	 * Updates the stored trip
+	 * @param fromId	the new fromId
+	 * @param toId		the new toId
 	 */
 	public void updateTrip(int fromId, int toId) {
 		// Update the trip
