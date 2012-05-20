@@ -77,19 +77,22 @@ The search is limited to not being more precise than finding road names.
 
 The \textit{format} must be easy to get used to / similar to the way we write addresses in letters, mails etc.
 
-When writing city name and street name next to each other, they must be separated with one or more characters not "legally" part of either of the two. An obvious option is separating the city name and street name with a comma (\texttt{","}) or with a comma followed by a white space (\texttt{", "}), but other characters are accepted as well.
+When writing city name and street name next to each other, they must be separated with one or more characters not "legally" part of either of the two. An obvious option is     separating the city name and street name with a comma (\texttt{","}) or with a comma followed by a white space (\texttt{", "}), but other characters are accepted as well.
 
-When writing either city name or street name next to the zip code, it should not be necessary to use any special characters to separate them. For example, it should be possible to write an entire address containing both street name, zip code, and city name without using any special characters to separate them, having the zip code in the middle of the others (ex. \texttt{"Street name1234city"}).
+
+When writing either city name or street name next to the zip code, it is not necessary to use any special characters to separate them. For example, it is possible to write     an entire address containing both street name, zip code, and city name without using any special characters to separate them, having the zip code in the middle of the others     (Ex. \texttt{"Street name 1234 city"}).
+
+Extra spaces within either the beginning or the end of a city name or street name are ignored and and does not hinder the application in recognizing the address as being valid (Ex. \texttt{"City\ \ \ \ name"}).
 
 Extra spaces or other "separators" within either the beginning or the end of a city name or street name should be ignored and not cause the application to not accept the address as being valid (ex. \texttt{"City name"}).
 
-It should not matter whether capitalised letters are used or not. Capitalised and non-capitalised letters should be understood as being the same. For example, \texttt{"CiTy NAMe"} and \texttt{"city name"} should result in the same address search.
+The parser does not differentiate capitalised and noncapitalized letters. Capitalised and non-capitalised letters are understood as being the same. For example, \texttt{"C    iTy NAMe"} and \texttt{"city name"} results in the same address search.
 
-If an address is not accepted as being valid, the user must be alerted, being told which of the addresses are not valid. A similar warning must be provided if the user executes a search without having entered any address at all. The user must not be left in a situation where he/she might think a search has been executed if it has not.
+If an address is not accepted as being valid, the user will be alerted, being told which of the addresses are not valid. A similar warning is provided if the user executes     a search without having entered any address at all. Thus, The user is never left in a situation where he/she might think a search has been executed, when it has not.
 
 \subsubsection{Automatic text completion}
-In order to aid the user in finding the desired address with a minimum of clutter and issues with the content and format of the address to be typed in, the application must provide the user with a list of the addresses which best match what is currently typed in. The list is empty when nothing is written, but the content of the list appears as soon as a character is typed in, and the list updates for each additional character typed / for each character removed. The list contains between zero and five possible addresses.
+In order to aid the user in finding the desired address with a minimum of clutter and issues with the content and format of the address to be typed in, the application provides the user with a list of the addresses which best match what is currently typed in. The list will be empty when nothing is written, but the content of the list appears as soon as a characters is typed in, and the list is updated for each additional character typed / for each character removed. The list always contains between zero and five valid addresses.
 
 Why we have decided to display up to five addresses is a matter of taste. We find that it is a reasonable amount of addresses, having enough for the user to have several options to choose between, but not having so many that the list dominates the rest of the graphical user interface.
 
-It has to be possible for the user to select the addresses on the list, copying the selected address to the input field and hiding the list from the view, avoiding that the list is in the way of other operations the user might want to perform.
+It is possible for the user to select the addresses on the list, copying the selected address to the input field and hiding the list from the view, avoiding that the list is in the way of other operations the user might want to perform.
