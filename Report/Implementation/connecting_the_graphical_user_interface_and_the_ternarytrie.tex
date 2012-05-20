@@ -1,4 +1,4 @@
-The connection between the graphical user interface and the \texttt{TernaryTrie} makes use of the \texttt{Observer} design pattern. The \texttt{View} class implements the \texttt{SearchListener} interface, which contain methods to be invoked when the user interacts with the graphical user interface in a way, creating a need for classes other than the \texttt{SearchPanel} being active. The instance of the \texttt{View} class is stored in both the \texttt{SearchPanel} and the \texttt{MainFrame} classes.
+The connection between the graphical user interface and the \texttt{TernaryTrie} makes use of the \texttt{Observer} design pattern. The \texttt{View} class implements the \texttt{SearchListener} interface, which contain methods to be invoked when the user interacts with the graphical user interface in a way, creating a need for classes other than the \texttt{SearchPanel} being active. The instance of the \texttt{View} class is stored the \texttt{SearchPanel} of the type \texttt{SearchListener}.
 
 Whenever the user types something in one of the text fields for inputting addresses (in the \texttt{SearchPanel} class), the following happens (as also illustrated in figure \ref{fig:autocompletion} on page \pageref{fig:autocompletion}):
 \begin{itemize}
@@ -30,4 +30,4 @@ There is a special case, where the text field is empty (the user just deleted th
 \label{fig:autocompletion}
 \end{figure}
 
-This process completely relies on the speed of the \texttt{TernaryTrie}, as the user would otherwise have to wait for all this to happen each time a character is type or removed.
+This process completely relies on the speed of the \texttt{TernaryTrie}, as the user would otherwise have to wait for all this to happen each time a character is typed or removed.
