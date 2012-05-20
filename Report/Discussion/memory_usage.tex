@@ -1,13 +1,13 @@
 The application stores a lot of information which is read from several large text files at start-up. The information stored might for example be information about each road segment in the quad tree data structure, each searchable address in different formats allowing the user to search efficiently with corresponding vertex ids, and a graph structure representing all the locations from the data from Krak and connections between them. The result is that the application uses roughly 1.5 GB of memory already before any user interaction has been performed.
 
-Another downside to all the information needed to be stored is the start-up time. It takes about ??? seconds on an average computer to launch the application. The major time consumers during the launch are the following: \\ \\
+Another downside to all the information needed to be stored is the start-up time. It takes about ??? seconds on an average computer to launch the application. Here are the launch times for the major components of the application on 2011 MacBook Air: \\ \\
 \begin{tabular}{ p{5cm} | p{3cm} }
-	\textbf{Thing to be created} & \textbf{Launch time} \\
+	\textbf{Thing to be created} & \textbf{Launch time in milliseconds} \\
 	\hline
-	\texttt{QuadtreeDS} & ??? \\
-	\texttt{Graph} & ??? \\
-	\texttt{TernaryTrie} & ??? \\
-	\texttt{Graphical user interface} & ???
+	\texttt{QuadtreeDS} & 1741 \\
+	\texttt{Graph} & 9436408 \\
+	\texttt{TernaryTrie} & 5439275 \\
+	\texttt{Graphical user interface} & 1110768
 \end{tabular}
 \\ \\ \\
 If the application were to be distributed, ??? seconds is a quite long start-up time for an application. And since the application shows no information to the user about the progress of the application, the user might think that the application has not started to launch at all. In the worst case, the user could then try to run the application multiple times, which would result in an even larger usage of memory, and with an average personal computer, the memory usage would most likely try to exceed the physical limits.
