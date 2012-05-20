@@ -14,13 +14,13 @@ We decided to make the thickness of the roads relative (so for example highways 
 \subsubsection{User interaction with the map}
 We wanted to make a simple, yet advanced, user interaction with the map. This resulted in a user interface with no physical buttons on the map. All you need to navigate the map is pointing device (i.e., a mouse). To zoom in and out you scroll up and down, respectively. When zooming in, (not out), the mouse pointer decides what the zooming point is. It is also very easy to pan up or down, or to the sides. This is done by simply dragging and dropping the map with the mouse pointer. The window is also easily resized by dragging in one corners or sides of the window.
 
-There is limit to how far in and out the user can zoom on the map. The limit on zooming out is there to avoid the user at some point being zoomed out so far that it is no longer possible to navigate back to display a desired part of the map (and since only the roads of Denmark are to be drawn, nothing will be visible other than maybe a very small amount of pixels representing Denmark). The limit of zooming in must prevent the user from being zoomed in so far that the map is no longer recognizable as a map. If no boundaries for zooming were to be made, the user might accidentally zoom either too far in or out, no longer recognizing what is displayed. The result is very likely to look similar to no roads being draw at all, which might again cause it to seem as if an error has occurred, forcing the user to restart the application.
+There is a limit to how far in and out the user can zoom on the map. The limit on zooming out, is there to avoid the user at some point being zoomed out so far that it is no longer possible to navigate back to display a desired part of the map (and since only the roads of Denmark are to be drawn, nothing will be visible other than maybe a very small amount of pixels representing Denmark). The limit of zooming in must prevent the user from being zoomed in so far that the map is no longer recognizable as a map. If no boundaries for zooming were to be made, the user might accidentally zoom either too far in or out, no longer recognizing what is displayed. The result is very likely to look similar to no roads being draw at all, which might again cause it to seem as if an error has occurred, forcing the user to restart the application.
 
 For similar reasons, limits must also be present when dragging the current view (ex. dragging to some places away from the roads drawn, making it look as if no roads are displayed).
 
 We want a user interface design with a minimal number of buttons and other components on the graphical user interface because it, in our strongest conviction, is the most intuitive way for people to navigate and interact with maps. It seems that this has become the \textit{de facto} standard, probably due to the increasing number of tablets and smart phones on the market.
 
-\subsubsection{Finding locations and trips}
+\subsubsection{Finding locations and trips}:
 As with the user interaction with the map, we decided to make the graphical user interface for finding either a location or a trip as simple as possible (and with that having as few buttons to push as possible and as few places to type text as possible). The result was to have two fields in which addresses can be typed in by the user and a button for executing the search for either location or trip. When the button is pressed, the content of the input fields decides what is to be executed. The possibilities are the following:
 \begin{itemize}
 	\item \textbf{Only one address is typed in} \\
@@ -32,8 +32,8 @@ As with the user interaction with the map, we decided to make the graphical user
 \end{itemize}
 In addition to that, when a search for a trip is executed, the search can actually be of two different types:
 \begin{itemize}
-	\item A search for the \textit{shortest} trip from one location to another (the one with the shortest distance).
 	\item A search for the \textit{fastest} tip from one location to another (the one taking the shortest period of time to follow).
+	\item A search for the \textit{shortest} trip from one location to another (the one with the shortest distance).
 \end{itemize}
 This second search criteria is also to be selected by the user. This is to be done with radio buttons allowing the user to toggle between the two.
 
