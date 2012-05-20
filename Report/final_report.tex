@@ -56,11 +56,11 @@ Rasmus Pagh\\
 \label{sub:Design Pattern}
 \include*{Design_choices/architectural_pattern}
 
-\subsection{Data structures}
-\include*{Design_choices/data_structures}
-
 \subsection{Visualisation and user interaction}
 \include*{Design_choices/visualisation_and_user_interaction}
+
+\subsection{Data structures}
+\include*{Design_choices/data_structures}
 
 \pagebreak
 \section{Implementation}
@@ -95,21 +95,25 @@ Rasmus Pagh\\
 \pagebreak
 \section{Testing}
 \label{sec:Testing}
+\include*{Testing/main}
 
 \subsection{AddressParser class test}
 \include*{Testing/addressparser_class_test}
 
 \subsection{Coordinates class test}
+\include*{Testing/coordinates_class_test}
 
 \subsection{Dijkstra class test}
 \include*{Testing/dijkstra_test_class}
 
-\subsection{GVertex and Vertex classes test}
+\subsection{Vertex class test}
+\include*{gvertex_and_vertex_classes_test}
 
 \subsection{QuadTree class test}
 \include*{Testing/quadtree_test_class}
 
 \subsection{TripEdge class test}
+\include*{Testing/tripedge_class_test}
 
 \subsection{TernaryTrie class test}
 
@@ -117,6 +121,7 @@ Rasmus Pagh\\
 \include*{Testing/roaddatacreator_test_class}
 
 \subsection{Testing the graphical user interface}
+\include*{testing_the_graphical_user_interface}
 
 \subsection{Outline}
 \include*{Testing/outline}
@@ -159,6 +164,7 @@ Rasmus Pagh\\
 \include*{Discussion/route_description}
 
 \subsection{One user, one system}
+\label{sec:One user one system}
 \include*{Discussion/one_user_one_system}
 
 \subsection{Character Encoding}
@@ -889,10 +895,12 @@ The \texttt{convertYToPixels} methods has been tested according to the following
 
 \pagebreak
 \subsection{Dijkstra class}
+\label{sec:Dijkstra class}
 \include*{Appendices/Testing/dijkstra_class}
 
 \pagebreak
-\subsection{GVertex and Vertex classes}
+\subsection{Vertex class}
+\label{sec:Vertex class}
 Both the \texttt{GVertex} and \texttt{Vertex} classes share the \texttt{distance} method, only taking different parameters. Both methods have been blackbox tested according to the following expectancy table: \\ \\
 \begin{tabular}{ p{3.5cm} | p{4cm} | p{2.5cm} | p{1cm} }
 	Input property & Input & Expected output & Actual output \\
@@ -915,10 +923,12 @@ Each of the results have been rounded to the nearest 1/10000.
 
 \pagebreak
 \subsection{Quadtree class}
+\label{sec:Quadtree class}
 \include*{Appendices/Testing/quadtree_class}
 
 \pagebreak
 \subsection{TripEdge class}
+\label{sec:TripEdge class}
 The \texttt{TripEdge} class includes the \texttt{computeTime} method for computing time. The method has been tested according to the following expectancy table: \\ \\
 \begin{tabular}{ p{3.5cm} | p{2.5cm} | p{2.5cm} | p{2.5cm} }
 	Input property & Input (speed, distance) & Expected output & Actual output \\

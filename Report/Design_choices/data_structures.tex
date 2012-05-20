@@ -1,14 +1,24 @@
-
-
 In this section we will account for the choices we have made, in regard to the data structures we have used to support our application.
 
-\subsubsection{Preprocessed files}
+The choice of data structures to be used are essential to the overall performance of the application, since they are the heart of almost every operation. The critical operations are:
+\begin{itemize}
+	\item Filtering all edges stored according to a part of the map and the types of edges
+	\item Finding the shortest or fastest path from one location to another
+	\item Finding the locations corresponding to addresses typed in by the user
+\end{itemize}
 
-We decided on using preprocessed files containing the edge and vertex data needed to create graphs for path finding, as well as a file for creating our ternary trie and a file containing krak data for each edge (used when drawing roads). Use of the these files speeds up several parts of our application since the files we have to read through contain only the information that is strictly necessary to serve their purposes. Also, since the files only need to be created once (ever), this can be done outside of the application, not adding to the start-up time, and in contrast to having the krak files lying around in the application, these files serve the same purpose but without taking up nearly as much space.
+\subsubsection{Storing and filtering edges}
+We use a Quadtree containing all edges, allowing quite fast filtering of the edges according to the given criteria. The user interface must not block during the basic map navigation operations, zooming and panning (some milliseconds of blockage are accepted, as long as it does not render the map navigation too annoying or even useless).
 
-\subsubsection{The graph}
-We have decided to use two graphs for path finding; one containing edges weighted by time and one containing edges weighted simply by their length. The first of the two is used to compute the fastest path from one given point to another, and the latter of the two is used to compute the shortest path between any two point.
+\subsubsection{Path finding}
+We have decided to use two graphs for path finding; one containing edges weighted by time and one containing edges weighted by their length. The first of the two is used to compute the fastest path from one given point to another, and the latter of the two is used to compute the shortest path between any two points.
 
-This decision has both its pros and its cons. On the up-side, it adds additional function which is the choice between fastest or shortest path. On the down-side, however, having two graphs lying around takes up more memory.
+This decision has both its pros and its cons. On the up-side, it adds additional functionality which is the choice between fastest or shortest path. On the down-side, however, having two graphs uses more memory.
 
 The shortest path graph could be expanded to allow the choice between different types of transportation (such as walking or cycling) where one is assumed to maintain roughly the same speed throughout the entire trip.
+
+\subsubsection{Storing the address}
+All possible addresses are stored in a ternary trie, allowing for fast prefix searches for the automatic text completion to function without blockage (again, a few milliseconds of blockage is accepted as long as it does not cause annoyance or in the worst case render the searching useless). It also allows for the id corresponding to a given address to be found very quickly.
+
+\subsubsection{Preprocessed files}
+We decided on using preprocessed files containing the edge and vertex data needed to create graphs for path finding, quadtrees for filtering edges, and the ternary trie for address finding. The files contain only the information that is strictly necessary to serve their purposes, and since the files only need to be created once (ever), this can be done outside of the application, decreasing the start-up time of the application itself.

@@ -1,19 +1,19 @@
 The application stores a lot of information which is read from several large text files at start-up. The information stored might for example be information about each road segment in the quad tree data structure, each searchable address in different formats allowing the user to search efficiently with corresponding vertex ids, and a graph structure representing all the locations from the data from Krak and connections between them. The result is that the application uses roughly 1.5 GB of memory already before any user interaction has been performed.
 
-Another downside to all the information needed to be stored is the start-up time. It takes about ??? seconds on an average computer to launch the application. The major time consumers during the launch are the following: \\ \\
+Another downside to all the information needed to be stored is the start-up time. It takes about 22 seconds on an average computer to launch the application. Here are the launch times for the major components of the application on 2011 MacBook Air: \\ \\
 \begin{tabular}{ p{5cm} | p{3cm} }
-	\textbf{Thing to be created} & \textbf{Launch time} \\
+	\textbf{Thing to be created} & \textbf{Launch time in seconds} \\
 	\hline
-	\texttt{QuadtreeDS} & ??? \\
-	\texttt{Graph} & ??? \\
-	\texttt{TernaryTrie} & ??? \\
-	\texttt{Graphical user interface} & ???
+	\texttt{QuadtreeDS} & 5.6 \\
+	\texttt{Graph} & 9.4 \\
+	\texttt{TernaryTrie} & 5.4 \\
+	\texttt{Graphical user interface} & 1.1
 \end{tabular}
 \\ \\ \\
-If the application were to be distributed, ??? seconds is a quite long start-up time for an application. And since the application shows no information to the user about the progress of the application, the user might think that the application has not started to launch at all. In the worst case, the user could then try to run the application multiple times, which would result in an even larger usage of memory, and with an average personal computer, the memory usage would most likely try to exceed the physical limits.
+If the application were to be distributed, 22 seconds is a quite long start-up time for an application. And since the application shows no information to the user about the progress of the application, the user might think that the application has not started to launch at all. In the worst case, the user could then try to run the application multiple times, which would result in an even larger usage of memory, and with an average personal computer, the memory usage would most likely try to exceed the physical limits.
 
 Even the standard memory usage of the application will use up such a vast amount of memory on the computer that running other applications simultaneously would most likely be a slow experience, given the application is running on an average personal computer.
 
 We do, however, believe that the upsides to the memory usage by far exceed the downsides. To be more exact, it would not be possible for the application to run as it does, were the information not stored in the memory of the computer, since the application is based on data structures optimized for searching in different ways.
 
-An alternative to having such a vast memory usage on the computer of the user could be a client-server situation, where all the information is stored in the memory of the server, allowing for optimized searches, whereas the client side needs only the very small part of the information which is currently to be displayed in the graphical user interface. This would moreover open up for the possibility of having more than one client accessing the same server simultaneously. But it was a design decision of ours to have everything within the application and thereby also making the application accessible by only one user at the time, e.g. the user on the computer itself. Having it any other way would, as mentioned in ???, demand changes to the overall structure of the application.
+An alternative to having such a vast memory usage on the computer of the user could be a client-server situation, where all the information is stored in the memory of the server, allowing for optimized searches, whereas the client side needs only the very small part of the information which is currently to be displayed in the graphical user interface. This would moreover open up for the possibility of having more than one client accessing the same server simultaneously. But it was a design decision of ours to have everything within the application and thereby also making the application accessible by only one user at the time, e.g. the user on the computer itself. Having it any other way would, as discussed in section \ref{sec:One user, one system} on page \pageref{sec:One user, one system}, demand changes to the overall structure of the application.

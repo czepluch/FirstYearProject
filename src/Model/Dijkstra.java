@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.PriorityQueue;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,12 +25,16 @@ public class Dijkstra implements PathFinder
     		v.minDistance = Double.POSITIVE_INFINITY;
     		v.previous = null;
     	}
-        source.minDistance = 0.;		// distance to self is zero   
-        PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>(vs);
+        source.minDistance = 0.;		// distance to self is zero
+        IndexMinPQ<Vertex> vertexQueue = new IndexMinPQ<Vertex>(vs.size());
+        
+        for (Vertex v : vs) vertexQueue.insert(Integer.parseInt(v.id), v);
 
 		while (!vertexQueue.isEmpty()) 
 		{
-	    	Vertex u = vertexQueue.poll();		// retrieve vertex with shortest distance to source
+	    	// retrieve vertex with shortest distance to source
+	    	Vertex u = vertexQueue.minKey();
+	    	vertexQueue.delMin();
 			if (u == target)
 			{
 				// trace back
@@ -39,7 +42,6 @@ public class Dijkstra implements PathFinder
 				{;
 					u = u.previous;
 				}
-				vertexQueue.clear();
 				return;
 			}
         	// Visit each edge exiting u
@@ -50,10 +52,11 @@ public class Dijkstra implements PathFinder
             	double distanceThroughU = u.minDistance + weight;
 				if (distanceThroughU < v.minDistance) 
 				{
-		    		//vertexQueue.remove(v);
+					int vid = Integer.parseInt(v.id);
+		    		vertexQueue.delete(vid);
 		    		v.minDistance = distanceThroughU;
 		    		v.previous = u;
-		    		vertexQueue.add(v);
+		    		vertexQueue.insert(vid,v);
 				}
 			}
         }
@@ -84,8 +87,9 @@ public class Dijkstra implements PathFinder
        			Edge firstEdge = null;
        			// get first edge in path
        			// used for calculating travel time
-       			for (Edge e : firstPoint.adjacencies)
-       				if (e.target.id.equals(path.get(1).id)) firstEdge = e;
+       			if (!source.equals(target)) 
+       				for (Edge e : firstPoint.adjacencies)
+       					if (e.target.id.equals(path.get(1).id)) firstEdge = e;
        			double fromX = firstPoint.getX();
        			double fromY = firstPoint.getY();
        			for (int i = 1; i < path.size(); i++) {
