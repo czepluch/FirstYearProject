@@ -32,9 +32,12 @@ public class Graph
 		if (awake < 1) G = new Graph("vertex.txt", "edges.txt");
 	}
 	
-	/*
-	 * This is method is stricly for testing purposes
+	/**
+	 * This is method is strictly for testing purposes
 	 * and should only be called in the DijkstraTest class.
+	 * @param vpath	The path to the vertex test file
+	 * @param epath	The path to the edge test file
+	 * @return
 	 */
 	public static Graph testGraph(String vpath, String epath)
 	{
@@ -43,7 +46,8 @@ public class Graph
 	
 	/**
 	 * Constructor. Creates the Graph.
-	 * @param path File path to the file containing graph information
+	 * @param vpath The path to the file containing the vertex data
+	 * @param epath	The path to the file containing the edge data
 	 */
 	private Graph(String vpath, String epath)
 	{
@@ -177,9 +181,5 @@ public class Graph
 		Vertex v = fastMap.get(nodeId + "");
 		double[] coords = { v.getX(), v.getY() };
 		return coords;
-	}
-
-	public static void main(String[] args) {
-		wakeUp();
 	}
 }

@@ -26,7 +26,7 @@ public class RoadsDataReader
 	 * @param path The path of the XML file from which data is read
 	 * @param edges The data structure in which the data is stored
 	 */
-	public static void readXML(String path, DataStructure edges)
+	public static void readRoadData(String path, DataStructure edges)
 	{
 		BufferedReader in = null;
 		try {

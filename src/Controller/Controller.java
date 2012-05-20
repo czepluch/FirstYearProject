@@ -69,7 +69,9 @@ public class Controller implements ViewListener {
 	}
 
 	/**
-	 * @param args -
+	 * Creates an instance of the Controller class,
+	 * starting the application
+	 * @param args - Not used
 	 */
 	public static void main(String[] args) {
 		new Controller();

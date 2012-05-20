@@ -7,7 +7,7 @@ import java.util.HashMap;
 import static Model.TripCriteria.*;
 
 /**
- * Class used to compute the shortest path between two given vertices
+ * Class used to compute paths between two given vertices
  */
 public class Dijkstra implements PathFinder
 {

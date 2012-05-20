@@ -2,6 +2,10 @@ package Model;
 
 import java.util.ArrayList;
 
+/**
+ * Interface of a data structure of edges,
+ * capable of filtering the edges
+ */
 public interface DataStructure {
 
 	/**

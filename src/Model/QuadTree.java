@@ -3,7 +3,6 @@ package Model;
 import java.util.ArrayList;
 import Model.Point;
 import View.ViewValues;
-import static View.ViewValues.*;
 
 /*
  * This implementation is taken from http://algs4.cs.princeton.edu/92search/QuadTree.java.html

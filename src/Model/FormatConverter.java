@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Has the responsibility of converting between the data types stored in the Model
- * and data types needed by the view
+ * and data types needed by the view (from UTM32 to pixels)
  */
 public class FormatConverter {
 	private static Coordinates c;
@@ -54,13 +54,13 @@ public class FormatConverter {
 	 */
 	public static TripEdge<Integer> createTripEdge(TripEdge<Double> te, int speed) {
 		int[] pixelCoords = convertEdge(te.getFromX(), te.getFromY(), te.getToX(), te.getToY());
-		return new TripEdge(pixelCoords[0],
-							pixelCoords[1],
-							pixelCoords[2],
-							pixelCoords[3],
-							te.getDistance(),
-							te.getTurn(),
-							speed);
+		return new TripEdge<Integer>(pixelCoords[0],
+									 pixelCoords[1],
+									 pixelCoords[2],
+									 pixelCoords[3],
+									 te.getDistance(),
+									 te.getTurn(),
+									 speed);
 	}
 	
 	/**
@@ -71,13 +71,13 @@ public class FormatConverter {
 	 */
 	public static TripEdge<Integer> createTripEdge(TripEdge<Double> te) {
 		int[] pixelCoords = convertEdge(te.getFromX(), te.getFromY(), te.getToX(), te.getToY());
-		return new TripEdge(pixelCoords[0],
-							pixelCoords[1],
-							pixelCoords[2],
-							pixelCoords[3],
-							te.getDistance(),
-							te.getTurn(),
-							te.getSpeed());
+		return new TripEdge<Integer>(pixelCoords[0],
+									 pixelCoords[1],
+									 pixelCoords[2],
+									 pixelCoords[3],
+									 te.getDistance(),
+									 te.getTurn(),
+									 te.getSpeed());
 	}
 	
 	/**

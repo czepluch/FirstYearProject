@@ -3,6 +3,9 @@ package Model;
 import static Model.Directions.*;
 import Model.KEdge;
 
+/**
+ * 
+ */
 public class Point{
 	double x;
 	double y;

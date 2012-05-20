@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * Interface for classes capable of finding
+ * fastest and shortest paths between two given
+ * points in a given graph
+ */
 public interface PathFinder {
 
 	/**
