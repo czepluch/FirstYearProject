@@ -82,7 +82,6 @@ public class Dijkstra implements PathFinder
        		if (v.id.equals(target)) 
 			{
        			List<Vertex> path = getShortestPathTo(v);
-       			TripEdge<Double> prevEdge = null;
        			Vertex firstPoint = path.get(0);
        			Edge firstEdge = null;
        			// get first edge in path
@@ -101,14 +100,12 @@ public class Dijkstra implements PathFinder
        														  x,
        														  y,
        														  Vertex.distance(firstPoint, point),
-       														  prevEdge,
        														  firstEdge.speed);
        				trip.addEdge(e);
        				
        				fromX = x;
        				fromY = y;
        				firstPoint = point;
-       				prevEdge = e;
        				// get next edge in path
        				if (i + 1 >= path.size()) continue;
            			for (Edge ed : firstPoint.adjacencies)

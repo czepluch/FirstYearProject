@@ -12,7 +12,6 @@ public class TripEdge<T> {
 	private double distance;
 	private double time;
 	private int speed;
-	private Turn turn;
 	
 	/*
 	 * Constructor
@@ -21,11 +20,9 @@ public class TripEdge<T> {
 	 * @param toX		the first to coordinate in pixels
 	 * @param toY		the first to coordinate in pixels
 	 * @param distance	the distance of the edge
-	 * @param prevEdge	the previous edge on the trip
-	 * 					null if no such exists
 	 * @param speed		the speed of the edge
 	 */
-	public TripEdge(T fromX, T fromY, T toX, T toY, double distance, TripEdge<T> prevEdge, int speed) {
+	public TripEdge(T fromX, T fromY, T toX, T toY, double distance, int speed) {
 		// Make sure the TripEdge is of type Double or Integer
 		if (fromX.getClass() != Integer.class && fromX.getClass() != Double.class) {
 			throw new IllegalStateException("TripEdge must have the type Double or Integer");
@@ -37,22 +34,6 @@ public class TripEdge<T> {
 		this.distance = distance;
 		this.speed = speed;
 		computeTime();
-		computeTurn(prevEdge);
-	}
-	
-	public TripEdge(T fromX, T fromY, T toX, T toY, double distance, Turn turn, int speed) {
-		// Make sure the TripEdge is of type Double or Integer
-		if (fromX.getClass() != Integer.class && fromX.getClass() != Double.class) {
-			throw new IllegalStateException("TripEdge must have the type Double or Integer");
-		}
-		this.fromX = fromX;
-		this.fromY = fromY;
-		this.toX = toX;
-		this.toY = toY;
-		this.distance = distance;
-		this.speed = speed;
-		computeTime();
-		this.turn = turn;
 	}
 	
 	// Getter methods
@@ -60,10 +41,6 @@ public class TripEdge<T> {
 	
 	public int getSpeed() {
 		return speed;
-	}
-	
-	public Turn getTurn() {
-		return turn;
 	}
 	
 	public double getTime() {
@@ -92,7 +69,7 @@ public class TripEdge<T> {
 	
 	@Override
 	public String toString() {
-		return distance + ", " + time + ", " + turn;
+		return distance + ", " + time;
 	}
 	
 	/*
@@ -105,13 +82,5 @@ public class TripEdge<T> {
 		else if (speed == 0) throw new IllegalArgumentException("Speed is zero");
 		else if ((distance < 0) || (speed < 0)) throw new IllegalArgumentException("Negative speed and/or distance");
 		else time = ((getDistance() / 1000) * 60) / speed;
-	}
-	
-	/*
-	 * Helper method
-	 * Computes the time according to the two edges
-	 */
-	private void computeTurn(TripEdge<T> prevEdge) {
-		turn = Turn.LEFT; // Mock implementation
 	}
 }

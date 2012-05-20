@@ -2,7 +2,9 @@ package Model;
 
 import java.util.ArrayList;
 
-// Class used to represent a vertex in the shortest path clases: Dijkstra, Graph, and GraphInput
+/**
+ * Class used to represent a vertex in the shortest path clases: Dijkstra, Graph, and GraphInput
+ */
 public class Vertex implements Comparable<Vertex>
 {
 	public final double x, y;
@@ -27,18 +29,29 @@ public class Vertex implements Comparable<Vertex>
 		this.neighbours = neighbours;
 		adjacencies = new ArrayList<Edge>();
 	}
-
+	
+	@Override
 	public String toString()
 	{
 		return id;
 	}
 
+	@Override
 	public int compareTo(Vertex other)
 	{
 		return Double.compare(minDistance, other.minDistance);
 	}
 
+	/**
+	 * Get the stored x-coordinate
+	 * @return the stored x-coordinate
+	 */
 	public double getX() { return x; }
+	
+	/**
+	 * Get the stored y-coordinate
+	 * @return the stored y-coordinate
+	 */
 	public double getY() { return y; }
 
 	/**

@@ -59,7 +59,6 @@ public class FormatConverter {
 									 pixelCoords[2],
 									 pixelCoords[3],
 									 te.getDistance(),
-									 te.getTurn(),
 									 speed);
 	}
 	
@@ -76,7 +75,6 @@ public class FormatConverter {
 									 pixelCoords[2],
 									 pixelCoords[3],
 									 te.getDistance(),
-									 te.getTurn(),
 									 te.getSpeed());
 	}
 	
