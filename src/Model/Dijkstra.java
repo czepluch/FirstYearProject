@@ -87,8 +87,9 @@ public class Dijkstra implements PathFinder
        			Edge firstEdge = null;
        			// get first edge in path
        			// used for calculating travel time
-       			for (Edge e : firstPoint.adjacencies)
-       				if (e.target.id.equals(path.get(1).id)) firstEdge = e;
+       			if (!source.equals(target)) 
+       				for (Edge e : firstPoint.adjacencies)
+       					if (e.target.id.equals(path.get(1).id)) firstEdge = e;
        			double fromX = firstPoint.getX();
        			double fromY = firstPoint.getY();
        			for (int i = 1; i < path.size(); i++) {
