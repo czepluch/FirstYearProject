@@ -27,11 +27,16 @@ public class Dijkstra implements PathFinder
     		v.previous = null;
     	}
         source.minDistance = 0.;		// distance to self is zero   
-        PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>(vs);
+        //PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>(vs);
+        IndexMinPQ<Vertex> vertexQueue = new IndexMinPQ<Vertex>(vs.size());
+        
+        for (Vertex v : vs) vertexQueue.insert(Integer.parseInt(v.id), v);
 
 		while (!vertexQueue.isEmpty()) 
 		{
-	    	Vertex u = vertexQueue.poll();		// retrieve vertex with shortest distance to source
+	    	// retrieve vertex with shortest distance to source
+	    	Vertex u = vertexQueue.minKey();
+	    	vertexQueue.delMin();
 			if (u == target)
 			{
 				// trace back
@@ -39,7 +44,6 @@ public class Dijkstra implements PathFinder
 				{;
 					u = u.previous;
 				}
-				vertexQueue.clear();
 				return;
 			}
         	// Visit each edge exiting u
@@ -50,10 +54,11 @@ public class Dijkstra implements PathFinder
             	double distanceThroughU = u.minDistance + weight;
 				if (distanceThroughU < v.minDistance) 
 				{
-		    		//vertexQueue.remove(v);
+					int vid = Integer.parseInt(v.id);
+		    		vertexQueue.delete(vid);
 		    		v.minDistance = distanceThroughU;
 		    		v.previous = u;
-		    		vertexQueue.add(v);
+		    		vertexQueue.insert(vid,v);
 				}
 			}
         }
