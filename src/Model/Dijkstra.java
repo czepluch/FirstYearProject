@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.PriorityQueue;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,8 +25,7 @@ public class Dijkstra implements PathFinder
     		v.minDistance = Double.POSITIVE_INFINITY;
     		v.previous = null;
     	}
-        source.minDistance = 0.;		// distance to self is zero   
-        //PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>(vs);
+        source.minDistance = 0.;		// distance to self is zero
         IndexMinPQ<Vertex> vertexQueue = new IndexMinPQ<Vertex>(vs.size());
         
         for (Vertex v : vs) vertexQueue.insert(Integer.parseInt(v.id), v);
