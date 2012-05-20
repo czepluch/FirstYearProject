@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import Model.Point;
 import View.ViewValues;
 
 /*
@@ -123,13 +122,5 @@ public class QuadTree {
 	public void addEdge(KEdge e) {
 		insert(e.getFromLong(), e.getFromLat(), e);
 		insert(e.getToLong(), e.getToLat(), e);
-	}
-	
-	/**
-	 * Adds a point to the tree
-	 * @param p The point to be added
-	 */
-	public void addPoint(Point p) {
-		insert(p.getX(), p.getY(), p.getEdge());
 	}
 }
