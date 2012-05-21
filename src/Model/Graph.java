@@ -29,7 +29,7 @@ public class Graph
 	 */
 	public static void wakeUp() { 
 		awake++;
-		if (awake < 1) G = new Graph("vertex.txt", "edges.txt");
+		if (awake < 1) G = new Graph("data.vertices", "data.edges");
 	}
 	
 	/**

@@ -16,7 +16,7 @@ public class TernaryTrie {
 	 * Build a trie from the standard path
 	 */
 	public TernaryTrie() {
-		this(new File("TrieData.txt"));
+		this(new File("data.trie"));
 	}; 
 
 	/**
