@@ -69,8 +69,8 @@ The \texttt{ParseAddressLive} method makes use of the \texttt{ParseAddress} meth
 The \texttt{TernaryTrie} has the purpose of storing addresses, allowing efficient prefix searches and searches for a node id corresponding to a given address.
 
 The search trie uses an internal node representation of characters to build a ternary tree, where each branch represents a searchable address.
-The tree structure makes it possible to search for a given string in time that is $\sim\ln(N)$ for a search miss and  $\sim K+1$ for a search hit, where K is the length of the string to search for.
-In practise, on a 5 year old computer with a 2.4 Ghz Intel dual-core processor, we have measured the prefix searches to take about one hundredth of a second on our trie data set.
+The tree structure makes it possible to search for a given string in time that is $\sim\log_2 (N)$ for a search miss and  $K+1$ for a search hit, where K is the length of the string to search for.
+In practice, on a 5 year old computer with a 2.4 Ghz Intel dual-core processor, we have measured the prefix searches to take about one hundredth of a second on our trie data set.
 
 The trie  provides a simple API for searches:
 \begin{itemize}
