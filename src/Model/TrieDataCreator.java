@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.HashSet;
 
 /**
@@ -36,7 +35,7 @@ public class TrieDataCreator{
 		//initialize the file objects, terminate by runtimeexception if the files do not exist/can't be read
 		File zipsF  = assignRFile(zips);
 		File edgesF = assignRFile(edges);
-		File nodesF = assignRFile(edges);
+		File nodesF = assignRFile(nodes); // For use with possible later improvements (For making good choices for city-entry node-ids )
 		File outF = assignWFile(outFile);
 
 		//read contents of files into appropriate data structures
