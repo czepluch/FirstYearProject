@@ -2,7 +2,7 @@
 //These classes are completely ad-hoc, and thus not optimized for reuse.
 //
 //The output of this parser is NOT guaranteed to have any degree of arbritraryness in its order.
-//I use the UNIX sort method to randomize it (sort -R TrieData.txt > newFile.txt)
+//I use the UNIX sort method to randomize it (sort -R TrieData.txt > newFile.txt), but it shouldn't be necessary for a ternary trie
 package Model;
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class TrieDataCreator{
 	private static final String outFile="TrieData.txt";
 	private Map<Short, String> zipMap = new HashMap<Short, String>(); //map from zipcode to cityname
 	private List<Road> roads = new ArrayList<Road>(); //list of (unique) roads.
-	private Map<String,HashSet<Road>> zipBList = new HashMap<String, HashSet<Road>>();
+	private Map<String,HashSet<Road>> zipBList = new HashMap<String, HashSet<Road>>(); //maps from a city name to a set of roads in that city
 
 	//The constructor controlls the flow of this ad-hoc  parser
 	public TrieDataCreator (String zips, String edges, String nodes) {
@@ -92,11 +92,13 @@ public class TrieDataCreator{
 		closeStream(sc);
 	}
 
+	//Delegate controll to the writer methods
 	private void writeFormats(File nodeFile, File outFile, List<Road> roads) {
 		writeR	(outFile, roads);
 		writeC	(nodeFile, outFile, zipBList);
 	}
 
+	//Write the "normal" formats:
 	private void writeR (File outF, List<Road> roads) {
 		System.out.println("Writing normal formats formats (i.e; City## not yet included)");
 		long ST = System.currentTimeMillis();
@@ -115,6 +117,7 @@ public class TrieDataCreator{
 		closeStream(bw);
 	}
 
+	//Write city entries
 	private void writeC(File nodeF, File outF, Map<String, HashSet<Road>> zipBList) {
 		System.out.println("Writing City## format");
 		long ST = System.currentTimeMillis();
@@ -140,7 +143,7 @@ public class TrieDataCreator{
 
 	/*
 	 * Helper methods from here on out
-	 * convention for the IO helpers is to throw a RuntimeException on fatal IO problems, and thereby crash the program, unless otherwise noted
+	 * convention for the IO helpers is to throw a RuntimeException on fatal IO problems, and thereby crash the program, unless otherwise noted.
 	 */ 
 
 	//getRead/write methods, simply provides a 'cleaner' way of instatiating fileIO objects
@@ -183,7 +186,7 @@ public class TrieDataCreator{
 
 	//removes the file if it exists, and returns a file obj representing the newly created file
 	//terminates by runtimeexception if any of the IO fails fataly.
-	private File assignWFile(String path) {
+	private File assignWFile(String path){
 		File tmp = new File(path);
 		if (tmp.exists()) {
 			if (!tmp.delete()) throw new RuntimeException("Could not delete file: " + path);
@@ -196,7 +199,9 @@ public class TrieDataCreator{
 		return tmp;
 	}
 
-	//convient way to close streams.
+	/**
+	 * convient way to close streams.
+	 */
 	
 	//doesnt crash on IO problems, as an error here is non-fatal for the parser.)
 	private  void closeStream(Closeable c) {
@@ -208,6 +213,14 @@ public class TrieDataCreator{
 		}
 	}
 
+	//this method is here for java 6, in java 7 Scanner implements Closeable.
+	//in java 6, it just has a close method.
+	private  void closeStream(Scanner c) {
+			c.close();
+			System.out.println("Huh, couldn't close this");
+	}
+
+	//doesnt crash on IO problems, as an error here is non-fatal for the parser.)
 	private <E extends Flushable & Closeable> void closeStream(E c) {
 		try {
 			c.flush();
@@ -218,6 +231,7 @@ public class TrieDataCreator{
 		}
 	}
 
+	//adds a road to zipBList
 	private void addToZipList(Road r) {
 		if (zipBList.containsKey(r.cityName)) {
 			zipBList.get(r.cityName).add(r);
@@ -260,6 +274,7 @@ public class TrieDataCreator{
 		}
 	}
 
+	//invokes the parser, or prints usage information if a wrong number of parameters is given.
 	public static void main (String[] args){
 		if (args.length != 3) {
 			System.out.println("Usage: zipfile edgefile nodefile");
