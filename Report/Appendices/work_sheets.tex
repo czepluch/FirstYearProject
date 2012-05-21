@@ -1,0 +1,149 @@
+\subsection*{Shortest Path}
+\begin{tabular}{ | p{12cm} | }
+	\hline
+	\textbf{Title:} \\ 
+	Compute the shortest / fastest path \\ 
+	\\ \hline
+	\textbf{Description:} \\
+	Make a graph representation, allowing the program to compute the shortest / fastest path from one given point to another \\
+	\\ \hline
+	\textbf{Design decisions:}
+	\begin{itemize}
+		\item Use a non-simplified graph (at least at first), allowing us to easily draw the results
+		\item Use Dijkstra’s algorithm
+		\item The output is an object of type Trip:
+		\begin{itemize}
+			\item Contains info about the time and distance of the entire trip / path
+			\item Contains a list a custom edge type, containing info about:
+			\begin{itemize}
+				\item From and to coordinates (in UTM 32)
+				\item Distance of the edge
+				\item Time of the edge
+				\item Enum of type Direction
+			\end{itemize}
+		\end{itemize}
+		\item Allows applying a filter of what types of road segments are to be included
+	\end{itemize}
+	\\ \hline
+	\textbf{Implementation:} \\
+	\\ \hline
+	\textbf{Comments:} \\
+	\\ \hline
+\end{tabular} \\
+\begin{tabular}{ | p{12cm} | }
+	\hline
+	\textbf{Title:} \\
+	Expand the FormatConverter \\
+	\\ \hline
+	\textbf{Description:} \\
+	Expand the FormatConverter to convert the coordinates in the the Trip type to pixels \\
+	\\ \hline
+	\textbf{Design decisions:} \\
+	\\ \hline
+	\textbf{Implementation:} \\
+	\\ \hline
+	\textbf{Comments:} \\
+	\\ \hline
+\end{tabular} \\
+\begin{tabular}{ | p{12cm} | }
+	\hline
+	\textbf{Title:} \\
+	Draw the shortest / fastest path \\
+	\\ \hline
+	\textbf{Description:} \\
+	Draw a given list of edges and a path \\
+	Show info about the trip \\
+	\\ \hline
+	\textbf{Design decisions:}
+	\begin{itemize}
+		\item Draw the path / edges
+		\item Show a list containing info about both the entire road and the segments
+		\item The input is of type Trip
+	\end{itemize}
+	\\ \hline
+	\textbf{Implementation:} \\
+	\\ \hline
+	\textbf{Comments:} \\
+	\\ \hline
+\end{tabular}
+
+\pagebreak
+
+\subsection*{Search for directions}
+\begin{tabular}{ | p{12cm} | }
+	\hline
+	\textbf{Title:} \\
+	The search GUI \\
+	\\ \hline
+	\textbf{Description:} \\
+	Make it possible to search, both for a single "point" or a trip \\
+	\\ \hline
+	\textbf{Design decisions:}
+	\begin{itemize}
+		\item Two input text fields and a button
+		\item If second button does not contain info, search for "point", else search for trip
+		\item The panel containing user interaction components is to the left
+	\end{itemize}
+	\\ \hline
+	\textbf{Implementation:} \\
+	\\ \hline
+	\textbf{Comments:} \\
+	\\ \hline
+\end{tabular} \\
+\begin{tabular}{ | p{12cm} | }
+	\hline
+	\textbf{Title:} \\
+	Auto completion \\
+	\\ \hline
+	\textbf{Description:} \\
+	Auto completion (and potentially spell-correction) of addresses \\
+	\\ \hline
+	\textbf{Design decisions:}
+	\begin{itemize}
+		\item We need to define the UI-wise implementation. None of the classes in Java's standard library (that we know of) encompass the visualisation of this concept
+	\end{itemize}
+	\\ \hline
+	\textbf{Implementation:} \\
+	Still strongly tied to making the design decisions \\
+	\\ \hline
+	\textbf{Comments:} \\
+	There is an external library that does this, but the question is if we wouldn't rather do it ourselves \\
+	\\ \hline
+\end{tabular}
+
+\pagebreak
+
+\subsection*{Draw the landscape}
+\begin{tabular}{ | p{12cm} | }
+	\hline
+	\textbf{Title:} \\
+	Read in the XML file and store it \\
+	\\ \hline
+	\textbf{Description:} \\
+	Read in the XML file so it can be parsed to the view \\
+	\\ \hline
+	\textbf{Design decisions:}
+	\begin{itemize}
+		\item Make a separate quad tree for the landscape, containing a custom polygon type
+	\end{itemize}
+	\\ \hline
+	\textbf{Implementation:} \\
+	\\ \hline
+	\textbf{Comments:} \\
+	\\ \hline
+\end{tabular} \\
+\begin{tabular}{ | p{12cm} | }
+	\hline
+	\textbf{Title:} \\
+	Draw the landscape
+	\\ \hline
+	\textbf{Description:} \\
+	Draw the landscape beneath the road segments
+	\\ \hline
+	\textbf{Design decisions:} \\
+	\\ \hline
+	\textbf{Implementation:} \\
+	\\ \hline
+	\textbf{Comments:} \\
+	\\ \hline
+\end{tabular}
