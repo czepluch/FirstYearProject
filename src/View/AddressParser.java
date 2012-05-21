@@ -3,6 +3,9 @@ package View;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class with the responsibility of parsing addresses
+ */
 public class AddressParser {
 	private final static String CITY_STREET_REGEX_PART = 	"[-a-zæøåäöüA-ZÆØÅÄÖÜ.\\s\']";
 	private final static String CRAP_REGEX_PART = 			"[^a-zæøåäöüA-ZÆØÅÄÖÜ0-9]";
