@@ -80,6 +80,9 @@ public class AddressParser {
 		if (zip == null) 	zip = "";
 		else				zip = zip.trim();
 		
+		// Do not allow zip code only
+		if (city.length() == 0 & street.length() == 0) return null;
+		
 		return String.format("%s#%s#%s", city, zip, street);
 	}
 	

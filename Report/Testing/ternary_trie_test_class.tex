@@ -1,21 +1,21 @@
-Of the methods in the \texttt{TernaryTrie} class only a few chosen are tested, though one could could argue that methods such as \texttt{TernaryTrie(\textit{File})} are tested implicitly, by testing methods that depend on their correctness.
-To be more specific; methods \texttt{get(\textit{String})} and \texttt{startsWith(\textit{String})} are the only methods that are tested directly.  The test has been constructed as a black-box test, focusing comparing expected output with actual output for different sets of input.
+Of the methods in the \texttt{TernaryTrie} class only a few chosen are tested, though one could could argue that methods such as \texttt{TernaryTrie\textit{(File)}} are tested implicitly, by testing methods that depend on their correctness.
+To be more specific; methods \texttt{get\textit{(String)}} and \texttt{startsWith\textit{(String)}} are the only methods that are tested directly.  The test has been constructed as a black-box test, focusing comparing expected output with actual output for different sets of input.
 
 The inputs are divided into seven categories:
 A1 though C are in the formats we keep in our real data set, D are invalid inputs, i.e. a string that is neither in the set nor a valid prefix for one that is.
-E are valid prefixes, i.e. prefixes that when used as parameter for \texttt{startsWith(\textit{String})}, should yield one or more result strings.
+E are valid prefixes, i.e. prefixes that when used as parameter for \texttt{startsWith\textit{(String)}}, should yield one or more result strings.
 
-\texttt{testGet} runs \texttt{get(\textit{String})} on all valid input sets (all but D and E), and verifies that the returned value is indeed the expected, also verifying that all the entries are actually in the trie.
+\texttt{testGet} runs \texttt{get\textit{(String)}} on all valid input sets (all but D and E), and verifies that the returned value is indeed the expected, also verifying that all the entries are actually in the trie.
 
-\texttt{testFalseGet} runs \texttt{get(\textit{String})} on set D, and checks the method returns null. This could have been put on the previous table, as it is related to testing the get method.
+\texttt{testFalseGet} runs \texttt{get\textit{(String)})} on set D, and checks the method returns null. This could have been put on the previous table, as it is related to testing the get method.
 
-\texttt{testNumberOfPrefixMatches[X]} runs \texttt{startsWith(\textit{String})} on data set E to ensure that the method returns the right amount of strings for a given prefix.
+\texttt{testNumberOfPrefixMatches[X]} runs \texttt{startsWith\textit{(String)}} on data set E to ensure that the method returns the right amount of strings for a given prefix.
 
-\texttt{testFalsePrefix} runs \texttt{startsWith(\textit{String})} on set D, and checks that the number of returned strings is zero.
+\texttt{testFalsePrefix} runs \texttt{startsWith\textit{(String)}} on set D, and checks that the number of returned strings is zero.
 
-\texttt{testPrefix_GetCompliance} runs \texttt{get(\textit{String})} with the results from the \texttt{startsWith\textit{String}} method as parameter. Other tests have proven that the \texttt{get(\textit{String})} method works and that the \texttt{startsWith\textit{String}} method returns the right amount of strings. This test shows that the strings returned by \texttt{startsWith\textit{String}} are all valid.
+\texttt{testPrefix\_GetCompliance} runs \texttt{get\textit{(String)}} with the results from the \texttt{startsWith\textit{(String)}} method as parameter. Other tests have proven that the \texttt{get\textit{(String)}} method works and that the \texttt{startsWith\textit{(String)}} method returns the right amount of strings. This test shows that the strings returned by \texttt{startsWith\textit{(String)}} are all valid.
 
 Acknowledgments:
 Data set E is flawed, in that in only contains one-character entries. On the other hand, it is hard to rationalize the choice  of a series of entry lengths: If one is too short, is one though three really better?Is there even a reason to expect different behavior for different entry lengths? In truth, using a short range of entry lengths would probably have made sense.
 
-The method \texttt{startsWith\textit{String}} has not been proven to be correct. It has been proven that it returns the correct number of strings, and that these strings are all valid, but not that all correct strings are returned. To ensure the correctness of \texttt{startsWith\textit{String}}, the return values of \texttt{get\textit{String}} could be checked with predefined values for each string returned by \texttt{startsWith\textit{String}}.
+The method \texttt{startsWith\textit{(String)}} has not been proven to be correct. It has been proven that it returns the correct number of strings, and that these strings are all valid, but not that all correct strings are returned. To ensure the correctness of \texttt{startsWith\textit{(String)}}, the return values of \texttt{get\textit{String}} could be checked with predefined values for each string returned by \\ \texttt{startsWith\textit{(String)}}.

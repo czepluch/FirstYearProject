@@ -72,7 +72,7 @@ public class AddressParserTest {
 	@Test
 	public void testParseAddressB1() {
 		String input = "1234";
-		String expectedOutput = "#1234#";
+		String expectedOutput = "null";
 		String output = AddressParser.parseAddress(input);
 		if (output == null) output = "null";
 		assertEquals(expectedOutput, output);
@@ -81,7 +81,7 @@ public class AddressParserTest {
 	@Test
 	public void testParseAddressB2() {
 		String input = ",!1234";
-		String expectedOutput = "#1234#";
+		String expectedOutput = "null";
 		String output = AddressParser.parseAddress(input);
 		if (output == null) output = "null";
 		assertEquals(expectedOutput, output);
@@ -90,7 +90,7 @@ public class AddressParserTest {
 	@Test
 	public void testParseAddressB3() {
 		String input = "??1234  )";
-		String expectedOutput = "#1234#";
+		String expectedOutput = "null";
 		String output = AddressParser.parseAddress(input);
 		if (output == null) output = "null";
 		assertEquals(expectedOutput, output);

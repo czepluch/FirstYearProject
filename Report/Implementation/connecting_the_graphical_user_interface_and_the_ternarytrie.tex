@@ -5,7 +5,7 @@ Whenever the user types something in one of the text fields for inputting addres
 	\item A method \texttt{findOptions>>Number<<List()} (where \texttt{>>Number<<} is either \texttt{"First"} or \texttt{"Second"} depending on the text field being edited) in the \texttt{SearchListener} / \texttt{View} class is invoked.
 	\item The input is parsed by the \texttt{AddressParser} class.
 	\item The parsed string is passed to the instance of the \texttt{TernaryTrie} class stored in which a prefix search is done, finding all addresses having the parsed string as a prefix.
-	\item The up to five first matches from the \texttt{TernaryTrie} are "cleaned" and stored in a \texttt{String[]} (this is done in the \texttt{cleanString} method which makes sure all letters start with a capitalized letter and that all words are comma and space separated (\texttt{", "})).
+	\item The first five matches from the \texttt{TernaryTrie} are "cleaned" and stored in a \texttt{String[]} (this is done in the \texttt{cleanString} method which makes sure all words start with a capitalized letter and that all words are comma and space separated (\texttt{", "})).
 	\item The \texttt{String[]} is passed first to the \texttt{MainFrame} class, then to the \texttt{SearchPanel} class, which updates the content of the correct \texttt{JList} to display the \texttt{String[]}.
 \end{itemize}
 There is a special case, where the text field is empty (the user just deleted the only character(s)). In that case, the corresponding list below the text field is emptied, and nothing else happens.

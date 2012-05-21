@@ -18,7 +18,7 @@
 \centering \parindent=0pt
 \newcommand{\HRule}{\rule{\textwidth}{1mm}}
 \vspace*{\stretch{1}} \HRule\\[1cm]\Huge\bfseries
-First Year Project: "Map of Denmark"\\[0.7cm]
+First Year Project:\\"Map of Denmark"\\[0.7cm]
 \large Visualisation and path finding\\[1cm]
 \HRule\\[4cm]  \large Group 8:
 \\Jacob Stenum Czepluch (jstc@itu.dk), \\Niels Liljedahl Christensen (nlch@itu.dk), \\Mikkel Larsen (milar@itu.dk), \\Sigurt Bladt Dinesen (sidi@itu.dk) \\
@@ -84,7 +84,7 @@ May 23, 2012 \end{flushleft}
 \subsection{Connecting the graphical user interface and the TernaryTrie}
 \include*{Implementation/connecting_the_graphical_user_interface_and_the_ternarytrie}
 
-\subsection{Connecting the graphical user interface and the \texttt{TernaryTrie} with the Model for searching for trips and locations}
+\subsection{Connecting the graphical user interface and the TernaryTrie with the Model for searching for trips and locations}
 \include*{Implementation/connecting_gui_ternarytrie_model}
 
 \subsection{Use of external libraries}
@@ -103,6 +103,7 @@ May 23, 2012 \end{flushleft}
 \include*{Testing/main}
 
 \subsection{AddressParser class test}
+\label{sec:AddressParser class test}
 \include*{Testing/addressparser_class_test}
 
 \subsection{Coordinates class test}
@@ -112,7 +113,7 @@ May 23, 2012 \end{flushleft}
 \include*{Testing/dijkstra_test_class}
 
 \subsection{Vertex class test}
-\include*{gvertex_and_vertex_classes_test}
+\include*{Testing/gvertex_and_vertex_classes_test}
 
 \subsection{QuadTree class test}
 \include*{Testing/quadtree_test_class}
@@ -121,12 +122,13 @@ May 23, 2012 \end{flushleft}
 \include*{Testing/tripedge_class_test}
 
 \subsection{TernaryTrie class test}
+\include*{Testing/ternary_trie_test_class}
 
 \subsection{RoadDataCreator class test}
 \include*{Testing/roaddatacreator_test_class}
 
 \subsection{Testing the graphical user interface}
-\include*{testing_the_graphical_user_interface}
+\include*{Testing/testing_the_graphical_user_interface}
 
 %\subsection{Outline}
 %\include*{Testing/outline}
@@ -134,6 +136,7 @@ May 23, 2012 \end{flushleft}
 \pagebreak
 \section{Discussion}
 \label{sec:Discussion}
+\include*{Discussion/main}
 
 \subsection{Quadtree or k-D tree}
 \include*{Discussion/quadtree_or_kd_tree}
@@ -208,6 +211,7 @@ May 23, 2012 \end{flushleft}
 \pagebreak
 \appendix
 \section{Testing}
+\label{sec:Testing appendix}
 
 \subsection{AddressParser class}
 \label{sec:AddressParser test appendix}
@@ -271,9 +275,9 @@ In the input property, we will use the letter \textit{c} to refer to a series of
 	A4 & \O dense \ae \aa \hspace{2pt} by \"{a}\"{u}\"{O} & \O dense \ae \aa \hspace{2pt} by\#\# & $\surd$ \\
 	A5 & Odense-By & odense-by\#\# & $\surd$ \\
 	A6 & Odense' den fine by & odense' den fine by\#\# & $\surd$ \\
-	B1 & 1234 & $\#$1234$\#$ & $\surd$ \\
-	B2 & ,!1234 & $\#$1234$\#$ & $\surd$ \\
-	B3 & ??1234  ) & $\#$1234$\#$ & $\surd$ \\
+	B1 & 1234 & null & $\surd$ \\
+	B2 & ,!1234 & null & $\surd$ \\
+	B3 & ??1234  ) & null & $\surd$ \\
 	B4 & -1234 & -$\#$1234$\#$ & $\surd$ \\
 	B5 & 12 & null & $\surd$ \\
 	B6 & 123456 & null & $\surd$ \\
@@ -300,7 +304,7 @@ In the input property, we will use the letter \textit{c} to refer to a series of
 
 \pagebreak
 \subsection{Coordinates class}
-For the testing of both of the following methods, the values of the \texttt{MinAndMaxValues} class, which are used are set to the following:
+For the testing of both of the following methods, the values of the \texttt{ViewValues} class, which are used, are set to the following:
 \begin{itemize}
 	\item minX = 20
 	\item maxX = 120
@@ -356,7 +360,7 @@ The \texttt{Vertex} class has the \texttt{distance} method, which has been black
 	One number zero & (0, 0), (-3, 7) & 7.6158 & $\surd$ \\
 	Decimal numbers & (3.7, 5.9), (-3.3, 2.3) & 7.8715 & $\surd$ \\
 	Large numbers (UTM) & (892250.58771, 6147885.93632), (892297.17852, 6147868.40019) & 49.7817 & $\surd$ \\
-	Low numbers & (0.58171, 0.93432), (-0.18852, 0.43019) & 0.9205 & $\surd$ \\
+	Low numbers & (0.58171, 0.93432),\newline(-0.18852, 0.43019) & 0.9205 & $\surd$ \\
 	Large and low numbers & (2, 5), (892250.58771, 6147885.93632) & 6212290.0407 & $\surd$
 \end{tabular}
 \\ \\ \\
@@ -958,8 +962,14 @@ Sunday 13/5-2012, 10:00 at ITU
 \include*{Appendices/Project_diary/sunday_20_5_12}
 
 \pagebreak
+\subsection{Monday, 21/5-2012}
+\include*{Appendices/Project_diary/monday_21_5_12}
+
+\pagebreak
 \section{Work sheets made on Monday, 17/4-2012}
 \include*{Appendices/Work_sheets/work_sheets}
+
+
 
 %\pagebreak
 %\subsection{Blackbox test template}
@@ -997,5 +1007,14 @@ Sunday 13/5-2012, 10:00 at ITU
 %\subsubsection*{Next meeting}
 %???
 
+\pagebreak
+\section{UML diagrams}
+\label{sec:UML diagrams}
+Three UML diagrams can be found on the DVD:
+\begin{itemize}
+	\item A UML diagram of the connection between the Model, View and Controller classes
+	\item A UML diagram of the Model package
+	\item A UML diagram of the View package
+\end{itemize}
 
 \end{document}
