@@ -33,7 +33,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(2.0,8.0)-->(13.0,5.0)-->(10.0,9.0)");
+		assertTrue(path.equals("(2.0,8.0)-->(13.0,5.0)-->(10.0,9.0)") ||
+				   path.equals("(2,0,8,0)-->(13,0,5,0)-->(10,0,9,0)"));
 	}
 	
 	@Test
@@ -43,7 +44,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(2.0,8.0)-->(13.0,5.0)");
+		assertTrue(path.equals("(2.0,8.0)-->(13.0,5.0)") ||
+				   path.equals("(2,0,8,0)-->(13,0,5,0)"));
 	}
 	
 	@Test
@@ -52,7 +54,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(2.0,8.0)-->(7.0,4.0)-->(12.0,3.0)-->(19.0,8.0)");
+		assertTrue(path.equals("(2.0,8.0)-->(7.0,4.0)-->(12.0,3.0)-->(19.0,8.0)") ||
+				   path.equals("(2,0,8,0)-->(7,0,4,0)-->(12,0,3,0)-->(19,0,8,0)"));
 	}
 	
 	@Test
@@ -62,7 +65,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(2.0,8.0)-->(7.0,4.0)-->(12.0,3.0)-->(13.0,5.0)-->(10.0,9.0)");
+		assertTrue(path.equals("(2.0,8.0)-->(7.0,4.0)-->(12.0,3.0)-->(13.0,5.0)-->(10.0,9.0)") ||
+				   path.equals("(2,0,8,0)-->(7,0,4,0)-->(12,0,3,0)-->(13,0,5,0)-->(10,0,9,0)"));
 	}
 	
 	@Test
@@ -72,7 +76,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(2.0,8.0)-->(7.0,4.0)-->(12.0,3.0)-->(13.0,5.0)");
+		assertTrue(path.equals("(2.0,8.0)-->(7.0,4.0)-->(12.0,3.0)-->(13.0,5.0)") ||
+				   path.equals("(2,0,8,0)-->(7,0,4,0)-->(12,0,3,0)-->(13,0,5,0)"));
 	}
 
 	@Test
@@ -82,7 +87,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(2.0,8.0)-->(7.0,4.0)-->(12.0,3.0)-->(19.0,8.0)");
+		assertTrue(path.equals("(2.0,8.0)-->(7.0,4.0)-->(12.0,3.0)-->(19.0,8.0)") ||
+				   path.equals("(2,0,8,0)-->(7,0,4,0)-->(12,0,3,0)-->(19,0,8,0)"));
 	}
 	
 	/*
@@ -96,7 +102,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(0.0,11.0)-->(1.0,9.0)-->(7.0,11.0)");
+		assertTrue(path.equals("(0.0,11.0)-->(1.0,9.0)-->(7.0,11.0)") ||
+				   path.equals("(0,0,11,0)-->(1,0,9,0)-->(7,0,11,0)"));
 	}
 	
 	@Test
@@ -106,7 +113,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(0.0,2.0)-->(1.0,9.0)-->(7.0,11.0)");
+		assertTrue(path.equals("(0.0,2.0)-->(1.0,9.0)-->(7.0,11.0)") ||
+				   path.equals("(0,0,2,0)-->(1,0,9,0)-->(7,0,11,0)"));
 	}
 	
 	@Test
@@ -116,7 +124,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(5.0,16.0)-->(7.0,11.0)-->(7.0,0.0)");
+		assertTrue(path.equals("(5.0,16.0)-->(7.0,11.0)-->(7.0,0.0)") ||
+				   path.equals("(5,0,16,0)-->(7,0,11,0)-->(7,0,0,0)"));
 	}
 	
 	@Test
@@ -126,7 +135,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(13.0,10.0)-->(7.0,11.0)-->(1.0,9.0)");
+		assertTrue(path.equals("(13.0,10.0)-->(7.0,11.0)-->(1.0,9.0)") ||
+				   path.equals("(13,0,10,0)-->(7,0,11,0)-->(1,0,9,0)"));
 	}
 	
 	@Test
@@ -136,7 +146,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(0.0,11.0)-->(5.0,16.0)-->(12.0,15.0)-->(13.0,10.0)-->(7.0,11.0)");
+		assertTrue(path.equals("(0.0,11.0)-->(5.0,16.0)-->(12.0,15.0)-->(13.0,10.0)-->(7.0,11.0)") ||
+				   path.equals("(0,0,11,0)-->(5,0,16,0)-->(12,0,15,0)-->(13,0,10,0)-->(7,0,11,0)"));
 	}
 	
 	@Test
@@ -146,7 +157,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(0.0,2.0)-->(7.0,0.0)-->(11.0,7.0)-->(13.0,10.0)-->(7.0,11.0)");
+		assertTrue(path.equals("(0.0,2.0)-->(7.0,0.0)-->(11.0,7.0)-->(13.0,10.0)-->(7.0,11.0)") ||
+				   path.equals("(0,0,2,0)-->(7,0,0,0)-->(11,0,7,0)-->(13,0,10,0)-->(7,0,11,0)"));
 	}
 	
 	@Test
@@ -156,7 +168,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(5.0,16.0)-->(12.0,15.0)-->(13.0,10.0)-->(11.0,7.0)-->(7.0,0.0)");
+		assertTrue(path.equals("(5.0,16.0)-->(12.0,15.0)-->(13.0,10.0)-->(11.0,7.0)-->(7.0,0.0)") ||
+				   path.equals("(5,0,16,0)-->(12,0,15,0)-->(13,0,10,0)-->(11,0,7,0)-->(7,0,0,0)"));
 	}
 	
 	@Test
@@ -166,7 +179,8 @@ public class DijkstraTest {
 		List<TripEdge<Double>> edges = trip.getEdges();
 		String path = tripEdgeString(edges.get(0), true);
 		for (int i = 0; i < edges.size(); i++) path += "-->" + tripEdgeString(edges.get(i), false);
-		assertEquals(path, "(13.0,10.0)-->(12.0,15.0)-->(5.0,16.0)-->(0.0,11.0)-->(1.0,9.0)");
+		assertTrue(path.equals("(13.0,10.0)-->(12.0,15.0)-->(5.0,16.0)-->(0.0,11.0)-->(1.0,9.0)") ||
+				   path.equals("(13,0,10,0)-->(12,0,15,0)-->(5,0,16,0)-->(0,0,11,0)-->(1,0,9,0)"));
 	}
 	
 	/*
