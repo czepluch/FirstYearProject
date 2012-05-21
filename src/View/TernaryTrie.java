@@ -34,7 +34,7 @@ public class TernaryTrie {
 	public TernaryTrie(File f) {
 		Scanner fileScan = null;
 		try {
-			fileScan = new Scanner(f);
+			fileScan = new Scanner(f, "UTF-8");
 			while (fileScan.hasNext()) {
 				String[] name = fileScan.nextLine().split(";");
 				put(name[0], name[1]);
